@@ -1,0 +1,554 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Favicon Links -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    
+    <title>Products | SegriTech</title>
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .navbar-main-sec {
+            background-color: #0f0f0f;
+            padding: 10px 0;
+        }
+        
+        /* Force navbar positioning */
+        .index-page-navbar {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            padding: 80px 0 40px 0 !important;
+            margin-top: 0 !important;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .products-section {
+            padding: 60px 0;
+            background: #1a1a1a;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+        
+        .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1rem;
+        }
+        
+        .product-card {
+            background: #2a2a2a;
+            border-radius: 10px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .product-icon {
+            font-size: 3rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .product-features {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .feature-tag {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .explore-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .explore-btn:hover {
+            background: #66BB6A;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+        
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb-item a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .featured-section {
+            background: #0f0f0f;
+            padding: 60px 0;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .featured-card {
+            background: #2a2a2a;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+        
+        .featured-image {
+            height: 200px;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .featured-content {
+            padding: 20px;
+        }
+        
+        .featured-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+        
+        .featured-desc {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .product-card {
+                height: auto;
+                min-height: 320px;
+            }
+            
+            .product-features {
+                gap: 8px;
+            }
+            
+            .feature-tag {
+                font-size: 0.75rem;
+                padding: 4px 8px;
+            }
+        }
+    </style>
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+</head>
+
+<body>
+    {% include 'includes/navigation.html' %}
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Products</li>
+                </ol>
+            </nav>
+            
+            <h1 class="hero-title">Our Product Categories</h1>
+            <p class="hero-subtitle">
+                Discover our range of AI-powered agricultural machines designed to optimize crop processing and reduce post-harvest losses.
+            </p>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Choose Your Solution</h2>
+                <p>Select from our comprehensive range of agricultural technology solutions</p>
+            </div>
+            
+            <div class="row">
+                <!-- Size Graders -->
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'size_graders' %}" class="product-card">
+                        <div>
+                            <i class="fas fa-ruler-combined product-icon"></i>
+                            <h3 class="product-title">Size Graders</h3>
+                            <p class="product-description">
+                                Advanced optical scanning technology for precise size-based sorting of grains, seeds, and nuts with 99.5% accuracy.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Optical Scanning</span>
+                                <span class="feature-tag">500kg/hr</span>
+                            </div>
+                        </div>
+                        <span class="explore-btn">Explore Now</span>
+                    </a>
+                </div>
+
+                <!-- Quality Graders -->
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'quality_graders' %}" class="product-card">
+                        <div>
+                            <i class="fas fa-star product-icon"></i>
+                            <h3 class="product-title">Quality Graders</h3>
+                            <p class="product-description">
+                                Multi-spectrum imaging with AI analysis to detect defects and ensure only premium grade crops reach the market.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">AI Analysis</span>
+                                <span class="feature-tag">98% Detection</span>
+                            </div>
+                        </div>
+                        <span class="explore-btn">Explore Now</span>
+                    </a>
+                </div>
+
+                <!-- Weight Graders -->
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'weight_graders' %}" class="product-card">
+                        <div>
+                            <i class="fas fa-weight product-icon"></i>
+                            <h3 class="product-title">Weight Graders</h3>
+                            <p class="product-description">
+                                Precision weight-based sorting for density grading and uniformity, essential for premium export markets.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">±0.1g Precision</span>
+                                <span class="feature-tag">Export Ready</span>
+                            </div>
+                        </div>
+                        <span class="explore-btn">Explore Now</span>
+                    </a>
+                </div>
+
+                <!-- Cleaning Machines -->
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'cleaning_machines' %}" class="product-card">
+                        <div>
+                            <i class="fas fa-broom product-icon"></i>
+                            <h3 class="product-title">Cleaning Machines</h3>
+                            <p class="product-description">
+                                Advanced multi-stage cleaning systems that remove impurities, dust, and foreign materials for food-grade preparation.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Air Cleaning</span>
+                                <span class="feature-tag">99.9% Clean</span>
+                            </div>
+                        </div>
+                        <span class="explore-btn">Explore Now</span>
+                    </a>
+                </div>
+
+                <!-- Packing Robots -->
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'packing_robots' %}" class="product-card">
+                        <div>
+                            <i class="fas fa-microchip product-icon"></i>
+                            <h3 class="product-title">Packing Robots</h3>
+                            <p class="product-description">
+                                Automated packaging solutions with robotic arms and smart weighing systems for consistent retail-ready packaging.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">Full Automation</span>
+                                <span class="feature-tag">200 packs/hr</span>
+                            </div>
+                        </div>
+                        <span class="explore-btn">Explore Now</span>
+                    </a>
+                </div>
+
+                <!-- Inspection Box -->
+                <div class="col-lg-4 col-md-6">
+                    <a href="{% url 'inspection_box' %}" class="product-card">
+                        <div>
+                            <i class="fas fa-cube product-icon"></i>
+                            <h3 class="product-title">Inspection Box</h3>
+                            <p class="product-description">
+                                Advanced quality inspection system combining cutting-edge technology with ease of use for OEMs and exporters.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag">AI Analysis</span>
+                                <span class="feature-tag">New</span>
+                            </div>
+                        </div>
+                        <span class="explore-btn">Explore Now</span>
+                    </a>
+                </div>
+
+                <!-- Additional Category Placeholder -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="product-card" style="background: #333; opacity: 0.7;">
+                        <div>
+                            <i class="fas fa-plus product-icon" style="color: #666;"></i>
+                            <h3 class="product-title" style="color: #999;">More Categories</h3>
+                            <p class="product-description" style="color: #777;">
+                                We're continuously developing new agricultural technology solutions. Contact us for custom requirements.
+                            </p>
+                            <div class="product-features">
+                                <span class="feature-tag" style="background: rgba(153, 153, 153, 0.2); color: #999;">Coming Soon</span>
+                            </div>
+                        </div>
+                        <span class="explore-btn" style="background: #666; cursor: not-allowed;">Contact Us</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    {% if featured_products %}
+        <section class="featured-section">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Featured Products</h2>
+                    <p>Discover our most popular and innovative machines</p>
+                </div>
+                
+                <div class="featured-grid">
+                    {% for product in featured_products %}
+                        <div class="featured-card">
+                            <div class="featured-image">
+                                {% if product.main_image %}
+                                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                {% else %}
+                                    <i class="fas fa-cogs fa-3x" style="color: #4CAF50;"></i>
+                                {% endif %}
+                            </div>
+                            <div class="featured-content">
+                                <h4 class="featured-title">{{ product.name }}</h4>
+                                <p class="featured-desc">{{ product.short_description|truncatewords:15 }}</p>
+                                <a href="{% url 'product_detail' product.category.slug product.slug %}" class="explore-btn">
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <!-- footer section-->
+    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
+        <div class="wrapper2">
+            <div class="footer-inner-section" style="display: grid; grid-template-columns: 2fr 1fr 1.5fr 2fr; gap: 40px; align-items: start; margin-bottom: 20px;">
+                <style>
+                    @media (max-width: 768px) {
+                        .footer-inner-section {
+                            grid-template-columns: 1fr !important;
+                            gap: 30px !important;
+                            text-align: center !important;
+                        }
+                    }
+                    @media (max-width: 992px) and (min-width: 769px) {
+                        .footer-inner-section {
+                            grid-template-columns: 1fr 1fr !important;
+                            gap: 30px !important;
+                        }
+                    }
+                </style>
+                <div class="footer-logo footer-box" style="padding: 30px;">
+                    <a href="{% url 'home' %}">
+                        <figure style="margin-bottom: 20px; height: auto; display: flex; align-items: center;">
+                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
+                        </figure>
+                    </a>
+                    <p class="mb-1" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Copyright © 2023 SegriTech.</p>
+                    <p class="mb-3" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All Rights Reserved.</p>
+                    <div style="margin-top: 15px;">
+                        <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Social Media</span>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="https://www.facebook.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                            <a href="https://pk.linkedin.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-box" style="padding: 30px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">About</h4>
+                    <ul class="list-unstyled" style="margin: 0;">
+                        <li style="margin-bottom: 8px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">About Company</a></li>
+                        <li style="margin-bottom: 8px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Products</a></li>
+                        <li style="margin-bottom: 8px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Services</a></li>
+                        <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Career Opportunities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box address-box" style="padding: 30px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Address</h4>
+                    <ul class="list-unstyled" style="margin: 0;">
+                        <li style="margin-bottom: 15px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                            551 Swanston Street,<br>
+                            <span style="margin-left: 25px;">Melbourne, Victoria 3053 Australia</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                            <a href="tel:+61383766284" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">+61 3 8376 6284</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                            <a href="mailto:info@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">info@segritech.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-box footer-form-box" style="padding: 30px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Newsletter Signup</h4>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; border-radius: 25px; overflow: hidden; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                            <input type="text" placeholder="Enter Your Email Address" style="flex: 1; background: transparent; border: none; padding: 12px 15px; color: white; font-size: 0.9rem; outline: none;">
+                            <button style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; border: none; padding: 12px 20px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">Send</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.8rem;">
+                        <input type="checkbox" id="policy" name="policy" style="margin-top: 2px;">
+                        <label for="policy" style="color: rgba(255,255,255,0.8); line-height: 1.4;">
+                            I agree to the <a href="#" style="color: var(--accent-green); text-decoration: none;">Privacy Policy</a>.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a id="button" class="show"></a>
+    <!-- footer section-->
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

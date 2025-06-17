@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspection Box - SegriTech</title>
+    <!-- Include all the necessary CSS files -->
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cdn.jsdelivr.net_npm_swiper%4010_swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/superclasses.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+</head>
+<body class="bg-light-black">
+    {% include 'includes/header.html' %}
+
+    <!-- Hero Section -->
+    <section class="product-hero-section" style="padding-top: 120px; padding-bottom: 80px; position: relative; overflow: hidden;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                    <div class="hero-content">
+                        <h1 style="color: #fff; font-size: 3.5rem; font-weight: 700; margin-bottom: 30px;">
+                            Inspection Box
+                            <span style="display: block; font-size: 1.8rem; color: var(--accent-green); margin-top: 10px;">
+                                Advanced Quality Control System
+                            </span>
+                        </h1>
+                        <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; line-height: 1.8; margin-bottom: 40px;">
+                            Transform your quality control process with our state-of-the-art Inspection Box. 
+                            Powered by advanced AI and computer vision technology, it delivers precise, 
+                            consistent, and rapid quality assessments for agricultural products.
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#features" class="btn btn-primary me-3" style="background: var(--accent-green); border: none; padding: 12px 30px; border-radius: 50px;">
+                                Explore Features
+                            </a>
+                            <a href="#contact" class="btn btn-outline-light" style="padding: 12px 30px; border-radius: 50px;">
+                                Request Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <div class="hero-image" style="position: relative;">
+                        <img src="{% static 'web/inspection_box.jpg' %}" alt="Inspection Box" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                        <div class="floating-stats" style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); 
+                                                         background: rgba(33, 33, 33, 0.95); backdrop-filter: blur(10px);
+                                                         padding: 20px; border-radius: 15px; width: 80%;
+                                                         display: flex; justify-content: space-around;
+                                                         box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                            <div class="stat-item text-center">
+                                <h3 style="color: var(--accent-green); font-size: 2rem; margin-bottom: 5px;">99%</h3>
+                                <p style="color: #fff; margin: 0;">Accuracy</p>
+                            </div>
+                            <div class="stat-item text-center">
+                                <h3 style="color: var(--accent-green); font-size: 2rem; margin-bottom: 5px;">3x</h3>
+                                <p style="color: #fff; margin: 0;">Faster</p>
+                            </div>
+                            <div class="stat-item text-center">
+                                <h3 style="color: var(--accent-green); font-size: 2rem; margin-bottom: 5px;">24/7</h3>
+                                <p style="color: #fff; margin: 0;">Operation</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section bg-dark-black" style="padding: 100px 0;">
+        <div class="container">
+            <div class="section-title text-center mb-5">
+                <span style="color: var(--accent-green); text-transform: uppercase; letter-spacing: 2px;" 
+                      data-aos="fade-up" data-aos-duration="600">Features</span>
+                <h2 style="color: #fff; font-size: 2.5rem; margin-top: 15px;" 
+                    data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+                    Advanced Capabilities
+                </h2>
+            </div>
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                    <div class="feature-card" style="background: rgba(33, 33, 33, 0.5); border-radius: 15px; padding: 30px; height: 100%;
+                                                    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-camera" style="color: var(--accent-green); font-size: 2.5rem;"></i>
+                        </div>
+                        <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px;">AI-Powered Imaging</h3>
+                        <p style="color: rgba(255,255,255,0.8); line-height: 1.7;">
+                            High-resolution cameras combined with advanced AI algorithms for precise quality assessment 
+                            and defect detection.
+                        </p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+                    <div class="feature-card" style="background: rgba(33, 33, 33, 0.5); border-radius: 15px; padding: 30px; height: 100%;
+                                                    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-bolt" style="color: var(--accent-green); font-size: 2.5rem;"></i>
+                        </div>
+                        <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px;">Real-time Processing</h3>
+                        <p style="color: rgba(255,255,255,0.8); line-height: 1.7;">
+                            Instant analysis and results with our powerful processing unit, enabling quick decision-making.
+                        </p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+                    <div class="feature-card" style="background: rgba(33, 33, 33, 0.5); border-radius: 15px; padding: 30px; height: 100%;
+                                                    backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);">
+                        <div class="feature-icon mb-4">
+                            <i class="fas fa-chart-bar" style="color: var(--accent-green); font-size: 2.5rem;"></i>
+                        </div>
+                        <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 15px;">Data Analytics</h3>
+                        <p style="color: rgba(255,255,255,0.8); line-height: 1.7;">
+                            Comprehensive reporting and analytics dashboard for tracking quality metrics and trends.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications Section -->
+    <section class="specs-section bg-light-black" style="padding: 100px 0;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                    <div class="specs-content">
+                        <span style="color: var(--accent-green); text-transform: uppercase; letter-spacing: 2px;">
+                            Specifications
+                        </span>
+                        <h2 style="color: #fff; font-size: 2.5rem; margin: 20px 0 30px;">
+                            Technical Details
+                        </h2>
+                        <div class="specs-list">
+                            <div class="spec-item" style="margin-bottom: 25px;">
+                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
+                                    Dimensions
+                                </h4>
+                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
+                                    Length: 120cm | Width: 80cm | Height: 150cm
+                                </p>
+                            </div>
+                            <div class="spec-item" style="margin-bottom: 25px;">
+                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
+                                    Processing Capacity
+                                </h4>
+                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
+                                    Up to 100 items per minute
+                                </p>
+                            </div>
+                            <div class="spec-item" style="margin-bottom: 25px;">
+                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
+                                    Power Requirements
+                                </h4>
+                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
+                                    220V AC | 50-60Hz | 1000W
+                                </p>
+                            </div>
+                            <div class="spec-item">
+                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
+                                    Connectivity
+                                </h4>
+                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
+                                    Wi-Fi | Ethernet | USB 3.0
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <div class="specs-image" style="position: relative;">
+                        <img src="{% static 'web/inspection_box.jpg' %}" alt="Inspection Box Specifications" 
+                             style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section bg-dark-black" style="padding: 100px 0;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="section-title mb-5">
+                        <span style="color: var(--accent-green); text-transform: uppercase; letter-spacing: 2px;" 
+                              data-aos="fade-up" data-aos-duration="600">Contact Us</span>
+                        <h2 style="color: #fff; font-size: 2.5rem; margin-top: 15px;" 
+                            data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+                            Request a Demo
+                        </h2>
+                        <p style="color: rgba(255,255,255,0.8); margin-top: 20px;" 
+                           data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                            Interested in seeing the Inspection Box in action? Fill out the form below and our team 
+                            will get back to you shortly.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <form action="{% url 'submit_inquiry' %}" method="POST" class="contact-form" 
+                          style="background: rgba(33, 33, 33, 0.5); padding: 40px; border-radius: 20px; 
+                                 backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);"
+                          data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        {% csrf_token %}
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <input type="text" name="name" class="form-control" placeholder="Your Name" required
+                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" name="email" class="form-control" placeholder="Your Email" required
+                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="tel" name="phone" class="form-control" placeholder="Phone Number"
+                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="company" class="form-control" placeholder="Company Name"
+                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                            </div>
+                            <div class="col-12">
+                                <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required
+                                          style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+                                                 color: #fff; padding: 12px 20px; border-radius: 10px;"></textarea>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button type="submit" class="btn btn-primary" 
+                                        style="background: var(--accent-green); border: none; padding: 12px 40px; 
+                                               border-radius: 50px; font-size: 1.1rem; margin-top: 20px;">
+                                    Submit Inquiry
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% include 'includes/footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/cdn.jsdelivr.net_npm_swiper%4010_swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html> 

@@ -1,0 +1,748 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Favicon Links -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    
+    <title>{{ category.name }} | SegriTech Products</title>
+    
+    <!-- CSS Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --accent-green: #66BB6A;
+            --dark-green: #388E3C;
+            --light-black: #1a1a1a;
+            --dark-black: #0f0f0f;
+        }
+        
+        body {
+            background-color: var(--light-black);
+            color: #ffffff;
+        }
+        
+        /* Force navbar positioning */
+        .index-page-navbar {
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+        }
+        
+        .product-hero {
+            background: linear-gradient(135deg, var(--dark-black) 0%, var(--light-black) 100%);
+            padding: 120px 0 40px 0 !important;
+            margin-top: 0 !important;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(76, 175, 80, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        .category-hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-hero-desc {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-icon-large {
+            font-size: 6rem;
+            color: var(--accent-green);
+            text-shadow: 0 0 30px rgba(76, 175, 80, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .product-card {
+            background: var(--dark-black);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.02) !important;
+            box-shadow: 0 20px 50px rgba(76, 175, 80, 0.4), 
+                        inset 0 1px 0 rgba(255,255,255,0.2) !important;
+            border-color: rgba(76, 175, 80, 0.6) !important;
+        }
+        
+        .product-card:hover img {
+            transform: translate(-50%, -50%) !important;
+        }
+        
+        .product-card:hover .hover-effect-bar {
+            transform: scaleX(1) !important;
+        }
+        
+        .product-card a:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5) !important;
+        }
+        
+        .product-card .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.4) !important;
+        }
+        
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.1));
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .product-image-placeholder {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.1));
+        }
+        
+        .product-content {
+            padding: 30px 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .product-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+        
+        .product-features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 25px 0;
+        }
+        
+        .product-features li {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .product-features i {
+            color: var(--accent-green);
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-learn-more {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            margin-top: auto;
+        }
+        
+        .btn-learn-more:hover {
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+        }
+        
+        .no-products {
+            text-align: center;
+            padding: 80px 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .no-products i {
+            font-size: 4rem;
+            color: var(--accent-green);
+            margin-bottom: 30px;
+        }
+        
+        .no-products h3 {
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .other-categories-section {
+            background: var(--dark-black);
+            padding: 80px 0;
+            border-top: 1px solid rgba(76, 175, 80, 0.1);
+        }
+        
+        .category-card {
+            display: block;
+            background: var(--light-black);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            height: 100%;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.2);
+            text-decoration: none;
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+        
+        .category-image {
+            aspect-ratio: 4/3;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.1));
+            position: relative;
+        }
+        
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .category-icon {
+            font-size: 3rem;
+            color: var(--accent-green);
+        }
+        
+        .category-content {
+            padding: 25px 20px;
+        }
+        
+        .category-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .category-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+            margin: 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-green));
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .products-grid {
+            margin-top: 50px;
+        }
+        
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--accent-green);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--accent-green);
+        }
+        
+        @media (max-width: 768px) {
+            .product-hero {
+                padding: 120px 0 80px 0;
+            }
+            
+            .category-hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .category-hero-desc {
+                font-size: 1.1rem;
+            }
+            
+            .category-icon-large {
+                font-size: 4rem;
+            }
+            
+            .product-content {
+                padding: 25px 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .other-categories-section {
+                padding: 60px 0;
+            }
+        }
+        
+        /* Minimal Dropdown Fix */
+        .dropdown-menu {
+            z-index: 1050 !important;
+            position: absolute !important;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'includes/navigation.html' %}
+
+    <!-- Product Category Hero -->
+    <section class="product-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="category-hero-content" data-aos="fade-right" data-aos-duration="800" style="padding-right: 60px;">
+                        <div style="display: flex; align-items: center; gap: 30px; margin-bottom: 40px;">
+                            <div class="category-icon-large">
+                                {% if category.name == "Size Graders" %}
+                                    <i class="fas fa-ruler-combined"></i>
+                                {% elif category.name == "Quality Graders" %}
+                                    <i class="fas fa-star"></i>
+                                {% elif category.name == "Weight Graders" %}
+                                    <i class="fas fa-weight"></i>
+                                {% elif category.name == "Cleaning Machines" %}
+                                    <i class="fas fa-broom"></i>
+                                {% elif category.name == "Packing Robots" %}
+                                    <i class="fas fa-microchip"></i>
+                                {% else %}
+                                    <i class="fas fa-cogs"></i>
+                                {% endif %}
+                            </div>
+                            <div style="flex: 1;">
+                                <h1 class="category-hero-title" style="margin-bottom: 0;">{{ category.name }}</h1>
+                            </div>
+                        </div>
+                        <p class="category-hero-desc" style="margin-bottom: 50px;">{{ category.description }}</p>
+                        
+                        <!-- Category Features -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                            {% if category.name == "Size Graders" %}
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-eye"></i> Optical Technology</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Advanced cameras and sensors for precise size detection</p>
+                                </div>
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-tachometer-alt"></i> High Speed</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Process up to 500kg per hour with 99.5% accuracy</p>
+                                </div>
+                            {% elif category.name == "Quality Graders" %}
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-brain"></i> AI Analysis</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Machine learning algorithms for defect detection</p>
+                                </div>
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-camera"></i> Multi-Spectrum</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">RGB, NIR, and UV imaging for comprehensive analysis</p>
+                                </div>
+                            {% elif category.name == "Weight Graders" %}
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-balance-scale"></i> Precision</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">±0.1g accuracy for consistent weight grading</p>
+                                </div>
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-globe"></i> Export Ready</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Meets international quality standards</p>
+                                </div>
+                            {% elif category.name == "Cleaning Machines" %}
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-wind"></i> Multi-Stage</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Air separation, screening, and density cleaning</p>
+                                </div>
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-shield-alt"></i> Food Grade</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Stainless steel construction for food safety</p>
+                                </div>
+                            {% elif category.name == "Packing Robots" %}
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-microchip"></i> Automation</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Fully automated weighing and packaging</p>
+                                </div>
+                                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-boxes"></i> Versatile</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Multiple packaging formats and sizes</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="category-hero-image" data-aos="fade-left" data-aos-duration="800" style="padding-left: 40px;">
+                                                  <div style="position: relative; border-radius: 25px; overflow: hidden; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(102, 187, 106, 0.1)); aspect-ratio: 4/3; min-height: 250px; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 40px rgba(0,0,0,0.3);">
+                              {% if category.name == "Size Graders" %}
+                                  <img src="{% static 'web/size_grader.png' %}" alt="Size Grader Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                              {% elif category.name == "Quality Graders" %}
+                                <img src="{% static 'web/quality_grader_updated.png' %}" alt="Quality Grader Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                              {% elif category.name == "Weight Graders" %}
+                                <img src="{% static 'web/weight_grader.png' %}" alt="Weight Grader Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                              {% elif category.name == "Cleaning Machines" %}
+                                <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                              {% elif category.name == "Packing Robots" %}
+                                <img src="{% static 'web/packing_robort.png' %}" alt="Packing Robot" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                              {% endif %}
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section style="padding: 80px 0; background: var(--light-black);">
+        <div class="container">
+            {% if products %}
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Our {{ category.name }}</h2>
+                    <p>Discover our range of high-quality {{ category.name|lower }} designed for efficiency and reliability.</p>
+                </div>
+
+                <div class="row products-grid">
+                    {% for product in products %}
+                        <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="600" {% if forloop.counter == 2 %}data-aos-delay="100"{% elif forloop.counter == 3 %}data-aos-delay="200"{% elif forloop.counter == 4 %}data-aos-delay="300"{% endif %}>
+                            <div class="product-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: auto; min-height: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                                <!-- Product Header -->
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green));"></div>
+                                
+                                <!-- Product Image/Icon -->
+                                <div style="height: 200px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.05)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
+                                    {% if product.main_image %}
+                                        <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
+                                    {% else %}
+                                        <div style="text-align: center; color: var(--accent-green);">
+                                            {% if category.name == "Size Graders" %}
+                                                {% if forloop.counter == 1 %}
+                                                    <img src="{% static 'web/apple_size_grader.png' %}" alt="Apple Size Grader" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                                {% elif forloop.counter == 2 %}
+                                                    <img src="{% static 'web/orange_grader.png' %}" alt="Orange Size Grader" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                                {% else %}
+                                                    <i class="fas fa-ruler-combined" style="font-size: 4rem; margin-bottom: 15px; opacity: 0.8;"></i>
+                                                {% endif %}
+                                            {% elif category.name == "Quality Graders" %}
+                                <img src="{% static 'web/quality_grader_updated.png' %}" alt="Quality Grader" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                            {% elif category.name == "Weight Graders" %}
+                                <img src="{% static 'web/weight_grader.png' %}" alt="Weight Grader" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                            {% elif category.name == "Cleaning Machines" %}
+                                <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machine" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                            {% elif category.name == "Packing Robots" %}
+                                <img src="{% static 'web/packing_robort.png' %}" alt="Packing Robot" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                            {% else %}
+                                                <i class="fas fa-cogs" style="font-size: 4rem; margin-bottom: 15px; opacity: 0.8;"></i>
+                                            {% endif %}
+                                                                        {% if category.name == "Size Graders" and forloop.counter > 2 %}
+                                <h6 style="color: white; margin: 0; font-size: 0.9rem; opacity: 0.8;">Product Image</h6>
+                            {% elif category.name not in "Size Graders,Quality Graders,Weight Graders,Cleaning Machines,Packing Robots" %}
+                                                <h6 style="color: white; margin: 0; font-size: 0.9rem; opacity: 0.8;">Product Image</h6>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}
+                                    
+
+                                    
+                                    <!-- Availability Status -->
+                                    <div style="position: absolute; top: 15px; left: 15px; background: {% if product.is_available %}rgba(76, 175, 80, 0.9){% else %}rgba(255, 87, 87, 0.9){% endif %}; color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 600;">
+                                        {% if product.is_available %}
+                                            <i class="fas fa-check-circle"></i> Available
+                                        {% else %}
+                                            <i class="fas fa-clock"></i> Pre-Order
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <!-- Product Content -->
+                                <div style="padding: 25px;">
+                                    <h4 style="color: #FFFFFF; font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; line-height: 1.3; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">{{ product.name }}</h4>
+                                    
+                                    <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; height: 3.2em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ product.short_description }}</p>
+                                    
+
+                                    
+
+                                    
+                                    <!-- Action Buttons -->
+                                    <div style="display: flex; gap: 10px; margin-top: auto;">
+                                        <a href="{% url 'product_detail' category.slug product.slug %}" style="flex: 1; background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; text-decoration: none; padding: 12px 20px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
+                                            <i class="fas fa-info-circle"></i> View Details
+                                        </a>
+                                        <a href="#" onclick="openInquiryModal('{{ product.name }}')" style="background: rgba(255, 255, 255, 0.1); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2);">
+                                            <i class="fas fa-envelope"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <!-- Hover Effects -->
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green)); border-radius: 0 0 20px 20px; transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left;"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="no-products" data-aos="fade-up">
+                    <i class="fas fa-tools"></i>
+                    <h3>Products Coming Soon</h3>
+                    <p>We're working hard to bring you innovative {{ category.name|lower }}. Stay tuned for updates!</p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Other Categories -->
+    <section class="other-categories-section">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Explore Other Categories</h2>
+                <p>Discover our complete range of agricultural processing solutions</p>
+            </div>
+
+            <div class="row">
+                {% for other_category in other_categories %}
+                    <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
+                        <a href="{% url 'category_products' other_category.slug %}" class="category-card">
+                            <div class="category-image">
+                                {% if other_category.name == "Size Graders" %}
+                                    <img src="{% static 'web/size_grader.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                {% elif other_category.name == "Quality Graders" %}
+                                    <img src="{% static 'web/quality_grader_updated.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                {% elif other_category.name == "Weight Graders" %}
+                                    <img src="{% static 'web/weight_grader.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                {% elif other_category.name == "Cleaning Machines" %}
+                                    <img src="{% static 'web/cleaning_machine.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                {% elif other_category.name == "Packing Robots" %}
+                                    <img src="{% static 'web/packing_robort.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                {% elif other_category.image %}
+                                    <img src="{{ other_category.image.url }}" alt="{{ other_category.name }}">
+                                    {% else %}
+                                        <i class="{{ other_category.icon|default:'fas fa-cog' }} category-icon"></i>
+                                {% endif %}
+                            </div>
+                            <div class="category-content">
+                                <h4 class="category-title">{{ other_category.name }}</h4>
+                                <p class="category-desc">{{ other_category.description|truncatewords:10 }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- footer section-->
+    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
+        <div class="wrapper2">
+            <div class="footer-inner-section" style="display: grid; grid-template-columns: 2fr 1fr 1.5fr 2fr; gap: 40px; align-items: start; margin-bottom: 20px;">
+                <style>
+                    @media (max-width: 768px) {
+                        .footer-inner-section {
+                            grid-template-columns: 1fr !important;
+                            gap: 30px !important;
+                            text-align: center !important;
+                        }
+                    }
+                    @media (max-width: 992px) and (min-width: 769px) {
+                        .footer-inner-section {
+                            grid-template-columns: 1fr 1fr !important;
+                            gap: 30px !important;
+                        }
+                    }
+                </style>
+                <div class="footer-logo footer-box" style="padding: 30px;">
+                    <a href="{% url 'home' %}">
+                        <figure style="margin-bottom: 20px; height: auto; display: flex; align-items: center;">
+                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
+                        </figure>
+                    </a>
+                    <p class="mb-1" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Copyright © 2023 SegriTech.</p>
+                    <p class="mb-3" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All Rights Reserved.</p>
+                    <div style="margin-top: 15px;">
+                        <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Social Media</span>
+                        <div style="display: flex; gap: 10px;">
+                            <a href="https://www.facebook.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.instagram.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                            <a href="https://pk.linkedin.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-box" style="padding: 30px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">About</h4>
+                    <ul class="list-unstyled" style="margin: 0;">
+                        <li style="margin-bottom: 8px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">About Company</a></li>
+                        <li style="margin-bottom: 8px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Products</a></li>
+                        <li style="margin-bottom: 8px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Services</a></li>
+                        <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Career Opportunities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box address-box" style="padding: 30px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Address</h4>
+                    <ul class="list-unstyled" style="margin: 0;">
+                        <li style="margin-bottom: 15px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                            551 Swanston Street,<br>
+                            <span style="margin-left: 25px;">Melbourne, Victoria 3053 Australia</span>
+                        </li>
+                        <li style="margin-bottom: 12px;">
+                            <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                            <a href="tel:+61383766284" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">+61 3 8376 6284</a>
+                        </li>
+                        <li class="mb-0">
+                            <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                            <a href="mailto:info@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">info@segritech.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-box footer-form-box" style="padding: 30px;">
+                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Newsletter Signup</h4>
+                    <div style="margin-bottom: 15px;">
+                        <div style="display: flex; border-radius: 25px; overflow: hidden; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
+                            <input type="text" placeholder="Enter Your Email Address" style="flex: 1; background: transparent; border: none; padding: 12px 15px; color: white; font-size: 0.9rem; outline: none;">
+                            <button style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; border: none; padding: 12px 20px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">Send</button>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.8rem;">
+                        <input type="checkbox" id="policy" name="policy" style="margin-top: 2px;">
+                        <label for="policy" style="color: rgba(255,255,255,0.8); line-height: 1.4;">
+                            I agree to the <a href="#" style="color: var(--accent-green); text-decoration: none;">Privacy Policy</a>.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a id="button" class="show"></a>
+    <!-- footer section-->
+
+    <!-- JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-quart',
+            once: true
+        });
+    </script>
+</body>
+
+</html> 

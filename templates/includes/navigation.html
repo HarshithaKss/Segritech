@@ -1,0 +1,52 @@
+{% load static %}
+<!-- navbar section -->
+<div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
+    <div class="wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
+            <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
+                <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 70px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px; margin-right: 120px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}" style="color: rgba(255,255,255,0.95) !important; font-weight: 500; font-size: 1rem; padding: 12px 18px !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); transition: all 0.3s ease;">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'about' %}" style="color: rgba(255,255,255,0.95) !important; font-weight: 500; font-size: 1rem; padding: 12px 18px !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); transition: all 0.3s ease;">About Us</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgba(255,255,255,0.95) !important; font-weight: 500; font-size: 1rem; padding: 12px 18px !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); transition: all 0.3s ease;">
+                            Products
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="productsDropdown" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-top: 10px;">
+                            <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
+                            <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Quality Graders</a>
+                            <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Graders</a>
+                            <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
+                            <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
+                            <a class="dropdown-item" href="{% url 'inspection_box' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
+                                <i class="fas fa-cube me-2"></i>Inspection Box
+                                <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
+                            </a>
+                            <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
+                            <a class="dropdown-item" href="{% url 'products' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">View All Categories</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contact' %}" style="color: rgba(255,255,255,0.95) !important; font-weight: 500; font-size: 1rem; padding: 12px 18px !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); transition: all 0.3s ease;">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'careers' %}" style="color: rgba(255,255,255,0.95) !important; font-weight: 500; font-size: 1rem; padding: 12px 18px !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); transition: all 0.3s ease;">Careers</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div> 

@@ -1,0 +1,1149 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SegriTech</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/superclasses.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --primary-dark: #121212;
+            --secondary-dark: #1e1e1e;
+            --accent-dark: #2a2a2a;
+            --light-gray: #f5f5f5;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --gradient-primary: linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #66BB6A 100%);
+            --shadow-primary: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.4);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(46, 46, 46, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(76, 175, 80, 0.08) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(2deg) scale(1.02); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 140px 0 40px 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--primary-green);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .hero-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 50px;
+            max-width: 700px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 60px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-image-container {
+            position: relative;
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: var(--transition);
+        }
+
+        .hero-image-container:hover {
+            transform: perspective(1000px) rotateY(0deg) scale(1.02);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: var(--shadow-primary);
+            border: 2px solid rgba(76, 175, 80, 0.2);
+        }
+
+        .hero-image-container::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: linear-gradient(45deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            border-radius: 30px;
+            z-index: -1;
+            animation: imageGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes imageGlow {
+            0% { opacity: 0.5; transform: scale(0.98); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* Solutions Section */
+        .solutions-section {
+            padding: 120px 0;
+            background: var(--secondary-dark);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .solution-card {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(76, 175, 80, 0.3);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .solution-card:hover::before {
+            left: 100%;
+        }
+
+        .solution-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .solution-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .solution-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 120px 0;
+            background: var(--primary-dark);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .benefit-card {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(76, 175, 80, 0.3);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .benefit-card:hover::before {
+            left: 100%;
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .benefit-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .benefit-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 120px 0;
+            background: var(--secondary-dark);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-card {
+            background: linear-gradient(135deg, rgba(42, 42, 42, 0.8) 0%, rgba(30, 30, 30, 0.9) 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(76, 175, 80, 0.1);
+            backdrop-filter: blur(20px);
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(76, 175, 80, 0.3);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .team-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-card:hover .team-image {
+            transform: scale(1.05);
+        }
+
+        .team-info {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .team-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .team-role {
+            color: var(--primary-green);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .team-social a {
+            width: 40px;
+            height: 40px;
+            background: rgba(76, 175, 80, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            transition: var(--transition);
+        }
+
+        .team-social a:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #45a049 100%);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .cta-description {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary-custom {
+            background: white;
+            color: var(--primary-green);
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary-custom:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .btn-secondary-custom {
+            background: transparent;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid white;
+            transition: var(--transition);
+        }
+
+        .btn-secondary-custom:hover {
+            background: white;
+            color: var(--primary-green);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 30px;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .solutions-grid,
+            .benefits-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-green);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
+                <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
+                    <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 130px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
+                </a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px; margin-right: 120px;">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Products
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                                <a class="dropdown-item" href="{% url 'size_graders' %}">Size Graders</a>
+                                <a class="dropdown-item" href="{% url 'quality_graders' %}">Quality Graders</a>
+                                <a class="dropdown-item" href="{% url 'weight_graders' %}">Weight Graders</a>
+                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}">Cleaning Machines</a>
+                                <a class="dropdown-item" href="{% url 'packing_robots' %}">Packing Robots</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'products' %}">View All Categories</a>
+                            </div>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'careers' %}">Careers</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
+                            <li><a href="#"><i class="fas fa-search"></i></a></li>
+                        </ul>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="hero-content" data-aos="fade-right" data-aos-duration="800">
+                        <span class="hero-badge">WHO WE ARE</span>
+                        <h1 class="hero-title">Revolutionizing Agriculture with AI Technology</h1>
+                        <p class="hero-subtitle">Automating what's still done manually in agricultural processing</p>
+                        <p class="hero-description">
+                            We are a team of AI & Robotics engineers solving untouched problems in agriculture to improve the lives of farmers and traders worldwide. Our innovative solutions address major inefficiencies in operational processes, reducing revenue losses and improving productivity.
+                        </p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                                <div class="stat-number">40%</div>
+                                <div class="stat-label">Revenue Recovery</div>
+                            </div>
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                                <div class="stat-number">35%</div>
+                                <div class="stat-label">Volume Saved</div>
+                            </div>
+                            <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                                <div class="stat-number">30%</div>
+                                <div class="stat-label">Time Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="hero-image" data-aos="fade-left" data-aos-duration="800">
+                        <div class="hero-image-container">
+                            <img src="{% static 'images/image.png' %}" alt="SegriTech Innovation" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section" style="padding: 120px 0; background: var(--primary-dark); position: relative;">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="600">
+                <span class="section-badge">OUR JOURNEY</span>
+                <h2 class="section-title">Our Growth Timeline</h2>
+                <p class="section-description">
+                    Tracking our progress from prototype to success
+                </p>
+            </div>
+            
+            <div class="timeline" style="position: relative; max-width: 1200px; margin: 50px auto;">
+                <!-- Timeline Line -->
+                <div class="timeline-line" style="position: absolute; width: 4px; background: var(--accent-green); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); border-radius: 2px;"></div>
+                
+                <!-- 2022 -->
+                <div class="timeline-item" data-aos="fade-right" data-aos-duration="800" style="position: relative; margin-bottom: 60px; width: 50%; padding-right: 50px; text-align: right;">
+                    <div class="timeline-content" style="background: var(--secondary-dark); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.2); position: relative;">
+                        <div class="timeline-date" style="position: absolute; right: -85px; background: var(--accent-green); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600;">2022</div>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.5rem;">Development Started</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Did a small prototype of AI grading machine</p>
+                    </div>
+                </div>
+                
+                <!-- 2023 -->
+                <div class="timeline-item right" data-aos="fade-left" data-aos-duration="800" style="position: relative; margin-bottom: 60px; width: 50%; margin-left: 50%; padding-left: 50px;">
+                    <div class="timeline-content" style="background: var(--secondary-dark); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.2); position: relative;">
+                        <div class="timeline-date" style="position: absolute; left: -85px; background: var(--accent-green); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600;">2023</div>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.5rem;">MVP Completed</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Successfully completed the Minimum Viable Product</p>
+                    </div>
+                </div>
+                
+                <!-- 2024 Q1 -->
+                <div class="timeline-item" data-aos="fade-right" data-aos-duration="800" style="position: relative; margin-bottom: 60px; width: 50%; padding-right: 50px; text-align: right;">
+                    <div class="timeline-content" style="background: var(--secondary-dark); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.2); position: relative;">
+                        <div class="timeline-date" style="position: absolute; right: -85px; background: var(--accent-green); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600;">2024</div>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.5rem;">PreSeed Funding</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Raised $100K preseed funding for Segritech</p>
+                    </div>
+                </div>
+                
+                <!-- 2024 Q2 -->
+                <div class="timeline-item right" data-aos="fade-left" data-aos-duration="800" style="position: relative; margin-bottom: 60px; width: 50%; margin-left: 50%; padding-left: 50px;">
+                    <div class="timeline-content" style="background: var(--secondary-dark); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.2); position: relative;">
+                        <div class="timeline-date" style="position: absolute; left: -85px; background: var(--accent-green); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600;">2024</div>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.5rem;">Product Launch</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Successfully launched our product to market</p>
+                    </div>
+                </div>
+                
+                <!-- 2025 -->
+                <div class="timeline-item" data-aos="fade-right" data-aos-duration="800" style="position: relative; margin-bottom: 60px; width: 50%; padding-right: 50px; text-align: right;">
+                    <div class="timeline-content" style="background: var(--secondary-dark); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.2); position: relative; overflow: hidden;">
+                        <div class="timeline-date" style="position: absolute; right: -85px; background: var(--accent-green); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600;">2025</div>
+                        <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.5rem;">First Revenue</h3>
+                        <p style="color: var(--text-secondary); margin: 0;">Successfully completed our first order</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Add some decorative elements -->
+        <div class="timeline-decoration" style="position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);"></div>
+        <div class="timeline-dots" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; pointer-events: none; opacity: 0.1;">
+            <div style="position: absolute; width: 4px; height: 4px; background: var(--accent-green); border-radius: 50%;"></div>
+        </div>
+    </section>
+
+    <!-- Add responsive styles -->
+    <style>
+        @media (max-width: 768px) {
+            .timeline-item {
+                width: 100% !important;
+                margin-left: 0 !important;
+                padding: 0 20px !important;
+                text-align: left !important;
+            }
+            
+            .timeline-line {
+                left: 20px !important;
+            }
+            
+            .timeline-date {
+                position: relative !important;
+                left: 0 !important;
+                right: 0 !important;
+                margin-bottom: 15px !important;
+                display: inline-block !important;
+            }
+            
+            .timeline-content {
+                padding: 20px !important;
+            }
+        }
+
+        /* Timeline item hover effects */
+        .timeline-content {
+            transition: all 0.3s ease;
+        }
+        
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: var(--accent-green);
+        }
+        
+        /* Timeline animations */
+        .timeline-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        
+        .timeline-item.aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Timeline line animation */
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+    </style>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section" style="padding: 100px 0; background: var(--primary-dark);">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="600">
+                <span class="section-badge">OUR BENEFITS</span>
+                <h2 class="section-title">Why Choose Our Technology</h2>
+                <p class="section-description">
+                    Experience the advantages of our cutting-edge AI-powered agricultural solutions
+                </p>
+            </div>
+            
+            <div class="benefits-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px;">
+                <!-- Benefit 1 -->
+                <div class="benefit-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" 
+                     style="background: var(--secondary-dark); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1);">
+                    <div class="benefit-icon" style="width: 60px; height: 60px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-chart-line" style="color: var(--accent-green); font-size: 24px;"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); font-size: 24px; margin-bottom: 15px;">Enhanced Efficiency</h3>
+                    <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                        Boost your productivity with our AI-powered grading system that processes items quickly and accurately
+                    </p>
+                </div>
+                
+                <!-- Benefit 2 -->
+                <div class="benefit-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" 
+                     style="background: var(--secondary-dark); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1);">
+                    <div class="benefit-icon" style="width: 60px; height: 60px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-cog" style="color: var(--accent-green); font-size: 24px;"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); font-size: 24px; margin-bottom: 15px;">Easy Integration</h3>
+                    <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                        Seamlessly integrate our solutions into your existing workflow with minimal disruption
+                    </p>
+                </div>
+                
+                <!-- Benefit 3 -->
+                <div class="benefit-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300" 
+                     style="background: var(--secondary-dark); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1);">
+                    <div class="benefit-icon" style="width: 60px; height: 60px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-mobile-alt" style="color: var(--accent-green); font-size: 24px;"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); font-size: 24px; margin-bottom: 15px;">Mobile Access</h3>
+                    <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                        Monitor and control your operations from anywhere using our mobile-friendly interface
+                    </p>
+                </div>
+                
+                <!-- Benefit 4 -->
+                <div class="benefit-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400" 
+                     style="background: var(--secondary-dark); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1);">
+                    <div class="benefit-icon" style="width: 60px; height: 60px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-shield-alt" style="color: var(--accent-green); font-size: 24px;"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); font-size: 24px; margin-bottom: 15px;">Reliable Performance</h3>
+                    <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                        Count on consistent, accurate results with our robust and well-tested technology
+                    </p>
+                </div>
+
+                <!-- Benefit 5 -->
+                <div class="benefit-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="500" 
+                     style="background: var(--secondary-dark); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1);">
+                    <div class="benefit-icon" style="width: 60px; height: 60px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-headset" style="color: var(--accent-green); font-size: 24px;"></i>
+            </div>
+                    <h3 style="color: var(--text-primary); font-size: 24px; margin-bottom: 15px;">24/7 Support</h3>
+                    <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                        Get expert assistance whenever you need it with our dedicated support team
+                    </p>
+        </div>
+
+                <!-- Benefit 6 -->
+                <div class="benefit-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="600" 
+                     style="background: var(--secondary-dark); padding: 40px; border-radius: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1);">
+                    <div class="benefit-icon" style="width: 60px; height: 60px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+                        <i class="fas fa-chart-pie" style="color: var(--accent-green); font-size: 24px;"></i>
+                    </div>
+                    <h3 style="color: var(--text-primary); font-size: 24px; margin-bottom: 15px;">Data Analytics</h3>
+                    <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">
+                        Make informed decisions with detailed insights and analytics from your operations
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            .benefit-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+                border-color: var(--accent-green);
+            }
+
+            .benefit-icon {
+                transition: all 0.3s ease;
+            }
+
+            .benefit-card:hover .benefit-icon {
+                transform: scale(1.1);
+                background: var(--accent-green);
+            }
+
+            .benefit-card:hover .benefit-icon i {
+                color: white;
+            }
+
+            @media (max-width: 768px) {
+                .benefits-grid {
+                    grid-template-columns: 1fr;
+                }
+
+                .benefit-card {
+                    padding: 30px;
+                }
+            }
+        </style>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up" data-aos-duration="600">
+                <span class="section-badge">OUR TEAM</span>
+                <h2 class="section-title">Meet Our Innovators</h2>
+                <p class="section-description">
+                    The brilliant minds behind SegriTech's revolutionary agricultural solutions
+                </p>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+                    <img src="{% static 'images/team-img1.png' %}" alt="Team Member" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Rajesh Kumar</h3>
+                        <p class="team-role">CEO & Co-Founder</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                    <img src="{% static 'images/team-img2.png' %}" alt="Team Member" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Priya Sharma</h3>
+                        <p class="team-role">CTO & AI Lead</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+                    <img src="{% static 'images/team-img3.png' %}" alt="Team Member" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Arjun Patel</h3>
+                        <p class="team-role">Head of Engineering</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+                    <img src="{% static 'images/team-img4.png' %}" alt="Team Member" class="team-image">
+                    <div class="team-info">
+                        <h3 class="team-name">Anita Singh</h3>
+                        <p class="team-role">Head of Operations</p>
+                        <div class="team-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fas fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up" data-aos-duration="600">
+                    <h2 class="cta-title">Ready to Transform Your Agricultural Operations?</h2>
+                    <p class="cta-description">
+                        Join hundreds of farmers and traders who have already revolutionized their processes with SegriTech's AI solutions.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="{% url 'contact' %}" class="btn-primary-custom">Get Started Today</a>
+                        <a href="{% url 'products' %}" class="btn-secondary-custom">Explore Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
+        <div class="wrapper2">
+            <div class="footer-inner-section">
+                <div class="footer-logo footer-box">
+                    <a href="{% url 'home' %}">
+                        <figure>
+                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
+                        </figure>
+                    </a>
+                    <p class="mb-0">Copyright © 2024 SegriTech.</p>
+                    <p>All Rights Reserved.</p>
+                    <ul class="list-unstyled mb-0">
+                        <li><span class="d-block">Social Media</span></li>
+                        <li class="d-inline-block ml-0"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="d-inline-block"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li class="d-inline-block"><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li class="d-inline-block mr-0"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer-box">
+                    <h4>About</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="{% url 'about' %}">About Company</a></li>
+                        <li><a href="{% url 'solutions' %}">Our Solutions</a></li>
+                        <li><a href="{% url 'products' %}">Our Products</a></li>
+                        <li class="mb-0"><a href="{% url 'careers' %}">Join Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box address-box">
+                    <h4>Address</h4>
+                    <ul class="list-unstyled">
+                        <li class="position-relative"><i class="fas fa-map-marker-alt"></i> Innovation Hub, Tech Park <br> Bangalore, Karnataka 560001</li>
+                        <li class="position-relative"><i class="fas fa-phone-volume"></i> <a href="tel:+918012345678">+91 80 1234 5678</a></li>
+                        <li class="mb-0 position-relative"><i class="fas fa-envelope"></i> <a href="mailto:info@segritech.com">info@segritech.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box footer-form-box">
+                    <h4>Newsletter Signup</h4>
+                    <ul class="list-unstyled">
+                        <li class="position-relative mb-0">
+                            <input class="bg-light-black" type="email" placeholder="Enter Your Email Address">
+                            <button>Subscribe</button>
+                        </li>
+                    </ul>
+                    <form>
+                        <input type="checkbox" id="policy" name="policy" value="agree">
+                        <label for="policy" class="check-box"></label>
+                        <label for="policy"> I agree to the <a href="#">Privacy Policy</a>.</label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <a id="button" class="show"></a>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    
+    <script>
+        $(window).on('load', function(){ 
+            // Preloader
+            $('.loader').fadeOut();
+            $('.loader-mask').delay(350).fadeOut('slow');
+        });
+        
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+        
+        // Smooth scrolling for anchor links
+        $('a[href^="#"]').on('click', function(event) {
+            var target = $(this.getAttribute('href'));
+            if( target.length ) {
+                event.preventDefault();
+                $('html, body').stop().animate({
+                    scrollTop: target.offset().top - 80
+                }, 1000);
+            }
+        });
+        
+        // Add scroll effect to navigation
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 50) {
+                $('.navbar-main-sec').addClass('scrolled');
+            } else {
+                $('.navbar-main-sec').removeClass('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

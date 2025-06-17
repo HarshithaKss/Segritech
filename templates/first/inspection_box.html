@@ -1,0 +1,422 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inspection Box - SegriTech</title>
+    
+    <!-- Favicon Links -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cdn.jsdelivr.net_npm_swiper%4010_swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/superclasses.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    
+    <style>
+        .product-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            position: relative;
+            overflow: hidden;
+        }
+        .product-features {
+            padding: 80px 0;
+            background: #1a1a1a;
+        }
+        .feature-card {
+            background: #2a2a2a;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            border-color: var(--accent-green);
+        }
+        .inquiry-form {
+            background: #2a2a2a;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .form-control {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+        }
+        .form-control:focus {
+            background: rgba(255,255,255,0.15);
+            border-color: var(--accent-green);
+            color: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Loader Styles */
+        .loader-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #000;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .loader {
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        
+        .loader div {
+            position: absolute;
+            border: 4px solid var(--accent-green);
+            opacity: 1;
+            border-radius: 50%;
+            animation: loader 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+        }
+        
+        .loader div:nth-child(2) {
+            animation-delay: -0.5s;
+        }
+        
+        @keyframes loader {
+            0% {
+                top: 24px;
+                left: 24px;
+                width: 0;
+                height: 0;
+                opacity: 1;
+            }
+            100% {
+                top: 0px;
+                left: 0px;
+                width: 48px;
+                height: 48px;
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    
+    {% include 'includes/navigation.html' %}
+
+    <!-- Hero Section -->
+    <section class="product-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                    <h1 class="text-white mb-4" style="font-size: 3rem; font-weight: 700; line-height: 1.2;">Inspection Box</h1>
+                    <p class="text-white-50 mb-5" style="font-size: 1.2rem; line-height: 1.8; max-width: 90%;">
+                        Our advanced quality inspection system combines cutting-edge technology with ease of use, 
+                        providing OEMs and exporters with unmatched precision in quality control.
+                    </p>
+                    <div class="d-flex align-items-center" style="gap: 20px;">
+                        <a href="https://wa.me/+919999999999" target="_blank" class="btn btn-success" style="padding: 15px 32px; font-weight: 600; font-size: 1.1rem; border-radius: 50px; background: linear-gradient(135deg, #4CAF50, #45a049); border: none; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3); transition: all 0.3s ease; white-space: nowrap;">
+                            <i class="fab fa-whatsapp me-2"></i>Book via WhatsApp
+                        </a>
+                        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#inquiryModal" style="padding: 15px 32px; font-weight: 600; font-size: 1.1rem; border-radius: 50px; border: 2px solid rgba(255,255,255,0.3); background: transparent; transition: all 0.3s ease; white-space: nowrap;">
+                            Send Inquiry
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                    <div style="position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.5); max-width: 80%; margin: 0 auto;">
+                        <img src="{% static 'web/inspection_box.jpg' %}" alt="Inspection Box" class="img-fluid" style="width: 100%; transform: scale(1.02);">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), transparent);"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="product-features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="text-white mb-4">Key Features</h2>
+                <p class="text-white-50 mb-5" style="max-width: 700px; margin: 0 auto;">
+                    Experience the next generation of quality inspection with our comprehensive feature set
+                    designed to meet the demanding needs of modern agricultural businesses.
+                </p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="600">
+                    <div class="feature-card">
+                        <i class="fas fa-camera fa-2x mb-4" style="color: var(--accent-green);"></i>
+                        <h4 class="text-white mb-3">High-Resolution Imaging</h4>
+                        <p class="text-white-50">
+                            4K Ultra HD camera system for detailed inspection and accurate defect detection.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                    <div class="feature-card">
+                        <i class="fas fa-brain fa-2x mb-4" style="color: var(--accent-green);"></i>
+                        <h4 class="text-white mb-3">AI-Powered Analysis</h4>
+                        <p class="text-white-50">
+                            Advanced machine learning algorithms for real-time quality assessment and grading.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+                    <div class="feature-card">
+                        <i class="fas fa-chart-bar fa-2x mb-4" style="color: var(--accent-green);"></i>
+                        <h4 class="text-white mb-3">Detailed Analytics</h4>
+                        <p class="text-white-50">
+                            Comprehensive reporting system with customizable quality parameters and trends.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specifications -->
+    <section class="py-5 bg-light-black">
+        <div class="container">
+            <h2 class="text-white text-center mb-5" data-aos="fade-up">Technical Specifications</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Dimensions</th>
+                                    <td>800mm x 600mm x 400mm</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Camera Resolution</th>
+                                    <td>4K Ultra HD</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Processing Speed</th>
+                                    <td>Up to 100 items per minute</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Power Consumption</th>
+                                    <td>200W</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Connectivity</th>
+                                    <td>Wi-Fi, Ethernet, USB</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    {% include 'includes/footer.html' %}
+    <a id="button" class="show"></a>
+
+    <!-- Inquiry Modal -->
+    <div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content" style="background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 15px;">
+                <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 30px;">
+                    <h5 class="modal-title text-white" id="inquiryModalLabel">Send Inquiry - Inspection Box</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white; opacity: 0.5;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 30px;">
+                    <form id="inquiryForm" method="POST" action="{% url 'send_inquiry' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product" value="Inspection Box">
+                        <div class="form-group mb-4">
+                            <label class="text-white">Full Name *</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="text-white">Email Address *</label>
+                            <input type="email" class="form-control" name="email" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="text-white">Phone Number *</label>
+                            <input type="tel" class="form-control" name="phone" required>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="text-white">Company Name</label>
+                            <input type="text" class="form-control" name="company">
+                        </div>
+                        <div class="form-group mb-4">
+                            <label class="text-white">Message *</label>
+                            <textarea class="form-control" name="message" rows="4" required placeholder="Please describe your requirements..."></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success" style="padding: 12px 28px; font-weight: 600; border-radius: 50px; background: linear-gradient(135deg, #4CAF50, #45a049); border: none; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3); min-width: 200px;">
+                                <i class="fas fa-paper-plane me-2"></i> Send Inquiry
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        $(document).ready(function() {
+            // Hide loader immediately when jQuery is ready
+            $('.loader-mask').fadeOut('slow');
+            
+            // Initialize AOS
+            AOS.init({
+                duration: 1000,
+                once: true
+            });
+
+            // Initialize dropdown functionality
+            const $dropdown = $(".dropdown");
+            const $dropdownToggle = $(".dropdown-toggle");
+            const $dropdownMenu = $(".dropdown-menu");
+            const showClass = "show";
+
+            $(window).on("load resize", function() {
+                if (this.matchMedia("(min-width: 768px)").matches) {
+                    $dropdown.hover(
+                        function() {
+                            const $this = $(this);
+                            $this.addClass(showClass);
+                            $this.find($dropdownToggle).attr("aria-expanded", "true");
+                            $this.find($dropdownMenu).addClass(showClass);
+                        },
+                        function() {
+                            const $this = $(this);
+                            $this.removeClass(showClass);
+                            $this.find($dropdownToggle).attr("aria-expanded", "false");
+                            $this.find($dropdownMenu).removeClass(showClass);
+                        }
+                    );
+                } else {
+                    $dropdown.off("mouseenter mouseleave");
+                }
+            });
+
+            // Hide loader when page is loaded
+            $(window).on('load', function() {
+                $('.loader-mask').fadeOut('slow');
+            });
+
+            // Smooth scroll for anchor links
+            $('a[href^="#"]').on('click', function(e) {
+                e.preventDefault();
+                var target = $(this.hash);
+                if (target.length) {
+                    $('html, body').animate({
+                        scrollTop: target.offset().top - 100
+                    }, 1000);
+                }
+            });
+
+            // Form submission handling
+            $('#inquiryForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const form = $(this);
+                const submitBtn = form.find('button[type="submit"]');
+                const originalText = submitBtn.html();
+                
+                // Validate required fields
+                const name = form.find('input[name="name"]').val();
+                const email = form.find('input[name="email"]').val();
+                const phone = form.find('input[name="phone"]').val();
+                const message = form.find('textarea[name="message"]').val();
+                
+                if (!name || !email || !phone || !message) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                submitBtn.html('<i class="fas fa-spinner fa-spin me-2"></i> Sending...').prop('disabled', true);
+                
+                $.ajax({
+                    url: form.attr('action'),
+                    method: 'POST',
+                    data: form.serialize(),
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            alert('Thank you for your inquiry. We will contact you soon!');
+                            form[0].reset();
+                            $('#inquiryModal').modal('hide');
+                        } else {
+                            alert('There was an error sending your inquiry. Please try again.');
+                        }
+                    },
+                    error: function() {
+                        alert('There was an error sending your inquiry. Please try again.');
+                    },
+                    complete: function() {
+                        submitBtn.html(originalText).prop('disabled', false);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

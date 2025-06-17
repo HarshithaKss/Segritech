@@ -1,0 +1,299 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ product.name }} - SegriTech{% endblock %}
+
+{% block extra_css %}
+<style>
+    .product-hero {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+        position: relative;
+        overflow: hidden;
+    }
+    .product-features {
+        padding: 80px 0;
+        background: #1a1a1a;
+    }
+    .feature-card {
+        background: #2a2a2a;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 30px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(76, 175, 80, 0.2);
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        border-color: var(--accent-green);
+    }
+    .inquiry-form {
+        background: #2a2a2a;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+    .form-control {
+        background: rgba(255,255,255,0.1);
+        border: 1px solid rgba(255,255,255,0.2);
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+    }
+    .form-control:focus {
+        background: rgba(255,255,255,0.15);
+        border-color: var(--accent-green);
+        color: white;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    }
+    .whatsapp-btn {
+        background: #25D366;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+    .whatsapp-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+        color: white;
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="product-hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <h1 class="display-4 text-white mb-4">{{ product.name }}</h1>
+                <p class="lead text-light mb-5">{{ product.short_description }}</p>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#inquiryModal">
+                    Request Information
+                </button>
+                <a href="https://wa.me/+919876543210" class="whatsapp-btn ml-3">
+                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
+                </a>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                {% if product.main_image %}
+                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" class="img-fluid rounded-lg shadow-lg">
+                {% else %}
+                    <img src="{% static 'images/product-placeholder.jpg' %}" alt="{{ product.name }}" class="img-fluid rounded-lg shadow-lg">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="product-features">
+    <div class="container">
+        <h2 class="text-center text-white mb-5" data-aos="fade-up">Key Features</h2>
+        <div class="row">
+            {% for feature in product.key_features|safe|slice:":6" %}
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ forloop.counter|multiply:100 }}">
+                <div class="feature-card">
+                    <i class="fas fa-check-circle text-success mb-4" style="font-size: 2.5rem;"></i>
+                    <h4 class="text-white mb-3">{{ feature }}</h4>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Specifications Section -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h2 class="text-center text-white mb-5" data-aos="fade-up">Technical Specifications</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bg-dark border-light">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6 mb-3">
+                                <h5 class="text-white">Dimensions</h5>
+                                <p class="text-light">{{ product.dimensions }}</p>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <h5 class="text-white">Power Requirements</h5>
+                                <p class="text-light">{{ product.power_requirements }}</p>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <h5 class="text-white">Processing Capacity</h5>
+                                <p class="text-light">{{ product.capacity }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Applications Section -->
+<section class="py-5 bg-darker">
+    <div class="container">
+        <h2 class="text-center text-white mb-5" data-aos="fade-up">Applications</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bg-dark border-light">
+                    <div class="card-body">
+                        <p class="text-light">{{ product.applications|linebreaks }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="py-5 bg-dark">
+    <div class="container">
+        <h2 class="text-center text-white mb-5" data-aos="fade-up">Benefits</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card bg-dark border-light">
+                    <div class="card-body">
+                        <p class="text-light">{{ product.benefits|linebreaks }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Inquiry Modal -->
+<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="inquiryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-white" id="inquiryModalLabel">Request Information</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="inquiryForm" class="inquiry-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="text-white">Name *</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="text-white">Email *</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="text-white">Phone *</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="company" class="text-white">Company</label>
+                            <input type="text" class="form-control" id="company" name="company">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="inquiry_type" class="text-white">Inquiry Type *</label>
+                        <select class="form-control" id="inquiry_type" name="inquiry_type" required>
+                            <option value="pricing">Pricing Information</option>
+                            <option value="demo">Request Demo</option>
+                            <option value="specs">Technical Specifications</option>
+                            <option value="customization">Customization Options</option>
+                            <option value="bulk_order">Bulk Order Inquiry</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="text-white">Message *</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                            Submit Inquiry
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Handle form submission
+    $('#inquiryForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        $('#submitBtn').prop('disabled', true);
+        $('#submitBtn .spinner-border').removeClass('d-none');
+        
+        // Get form data
+        const formData = {
+            product_id: $('input[name="product_id"]').val(),
+            name: $('#name').val(),
+            email: $('#email').val(),
+            phone: $('#phone').val(),
+            company: $('#company').val(),
+            inquiry_type: $('#inquiry_type').val(),
+            message: $('#message').val()
+        };
+        
+        // Send AJAX request
+        $.ajax({
+            url: '{% url "product_inquiry" %}',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function(response) {
+                if(response.status === 'success') {
+                    // Show success message
+                    Swal.fire({
+                        title: 'Thank You!',
+                        text: 'Your inquiry has been submitted successfully. We will contact you soon.',
+                        icon: 'success',
+                        confirmButtonColor: '#4CAF50'
+                    });
+                    
+                    // Reset form
+                    $('#inquiryForm')[0].reset();
+                    $('#inquiryModal').modal('hide');
+                } else {
+                    throw new Error('Server returned error');
+                }
+            },
+            error: function(xhr, status, error) {
+                // Show error message
+                Swal.fire({
+                    title: 'Error',
+                    text: 'There was a problem submitting your inquiry. Please try again.',
+                    icon: 'error',
+                    confirmButtonColor: '#4CAF50'
+                });
+            },
+            complete: function() {
+                // Reset button state
+                $('#submitBtn').prop('disabled', false);
+                $('#submitBtn .spinner-border').addClass('d-none');
+            }
+        });
+    });
+});
+</script>
+{% endblock %} 

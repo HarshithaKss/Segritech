@@ -1,0 +1,2541 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <title>SegriTech | Home</title>
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cdn.jsdelivr.net_npm_swiper%4010_swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/superclasses.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    <!-- Three.js for 3D model -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/examples/js/controls/OrbitControls.js"></script>
+    <script>
+        // Simple check that libraries loaded
+        console.log('Three.js loaded:', typeof THREE !== 'undefined');
+        console.log('Checking for GLTFLoader and OrbitControls...');
+        
+        // They should be available immediately after the scripts load
+        setTimeout(function() {
+            console.log('GLTFLoader available:', typeof THREE.GLTFLoader !== 'undefined');
+            console.log('OrbitControls available:', typeof THREE.OrbitControls !== 'undefined');
+        }, 100);
+    </script>
+    <style>
+        html, body {
+            overflow-x: hidden !important;
+        }
+        
+        /* Force remove any white backgrounds */
+        * {
+            background-color: transparent !important;
+        }
+        
+        body, html {
+            background-color: #1a1a1a !important;
+        }
+        
+        /* Complete reset for gallery elements */
+        .gallery-container, .gallery-container *, 
+        .gallery-item, .gallery-item *, 
+        .images, .images *,
+        #art .gallery-container,
+        #art .gallery-item,
+        #art .images,
+        #art figure,
+        #art img,
+        div.images,
+        div.gallery-item,
+        div.gallery-container {
+            padding: 0 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+            border: none !important;
+            outline: none !important;
+            line-height: 0 !important;
+            font-size: 0 !important;
+        }
+        
+        /* Aggressive image styling */
+        .images img,
+        #art .images img,
+        #art img,
+        img {
+            display: block !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            outline: none !important;
+            vertical-align: top !important;
+            line-height: 0 !important;
+            font-size: 0 !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+        }
+        
+        /* Container specific overrides */
+        #art .gallery-container {
+            overflow: hidden !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        #art .gallery-item {
+            line-height: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        #art .images {
+            line-height: 0 !important;
+            font-size: 0 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            overflow: hidden !important;
+        }
+        
+        /* Force remove any inherited spacing */
+        .gallery-section .gallery-container,
+        .gallery-section .gallery-item,
+        .gallery-section .images {
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+        }
+        
+        /* NUCLEAR OPTION - Override ALL inline styles */
+        #art img[src*="portfolio-3.jpg"] {
+            position: absolute !important;
+            top: -20px !important;
+            left: -20px !important;
+            width: calc(100% + 40px) !important;
+            height: calc(100% + 40px) !important;
+            object-fit: cover !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            display: block !important;
+            line-height: 0 !important;
+            vertical-align: top !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Target ALL gallery images with extreme force */
+        #art .gallery-container img,
+        #art .gallery-item img,
+        #art .images img,
+        img[src*="portfolio-"],
+        img[alt*="portfolio-"] {
+            position: absolute !important;
+            top: -18px !important;
+            left: -18px !important;
+            width: calc(100% + 36px) !important;
+            height: calc(100% + 36px) !important;
+            object-fit: cover !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            display: block !important;
+            line-height: 0 !important;
+            vertical-align: top !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Force containers to be proper size */
+        #art .gallery-container,
+        #art .gallery-item,
+        #art .images {
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            line-height: 0 !important;
+            font-size: 0 !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Center the entire tabset gallery */
+        .tabset {
+            padding-left: 300px !important;
+        }
+        
+        /* Center tab labels in the middle of the page */
+        .tabset label {
+            position: relative !important;
+            left: -150px !important;
+        }
+        
+        /* Add space between tab labels and gallery */
+        .tab-panels {
+            margin-top: 50px !important;
+        }
+        
+        /* Client logos sizing */
+        #logoSwiper .swiper-slide figure img,
+        .logo-slider .swiper-slide figure img,
+        .swiper-slide figure img[src*="client-"],
+        .swiper-slide figure img[alt*="client-"] {
+            max-width: 116px !important;
+            max-height: 118px !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: contain !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }
+        
+        /* Ensure figures don't add extra space */
+        #logoSwiper .swiper-slide figure,
+        .logo-slider .swiper-slide figure {
+            margin: 0 !important;
+            padding: 15px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            height: 140px !important;
+        }
+        
+        /* CSS Fallback Animation for Logo Slider */
+        @keyframes scroll-logos {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        /* Fallback if Swiper doesn't work */
+        .swiper-wrapper {
+            display: flex !important;
+            animation: scroll-logos 20s linear infinite !important;
+            width: 200% !important;
+        }
+        
+        /* Force swiper container to show overflow */
+        #logoSwiper {
+            overflow: hidden !important;
+            width: 100% !important;
+        }
+        
+        .swiper-slide {
+            flex-shrink: 0 !important;
+            width: auto !important;
+            min-width: 150px !important;
+            max-width: 200px !important;
+        }
+        
+        /* Beautiful Section Headings */
+        .generic-title {
+            margin-bottom: 60px !important;
+            padding: 0 20px !important;
+        }
+        
+        .generic-title span {
+            font-size: 1.4rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 3px !important;
+            text-transform: uppercase !important;
+            color: var(--accent-green) !important;
+            display: block !important;
+            margin-bottom: 20px !important;
+            text-align: center !important;
+            position: relative !important;
+        }
+        
+        .generic-title span::after {
+            content: '' !important;
+            width: 80px !important;
+            height: 3px !important;
+            background: linear-gradient(90deg, var(--accent-green), var(--primary-green)) !important;
+            display: block !important;
+            margin: 15px auto 0 auto !important;
+            border-radius: 2px !important;
+        }
+        
+        .generic-title h2 {
+            font-size: 3.2rem !important;
+            font-weight: 800 !important;
+            line-height: 1.2 !important;
+            color: #FFFFFF !important;
+            text-align: center !important;
+            margin: 0 auto !important;
+            max-width: 900px !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3) !important;
+            letter-spacing: -0.5px !important;
+        }
+        
+        /* Core Technologies section */
+        .service-slider-sec .generic-title span {
+            color: var(--accent-green) !important;
+            font-size: 1.3rem !important;
+        }
+        
+        .service-slider-sec .generic-title h2 {
+            font-size: 3.4rem !important;
+            background: linear-gradient(135deg, var(--accent-green), #FFFFFF) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+        }
+        
+        /* Collection section */
+        .collection-section .generic-title span {
+            color: var(--primary-green) !important;
+        }
+        
+        .collection-section .generic-title h2 {
+            font-size: 3.3rem !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Support section */
+        .logo-slider .generic-title span {
+            color: var(--accent-green) !important;
+            font-size: 1.3rem !important;
+        }
+        
+        .logo-slider .generic-title h2 {
+            font-size: 3.1rem !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Reviews section - if it has a title */
+        .reviews-section .generic-title span {
+            color: var(--primary-green) !important;
+        }
+        
+        /* Blog section */
+        .blogs-section .generic-title span {
+            color: var(--accent-green) !important;
+        }
+        
+        .blogs-section .generic-title h2 {
+            font-size: 3.2rem !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .generic-title h2 {
+                font-size: 2.5rem !important;
+            }
+            
+            .gallery-section .generic-title h2 {
+                font-size: 2.2rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .generic-title h2 {
+                font-size: 2rem !important;
+            }
+            
+            .generic-title span {
+                font-size: 1.1rem !important;
+                letter-spacing: 2px !important;
+            }
+        }
+        
+        /* Center the Who We Are section image */
+        #home-who-we-are-section .col-lg-5 {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        #home-who-we-are-section .col-lg-5 figure {
+            margin: 0 auto !important;
+            text-align: center !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+        }
+        
+        #home-who-we-are-section .col-lg-5 figure img {
+            max-width: 90% !important;
+            height: auto !important;
+            border-radius: 12px !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
+            transition: transform 0.3s ease !important;
+        }
+        
+        #home-who-we-are-section .col-lg-5 figure img:hover {
+            transform: scale(1.02) !important;
+        }
+        
+        /* Responsive adjustments for the image */
+        @media (max-width: 991px) {
+            #home-who-we-are-section .col-lg-5 {
+                margin-top: 40px !important;
+                text-align: center !important;
+            }
+        }
+        
+        /* Explore Button Styling */
+        .explore-btn {
+            background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            padding: 12px 30px !important;
+            font-size: 1.1rem !important;
+            font-weight: 700 !important;
+            border-radius: 25px !important;
+            cursor: pointer !important;
+            transition: all 0.3s ease !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+            min-width: 120px !important;
+        }
+        
+        .explore-btn:hover {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green)) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3) !important;
+            color: #FFFFFF !important;
+        }
+        
+        .explore-btn:focus {
+            outline: none !important;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3) !important;
+        }
+        
+        .explore-btn:active {
+            transform: translateY(0) !important;
+        }
+        
+        /* Responsive styling for Explore button */
+        @media (max-width: 768px) {
+            .explore-btn {
+                padding: 10px 20px !important;
+                font-size: 1rem !important;
+                min-width: 100px !important;
+            }
+        }
+        
+        /* Collection Box Size Reduction */
+        .collection-section .collection-box {
+            padding: 20px 15px !important;
+            margin-bottom: 20px !important;
+            border-radius: 8px !important;
+            height: auto !important;
+            min-height: 280px !important;
+        }
+        
+        .collection-section .collection-box figure {
+            margin-bottom: 15px !important;
+            height: 60px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        .collection-section .collection-box figure img {
+            max-width: 50px !important;
+            max-height: 50px !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: contain !important;
+        }
+        
+        .collection-section .collection-box h4 {
+            font-size: 1.2rem !important;
+            margin-bottom: 10px !important;
+            font-weight: 600 !important;
+        }
+        
+        .collection-section .collection-box p {
+            font-size: 0.9rem !important;
+            line-height: 1.4 !important;
+            margin-bottom: 15px !important;
+            color: #B0B0B0 !important;
+        }
+        
+        .collection-section .collection-box a {
+            font-size: 0.9rem !important;
+            padding: 8px 15px !important;
+            border-radius: 20px !important;
+            background: var(--accent-green) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+            transition: all 0.3s ease !important;
+            display: inline-block !important;
+        }
+        
+        .collection-section .collection-box a:hover {
+            background: var(--primary-green) !important;
+            transform: translateY(-2px) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+        }
+        
+        .collection-section .collection-box a i {
+            margin-left: 5px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        /* Responsive adjustments for collection boxes */
+        @media (max-width: 768px) {
+            .collection-section .collection-box {
+                padding: 15px 10px !important;
+                min-height: 240px !important;
+            }
+            
+            .collection-section .collection-box figure img {
+                max-width: 40px !important;
+                max-height: 40px !important;
+            }
+            
+            .collection-section .collection-box h4 {
+                font-size: 1.1rem !important;
+            }
+            
+            .collection-section .collection-box p {
+                font-size: 0.85rem !important;
+            }
+        }
+        
+        /* Style for percentage statistics */
+        #home-who-we-are-section .about-details-box p {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)) !important;
+            padding: 25px !important;
+            border-radius: 12px !important;
+            border-left: 4px solid var(--accent-green) !important;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        
+        /* Enhanced text formatting */
+        #home-who-we-are-section .about-details-box p strong,
+        #home-who-we-are-section .about-details-box p b {
+            color: var(--accent-green) !important;
+            font-weight: 600 !important;
+        }
+        
+        /* SegriTech themed paragraph styling */
+        #home-who-we-are-section .intro-text {
+            color: #F0F4F0 !important;
+            font-size: 1.05rem !important;
+            line-height: 1.7 !important;
+            display: block !important;
+            margin-bottom: 10px !important;
+        }
+        
+        #home-who-we-are-section .stat-item {
+            display: inline-block !important;
+            background: linear-gradient(135deg, 
+                rgba(244, 67, 54, 0.15) 0%, 
+                rgba(233, 30, 99, 0.1) 50%,
+                rgba(244, 67, 54, 0.15) 100%) !important;
+            padding: 15px 25px !important;
+            margin: 8px 0 !important;
+            border-radius: 25px !important;
+            border: 1px solid rgba(244, 67, 54, 0.3) !important;
+            color: #FFFFFF !important;
+            font-size: 1rem !important;
+            width: 100% !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            backdrop-filter: blur(10px) !important;
+            box-shadow: 0 4px 15px rgba(244, 67, 54, 0.2) !important;
+        }
+        
+        #home-who-we-are-section .stat-item::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -100% !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent) !important;
+            transition: left 0.6s ease !important;
+        }
+        
+        #home-who-we-are-section .stat-item:hover::before {
+            left: 100% !important;
+        }
+        
+        #home-who-we-are-section .stat-item:hover {
+            background: linear-gradient(135deg, 
+                rgba(244, 67, 54, 0.25) 0%, 
+                rgba(233, 30, 99, 0.2) 50%,
+                rgba(244, 67, 54, 0.25) 100%) !important;
+            transform: translateX(10px) scale(1.02) !important;
+            box-shadow: 0 8px 25px rgba(244, 67, 54, 0.4) !important;
+            border-color: rgba(244, 67, 54, 0.5) !important;
+        }
+        
+        #home-who-we-are-section .stat-item strong {
+            color: #ff6b6b !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3) !important;
+        }
+        
+        /* Enhanced mission text */
+        #home-who-we-are-section .mission-text {
+            color: #E8F5E8 !important;
+            font-size: 1.1rem !important;
+            line-height: 1.8 !important;
+            display: block !important;
+            margin-top: 15px !important;
+            font-weight: 400 !important;
+        }
+        
+        #home-who-we-are-section .brand-highlight {
+            background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text !important;
+            font-weight: 800 !important;
+            font-size: 1.2rem !important;
+            text-shadow: none !important;
+        }
+        
+        #home-who-we-are-section .mission-text strong {
+            color: var(--accent-green) !important;
+            font-weight: 600 !important;
+        }
+        
+        /* Responsive adjustments for the paragraph */
+        @media (max-width: 768px) {
+            #home-who-we-are-section p {
+                font-size: 1rem !important;
+                line-height: 1.7 !important;
+                text-align: left !important;
+                padding: 20px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #home-who-we-are-section p {
+                font-size: 0.95rem !important;
+                line-height: 1.6 !important;
+                padding: 15px !important;
+            }
+        }
+        
+        #home-who-we-are-section .brand-highlight:hover::after {
+            transform: scaleX(1) !important;
+            transform-origin: left !important;
+        }
+        
+        /* Enhanced Learn More button */
+        #home-who-we-are-section .generic-btn {
+            margin-top: 35px !important;
+        }
+        
+        #home-who-we-are-section .generic-btn a {
+            background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important;
+            color: #FFFFFF !important;
+            padding: 15px 35px !important;
+            border-radius: 30px !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            position: relative !important;
+            overflow: hidden !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3) !important;
+            border: 2px solid transparent !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+        }
+        
+        #home-who-we-are-section .generic-btn a::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -100% !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent) !important;
+            transition: left 0.6s ease !important;
+        }
+        
+        #home-who-we-are-section .generic-btn a:hover::before {
+            left: 100% !important;
+        }
+        
+        #home-who-we-are-section .generic-btn a:hover {
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 0 15px 35px rgba(76, 175, 80, 0.5) !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+        }
+        
+        #home-who-we-are-section .generic-btn a:active {
+            transform: translateY(-1px) scale(1.02) !important;
+            transition: all 0.1s ease !important;
+        }
+        
+        /* Enhanced Gallery Section Heading Styling */
+        .gallery-main-heading {
+            font-size: 1.4rem !important;
+            font-weight: 400 !important;
+            line-height: 1.4 !important;
+            color: rgba(255, 255, 255, 0.9) !important;
+            margin-bottom: 15px !important;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) !important;
+            max-width: 700px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            position: relative !important;
+            text-align: center !important;
+        }
+        
+        .gallery-main-heading::before {
+            display: none !important;
+        }
+        
+        .gallery-subtitle {
+            font-size: 0.9rem !important;
+            color: rgba(255, 255, 255, 0.7) !important;
+            font-weight: 400 !important;
+            margin-bottom: 30px !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+            font-style: normal !important;
+            position: relative !important;
+            max-width: 350px !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+            text-align: center !important;
+        }
+        
+        .gallery-subtitle::before {
+            content: '' !important;
+            position: absolute !important;
+            top: -12px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            width: 40px !important;
+            height: 1px !important;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.5), transparent) !important;
+            border-radius: 1px !important;
+        }
+        
+        .gallery-subtitle::after {
+            display: none !important;
+        }
+        
+        /* Responsive Design for Gallery Heading */
+        @media (max-width: 991px) {
+            .gallery-main-heading {
+                font-size: 1.3rem !important;
+                max-width: 85% !important;
+            }
+            
+            .gallery-subtitle {
+                font-size: 0.85rem !important;
+                max-width: 80% !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .gallery-main-heading {
+                font-size: 1.2rem !important;
+                max-width: 95% !important;
+                line-height: 1.3 !important;
+            }
+            
+            .gallery-subtitle {
+                font-size: 0.8rem !important;
+                max-width: 90% !important;
+                margin-bottom: 25px !important;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .gallery-main-heading {
+                font-size: 1.1rem !important;
+                line-height: 1.3 !important;
+                margin-bottom: 12px !important;
+            }
+            
+            .gallery-subtitle {
+                font-size: 0.75rem !important;
+                margin-bottom: 20px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery-main-heading {
+                font-size: 1rem !important;
+            }
+            
+            .gallery-subtitle {
+                font-size: 0.7rem !important;
+            }
+        }
+        
+        .navbar-main-sec, .navbar, .navbar-brand, .nav-link, .navbar-nav {
+            background-color: transparent !important;
+            background: transparent !important;
+        }
+        
+        .wrapper, .wrapper2 {
+            background-color: transparent !important;
+            background: transparent !important;
+        }
+        
+        .banner-sec, .bg-light-black, .bg-dark-black {
+            background-color: #1a1a1a !important;
+            background: #1a1a1a !important;
+        }
+        
+        /* Remove any white from navbar specifically */
+        .navbar-main-sec .navbar {
+            background: none !important;
+            background-color: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+        
+        .navbar-light {
+            background-color: transparent !important;
+        }
+        
+        /* Restore collection box backgrounds */
+        .collection-box, .collection-section .collection-box {
+            background-color: #2a2a2a !important;
+            background: #2a2a2a !important;
+            border: 1px solid rgba(76, 175, 80, 0.2) !important;
+            border-radius: 8px !important;
+        }
+        
+        /* Restore service box backgrounds */
+        .service-slider-sec .collection-box {
+            background-color: #2a2a2a !important;
+            background: #2a2a2a !important;
+            border: 1px solid rgba(76, 175, 80, 0.2) !important;
+        }
+        
+        /* Restore other dark boxes */
+        .bg-dark-black {
+            background-color: #2a2a2a !important;
+            background: #2a2a2a !important;
+        }
+        
+        /* Restore hover effects for collection boxes */
+        .collection-box:hover {
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3) !important;
+            border-color: rgba(76, 175, 80, 0.5) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        /* Restore button styling */
+        .collection-box a, .collection-section .collection-box a {
+            background: var(--accent-green) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+            padding: 8px 15px !important;
+            border-radius: 20px !important;
+            font-size: 0.9rem !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .collection-box a:hover, .collection-section .collection-box a:hover {
+            background: var(--primary-green) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        /* Restore service box button styling */
+        .service-slider-sec .collection-box a,
+        .service-learn-more {
+            background: var(--accent-green) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+            padding: 8px 15px !important;
+            border-radius: 20px !important;
+            font-size: 0.9rem !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .service-slider-sec .collection-box a:hover,
+        .service-learn-more:hover {
+            background: var(--primary-green) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        /* Ensure CSS variables are defined */
+        :root {
+            --accent-green: #4CAF50;
+            --primary-green: #45a049;
+        }
+        
+        /* More specific targeting for collection section buttons */
+        .collection-section .collection-box a,
+        .collection-inner-sec .collection-box a,
+        div.collection-box a {
+            background: linear-gradient(135deg, #4CAF50, #45a049, #66BB6A) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+            padding: 12px 24px !important;
+            border-radius: 25px !important;
+            font-size: 0.95rem !important;
+            font-weight: 600 !important;
+            display: inline-block !important;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+            border: none !important;
+            position: relative !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        
+        /* Add shimmer effect */
+        .collection-section .collection-box a::before,
+        .collection-inner-sec .collection-box a::before,
+        div.collection-box a::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: -100% !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent) !important;
+            transition: left 0.6s ease !important;
+        }
+        
+        /* Pulse animation */
+        .collection-section .collection-box a::after,
+        .collection-inner-sec .collection-box a::after,
+        div.collection-box a::after {
+            content: '' !important;
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            width: 0 !important;
+            height: 0 !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-radius: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            transition: width 0.3s ease, height 0.3s ease !important;
+        }
+        
+        .collection-section .collection-box a:hover,
+        .collection-inner-sec .collection-box a:hover,
+        div.collection-box a:hover {
+            background: linear-gradient(135deg, #66BB6A, #4CAF50, #43A047) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+            transform: translateY(-4px) scale(1.05) !important;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5) !important;
+            border: 2px solid rgba(255, 255, 255, 0.2) !important;
+        }
+        
+        /* Shimmer effect on hover */
+        .collection-section .collection-box a:hover::before,
+        .collection-inner-sec .collection-box a:hover::before,
+        div.collection-box a:hover::before {
+            left: 100% !important;
+        }
+        
+        /* Pulse effect on hover */
+        .collection-section .collection-box a:hover::after,
+        .collection-inner-sec .collection-box a:hover::after,
+        div.collection-box a:hover::after {
+            width: 120% !important;
+            height: 120% !important;
+        }
+        
+        /* Active state */
+        .collection-section .collection-box a:active,
+        .collection-inner-sec .collection-box a:active,
+        div.collection-box a:active {
+            transform: translateY(-2px) scale(1.02) !important;
+            transition: all 0.1s ease !important;
+        }
+        
+        /* Icon styling within buttons */
+        .collection-section .collection-box a i,
+        .collection-inner-sec .collection-box a i,
+        div.collection-box a i {
+            margin-left: 8px !important;
+            transition: transform 0.3s ease !important;
+        }
+        
+        .collection-section .collection-box a:hover i,
+        .collection-inner-sec .collection-box a:hover i,
+        div.collection-box a:hover i {
+            transform: translateX(3px) !important;
+        }
+        
+        /* Restore navbar hover effects */
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-green) !important;
+            transition: color 0.3s ease !important;
+        }
+        
+        /* Restore social box hover effects */
+        .social-box ul li a:hover {
+            background: var(--accent-green) !important;
+            transform: translateY(-2px) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        /* Restore explore button hover */
+        .explore-btn:hover {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green)) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        /* Restore generic button styling */
+        .generic-btn a {
+            background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important;
+            color: #FFFFFF !important;
+            padding: 15px 35px !important;
+            border-radius: 30px !important;
+            font-weight: 700 !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .generic-btn a:hover {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green)) !important;
+            transform: translateY(-3px) !important;
+            color: #FFFFFF !important;
+            text-decoration: none !important;
+        }
+        
+        /* Restore dropdown hover effects */
+        .dropdown:hover .dropdown-menu {
+            display: block !important;
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--accent-green) !important;
+            color: #FFFFFF !important;
+        }
+        
+        /* Restore cart and other icon hover effects */
+        .navbar-right-box li a:hover {
+            color: var(--accent-green) !important;
+            transform: scale(1.1) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        /* Add spacing between logo and navbar items */
+        .navbar-brand {
+            margin-right: 30px !important;
+        }
+        
+        /* Move navbar items towards right */
+        .navbar-nav {
+            margin-left: calc(auto - 100px) !important;
+            margin-right: 50px !important;
+        }
+        
+        /* Add spacing between navbar items */
+        .navbar-nav .nav-item {
+            margin: 0 6px !important;
+        }
+        
+        /* Ensure proper alignment on different screen sizes */
+        @media (min-width: 992px) {
+            .navbar-brand {
+                margin-right: 40px !important;
+            }
+            
+            .navbar-nav {
+                margin-left: calc(auto - 150px) !important;
+                margin-right: 80px !important;
+            }
+            
+            .navbar-nav .nav-item {
+                margin: 0 8px !important;
+            }
+        }
+        
+        @media (max-width: 991px) {
+            .navbar-brand {
+                margin-right: 20px !important;
+            }
+            
+            .navbar-nav {
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                margin-top: 20px !important;
+            }
+        }
+        
+        /* Move search and explore buttons to the right end */
+        .navbar-right-box {
+            margin-left: auto !important;
+            padding-left: 20px !important;
+        }
+        
+        .d-flex {
+            margin-left: auto !important;
+        }
+        
+        /* Ensure proper spacing for the right-side buttons */
+        @media (min-width: 992px) {
+            .navbar-right-box {
+                margin-left: 30px !important;
+                padding-left: 30px !important;
+            }
+        }
+        
+        @media (max-width: 991px) {
+            .navbar-right-box {
+                margin-left: 0 !important;
+                padding-left: 0 !important;
+                margin-top: 15px !important;
+            }
+        }
+        
+        /* Restore cart and other icon hover effects */
+        .navbar-right-box li a:hover {
+            color: var(--accent-green) !important;
+            transform: scale(1.1) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        /* Move banner image towards left */
+        .banner-right-sec {
+            margin-left: -50px !important;
+            padding-left: 0 !important;
+        }
+        
+        /* Adjust banner layout for better balance */
+        .wrapper2 {
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 0 20px !important;
+        }
+        
+        /* Fine-tune banner sections */
+        .banner-left-sec {
+            padding-right: 40px !important;
+        }
+        
+        /* Responsive adjustments */
+        @media (min-width: 1200px) {
+            .banner-right-sec {
+                margin-left: -80px !important;
+            }
+            
+            .banner-left-sec {
+                padding-right: 60px !important;
+            }
+        }
+        
+        @media (max-width: 991px) {
+            .banner-right-sec {
+                margin-left: 0 !important;
+                margin-top: 30px !important;
+            }
+            
+            .banner-left-sec {
+                padding-right: 20px !important;
+                text-align: center !important;
+            }
+        }
+        
+        /* Complete reset for gallery elements */
+        
+        /* 3D Model Viewer Styles */
+        .model-viewer-container {
+            width: 100% !important;
+            height: 500px !important;
+            position: relative !important;
+            border-radius: 15px !important;
+            overflow: hidden !important;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a) !important;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5) !important;
+            border: 2px solid rgba(76, 175, 80, 0.3) !important;
+            z-index: 9999 !important;
+        }
+        
+        #modelCanvas {
+            width: 100% !important;
+            height: 100% !important;
+            display: block !important;
+            border-radius: 13px !important;
+        }
+        
+        .model-controls {
+            position: absolute !important;
+            bottom: 20px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            display: flex !important;
+            gap: 10px !important;
+            z-index: 10 !important;
+        }
+        
+        .model-control-btn {
+            background: rgba(76, 175, 80, 0.9) !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            padding: 10px 15px !important;
+            border-radius: 25px !important;
+            cursor: pointer !important;
+            font-size: 0.9rem !important;
+            transition: all 0.3s ease !important;
+            backdrop-filter: blur(10px) !important;
+        }
+        
+        .model-control-btn:hover {
+            background: rgba(76, 175, 80, 1) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4) !important;
+        }
+        
+        .model-info {
+            position: absolute !important;
+            top: 20px !important;
+            right: 20px !important;
+            background: rgba(0,0,0,0.7) !important;
+            color: #FFFFFF !important;
+            padding: 10px 15px !important;
+            border-radius: 20px !important;
+            font-size: 0.85rem !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(76, 175, 80, 0.3) !important;
+        }
+        
+        .loading-indicator {
+            position: absolute !important;
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            color: var(--accent-green) !important;
+            font-size: 1.2rem !important;
+            z-index: 5 !important;
+        }
+        
+        .loading-spinner {
+            width: 40px !important;
+            height: 40px !important;
+            border: 4px solid rgba(76, 175, 80, 0.3) !important;
+            border-top: 4px solid var(--accent-green) !important;
+            border-radius: 50% !important;
+            animation: spin 1s linear infinite !important;
+            margin: 0 auto 10px auto !important;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive 3D model */
+        @media (max-width: 768px) {
+            .model-viewer-container {
+                height: 400px !important;
+            }
+            
+            .model-controls {
+                bottom: 10px !important;
+                gap: 5px !important;
+            }
+            
+            .model-control-btn {
+                padding: 8px 12px !important;
+                font-size: 0.8rem !important;
+            }
+            
+            .model-info {
+                top: 10px !important;
+                right: 10px !important;
+                padding: 8px 12px !important;
+                font-size: 0.75rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .model-viewer-container {
+                height: 350px !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- Preloader -->
+    <!-- navbar section -->
+    <div class="navbar-main-sec w-100 float-left index-page-navbar" style="margin: 0; padding: 0; position: relative; top: 0;">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light p-0">
+                <a class="navbar-brand" href="index.html" style="padding: 0; margin: 0; line-height: 1;">
+                    <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 180px; width: auto; object-fit: contain;">
+                </a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                    data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <ul class="navbar-nav mr-auto my-2 my-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'index' %}">Home</a> {# Landing page with a video #}
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Products
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="productsDropdown">
+                                <a class="dropdown-item" href="{% url 'products' %}">Categories</a>
+                                <a class="dropdown-item" href="#">Mechanical Machines</a>
+                            </div>
+                        </li>
+                        <!-- <li class="nav-item">
+                            <a class="nav-link" href="{% url 'solutions' %}">Solutions</a>
+                        </li> -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="{% url 'contact' %}" id="contactUsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Contact Us
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="contactUsDropdown">
+                                <a class="dropdown-item" href="{% url 'contact' %}">Contact Form</a>
+                                <a class="dropdown-item" href="#">Location Map</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'careers' %}">Careers</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
+                            <li><a href="#"><i class="fas fa-search"></i></a></li>
+                            <li>
+                                <button class="explore-btn" type="button">Explore</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- navbar section -->
+    <!-- banner section -->
+    <section class="banner-sec w-100 float-left bg-light-black" style="padding-top: 40px;">
+        <div class="wrapper2" style="display: flex; flex-wrap: wrap; align-items: center; gap: 20px; padding-top: 0px; padding-bottom: 30px;">
+            <div class="banner-left-sec" style="flex: 1 1 40%; min-width: 300px; text-align: left; padding: 20px;">
+                <h1 data-aos="zoom-out-right" data-aos-easing="ease-out-quart" data-aos-duration="1000" data-aos-delay="100" style="font-family: 'Montserrat', sans-serif; font-weight: bold; line-height: 1.2; margin-bottom: 25px; text-align: center;">
+                    <span style="display: block; font-size: 3.2rem; color: #FFFFFF; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); margin-bottom: 5px; letter-spacing: 0.01em;">Welcome to</span>
+                    <span style="font-size: 4.8rem; color: #FFFFFF; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); letter-spacing: -0.02em;">Segri</span><span style="font-size: 4.8rem; color: var(--primary-green); font-weight: 900; text-shadow: 1px 1px 0px var(--dark-green), 2px 2px 3px rgba(0,0,0,0.7); letter-spacing: -0.02em;">Tech</span>
+                </h1>
+                <p data-aos="zoom-out-left" data-aos-easing="ease-out-quart" data-aos-duration="1000" data-aos-delay="400" style="color: rgba(240, 244, 240, 0.85); line-height: 1.6; font-size: 1.05rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); margin-bottom: 30px; text-align: center; max-width: 90%; margin-left: auto; margin-right: auto;">Segritech is a grading solution for the crops which need expert human labours for the grading process. We are affordable and easily acessible solution for farmers and traders at developing countries. We empower small businesses and farmers through technology to cut down huge operational costs & flowrish their businesses.</p>
+                <div class="generic-btn" data-aos="flip-up" data-aos-easing="ease-in-out-back" data-aos-duration="800" data-aos-delay="700" style="--button-color-override: var(--accent-green); text-align: center;">
+                    <a href="#" style="background: var(--button-color-override);">Read More</a> {# You'll want to update this href later #}
+                </div>
+            </div>
+            <div class="banner-right-sec" style="flex: 1 1 55%; display: flex; justify-content: center; align-items: center; min-height: 450px; min-width: 320px; position: relative;" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="600">
+                <div class="model-viewer-container">
+                    <canvas id="modelCanvas"></canvas>
+                    <div class="loading-indicator" id="loadingIndicator">
+                        <div class="loading-spinner"></div>
+                        <div>Loading 3D Model...</div>
+                    </div>
+                    <div class="model-info" id="modelInfo" style="display: none;">
+                        <i class="fas fa-cube"></i> Seed Sorting Machine
+                    </div>
+                    <div class="model-controls" id="modelControls" style="display: none;">
+                        <button class="model-control-btn" id="resetView">
+                            <i class="fas fa-sync-alt"></i> Reset
+                        </button>
+                        <button class="model-control-btn" id="toggleRotation">
+                            <i class="fas fa-play"></i> Auto Rotate
+                        </button>
+                        <button class="model-control-btn" id="fullscreen">
+                            <i class="fas fa-expand"></i> Fullscreen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="social-box" data-aos="fade-left" data-aos-duration="800" data-aos-delay="1000" data-aos-anchor=".banner-left-sec">
+            <ul class="mb-0 list-unstyled">
+                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                <li><a href="#"><i class="fas fa-image"></i></a></li>
+                <li><a href="#"><i class="fas fa-comment-alt"></i></a></li>
+            </ul>
+        </div>
+    </section>
+    <!-- banner section -->
+    <!-- services section -->
+    <section class="service-slider-sec w-100 float-left padding-top padding-bottom bg-light-black">
+        <div class="generic-title text-center">
+            <span data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="700">CORE TECHNOLOGIES</span>
+            <h2 data-aos="flip-right" data-aos-easing="ease-out-cubic" data-aos-duration="700" data-aos-delay="100">Pioneering the Future of Farming</h2>
+        </div>
+        <div class="wrapper2">
+            <div class="row segritech-core-services">
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="200">
+                    <div class="collection-box bg-dark-black h-100 d-flex flex-column">
+                        <figure class="text-center mb-4">
+                            <i class="fas fa-cogs fa-3x" style="color: var(--accent-green);"></i>
+                        </figure>
+                        <h4 class="text-center">Automated Precision</h4>
+                        <p class="text-center flex-grow-1">Leveraging cutting-edge automation to enhance crop grading accuracy and efficiency for optimal yield.</p>
+                        <div class="text-center mt-auto">
+                            <a href="#" class="service-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="400">
+                    <div class="collection-box bg-dark-black h-100 d-flex flex-column">
+                        <figure class="text-center mb-4">
+                            <i class="fas fa-seedling fa-3x" style="color: var(--accent-green);"></i>
+                        </figure>
+                        <h4 class="text-center">Sustainable Solutions</h4>
+                        <p class="text-center flex-grow-1">Developing eco-friendly technologies that support sustainable farming practices and resource management.</p>
+                        <div class="text-center mt-auto">
+                            <a href="#" class="service-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="600">
+                    <div class="collection-box bg-dark-black h-100 d-flex flex-column">
+                        <figure class="text-center mb-4">
+                            <i class="fas fa-chart-line fa-3x" style="color: var(--accent-green);"></i>
+                        </figure>
+                        <h4 class="text-center">Data-Driven Insights</h4>
+                        <p class="text-center flex-grow-1">Providing actionable data analytics to empower farmers with insights for better decision-making and growth.</p>
+                        <div class="text-center mt-auto">
+                            <a href="#" class="service-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services section -->
+    <!-- collection section -->
+    <section class="collection-section w-100 float-left padding-bottom padding-top bg-light-black" style="margin-bottom: 80px;">
+        <div class="wrapper2">
+            <div class="generic-title text-center">
+                <span data-aos="zoom-in-down" data-aos-duration="700">REVOLUTIONIZING AGRICULTURE</span>
+                <h2 data-aos="zoom-in-left" data-aos-duration="700" data-aos-delay="100">Empowering Farmers with Segritech</h2>
+                <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" style="font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); max-width: 700px; margin: 20px auto 40px auto; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);">
+                    Empowering farmers through intelligent, data-driven, and scalable technology solutions.
+                </p>
+            </div>
+            <div class="collection-inner-sec">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-right" data-aos-duration="600" data-aos-delay="200">
+                        <div class="collection-box bg-dark-black">
+                            <figure>
+                                <i class="fas fa-brain fa-3x" style="color: var(--accent-green);"></i>
+                            </figure>
+                            <h4>Smart Agri-Intelligence</h4>
+                            <p>Harness advanced AI and sensor networks to monitor crops, soil, and climate with unparalleled precision. Make informed decisions, improve yields, and optimize resource use.</p>
+                            <a href="service.html">Learn More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+                        <div class="collection-box bg-dark-black">
+                            <figure>
+                                <i class="fas fa-map-marked-alt fa-3x" style="color: var(--accent-green);"></i>
+                            </figure>
+                            <h4>Precision Field Mapping</h4>
+                            <p>Transform agricultural data into clear, actionable visualizations — from soil moisture maps to real-time crop health analysis — helping farmers make data-driven decisions effortlessly.</p>
+                            <a href="service.html">Explore Tools <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-left" data-aos-duration="600" data-aos-delay="400">
+                        <div class="collection-box bg-dark-black">
+                            <figure>
+                                <i class="fas fa-rocket fa-3x" style="color: var(--accent-green);"></i>
+                            </figure>
+                            <h4>Innovative Agri-Tech Solutions</h4>
+                            <p>Segritech pioneers cutting-edge solutions by blending AI, IoT, and robotics, driving sustainable and efficient practices across every stage of the agricultural value chain.</p>
+                            <a href="service.html">See Innovations <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6" data-aos="fade-down" data-aos-duration="600" data-aos-delay="500">
+                        <div class="collection-box bg-dark-black">
+                            <figure>
+                                <i class="fas fa-cogs fa-3x" style="color: var(--accent-green);"></i>
+                            </figure>
+                            <h4>Scalable & Adaptive Systems</h4>
+                            <p>Whether you manage a smallholder farm or a large agricultural enterprise, Segritech's flexible systems grow with you, adapting to your evolving needs and challenges.</p>
+                            <a href="service.html">Discover Flexibility <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- collection section -->
+    <!-- about section -->
+    <section class="about-main-sec padding-top padding-bottom bg-light-black" id="home-who-we-are-section" style="margin-top: 40px; margin-bottom: -40px;">
+        <div class="banner-spacing">
+            <div class="wrapper2">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="about-details-box">
+                            <div class="generic-title">
+                                <span data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800">WHO WE ARE</span>
+                                <h2 class="mb-0" data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="200">Agtech company to automate, what is still done manually.</h2>
+                            </div>
+                            <p data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="400">
+                                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+                            </p>
+                            <div class="generic-btn" data-aos="zoom-in-up" data-aos-offset="100" data-aos-duration="700" data-aos-delay="600">
+                                <a href="{% url 'about' %}">Learn More About Us</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <figure class="mb-0" data-aos="fade-right" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800">
+                            <img src="{% static 'images/image.png' %}" alt="SegriTech team working">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about section-->
+    <!-- gallery section -->
+    <section class="gallery-section w-100 float-left padding-top padding-bottom bg-light-black home-gallery-section">
+        <div class="generic-title text-center">
+            <span data-aos="fade-up" data-aos-duration="600">SNAPSHOTS</span>
+            <h2 data-aos="fade-up" data-aos-duration="600" class="gallery-main-heading">
+                There are different fruits and vegetables we are making the solution for by putting our team efforts, day and night.
+            </h2>
+            <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" class="gallery-subtitle">
+                Some snaps for the proposed technology are here.
+            </p>
+        </div>
+        <div class="tabset mb-0" data-aos="fade-up" data-aos-duration="600">
+            <!-- Tab 1 -->
+            <input type="radio" name="tabset" id="tab1" aria-controls="art" checked>
+            <label for="tab1">ALL</label>
+            <!-- Tab 2 -->
+            <input type="radio" name="tabset" id="tab2" aria-controls="illustration">
+            <label for="tab2">WEB</label>
+            <!-- Tab 3 -->
+            <input type="radio" name="tabset" id="tab3" aria-controls="design">
+            <label for="tab3">APP</label>
+            <!-- Tab 4 -->
+            <input type="radio" name="tabset" id="tab4" aria-controls="creative">
+            <label for="tab4">MACHINE</label>
+
+            <div class="tab-panels" data-aos-duration="600">
+                <div id="art" class="tab-panel gallery-images-box pb-0" style="position: relative !important; height: 592px !important;">
+                    <!-- Image 1: Top Left -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 0px; top: 0px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-1.jpg' %}" alt="portfolio-1" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                    <!-- Image 2: Mid Left -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 0px; top: 204px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-2.jpg' %}" alt="portfolio-2" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                    <!-- Image 3: Bottom Left -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 0px; top: 408px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-3.jpg' %}" alt="portfolio-3" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                    <!-- Image 4: Top Middle -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 320px; top: 0px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-4.png' %}" alt="portfolio-4" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                    <!-- Image 5: Bottom Middle -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 320px; top: 204px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-5.png' %}" alt="portfolio-5" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                    <!-- Image 6: Top Right -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 640px; top: 0px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-6.png' %}" alt="portfolio-6" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                    <!-- Image 7: Mid Right -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 640px; top: 204px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-7.jpg' %}" alt="portfolio-7" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                     <!-- Image 8: Bottom Right -->
+                    <div class="gallery-container col-lg-4 col-md-6" style="position: absolute !important; left: 640px; top: 408px; width: 300px !important; height: 184px !important; min-height: 184px !important;">
+                        <div class="gallery-item" style="height: 100% !important; min-height: 100% !important; padding: 0 !important; margin: 0 !important;">
+                            <div class="images" style="height: 100% !important; min-height: 100% !important; overflow: visible !important; padding: 0 !important; margin: 0 !important;"><img src="{% static 'gallary/portfolio-8.jpg' %}" alt="portfolio-8" style="width: 100%; height: 100%; object-fit: cover; padding: 0; margin: 0; display: block;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="illustration" class="tab-panel gallery-second-tab">
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'web/web1.jpeg' %}" alt="web1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'web/web2.jpg' %}" alt="web2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'web/web3.png' %}" alt="web3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="design" class="tab-panel gallery-third-tab">
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'app/1.png' %}" alt="app1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'app/2.jpeg' %}" alt="app2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'app/3.jpg' %}" alt="app3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="creative" class="tab-panel gallery-fourth-tab">
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'machine/11.jpeg' %}" alt="machine1"></div>
+                        </div>
+                    </div>
+                    <div class="gallery-container w-1 h-2">
+                        <div class="gallery-item">
+                            <div class="images"><img src="{% static 'machine/22.png' %}" alt="machine2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- gallery section-->
+
+    <!-- video section-->
+    <div class="video-sec w-100 float-left" data-aos="fade-up" data-aos-duration="600">
+        <div class="box-video">
+            <div class="bg-video">
+                <div class="bt-play"></div>
+            </div>
+            <div class="video-container">
+                <iframe width="590" height="332" src="https://www.youtube.com/embed/qIjZqxqDTNM?rel=0&amp;showinfo=0"></iframe>
+            </div>
+        </div>
+    </div>
+    <!-- video section-->
+    <!-- Support and Logos Section -->
+    <div class="w-100 float-left bg-light-black logo-slider" style="padding-top: 50px; padding-bottom: 70px;">
+        <div class="wrapper2 text-center">
+            <div class="generic-title">
+                <span data-aos="fade-up" data-aos-duration="600" style="font-size: 1.2rem; text-transform: uppercase;">SUPPORT</span>
+                <h2 data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" style="margin-top: 10px;">Industry Backing</h2>
+            </div>
+            <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" style="font-size: 1.1rem; color: var(--text-color); max-width: 800px; margin: 20px auto 40px auto;">
+                We are backed by Industry Experts & Professionals in our journey to deliver value in agriculture value chain.
+            </p>
+        </div>
+        <div class="swiper" id="logoSwiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Original Slides -->
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <!-- Duplicate Slides for Seamless Loop -->
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora">
+                    </figure>
+                </div>
+                <div class="swiper-slide">
+                    <figure class="mb-0">
+                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora">
+                    </figure>
+                </div>
+            </div>
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+        </div>
+    </div>
+    <!-- logos section-->
+    <!-- slider section-->
+    <section class="reviews-section w-100 float-left padding-top padding-bottom bg-light-black" data-aos="fade-up" data-aos-duration="600">
+        <div class="wrapper2">
+            <div id="owlslider" class="owl-carousel owl-theme">
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit as
+                            pernatur iaut odite aut fugit, sed quia consequunt ur magni dolores eos qui ratione
+                            voluptatem sequi dolor porro quisquam nesciunt.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img1.png' %}" alt="engineer-img1">
+                        </figure>
+                        <h4>John Michael</h4>
+                        <span>Engineer</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Duis aute irure dolor in reprehenderit in voluptate esse cillum dolore fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa officia deserunt mollit anim
+                            laborum.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img2.png' %}" alt="engineer-img12">
+                        </figure>
+                        <h4>Rizwan Joseph</h4>
+                        <span>UI/UX Engineer</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit as
+                            pernatur iaut odite aut fugit, sed quia consequunt ur magni dolores eos qui ratione
+                            voluptatem sequi dolor porro quisquam nesciunt.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img1.png' %}" alt="engineer-img1">
+                        </figure>
+                        <h4>John Michael</h4>
+                        <span>Engineer</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Duis aute irure dolor in reprehenderit in voluptate esse cillum dolore fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa officia deserunt mollit anim
+                            laborum.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img2.png' %}" alt="engineer-img12">
+                        </figure>
+                        <h4>Rizwan Joseph</h4>
+                        <span>UI/UX Engineer</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit as
+                            pernatur iaut odite aut fugit, sed quia consequunt ur magni dolores eos qui ratione
+                            voluptatem sequi dolor porro quisquam nesciunt.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img1.png' %}" alt="engineer-img1">
+                        </figure>
+                        <h4>John Michael</h4>
+                        <span>Engineer</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Duis aute irure dolor in reprehenderit in voluptate esse cillum dolore fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa officia deserunt mollit anim
+                            laborum.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img2.png' %}" alt="engineer-img12">
+                        </figure>
+                        <h4>Rizwan Joseph</h4>
+                        <span>UI/UX Engineer</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Nemo enim ipsam voluptatem quia voluptas sit as
+                            pernatur iaut odite aut fugit, sed quia consequunt ur magni dolores eos qui ratione
+                            voluptatem sequi dolor porro quisquam nesciunt.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img1.png' %}" alt="engineer-img1">
+                        </figure>
+                        <h4>John Michael</h4>
+                        <span>Engineer</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="profile-box bg-dark-black">
+                        <p>Duis aute irure dolor in reprehenderit in voluptate esse cillum dolore fugiat nulla pariatur.
+                            Excepteur sint occaecat cupidatat non proident, sunt in culpa officia deserunt mollit anim
+                            laborum.</p>
+                        <figure>
+                            <img src="{% static 'images/engineer-img2.png' %}" alt="engineer-img12">
+                        </figure>
+                        <h4>Rizwan Joseph</h4>
+                        <span>UI/UX Engineer</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- slider section-->
+    <!-- blogs section-->
+    <section class="blogs-section w-100 float-left padding-top padding-bottom bg-light-black">
+        <div class="wrapper2">
+            <div class="generic-title text-center">
+                <span data-aos="fade-up" data-aos-duration="600">LATEST POSTS</span>
+                <h2 data-aos="fade-up" data-aos-duration="600">News & Articles</h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4" data-aos="fade-up" data-aos-duration="600">
+                    <div class="blog-inner-box bg-dark-black">
+                        <figure class="mb-0">
+                            <img src="{% static 'images/blog-img1.png' %}" alt="blog-img1">
+                        </figure>
+                        <div class="blog-text-con">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-block">
+                                    <figure class="mb-0">
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="blog-profile-img">
+                                    </figure>
+                                </li>
+                                <li class="d-inline-block"><span>Caroline Forsey</span></li>
+                            </ul>
+                            <a href="single-blog.html">
+                                <h4>The Top Benefits of AI for Marketers, State of AI Data</h4>
+                            </a>
+                            <div class="posted-details">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-inline-block"><i class="fas fa-calendar-alt"></i> June 25, 2023</li>
+                                    <li class="d-inline-block mr-0"><i class="fas fa-comments"></i> 0 Comments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4" data-aos="fade-up" data-aos-duration="600">
+                    <div class="blog-inner-box bg-dark-black">
+                        <figure class="mb-0">
+                            <img src="{% static 'images/blog-img2.png' %}" alt="blog-img2">
+                        </figure>
+                        <div class="blog-text-con">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-block">
+                                    <figure class="mb-0">
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="blog-profile-img">
+                                    </figure>
+                                </li>
+                                <li class="d-inline-block"><span>Caroline Forsey</span></li>
+                            </ul>
+                            <a href="single-blog.html">
+                                <h4>AI Tools to Help You Grow Your AI Graphics Business</h4>
+                            </a>
+                            <div class="posted-details">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-inline-block"><i class="fas fa-calendar-alt"></i> June 20, 2023</li>
+                                    <li class="d-inline-block mr-0"><i class="fas fa-comments"></i> 0 Comments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4" data-aos="fade-up" data-aos-duration="600">
+                    <div class="blog-inner-box bg-dark-black">
+                        <figure class="mb-0">
+                            <img src="{% static 'images/blog-img3.png' %}" alt="blog-img3">
+                        </figure>
+                        <div class="blog-text-con">
+                            <ul class="list-unstyled">
+                                <li class="d-inline-block">
+                                    <figure class="mb-0">
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="blog-profile-img">
+                                    </figure>
+                                </li>
+                                <li class="d-inline-block"><span>Caroline Forsey</span></li>
+                            </ul>
+                            <a href="single-blog.html">
+                                <h4>When Is the Best Time to Post on Instagram in 2023?</h4>
+                            </a>
+                            <div class="posted-details">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-inline-block"><i class="fas fa-calendar-alt"></i> June 25, 2023</li>
+                                    <li class="d-inline-block mr-0"><i class="fas fa-comments"></i> 0 Comments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- blogs section-->
+    <!-- footer section-->
+    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
+        <div class="wrapper2">
+            <div class="footer-inner-section">
+                <div class="footer-logo footer-box">
+                    <a href="index.html">
+                        <figure>
+                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
+                        </figure>
+                    </a>
+                    <p class="mb-0">Copyright © 2023 SegriTech.</p>
+                    <p>All Rights Reserved.</p>
+                    <ul class="list-unstyled mb-0">
+                        <li><span class="d-block">Social Media</span></li>
+                        <li class="d-inline-block ml-0"><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="d-inline-block"><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                        <li class="d-inline-block"><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                        <li class="d-inline-block mr-0"><a href="https://pk.linkedin.com/"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+                <div class="footer-box">
+                    <h4>About</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html">About Company</a></li>
+                        <li><a href="pricing.html">Our Solutions</a></li>
+                        <li><a href="service.html">Our Best Services</a></li>
+                        <li class="mb-0"><a href="team.html">Professional Team</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box address-box">
+                    <h4>Address</h4>
+                    <ul class="list-unstyled">
+                        <li class="position-relative"><i class="fas fa-map-marker-alt"></i> 551 Swanston Street,
+                            Melbourne <br> Victoria 3053 Australia</li>
+                        <li class="position-relative"><i class="fas fa-phone-volume"></i> <a
+                                href="tel:+61383766284">+61 3 8376 6284</a></li>
+                        <li class="mb-0 position-relative"><i class="fas fa-envelope"></i> <a
+                                href="mailto:info@designingmedia.com">info@designingmedia.com</a></li>
+                    </ul>
+                </div>
+                <div class="footer-box footer-form-box">
+                    <h4>Newsletter Signup</h4>
+                    <ul class="list-unstyled">
+                        <li class="position-relative mb-0"><input class="bg-light-black" type="text"
+                                placeholder="Enter Your Email Address"> <button>Send</button></li>
+                    </ul>
+                    <form action="https://html.designingmedia.com/action_page.php">
+                        <input type="checkbox" id="policy" name="policy" value="Bike">
+                        <label for="policy" class="check-box"></label>
+                        <label for="policy"> I agree to the <a href="#">Privacy Policy</a>.</label><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a id="button" class="show"></a>
+    <!-- footer section-->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/cdn.jsdelivr.net_npm_swiper%4010_swiper-bundle.min.js' %}"></script>
+    <script>
+        $(window).on('load', function(){ 
+        // Preloader
+        $('.loader').fadeOut();
+        $('.loader-mask').delay(350).fadeOut('slow');
+        AOS.init();
+        });
+        var btn = $('#button');         
+         $(window).scroll(function() {
+           if ($(window).scrollTop() > 300) {
+           btn.addClass('show');
+         }
+          else {
+           btn.removeClass('show');
+         }
+         });
+         btn.on('click', function(e) {
+         e.preventDefault();
+         $('html, body').animate({scrollTop:0}, '300');
+       });
+       window.addEventListener('load',function(){
+         document.querySelector('body').classList.add("loaded")  
+       });
+        $('#owlsliderone').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: true,
+            animateOut: 'slideInLeft',
+            animateIn: 'slideOutRight',
+            responsive: {
+                0: {
+                    items: 2,
+                    margin: 15
+                },
+                576: {
+                    items: 2,
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
+    <script>
+        // Logo Swiper with debugging
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing swiper...');
+            
+            // Check if swiper element exists
+            const swiperElement = document.getElementById('logoSwiper');
+            if (!swiperElement) {
+                console.error('Swiper element not found!');
+                return;
+            }
+            
+            // Initialize with timeout to ensure everything is loaded
+            setTimeout(function() {
+                try {
+                    const logoSwiper = new Swiper('#logoSwiper', {
+                        loop: true,
+                        loopedSlides: 6,
+                        autoplay: {
+                            delay: 0,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: false,
+                        },
+                        speed: 3000,
+                        slidesPerView: 'auto',
+                        spaceBetween: 0,
+                        allowTouchMove: false,
+                        centeredSlides: false,
+                        freeMode: {
+                            enabled: true,
+                            momentum: false,
+                        },
+                        breakpoints: {
+                            360: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 0,
+                            },
+                            576: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 0,
+                            },
+                            768: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 0,
+                            },
+                            992: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 0,
+                            },
+                            1200: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 0,
+                            },
+                        },
+                        on: {
+                            init: function () {
+                                console.log('Swiper initialized');
+                                this.autoplay.start();
+                            },
+                            autoplayStart: function () {
+                                console.log('Autoplay started');
+                            },
+                            autoplayStop: function () {
+                                console.log('Autoplay stopped - restarting...');
+                                this.autoplay.start();
+                            }
+                        }
+                    });
+                    
+                    console.log('Swiper created successfully');
+                    
+                    // Force start autoplay
+                    logoSwiper.autoplay.start();
+                    
+                } catch (error) {
+                    console.error('Error initializing swiper:', error);
+                }
+            }, 500);
+        });
+    </script>
+    <script>
+        $('#owlslider').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: true,
+            animateOut: 'slideInLeft',
+            animateIn: 'slideOutRight',
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 2
+                }
+            }
+        })
+    </script>
+    <script>
+        const lightbox = document.createElement('div')
+        lightbox.id = 'lightbox'
+        document.body.appendChild(lightbox)
+
+        const images = document.querySelectorAll('.images img')
+        images.forEach(image => {
+            image.addEventListener('click', e => {
+                lightbox.classList.add('active')
+                const img = document.createElement('img')
+                img.src = image.src
+                while (lightbox.firstChild) {
+                    lightbox.removeChild(lightbox.firstChild)
+                }
+                lightbox.appendChild(img)
+            })
+        })
+
+        lightbox.addEventListener('click', e => {
+            if (e.target !== e.currentTarget) return
+            lightbox.classList.remove('active')
+        })
+    </script>
+    <script>
+        $(".box-video").click(function () {
+            $('iframe', this)[0].src += "&amp;autoplay=1";
+            $(this).addClass('open');
+        });
+
+    const $dropdown = $(".dropdown");
+    const $dropdownToggle = $(".dropdown-toggle");
+    const $dropdownMenu = $(".dropdown-menu");
+    const showClass = "show";
+
+    $(window).on("load resize", function() {
+    if (this.matchMedia("(min-width: 768px)").matches) {
+        $dropdown.hover(
+        function() {
+            const $this = $(this);
+            $this.addClass(showClass);
+            $this.find($dropdownToggle).attr("aria-expanded", "true");
+            $this.find($dropdownMenu).addClass(showClass);
+        },
+        function() {
+            const $this = $(this);
+            $this.removeClass(showClass);
+            $this.find($dropdownToggle).attr("aria-expanded", "false");
+            $this.find($dropdownMenu).removeClass(showClass);
+        }
+        );
+    } else {
+        $dropdown.off("mouseenter mouseleave");
+    }
+    });
+    </script>
+    
+    <!-- 3D Model Viewer Script -->
+    <script>
+        let scene, camera, renderer, model, controls, mixer;
+        let isAutoRotating = false;
+        let originalPosition, originalRotation, originalScale;
+        
+        function init3DModel() {
+            // Prevent double initialization
+            if (window.hasModelInitialized) {
+                console.log('3D model already initialized, skipping...');
+                return;
+            }
+            window.hasModelInitialized = true;
+            
+            const container = document.getElementById('modelCanvas');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const modelInfo = document.getElementById('modelInfo');
+            const modelControls = document.getElementById('modelControls');
+            
+            console.log('Initializing 3D model...');
+            console.log('THREE object:', THREE);
+            
+            // Check if THREE is available
+            if (typeof THREE === 'undefined') {
+                console.error('THREE.js not loaded!');
+                loadingIndicator.innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> Three.js not loaded</div>';
+                return;
+            }
+            
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a1a);
+            
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(5, 5, 5);
+            
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: container, 
+                antialias: true,
+                alpha: true
+            });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            
+            // Handle different Three.js versions
+            if (renderer.outputEncoding !== undefined) {
+                renderer.outputEncoding = THREE.sRGBEncoding;
+            } else if (renderer.outputColorSpace !== undefined) {
+                renderer.outputColorSpace = THREE.SRGBColorSpace;
+            }
+            
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
+            
+            // Lighting setup
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
+            directionalLight.position.set(10, 10, 5);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            const pointLight1 = new THREE.PointLight(0x4CAF50, 0.8, 100);
+            pointLight1.position.set(-10, 10, 10);
+            scene.add(pointLight1);
+            
+            const pointLight2 = new THREE.PointLight(0x45a049, 0.6, 100);
+            pointLight2.position.set(10, -10, -10);
+            scene.add(pointLight2);
+            
+            // Controls setup
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.enableZoom = true;
+            controls.enablePan = true;
+            controls.maxDistance = 20;
+            controls.minDistance = 2;
+            
+            // Load GLB model
+            const loader = new THREE.GLTFLoader();
+                            const modelPath = "{% static 'models/main_assembly_final.glb' %}";
+            console.log('Attempting to load model from:', modelPath);
+            
+            loader.load(
+                modelPath,
+                function(gltf) {
+                    console.log('Model loaded successfully!', gltf);
+                    model = gltf.scene;
+                    
+                    // Store original transform
+                    originalPosition = model.position.clone();
+                    originalRotation = model.rotation.clone();
+                    originalScale = model.scale.clone();
+                    
+                    // Scale and position the model
+                    model.scale.setScalar(0.8);
+                    model.position.set(0, -1, 0);
+                    
+                    // Enable shadows
+                    model.traverse(function(child) {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                            
+                            // Enhance materials
+                            if (child.material) {
+                                child.material.envMapIntensity = 0.5;
+                            }
+                        }
+                    });
+                    
+                    scene.add(model);
+                    
+                    // Setup animations if available
+                    if (gltf.animations && gltf.animations.length > 0) {
+                        mixer = new THREE.AnimationMixer(model);
+                        gltf.animations.forEach((clip) => {
+                            mixer.clipAction(clip).play();
+                        });
+                    }
+                    
+                    // Hide loading indicator and show controls
+                    loadingIndicator.style.display = 'none';
+                    modelInfo.style.display = 'block';
+                    modelControls.style.display = 'flex';
+                    
+                    // Center the model in view
+                    const box = new THREE.Box3().setFromObject(model);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const fov = camera.fov * (Math.PI / 180);
+                    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+                    cameraZ *= 1.5; // Add some margin
+                    
+                    camera.position.set(cameraZ, cameraZ, cameraZ);
+                    camera.lookAt(center);
+                    controls.target.copy(center);
+                    controls.update();
+                },
+                function(progress) {
+                    const percentage = Math.round((progress.loaded / progress.total) * 100);
+                    console.log('Loading progress:', percentage + '%');
+                    if (loadingIndicator && loadingIndicator.querySelector('div:last-child')) {
+                        loadingIndicator.querySelector('div:last-child').textContent = `Loading 3D Model... ${percentage}%`;
+                    }
+                },
+                function(error) {
+                    console.error('Error loading GLB model:', error);
+                    if (loadingIndicator) {
+                        loadingIndicator.innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> Error loading 3D model: ' + error.message + '</div>';
+                    }
+                }
+            );
+            
+            // Event listeners for controls
+            document.getElementById('resetView').addEventListener('click', resetView);
+            document.getElementById('toggleRotation').addEventListener('click', toggleAutoRotation);
+            document.getElementById('fullscreen').addEventListener('click', toggleFullscreen);
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+            
+            // Start render loop
+            animate();
+        }
+        
+        function resetView() {
+            if (model) {
+                camera.position.set(5, 5, 5);
+                camera.lookAt(0, 0, 0);
+                controls.target.set(0, 0, 0);
+                controls.update();
+                
+                model.position.copy(originalPosition);
+                model.rotation.copy(originalRotation);
+                model.scale.copy(originalScale);
+                model.scale.setScalar(0.8);
+                model.position.set(0, -1, 0);
+            }
+        }
+        
+        function toggleAutoRotation() {
+            const button = document.getElementById('toggleRotation');
+            isAutoRotating = !isAutoRotating;
+            
+            if (isAutoRotating) {
+                button.innerHTML = '<i class="fas fa-pause"></i> Stop Rotate';
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 2.0;
+            } else {
+                button.innerHTML = '<i class="fas fa-play"></i> Auto Rotate';
+                controls.autoRotate = false;
+            }
+        }
+        
+        function toggleFullscreen() {
+            const container = document.querySelector('.model-viewer-container');
+            
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().then(() => {
+                    document.getElementById('fullscreen').innerHTML = '<i class="fas fa-compress"></i> Exit';
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    document.getElementById('fullscreen').innerHTML = '<i class="fas fa-expand"></i> Fullscreen';
+                });
+            }
+        }
+        
+        function onWindowResize() {
+            const container = document.getElementById('modelCanvas');
+            camera.aspect = container.clientWidth / container.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(container.clientWidth, container.clientHeight);
+        }
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (mixer) {
+                mixer.update(0.016); // Assuming 60fps
+            }
+            
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        
+        // Initialize 3D model when modules are ready
+        window.addEventListener('threejsModulesReady', function() {
+            console.log('Three.js modules ready event received, initializing 3D model...');
+            init3DModel();
+        });
+        
+        // Fallback initialization on window load (with timeout)
+        window.addEventListener('load', function() {
+            console.log('Window loaded, checking for Three.js libraries...');
+            
+            // Function to check if all libraries are loaded
+            function checkLibraries() {
+                console.log('THREE:', typeof THREE);
+                console.log('THREE.GLTFLoader:', typeof THREE.GLTFLoader);
+                console.log('THREE.OrbitControls:', typeof THREE.OrbitControls);
+                
+                if (typeof THREE === 'undefined') {
+                    console.error('THREE.js not available');
+                    document.getElementById('loadingIndicator').innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> THREE.js not loaded</div>';
+                    return false;
+                }
+                if (typeof THREE.GLTFLoader === 'undefined') {
+                    console.error('GLTFLoader not available');
+                    document.getElementById('loadingIndicator').innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> GLTFLoader not loaded</div>';
+                    return false;
+                }
+                if (typeof THREE.OrbitControls === 'undefined') {
+                    console.error('OrbitControls not available');
+                    document.getElementById('loadingIndicator').innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> OrbitControls not loaded</div>';
+                    return false;
+                }
+                return true;
+            }
+            
+            // Fallback with retries (only if modules haven't loaded yet)
+            setTimeout(function() {
+                if (!window.hasModelInitialized && checkLibraries()) {
+                    console.log('Fallback: All Three.js components loaded, initializing...');
+                    init3DModel();
+                }
+            }, 3000);
+        });
+    </script>
+</body>
+
+<!-- Mirrored from html.designingmedia.com/aimentor/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 May 2025 09:01:11 GMT -->
+</html>

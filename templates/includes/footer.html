@@ -1,0 +1,187 @@
+{% load static %}
+<section class="footer-main-sec w-100 float-left bg-dark-black" style="margin: 0 !important; padding: 30px 0 !important;">
+    <div class="wrapper2">
+        <div class="footer-inner-section" style="display: grid; grid-template-columns: 2fr 1fr 1.5fr 2fr; gap: 30px; align-items: start; margin-bottom: 0;">
+            <style>
+                @media (max-width: 768px) {
+                    .footer-inner-section {
+                        grid-template-columns: 1fr !important;
+                        gap: 30px !important;
+                        text-align: center !important;
+                    }
+                }
+                @media (max-width: 992px) and (min-width: 769px) {
+                    .footer-inner-section {
+                        grid-template-columns: 1fr 1fr !important;
+                        gap: 30px !important;
+                    }
+                }
+            </style>
+            <div class="footer-logo footer-box" style="padding: 15px;">
+                <a href="{% url 'home' %}">
+                    <figure style="margin-bottom: 10px; height: auto; display: flex; align-items: center;">
+                        <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height:250px; width: auto; object-fit: contain;">
+                    </figure>
+                </a>
+                <p class="mb-1" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Copyright © 2023 SegriTech.</p>
+                <p class="mb-3" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All Rights Reserved.</p>
+                <div style="margin-top: 15px;">
+                    <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Social Media</span>
+                    <div style="display: flex; gap: 10px;">
+                        <a href="https://www.facebook.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://pk.linkedin.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-box" style="padding: 15px;">
+                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">About</h4>
+                <ul class="list-unstyled" style="margin: 0;">
+                    <li style="margin-bottom: 8px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">About Company</a></li>
+                    <li style="margin-bottom: 8px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Products</a></li>
+                    <li style="margin-bottom: 8px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Services</a></li>
+                    <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Career Opportunities</a></li>
+                </ul>
+            </div>
+            <div class="footer-box address-box" style="padding: 15px;">
+                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Address</h4>
+                <ul class="list-unstyled" style="margin: 0;">
+                    <li style="margin-bottom: 15px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                        551 Swanston Street,<br>
+                        <span style="margin-left: 25px;">Melbourne, Victoria 3053 Australia</span>
+                    </li>
+                    <li style="margin-bottom: 12px;">
+                        <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                        <a href="tel:+61383766284" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">+61 3 8376 6284</a>
+                    </li>
+                    <li class="mb-0">
+                        <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
+                        <a href="mailto:info@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">info@segritech.com</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-box footer-form-box">
+                <h4>Newsletter Signup</h4>
+                <form id="newsletterForm" class="newsletter-form">
+                    {% csrf_token %}
+                    <div class="form-group position-relative mb-0">
+                        <input type="email" class="bg-light-black" id="newsletterEmail" name="email" placeholder="Enter Your Email Address" required style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; background: rgba(255,255,255,0.1); color: white;">
+                        <button type="submit" id="newsletterSubmit" style="margin-top: 10px; width: 100%; padding: 10px; background: var(--accent-green); color: white; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                        <div id="newsletterMessage" class="mt-2" style="display: none; padding: 10px; border-radius: 4px;"></div>
+                    </div>
+                    <div class="mt-3">
+                        <input type="checkbox" id="policy" name="policy" required>
+                        <label for="policy" class="check-box"></label>
+                        <label for="policy" style="color: rgba(255,255,255,0.8);"> I agree to the <a href="#" style="color: var(--accent-green);">Privacy Policy</a>.</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<a id="button" class="show"></a>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM Content Loaded');
+    const form = document.getElementById('newsletterForm');
+    const messageDiv = document.getElementById('newsletterMessage');
+    const emailInput = document.getElementById('newsletterEmail');
+    
+    console.log('Form element:', form);
+    console.log('Message div:', messageDiv);
+    console.log('Email input:', emailInput);
+    
+    if (form) {
+        form.addEventListener('submit', async function(e) {
+            console.log('Form submitted');
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const submitButton = document.getElementById('newsletterSubmit');
+            const policyCheckbox = document.getElementById('policy');
+            
+            console.log('Email:', email);
+            console.log('Policy checked:', policyCheckbox.checked);
+            
+            // Reset message styling
+            messageDiv.style.display = 'none';
+            messageDiv.style.backgroundColor = '';
+            messageDiv.style.color = '';
+            messageDiv.textContent = '';
+            
+            // Validate email
+            if (!email) {
+                showMessage('Please enter your email address.', false);
+                return;
+            }
+            
+            // Validate policy checkbox
+            if (!policyCheckbox.checked) {
+                showMessage('Please accept the Privacy Policy to continue.', false);
+                return;
+            }
+            
+            // Disable form while processing
+            submitButton.disabled = true;
+            emailInput.disabled = true;
+            policyCheckbox.disabled = true;
+            submitButton.textContent = 'Subscribing...';
+            
+            try {
+                // Get CSRF token
+                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                console.log('CSRF token:', csrftoken ? 'Found' : 'Not found');
+                
+                console.log('Sending request to /newsletter/signup/');
+                
+                // Make the API call
+                const response = await fetch('/newsletter/signup/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrftoken
+                    },
+                    body: new URLSearchParams({
+                        'email': email
+                    })
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Response data:', data);
+                
+                if (data.success) {
+                    showMessage(data.message, true);
+                    form.reset();
+                } else {
+                    showMessage(data.message, false);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('An error occurred. Please try again later.', false);
+            } finally {
+                // Re-enable form
+                submitButton.disabled = false;
+                emailInput.disabled = false;
+                policyCheckbox.disabled = false;
+                submitButton.textContent = 'Subscribe';
+            }
+        });
+    }
+    
+    function showMessage(message, isSuccess) {
+        console.log('Showing message:', message, 'Success:', isSuccess);
+        messageDiv.style.display = 'block';
+        messageDiv.style.backgroundColor = isSuccess ? '#4CAF50' : '#ff6b6b';
+        messageDiv.style.color = 'white';
+        messageDiv.textContent = message;
+    }
+});</script> 
