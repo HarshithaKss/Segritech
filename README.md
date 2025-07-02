@@ -77,4 +77,4 @@ Visit http://127.0.0.1:8000/ to see the application.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+This project is licensed under the MIT License - see the LICENSE file for details.
