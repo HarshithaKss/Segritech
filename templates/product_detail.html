@@ -893,12 +893,25 @@
                 }
                 
                 const brochureUrl = '{{ product.brochure.url|default:"" }}';
-                if (brochureUrl && brochureUrl.trim() !== '') {
-                    window.location.href = brochureUrl;
-                    alert('Brochure download started!');
-                } else {
+                if (!brochureUrl || brochureUrl.trim() === '') {
                     alert('Brochure is being prepared. Please contact us for the latest product information.');
+                    return;
                 }
+                
+                // Check if file exists before trying to download
+                fetch(brochureUrl, { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = brochureUrl;
+                            alert('Brochure download started!');
+                        } else {
+                            alert('Brochure is being prepared. Please contact us for the latest product information.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error checking brochure:', error);
+                        alert('Brochure is being prepared. Please contact us for the latest product information.');
+                    });
             } catch (error) {
                 console.error('Error downloading brochure:', error);
                 alert('Brochure is being prepared. Please contact us for the latest product information.');

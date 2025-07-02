@@ -7,6 +7,8 @@ products, blogs, and other content. Designed to be run after deploying to a new 
 from django.core.management.base import BaseCommand
 from django.core.management import call_command
 from django.db import transaction
+from django.conf import settings
+import os
 
 
 class Command(BaseCommand):
@@ -14,6 +16,18 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
+            # Ensure media directory exists
+            media_root = settings.MEDIA_ROOT
+            if not os.path.exists(media_root):
+                os.makedirs(media_root)
+                self.stdout.write(f'Created media directory at {media_root}')
+
+            # Ensure static directory exists
+            static_root = settings.STATIC_ROOT
+            if not os.path.exists(static_root):
+                os.makedirs(static_root)
+                self.stdout.write(f'Created static directory at {static_root}')
+
             with transaction.atomic():
                 self.stdout.write('Starting complete database setup...')
                 
@@ -33,12 +47,16 @@ class Command(BaseCommand):
                 call_command('update_packing_robots')
                 call_command('update_product_brochures')
                 
-                # Step 4: Add blogs and content
-                self.stdout.write('\n4. Setting up blog content...')
+                # Step 4: Set up brochures
+                self.stdout.write('\n4. Setting up brochure files...')
+                call_command('setup_brochures')
+                
+                # Step 5: Add blogs and content
+                self.stdout.write('\n5. Setting up blog content...')
                 call_command('add_featured_blogs')
                 
-                # Step 5: Add testimonials and other content
-                self.stdout.write('\n5. Adding testimonials and other content...')
+                # Step 6: Add testimonials and other content
+                self.stdout.write('\n6. Adding testimonials and other content...')
                 call_command('add_sample_testimonials')
                 call_command('add_sample_contacts')
                 call_command('add_sample_newsletter_subscribers')
