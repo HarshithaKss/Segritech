@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SegriTech Insights - Coming Soon</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --accent-green: #66BB6A;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            color: white;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .navbar-main-sec {
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navigation -->
+    {% include 'includes/navigation.html' %}
+    
+    <!-- Hero Section -->
+    <section class="hero-section" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(44, 44, 44, 0.9)), url('{% static "models/back1.jpg" %}'); background-size: cover; background-position: center; padding: 140px 0 80px 0; color: white; min-height: 100vh; display: flex; align-items: center;">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <div data-aos="fade-up" data-aos-duration="600">
+                        <!-- Icon -->
+                        <div style="margin-bottom: 30px;">
+                            <i class="fas fa-seedling" style="font-size: 4rem; color: var(--accent-green); text-shadow: 0 0 20px rgba(102, 187, 106, 0.5);"></i>
+                        </div>
+                        
+                        <!-- Title -->
+                        <span style="color: var(--accent-green); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1rem; display: block; margin-bottom: 20px;">
+                            SEGRITECH INSIGHTS
+                        </span>
+                        <h1 style="color: #FFFFFF; margin: 0 0 30px 0; font-size: 3.5rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                            Coming Soon
+                        </h1>
+                        
+                        <!-- Description -->
+                        <p style="font-size: 1.3rem; color: rgba(255, 255, 255, 0.85); max-width: 600px; margin: 0 auto 40px auto; line-height: 1.6;">
+                            We're preparing cutting-edge insights and success stories from agricultural technology innovation.
+                        </p>
+                        
+
+                        
+
+                        
+                        <!-- Back to Home -->
+                        <div style="margin-top: 50px;" data-aos="fade-up" data-aos-duration="600" data-aos-delay="800">
+                            <a href="{% url 'home' %}" class="btn" 
+                               style="background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(102, 187, 106, 0.5); color: white; padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-arrow-left"></i> Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Animated Background Elements -->
+        <div style="position: absolute; top: 20%; left: 10%; width: 100px; height: 100px; background: radial-gradient(circle, rgba(102, 187, 106, 0.1), transparent); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+        <div style="position: absolute; top: 60%; right: 15%; width: 150px; height: 150px; background: radial-gradient(circle, rgba(102, 187, 106, 0.05), transparent); border-radius: 50%; animation: float 8s ease-in-out infinite reverse;"></div>
+        <div style="position: absolute; bottom: 20%; left: 20%; width: 80px; height: 80px; background: radial-gradient(circle, rgba(102, 187, 106, 0.08), transparent); border-radius: 50%; animation: float 7s ease-in-out infinite;"></div>
+    </section>
+
+    {% include 'includes/footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    
+    <!-- Initialize AOS & Interactions -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+
+        
+
+        
+        document.querySelector('a.btn').addEventListener('mouseenter', function() {
+            this.style.background = 'rgba(102, 187, 106, 0.2)';
+            this.style.borderColor = 'var(--accent-green)';
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        document.querySelector('a.btn').addEventListener('mouseleave', function() {
+            this.style.background = 'rgba(255, 255, 255, 0.1)';
+            this.style.borderColor = 'rgba(102, 187, 106, 0.5)';
+            this.style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html> 

@@ -105,7 +105,7 @@
                     </ul>
                     <form class="d-flex">
                         <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-                            <li><a href="#"><i class="fas fa-search"></i></a></li>
+    
                             <li>
                                 <button class="login-btn" type="submit">
                                     <img src="assets/images/lock-icon.png" alt="lock-icon"> Login</button>
@@ -127,7 +127,7 @@
         </div>
         <div class="social-box">
             <ul class="mb-0 list-unstyled">
-                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                
                 <li><a href="#"><i class="fas fa-image"></i></a></li>
                 <li><a href="#"><i class="fas fa-comment-alt"></i></a></li>
             </ul>
@@ -586,61 +586,8 @@
         </div>
     </div>
     <!-- footer section-->
-    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
-        <div class="wrapper2">
-            <div class="footer-inner-section">
-                <div class="footer-logo footer-box">
-                    <a href="index.html">
-                        <figure>
-                            <img src="assets/images/AiMentor-logo.png" alt="AiMentor-logo">
-                        </figure>
-                    </a>
-                    <p class="mb-0">Copyright © 2023 AiMentor.</p>
-                    <p>All Rights Reserved.</p>
-                    <ul class="list-unstyled mb-0">
-                        <li><span class="d-block">Social Media</span></li>
-                        <li class="d-inline-block ml-0"><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="d-inline-block"><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                        <li class="d-inline-block"><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                        <li class="d-inline-block mr-0"><a href="https://pk.linkedin.com/"><i class="fab fa-linkedin-in"></i></a></li>
-                    </ul>
-                </div>
-                <div class="footer-box">
-                    <h4>About</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="about.html">About Company</a></li>
-                        <li><a href="pricing.html">Our Solutions</a></li>
-                        <li><a href="service.html">Our Best Services</a></li>
-                        <li class="mb-0"><a href="team.html">Professional Team</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box address-box">
-                    <h4>Address</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative"><i class="fas fa-map-marker-alt"></i> 551 Swanston Street,
-                            Melbourne <br> Victoria 3053 Australia</li>
-                        <li class="position-relative"><i class="fas fa-phone-volume"></i> <a
-                                href="tel:+61383766284">+61 3 8376 6284</a></li>
-                        <li class="mb-0 position-relative"><i class="fas fa-envelope"></i> <a
-                                href="mailto:info@designingmedia.com">info@designingmedia.com</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box footer-form-box">
-                    <h4>Newsletter Signup</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative mb-0"><input class="bg-light-black" type="text"
-                                placeholder="Enter Your Email Address"> <button>Send</button></li>
-                    </ul>
-                    <form action="https://html.designingmedia.com/action_page.php">
-                        <input type="checkbox" id="policy" name="policy" value="Bike">
-                        <label for="policy" class="check-box"></label>
-                        <label for="policy"> I agree to the <a href="#">Privacy Policy</a>.</label><br>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a id="button" class="show"></a>
+    {% include 'includes/footer.html' %}
+    
     <!-- footer section-->
     <script src="assets/js/jquery-3.6.0.min.js"></script>
     <script src="assets/js/popper.min.js"></script>

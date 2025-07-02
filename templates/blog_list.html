@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SegriTech Insights - Latest Agricultural Technology Articles</title>
+    
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
+    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="theme-color" content="#ffffff">
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <!-- CSS Variables -->
+    <style>
+        :root {
+            --accent-green: #66BB6A;
+            --primary-green: #4CAF50;
+            --dark-green: #1B5E20;
+            --background-dark: #1a1a1a;
+        }
+        
+        body {
+            background-color: var(--background-dark);
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        html, body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <!-- Include Navigation -->
+    {% include 'includes/navigation.html' %}
+    <!-- Hero Section -->
+    <section class="hero-section" style="background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(44, 44, 44, 0.9)), url('{% static "models/back1.jpg" %}'); background-size: cover; background-position: center; padding: 140px 0 60px 0; color: white;">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8">
+                    <div data-aos="fade-up" data-aos-duration="600">
+                        <span style="color: var(--accent-green); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1rem;">
+                            SEGRITECH INSIGHTS
+                        </span>
+                        <h1 style="color: #FFFFFF; margin: 25px 0 20px 0; font-size: 3.5rem; font-weight: 700; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+                            Latest in Agricultural Technology
+                        </h1>
+                        <p style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.85); max-width: 600px; margin: 0 auto; line-height: 1.6;">
+                            <i class="fas fa-seedling" style="color: var(--accent-green); margin-right: 12px;"></i>
+                            Discover cutting-edge insights, success stories, and innovations shaping the future of agriculture
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Section -->
+    <section class="blog-posts-section" style="background: var(--background-dark); padding: 80px 0;">
+        <div class="container">
+
+
+            <!-- Blog Posts Grid -->
+            <div class="row">
+                {% for blog_post in page_obj %}
+                <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ forloop.counter0|add:1|stringformat:'d'|add:'00' }}">
+                    <div class="blog-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.4); border-radius: 18px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: 500px; box-shadow: 0 12px 30px rgba(0,0,0,0.4); cursor: pointer;">
+
+                        
+                        <!-- Featured Image -->
+                        <div style="position: relative; overflow: hidden; height: 200px;">
+                            {% if blog_post.featured_image %}
+                                <img src="{{ blog_post.featured_image.url }}" alt="{{ blog_post.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                            {% else %}
+                                <img src="{% static 'images/blog-img1.png' %}" alt="{{ blog_post.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;">
+                            {% endif %}
+                            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 50px; background: linear-gradient(transparent, rgba(0,0,0,0.8));"></div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="blog-content" style="padding: 25px; height: calc(100% - 200px); display: flex; flex-direction: column;">
+                            <!-- Author Info -->
+                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                                <div style="width: 35px; height: 35px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin-right: 12px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1));">
+                                    {% if blog_post.author_image %}
+                                        <img src="{{ blog_post.author_image.url }}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                    {% else %}
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                    {% endif %}
+                                </div>
+                                <div>
+                                    <span style="color: var(--accent-green); font-weight: 700; font-size: 0.9rem;">{{ blog_post.author_name }}</span>
+                                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">{{ blog_post.author_title }}</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Title & Excerpt -->
+                            <a href="{% url 'blog_detail' blog_post.slug %}" 
+                               style="text-decoration: none; flex-grow: 1; display: flex; flex-direction: column;">
+                                <h4 style="color: #FFFFFF; font-size: 1.2rem; line-height: 1.4; margin-bottom: 15px; font-weight: 600; transition: color 0.3s ease;">{{ blog_post.title }}</h4>
+                                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">{{ blog_post.excerpt }}</p>
+                            </a>
+                            
+                            <!-- Footer -->
+                            <div style="border-top: 1px solid rgba(76, 175, 80, 0.4); padding-top: 15px; margin-top: auto;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                        <i class="fas fa-calendar-alt" style="color: var(--accent-green);"></i> {{ blog_post.published_at|date:"M d, Y" }}
+                                    </span>
+                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                                        <i class="fas fa-eye" style="color: var(--accent-green);"></i> {{ blog_post.views_count }} views
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Hover Indicator -->
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green)); border-radius: 0 0 18px 18px; transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left;"></div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12 text-center" style="padding: 60px 20px;">
+                    <div style="color: rgba(255,255,255,0.6); font-size: 1.2rem;">
+                        <i class="fas fa-newspaper" style="font-size: 3rem; color: var(--accent-green); margin-bottom: 20px; display: block;"></i>
+                        No articles published yet. Check back soon for the latest insights!
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Pagination -->
+            {% if page_obj.has_other_pages %}
+            <div class="row mt-5">
+                <div class="col-12">
+                    <nav aria-label="Blog pagination" data-aos="fade-up" data-aos-duration="600">
+                        <ul class="pagination justify-content-center" style="gap: 10px;">
+                            {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1" style="background: rgba(76, 175, 80, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); border-radius: 10px; padding: 12px 16px; transition: all 0.3s ease;">
+                                        <i class="fas fa-angle-double-left"></i> First
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" style="background: rgba(76, 175, 80, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); border-radius: 10px; padding: 12px 16px; transition: all 0.3s ease;">
+                                        <i class="fas fa-angle-left"></i> Previous
+                                    </a>
+                                </li>
+                            {% endif %}
+
+                            {% for i in page_obj.paginator.page_range %}
+                                {% if page_obj.number == i %}
+                                    <li class="page-item active">
+                                        <span class="page-link" style="background: var(--accent-green); border: 1px solid var(--accent-green); color: white; border-radius: 10px; padding: 12px 16px;">{{ i }}</span>
+                                    </li>
+                                {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+                                    <li class="page-item">
+                                        <a class="page-link" href="?page={{ i }}" style="background: rgba(76, 175, 80, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); border-radius: 10px; padding: 12px 16px; transition: all 0.3s ease;">{{ i }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" style="background: rgba(76, 175, 80, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); border-radius: 10px; padding: 12px 16px; transition: all 0.3s ease;">
+                                        Next <i class="fas fa-angle-right"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" style="background: rgba(76, 175, 80, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); border-radius: 10px; padding: 12px 16px; transition: all 0.3s ease;">
+                                        Last <i class="fas fa-angle-double-right"></i>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    {% include 'includes/footer.html' %}
+
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Blog card hover effects and click handling
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 20px 40px rgba(76, 175, 80, 0.2)';
+                this.querySelector('img').style.transform = 'scale(1.05)';
+                this.querySelector('[style*="transform: scaleX(0)"]').style.transform = 'scaleX(1)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 12px 30px rgba(0,0,0,0.4)';
+                this.querySelector('img').style.transform = 'scale(1)';
+                this.querySelector('[style*="transform: scaleX(1)"]').style.transform = 'scaleX(0)';
+            });
+            
+            // Make entire card clickable
+            card.addEventListener('click', function(e) {
+                // Don't interfere if user clicked directly on a link
+                if (e.target.tagName === 'A' || e.target.closest('a')) {
+                    return;
+                }
+                
+                const link = this.querySelector('a[href]');
+                if (link) {
+                    // Trigger the link click
+                    link.click();
+                }
+            });
+        });
+
+        // Pagination hover effects
+        document.querySelectorAll('.page-link').forEach(link => {
+            if (!link.closest('.active')) {
+                link.addEventListener('mouseenter', function() {
+                    this.style.background = 'var(--accent-green)';
+                    this.style.color = 'white';
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    this.style.background = 'rgba(76, 175, 80, 0.1)';
+                    this.style.color = 'var(--accent-green)';
+                    this.style.transform = 'translateY(0)';
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

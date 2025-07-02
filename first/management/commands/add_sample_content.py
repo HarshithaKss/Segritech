@@ -17,8 +17,8 @@ class Command(BaseCommand):
             {
                 'title': 'The Future of AI in Crop Grading and Agricultural Automation',
                 'category': 'ai_tech',
-                'author_name': 'SegriTech Research Team',
-                'author_title': 'AI & Machine Learning Engineers',
+                'author_name': 'Dr. Hetendra Singh',
+                'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Exploring how artificial intelligence is revolutionizing crop quality assessment and transforming agricultural practices across developing nations.',
                 'content': '''
                 Artificial Intelligence is transforming agriculture at an unprecedented pace. At SegriTech, we're at the forefront of this revolution, developing cutting-edge AI solutions that make crop grading more accurate, efficient, and accessible to farmers worldwide.
@@ -33,8 +33,8 @@ class Command(BaseCommand):
             {
                 'title': 'Reducing Post-Harvest Losses: Technology Solutions for Smallholder Farmers',
                 'category': 'sustainability',
-                'author_name': 'Dr. Sarah Mitchell',
-                'author_title': 'Sustainability Research Scientist',
+                'author_name': 'Dr. Hetendra Singh',
+                'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Innovative approaches to minimize crop waste and maximize farmer profits through smart technology solutions designed for resource-constrained environments.',
                 'content': '''
                 Post-harvest losses remain one of the biggest challenges facing agriculture globally, with an estimated 40% of crops lost between harvest and market in many developing regions. At SegriTech, we're addressing this challenge through innovative technology solutions specifically designed for smallholder farmers.
@@ -49,8 +49,8 @@ class Command(BaseCommand):
             {
                 'title': 'Empowering Farmers: How Quality Grading Opens Global Market Access',
                 'category': 'market_access',
-                'author_name': 'SegriTech Development Team',
-                'author_title': 'Product Development Engineers',
+                'author_name': 'Dr. Hetendra Singh',
+                'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Discover how precision grading technology enables smallholder farmers to compete in international markets and command premium prices for quality produce.',
                 'content': '''
                 Access to global markets has traditionally been limited for smallholder farmers due to inconsistent quality standards and lack of proper grading infrastructure. SegriTech's precision grading technology is changing this dynamic by providing farmers with the tools they need to meet international quality standards.

@@ -15,15 +15,49 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    
+    <!-- Custom CSS for Enhanced Specifications Section -->
+    <style>
+        .spec-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: var(--accent-green) !important;
+            box-shadow: 0 20px 40px rgba(76, 175, 80, 0.2);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.15), rgba(102, 187, 106, 0.08)) !important;
+        }
+        
+        .spec-card:hover .spec-icon i {
+            transform: scale(1.1);
+            text-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+        }
+        
+        .spec-card:hover h3 {
+            color: var(--accent-green) !important;
+            text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .spec-card {
+                margin-bottom: 20px;
+            }
+            
+            .spec-card h3 {
+                font-size: 1.8rem !important;
+            }
+            
+            .spec-icon i {
+                font-size: 2.5rem !important;
+            }
+        }
+    </style>
 </head>
 <body class="bg-light-black">
-    {% include 'includes/header.html' %}
+    {% include 'includes/navigation.html' %}
 
     <!-- Hero Section -->
     <section class="product-hero-section" style="padding-top: 120px; padding-bottom: 80px; position: relative; overflow: hidden;">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                <div class="col-lg-6">
                     <div class="hero-content">
                         <h1 style="color: #fff; font-size: 3.5rem; font-weight: 700; margin-bottom: 30px;">
                             Inspection Box
@@ -36,37 +70,22 @@
                             Powered by advanced AI and computer vision technology, it delivers precise, 
                             consistent, and rapid quality assessments for agricultural products.
                         </p>
-                        <div class="hero-buttons">
-                            <a href="#features" class="btn btn-primary me-3" style="background: var(--accent-green); border: none; padding: 12px 30px; border-radius: 50px;">
-                                Explore Features
+                        <div class="hero-buttons" style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 30px;">
+                            <a href="#features" class="btn btn-primary" style="background: var(--accent-green); border: none; padding: 15px 30px; border-radius: 50px; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
+                                <i class="fas fa-eye me-2"></i>Explore Features
                             </a>
-                            <a href="#contact" class="btn btn-outline-light" style="padding: 12px 30px; border-radius: 50px;">
-                                Request Demo
+                            <a href="#contact" class="btn btn-outline-light" style="padding: 15px 30px; border-radius: 50px; font-weight: 600; border: 2px solid rgba(255,255,255,0.5); transition: all 0.3s ease;">
+                                <i class="fas fa-envelope me-2"></i>Contact Us
+                            </a>
+                            <a href="#" onclick="downloadBrochure('inspection-box')" class="btn" style="padding: 15px 30px; border-radius: 50px; background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; border: none; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); transition: all 0.3s ease; text-decoration: none; font-weight: 600;">
+                                <i class="fas fa-download me-2"></i>Download Brochure
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                <div class="col-lg-6">
                     <div class="hero-image" style="position: relative;">
                         <img src="{% static 'web/inspection_box.jpg' %}" alt="Inspection Box" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
-                        <div class="floating-stats" style="position: absolute; bottom: -30px; left: 50%; transform: translateX(-50%); 
-                                                         background: rgba(33, 33, 33, 0.95); backdrop-filter: blur(10px);
-                                                         padding: 20px; border-radius: 15px; width: 80%;
-                                                         display: flex; justify-content: space-around;
-                                                         box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                            <div class="stat-item text-center">
-                                <h3 style="color: var(--accent-green); font-size: 2rem; margin-bottom: 5px;">99%</h3>
-                                <p style="color: #fff; margin: 0;">Accuracy</p>
-                            </div>
-                            <div class="stat-item text-center">
-                                <h3 style="color: var(--accent-green); font-size: 2rem; margin-bottom: 5px;">3x</h3>
-                                <p style="color: #fff; margin: 0;">Faster</p>
-                            </div>
-                            <div class="stat-item text-center">
-                                <h3 style="color: var(--accent-green); font-size: 2rem; margin-bottom: 5px;">24/7</h3>
-                                <p style="color: #fff; margin: 0;">Operation</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -129,58 +148,109 @@
         </div>
     </section>
 
-    <!-- Specifications Section -->
+    <!-- Technical Specifications Section -->
     <section class="specs-section bg-light-black" style="padding: 100px 0;">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
-                    <div class="specs-content">
-                        <span style="color: var(--accent-green); text-transform: uppercase; letter-spacing: 2px;">
-                            Specifications
-                        </span>
-                        <h2 style="color: #fff; font-size: 2.5rem; margin: 20px 0 30px;">
-                            Technical Details
-                        </h2>
-                        <div class="specs-list">
-                            <div class="spec-item" style="margin-bottom: 25px;">
-                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
-                                    Dimensions
-                                </h4>
-                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
-                                    Length: 120cm | Width: 80cm | Height: 150cm
-                                </p>
-                            </div>
-                            <div class="spec-item" style="margin-bottom: 25px;">
-                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
-                                    Processing Capacity
-                                </h4>
-                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
-                                    Up to 100 items per minute
-                                </p>
-                            </div>
-                            <div class="spec-item" style="margin-bottom: 25px;">
-                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
-                                    Power Requirements
-                                </h4>
-                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
-                                    220V AC | 50-60Hz | 1000W
-                                </p>
-                            </div>
-                            <div class="spec-item">
-                                <h4 style="color: var(--accent-green); font-size: 1.2rem; margin-bottom: 10px;">
-                                    Connectivity
-                                </h4>
-                                <p style="color: rgba(255,255,255,0.8); margin: 0;">
-                                    Wi-Fi | Ethernet | USB 3.0
-                                </p>
-                            </div>
+            <div class="section-title text-center mb-5">
+                <span style="color: var(--accent-green); text-transform: uppercase; letter-spacing: 2px; font-weight: 600;" 
+                      data-aos="fade-up" data-aos-duration="600">Technical Specifications</span>
+                <h2 style="color: #fff; font-size: 2.8rem; margin-top: 15px; font-weight: 700;" 
+                    data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
+                    Performance Parameters
+                </h2>
+                <p style="color: rgba(255,255,255,0.7); font-size: 1.1rem; max-width: 600px; margin: 20px auto 0;" 
+                   data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
+                    Advanced technical capabilities for precision quality control and inspection
+                </p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="specs-table-container" style="background: linear-gradient(135deg, rgba(33, 33, 33, 0.95), rgba(45, 45, 45, 0.9)); 
+                                                           border-radius: 20px; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); 
+                                                           border: 2px solid rgba(76, 175, 80, 0.3); backdrop-filter: blur(10px);"
+                         data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+                        
+                        <div class="table-responsive">
+                            <table class="table specs-table" style="margin-bottom: 0;">
+                                <thead>
+                                    <tr style="border-bottom: 2px solid var(--accent-green);">
+                                        <th style="color: var(--accent-green); font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 20px 25px; text-transform: uppercase; letter-spacing: 1px; 
+                                                   border: none; background: transparent;">
+                                            Parameter
+                                        </th>
+                                        <th style="color: var(--accent-green); font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 20px 25px; text-transform: uppercase; letter-spacing: 1px; 
+                                                   border: none; background: transparent;">
+                                            Value
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="spec-row" style="border-bottom: 1px solid rgba(76, 175, 80, 0.2); transition: all 0.3s ease;">
+                                        <td style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            Inspection Speed
+                                        </td>
+                                        <td style="color: #fff; font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            10 fruits/sec <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 400;">(real-time)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="spec-row" style="border-bottom: 1px solid rgba(76, 175, 80, 0.2); transition: all 0.3s ease;">
+                                        <td style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            Frame Rate
+                                        </td>
+                                        <td style="color: #fff; font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            200–300+ fps
+                                        </td>
+                                    </tr>
+                                    <tr class="spec-row" style="border-bottom: 1px solid rgba(76, 175, 80, 0.2); transition: all 0.3s ease;">
+                                        <td style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            Accuracy (Visual Defects)
+                                        </td>
+                                        <td style="color: #fff; font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            >95% <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 400;">(depending on crop type)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="spec-row" style="border-bottom: 1px solid rgba(76, 175, 80, 0.2); transition: all 0.3s ease;">
+                                        <td style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            Crop Compatibility
+                                        </td>
+                                        <td style="color: #fff; font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            15+ Fruits & Vegetables
+                                        </td>
+                                    </tr>
+                                    <tr class="spec-row" style="border-bottom: 1px solid rgba(76, 175, 80, 0.2); transition: all 0.3s ease;">
+                                        <td style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            Connectivity
+                                        </td>
+                                        <td style="color: #fff; font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            USB, LAN <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 400;">(Optional 4G/Wi-Fi)</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="spec-row" style="transition: all 0.3s ease;">
+                                        <td style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            Power Supply
+                                        </td>
+                                        <td style="color: #fff; font-size: 1.2rem; font-weight: 700; 
+                                                   padding: 18px 25px; border: none; vertical-align: middle;">
+                                            230V AC <span style="color: rgba(255,255,255,0.7); font-size: 0.9rem; font-weight: 400;">(UPS Compatible)</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
-                    <div class="specs-image" style="position: relative;">
-                        <img src="{% static 'web/inspection_box.jpg' %}" alt="Inspection Box Specifications" 
-                             style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
                     </div>
                 </div>
             </div>
@@ -193,13 +263,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <div class="section-title mb-5">
-                        <span style="color: var(--accent-green); text-transform: uppercase; letter-spacing: 2px;" 
-                              data-aos="fade-up" data-aos-duration="600">Contact Us</span>
-                        <h2 style="color: #fff; font-size: 2.5rem; margin-top: 15px;" 
-                            data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
-                            Request a Demo
+                        <h2 style="color: var(--accent-green); font-size: 2.5rem; margin-bottom: 20px;" 
+                            data-aos="fade-up" data-aos-duration="600">
+                            Reach Out to Us
                         </h2>
-                        <p style="color: rgba(255,255,255,0.8); margin-top: 20px;" 
+                        <p style="color: rgba(255,255,255,0.8);" 
                            data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
                             Interested in seeing the Inspection Box in action? Fill out the form below and our team 
                             will get back to you shortly.
@@ -208,43 +276,89 @@
                 </div>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <form action="{% url 'submit_inquiry' %}" method="POST" class="contact-form" 
-                          style="background: rgba(33, 33, 33, 0.5); padding: 40px; border-radius: 20px; 
-                                 backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1);"
+                <div class="col-lg-10">
+                    <!-- Django Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4" 
+                                 style="background: linear-gradient(135deg, #4CAF50, #66BB6A); 
+                                        border: none; border-radius: 15px; color: white; 
+                                        box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+                                        font-size: 1.1rem; padding: 20px 25px;"
+                                 data-aos="fade-down" data-aos-duration="600">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-check-circle me-3" style="font-size: 1.5rem;"></i>
+                                    <div>
+                                        <strong>Success!</strong><br>
+                                        {{ message }}
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form action="{% url 'send_inquiry' %}" method="POST" class="contact-form modern-form" 
+                          style="background: linear-gradient(135deg, rgba(45, 45, 45, 0.95), rgba(33, 33, 33, 0.9)); 
+                                 padding: 50px 40px; border-radius: 25px; backdrop-filter: blur(20px); 
+                                 border: 1px solid rgba(102, 187, 106, 0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.3);"
                           data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                         {% csrf_token %}
+                        <input type="hidden" name="product" value="Inspection Box">
                         <div class="row g-4">
                             <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required
-                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
-                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                                <div class="form-floating">
+                                    <input type="text" name="name" class="form-control modern-input" id="floatingName" placeholder="Your Name" required
+                                           style="background: rgba(255,255,255,0.08); border: 2px solid rgba(102,187,106,0.3); 
+                                                  color: #fff; padding: 18px 20px; border-radius: 15px; font-size: 16px;
+                                                  transition: all 0.3s ease; height: 60px;">
+                                    <label for="floatingName" style="color: rgba(255,255,255,0.7); padding-left: 20px;">Your Name *</label>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <input type="email" name="email" class="form-control" placeholder="Your Email" required
-                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
-                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                                <div class="form-floating">
+                                    <input type="email" name="email" class="form-control modern-input" id="floatingEmail" placeholder="Your Email" required
+                                           style="background: rgba(255,255,255,0.08); border: 2px solid rgba(102,187,106,0.3); 
+                                                  color: #fff; padding: 18px 20px; border-radius: 15px; font-size: 16px;
+                                                  transition: all 0.3s ease; height: 60px;">
+                                    <label for="floatingEmail" style="color: rgba(255,255,255,0.7); padding-left: 20px;">Your Email *</label>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <input type="tel" name="phone" class="form-control" placeholder="Phone Number"
-                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
-                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                                <div class="form-floating">
+                                    <input type="tel" name="phone" class="form-control modern-input" id="floatingPhone" placeholder="Phone Number" required
+                                           style="background: rgba(255,255,255,0.08); border: 2px solid rgba(102,187,106,0.3); 
+                                                  color: #fff; padding: 18px 20px; border-radius: 15px; font-size: 16px;
+                                                  transition: all 0.3s ease; height: 60px;">
+                                    <label for="floatingPhone" style="color: rgba(255,255,255,0.7); padding-left: 20px;">Phone Number *</label>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <input type="text" name="company" class="form-control" placeholder="Company Name"
-                                       style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
-                                              color: #fff; padding: 12px 20px; border-radius: 10px;">
+                                <div class="form-floating">
+                                    <input type="text" name="company" class="form-control modern-input" id="floatingCompany" placeholder="Company Name"
+                                           style="background: rgba(255,255,255,0.08); border: 2px solid rgba(102,187,106,0.3); 
+                                                  color: #fff; padding: 18px 20px; border-radius: 15px; font-size: 16px;
+                                                  transition: all 0.3s ease; height: 60px;">
+                                    <label for="floatingCompany" style="color: rgba(255,255,255,0.7); padding-left: 20px;">Company Name</label>
+                                </div>
                             </div>
                             <div class="col-12">
-                                <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required
-                                          style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
-                                                 color: #fff; padding: 12px 20px; border-radius: 10px;"></textarea>
+                                <div class="form-floating">
+                                    <textarea name="message" class="form-control modern-input" id="floatingMessage" placeholder="Your Message" required
+                                              style="background: rgba(255,255,255,0.08); border: 2px solid rgba(102,187,106,0.3); 
+                                                     color: #fff; padding: 18px 20px; border-radius: 15px; font-size: 16px;
+                                                     transition: all 0.3s ease; height: 140px; resize: vertical; min-height: 140px;"></textarea>
+                                    <label for="floatingMessage" style="color: rgba(255,255,255,0.7); padding-left: 20px;">Your Message *</label>
+                                </div>
                             </div>
                             <div class="col-12 text-center">
-                                <button type="submit" class="btn btn-primary" 
-                                        style="background: var(--accent-green); border: none; padding: 12px 40px; 
-                                               border-radius: 50px; font-size: 1.1rem; margin-top: 20px;">
-                                    Submit Inquiry
+                                <button type="submit" class="btn btn-primary modern-btn" 
+                                        style="background: linear-gradient(135deg, var(--accent-green), #4CAF50); 
+                                               border: none; padding: 16px 50px; border-radius: 50px; 
+                                               font-size: 1.1rem; font-weight: 600; margin-top: 30px; color: #fff;
+                                               box-shadow: 0 8px 25px rgba(102,187,106,0.3); 
+                                               transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;">
+                                    <i class="fas fa-paper-plane me-2"></i>Submit Inquiry
                                 </button>
                             </div>
                         </div>
@@ -257,11 +371,177 @@
     {% include 'includes/footer.html' %}
 
     <!-- Scripts -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/cdn.jsdelivr.net_npm_swiper%4010_swiper-bundle.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
+    
+    <!-- Initialize AOS -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+        
+        // Auto-hide success messages after 5 seconds
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert-success');
+            alerts.forEach(function(alert) {
+                const bsAlert = new bootstrap.Alert(alert);
+                bsAlert.close();
+            });
+        }, 5000);
+        
+        // Download Brochure Function
+        function downloadBrochure(productSlug) {
+            console.log('Download brochure for:', productSlug);
+            
+            // Create brochure filename based on product
+            const brochureFiles = {
+                'inspection-box': 'Inspection box bro.pdf',
+                'apple-size-grader': 'Segritech Apple Size Grader_b.pdf',
+                'multifruit-optical-grader': 'quality_grader_b.pdf',
+                'precisionweight-wg-2500-density-grader': 'weight grading machine_b.pdf',
+                'weight-grader-1': 'weight grading machine_b.pdf',
+                'cleaning-machine-1': 'cleaning-machine-brochure.pdf',
+                'segriwax-waxing-cleaning-machine': 'Segriwax Waxing Machine.pdf',
+                'packing-robot-1': 'Segripack (1).pdf',
+                'robopac-rp-5000-automated-packaging-system': 'Segripack (1).pdf',
+                'flexipack-fp-3000-adaptive-packaging-robot': 'Segripack (1).pdf'
+            };
+            
+            const brochureFile = brochureFiles[productSlug] || 'product-brochure.pdf';
+            const brochurePath = `/static/brochures/${brochureFile}`;
+            
+            // Try to download the brochure
+            fetch(brochurePath, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        // File exists, proceed with download
+                        const link = document.createElement('a');
+                        link.href = brochurePath;
+                        link.download = brochureFile;
+                        link.target = '_blank';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        // Show success message
+                        alert('Brochure download started!');
+                    } else {
+                        // File doesn't exist
+                        alert('Brochure is being prepared. Please contact us for the latest product information.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking brochure:', error);
+                    alert('Brochure is currently being updated. Please contact us for the latest product information.');
+                });
+        }
+    </script>
+    
+    <!-- Form interaction styles -->
+    <style>
+        .modern-input:focus {
+            border-color: var(--accent-green) !important;
+            box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.25) !important;
+            background: rgba(255,255,255,0.12) !important;
+        }
+        
+        .modern-input::placeholder {
+            color: rgba(255,255,255,0.5) !important;
+        }
+        
+        .form-floating > label {
+            transition: all 0.3s ease;
+        }
+        
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label {
+            color: var(--accent-green) !important;
+        }
+        
+        .modern-btn:hover {
+            transform: translateY(-3px) !important;
+            box-shadow: 0 12px 35px rgba(102,187,106,0.4) !important;
+            background: linear-gradient(135deg, #4CAF50, var(--accent-green)) !important;
+        }
+        
+        .modern-btn:active {
+            transform: translateY(-1px) !important;
+        }
+        
+        .modern-form {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102,187,106,0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .modern-form:hover::before {
+            left: 100%;
+        }
+        
+        /* Hero Buttons Hover Effects */
+        .hero-buttons .btn:hover {
+            transform: translateY(-3px);
+            transition: all 0.3s ease;
+        }
+        
+        .hero-buttons .btn-primary:hover {
+            background: linear-gradient(135deg, #4CAF50, var(--accent-green)) !important;
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4) !important;
+        }
+        
+        .hero-buttons .btn-outline-light:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: white !important;
+            color: white !important;
+        }
+        
+        .hero-buttons .btn:last-child:hover {
+            background: linear-gradient(135deg, #FF5252, #E53935) !important;
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5) !important;
+        }
+        
+        /* Responsive Button Layout */
+        @media (max-width: 768px) {
+            .hero-buttons {
+                gap: 15px !important;
+                justify-content: center !important;
+            }
+            
+            .hero-buttons .btn {
+                padding: 12px 25px !important;
+                font-size: 0.9rem !important;
+                min-width: 150px;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-buttons {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 15px !important;
+            }
+            
+            .hero-buttons .btn {
+                width: 100% !important;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+        }
+    </style>
 </body>
 </html> 

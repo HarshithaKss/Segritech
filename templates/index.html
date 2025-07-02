@@ -48,33 +48,105 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
     <!-- Three.js for 3D model -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/loaders/DRACOLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://unpkg.com/three@0.146.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/DRACOLoader.js"></script>
+    <script src="https://unpkg.com/three@0.146.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <!-- Fallback CDN in case unpkg fails -->
     <script>
-        // Wait for all scripts to load before checking
-        window.addEventListener('load', function() {
-            console.log('Three.js loaded:', typeof THREE !== 'undefined');
+        // Check if Three.js loaded successfully, if not try fallback
+        if (typeof THREE === 'undefined') {
+            console.warn('Primary Three.js CDN failed, loading fallback...');
             
-            // Check GLTFLoader and OrbitControls with a small delay
-            setTimeout(function() {
-                console.log('GLTFLoader available:', typeof THREE.GLTFLoader !== 'undefined');
-                console.log('DRACOLoader available:', typeof THREE.DRACOLoader !== 'undefined');
-                console.log('OrbitControls available:', typeof THREE.OrbitControls !== 'undefined');
+                         // Load fallback scripts
+             const scripts = [
+                 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/three.min.js',
+                 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/examples/js/loaders/GLTFLoader.js',
+                 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/examples/js/loaders/DRACOLoader.js',
+                 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r146/examples/js/controls/OrbitControls.js'
+             ];
+            
+            let loadedCount = 0;
+            scripts.forEach((src, index) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = function() {
+                    loadedCount++;
+                    console.log(`Fallback script ${index + 1} loaded`);
+                    if (loadedCount === scripts.length) {
+                        setTimeout(checkAndInitialize, 500);
+                    }
+                };
+                script.onerror = function() {
+                    console.error(`Failed to load fallback script: ${src}`);
+                };
+                document.head.appendChild(script);
+            });
+        } else {
+            // Primary CDN worked, check modules after a delay
+            setTimeout(checkAndInitialize, 1000);
+        }
+        
+        function checkAndInitialize() {
+            console.log('Three.js loaded:', typeof THREE !== 'undefined');
+            console.log('GLTFLoader available:', typeof THREE.GLTFLoader !== 'undefined');
+            console.log('DRACOLoader available:', typeof THREE.DRACOLoader !== 'undefined');
+            console.log('OrbitControls available:', typeof THREE.OrbitControls !== 'undefined');
+            
+            // Dispatch custom event when everything is ready
+            if (typeof THREE !== 'undefined' && 
+                typeof THREE.GLTFLoader !== 'undefined' && 
+                typeof THREE.DRACOLoader !== 'undefined' && 
+                typeof THREE.OrbitControls !== 'undefined') {
+                console.log('All Three.js modules loaded successfully!');
+                window.dispatchEvent(new CustomEvent('threejsModulesReady'));
+            } else {
+                console.error('Some Three.js modules failed to load, trying alternative approach...');
                 
-                // Dispatch custom event when everything is ready
-                if (typeof THREE !== 'undefined' && 
-                    typeof THREE.GLTFLoader !== 'undefined' && 
-                    typeof THREE.DRACOLoader !== 'undefined' && 
-                    typeof THREE.OrbitControls !== 'undefined') {
-                    console.log('All Three.js modules loaded successfully!');
-                    window.dispatchEvent(new CustomEvent('threejsModulesReady'));
+                // Try one more time with jsdelivr as final fallback
+                if (typeof THREE !== 'undefined' && (typeof THREE.GLTFLoader === 'undefined' || typeof THREE.DRACOLoader === 'undefined')) {
+                    console.log('Attempting to load missing Three.js modules manually...');
+                    
+                    const loadManualScript = (src, name) => {
+                        return new Promise((resolve, reject) => {
+                            const script = document.createElement('script');
+                            script.src = src;
+                            script.onload = () => {
+                                console.log(`Manual ${name} loaded successfully`);
+                                resolve();
+                            };
+                            script.onerror = reject;
+                            document.head.appendChild(script);
+                        });
+                    };
+                    
+                    const scriptsToLoad = [];
+                    if (typeof THREE.GLTFLoader === 'undefined') {
+                        scriptsToLoad.push(loadManualScript('https://cdn.jsdelivr.net/npm/three@0.146.0/examples/js/loaders/GLTFLoader.js', 'GLTFLoader'));
+                    }
+                    if (typeof THREE.DRACOLoader === 'undefined') {
+                        scriptsToLoad.push(loadManualScript('https://cdn.jsdelivr.net/npm/three@0.146.0/examples/js/loaders/DRACOLoader.js', 'DRACOLoader'));
+                    }
+                    if (typeof THREE.OrbitControls === 'undefined') {
+                        scriptsToLoad.push(loadManualScript('https://cdn.jsdelivr.net/npm/three@0.146.0/examples/js/controls/OrbitControls.js', 'OrbitControls'));
+                    }
+                    
+                    Promise.all(scriptsToLoad).then(() => {
+                        console.log('All manual scripts loaded successfully');
+                        setTimeout(() => window.dispatchEvent(new CustomEvent('threejsModulesReady')), 500);
+                    }).catch(error => {
+                        console.error('Failed to load manual scripts:', error);
+                    });
                 } else {
-                    console.error('Some Three.js modules failed to load');
+                    // Show error in loading indicator
+                    const loadingIndicator = document.getElementById('loadingIndicator');
+                    if (loadingIndicator) {
+                        loadingIndicator.innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> 3D Libraries failed to load<br><small>Please refresh the page</small></div>';
+                    }
                 }
-            }, 500);
-        });
+            }
+        }
     </script>
     <style>
         html, body {
@@ -289,8 +361,8 @@
         .logo-slider .swiper-slide figure img,
         .swiper-slide figure img[src*="client-"],
         .swiper-slide figure img[alt*="client-"] {
-            max-width: 116px !important;
-            max-height: 118px !important;
+            max-width: 180px !important;
+            max-height: 160px !important;
             width: auto !important;
             height: auto !important;
             object-fit: contain !important;
@@ -302,11 +374,11 @@
         #logoSwiper .swiper-slide figure,
         .logo-slider .swiper-slide figure {
             margin: 0 !important;
-            padding: 15px !important;
+            padding: 20px !important;
             display: flex !important;
             align-items: center !important;
             justify-content: center !important;
-            height: 140px !important;
+            height: 200px !important;
         }
         
         /* CSS Fallback Animation for Logo Slider */
@@ -335,8 +407,8 @@
         .swiper-slide {
             flex-shrink: 0 !important;
             width: auto !important;
-            min-width: 150px !important;
-            max-width: 200px !important;
+            min-width: 220px !important;
+            max-width: 280px !important;
         }
         
         /* Beautiful Section Headings */
@@ -1789,33 +1861,96 @@
             perspective: 1000px;
             -webkit-perspective: 1000px;
         }
+        
+        /* Specific targeting for media coverage cards with highest priority */
+        .mediaSwiper.swiper .swiper-wrapper .swiper-slide {
+            width: 600px !important;
+            min-width: 600px !important;
+            max-width: 600px !important;
+            flex: 0 0 600px !important;
+            flex-shrink: 0 !important;
+        }
 
         .swiper-slide > a > div {
-            padding: 25px !important;
+            padding: 30px !important;
             display: flex !important;
             flex-direction: column !important;
             transform: translate3d(0, 0, 0);
             -webkit-transform: translate3d(0, 0, 0);
+            height: 280px !important;
+            background: linear-gradient(135deg, rgba(40, 50, 40, 0.95) 0%, rgba(30, 40, 30, 0.98) 100%) !important;
+            border: 1px solid rgba(76, 175, 80, 0.2) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 5px 15px rgba(76, 175, 80, 0.1) !important;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+            position: relative !important;
+            overflow: hidden !important;
+            backdrop-filter: blur(10px) !important;
         }
 
         .swiper-slide h4 {
-            font-size: 1.2rem !important;
+            font-size: 1.4rem !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
             white-space: nowrap !important;
             overflow: hidden !important;
             text-overflow: ellipsis !important;
-            margin-bottom: 0 !important;
+            margin-bottom: 15px !important;
+            position: relative !important;
+            z-index: 2 !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
         }
 
         .swiper-slide p {
-            font-size: 0.95rem !important;
-            line-height: 1.6 !important;
-            -webkit-line-clamp: 5 !important;
+            font-size: 1rem !important;
+            line-height: 1.7 !important;
+            color: rgba(255, 255, 255, 0.85) !important;
+            -webkit-line-clamp: 6 !important;
             flex-grow: 1 !important;
-            margin: 15px 0 !important;
+            margin: 0 0 20px 0 !important;
             overflow: hidden !important;
             display: -webkit-box !important;
             -webkit-box-orient: vertical !important;
             text-overflow: ellipsis !important;
+            position: relative !important;
+            z-index: 2 !important;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.4) !important;
+        }
+
+        /* Add decorative elements and hover effects */
+        .swiper-slide > a > div::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-green));
+            opacity: 0.1;
+            border-radius: 0 20px 0 50px;
+            z-index: 1;
+        }
+
+        .swiper-slide > a > div::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-green), var(--accent-green));
+            border-radius: 2px;
+            z-index: 1;
+        }
+
+        .swiper-slide:hover > a > div {
+            transform: translateY(-8px) !important;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 10px 25px rgba(76, 175, 80, 0.3) !important;
+            border-color: rgba(76, 175, 80, 0.5) !important;
+        }
+
+        .swiper-slide:hover h4 {
+            color: var(--accent-green) !important;
         }
 
         .swiper-slide-active,
@@ -1832,6 +1967,40 @@
         .mediaSwiper {
             -ms-overflow-style: none;
             scrollbar-width: none;
+            padding: 40px 0 !important;
+        }
+
+        /* Add subtle entrance animation */
+        .swiper-slide {
+            animation: slideInFromBottom 0.6s ease-out forwards;
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 0.7;
+                transform: translateY(0);
+            }
+        }
+
+        /* Keep original dark section background */
+        .media-coverage-section {
+            position: relative;
+        }
+
+        .media-coverage-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%234CAF50" fill-opacity="0.08"><circle cx="40" cy="40" r="1.5"/></g></svg>');
+            pointer-events: none;
+            z-index: 0;
         }
 
         @media (max-width: 768px) {
@@ -1840,13 +2009,28 @@
                 padding: 15px;
             }
             
-            .swiper-slide {
-                width: 300px !important;
+            .mediaSwiper.swiper .swiper-wrapper .swiper-slide {
+                width: 420px !important;
+                min-width: 420px !important;
+                max-width: 420px !important;
+                flex: 0 0 420px !important;
             }
 
             .swiper-slide > a > div {
-                height: 280px !important;
-                padding: 20px !important;
+                height: 260px !important;
+                padding: 25px !important;
+                border-radius: 15px !important;
+            }
+
+            .swiper-slide h4 {
+                font-size: 1.3rem !important;
+                margin-bottom: 12px !important;
+            }
+
+            .swiper-slide p {
+                font-size: 0.95rem !important;
+                -webkit-line-clamp: 5 !important;
+                margin: 0 0 15px 0 !important;
             }
         }
     </style>
@@ -1895,7 +2079,7 @@
                     <div class="hero-actions" data-aos="fade-up" data-aos-easing="ease-in-out-back" data-aos-duration="800" data-aos-delay="600" 
                          style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
                         <div class="generic-btn secondary" style="--button-color-override: transparent;">
-                            <a href="#home-who-we-are-section" style="background: transparent; color: white; border: 2px solid var(--primary-green); padding: 12px 32px; font-size: 1rem; border-radius: 50px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease;">Learn More</a>
+                            <a href="#3d-model-section" style="background: transparent; color: white; border: 2px solid var(--primary-green); padding: 12px 32px; font-size: 1rem; border-radius: 50px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease;">Learn More</a>
                         </div>
                     </div>
                 </div>
@@ -1906,9 +2090,9 @@
         <div class="social-box" data-aos="fade-left" data-aos-duration="800" data-aos-delay="1200" 
              style="position: absolute; right: 25px; top: 50%; transform: translateY(-50%); z-index: 4;">
             <ul class="mb-0 list-unstyled">
-                <li><a href="#" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.3); padding: 8px; margin-bottom: 8px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-shopping-cart" style="font-size: 0.9rem;"></i></a></li>
-                <li><a href="#" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.3); padding: 8px; margin-bottom: 8px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-image" style="font-size: 0.9rem;"></i></a></li>
-                <li><a href="#" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.3); padding: 8px; margin-bottom: 0; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-comment-alt" style="font-size: 0.9rem;"></i></a></li>
+                <li><a href="{% url 'products' %}" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.3); padding: 8px; margin-bottom: 8px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-cog" style="font-size: 0.9rem;"></i></a></li>
+                <li><a href="{% url 'about' %}" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.3); padding: 8px; margin-bottom: 8px; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-info-circle" style="font-size: 0.9rem;"></i></a></li>
+                <li><a href="https://wa.me/919014809973?text=Hi! I'm interested in learning more about your agricultural technology solutions. Could you please provide more information?" target="_blank" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.3); padding: 8px; margin-bottom: 0; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;"><i class="fas fa-comment-alt" style="font-size: 0.9rem;"></i></a></li>
             </ul>
         </div>
         
@@ -1923,7 +2107,7 @@
     <!-- banner section -->
     
     <!-- 3D Model Section - Separate from video background -->
-    <section class="model-showcase-sec w-100 float-left bg-light-black" style="padding: 80px 0 60px 0; background: radial-gradient(ellipse at center, #2a3f2a 0%, #1a2a1a 40%, #0f1f0f 80%, #000000 100%); position: relative; overflow: hidden;">
+    <section id="3d-model-section" class="model-showcase-sec w-100 float-left bg-light-black" style="padding: 80px 0 60px 0; background: radial-gradient(ellipse at center, #2a3f2a 0%, #1a2a1a 40%, #0f1f0f 80%, #000000 100%); position: relative; overflow: hidden;">
         <!-- Background decorative elements -->
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.1; pointer-events: none;">
             <div style="position: absolute; top: 10%; left: 10%; width: 300px; height: 300px; background: radial-gradient(circle, rgba(76, 175, 80, 0.3) 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
@@ -2031,12 +2215,6 @@
                                                         padding: 30px; opacity: 0; transition: opacity 0.3s ease;">
                         </div>
                         <!-- Floating Elements -->
-                        <div style="position: absolute; top: 20px; right: 20px; 
-                                  background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);
-                                  padding: 10px; border-radius: 15px; 
-                                  box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-                            <i class="fas fa-camera" style="color: var(--accent-green); font-size: 1.5rem;"></i>
-                        </div>
                         <div style="position: absolute; bottom: 20px; left: 20px; 
                                   background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);
                                   padding: 10px 20px; border-radius: 20px; 
@@ -2160,46 +2338,82 @@
     <!-- about section-->
     
     <!-- Pomegranate Detection Video Section -->
-    <section class="video-feature-section bg-light-black" style="padding: 80px 0;">
+    <section class="video-feature-section bg-light-black" style="padding: 100px 0; position: relative; overflow: hidden;">
+        <!-- Background Elements -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 30% 70%, rgba(76, 175, 80, 0.1) 0%, transparent 50%);"></div>
+        <div style="position: absolute; top: 20%; right: 10%; width: 200px; height: 200px; background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), transparent); border-radius: 50%; filter: blur(40px);"></div>
+        
         <div class="wrapper2">
-            <div class="row align-items-center">
-                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
-                    <div class="video-container" style="position: relative; border-radius: 15px; overflow: visible; margin: 20px; margin-top: -200px;">
-                        <video autoplay loop muted playsinline style="width: 100%; min-height: 700px; display: block; background: transparent;">
-                            <source src="{% static 'video/1234.mp4' %}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+            <!-- Section Title -->
+            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="600">
+                <span style="font-size: 1.5rem; letter-spacing: 4px; background: linear-gradient(45deg, var(--accent-green), #4CAF50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 15px;">
+                    <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.3rem;"></i>
+                    SMART DETECTION
+                    <i class="fas fa-arrow-left" style="color: var(--accent-green); font-size: 1.3rem;"></i>
+                </span>
+                <h2 style="font-size: 3.8rem; font-weight: 700; margin: 25px 0; background: linear-gradient(45deg, #ffffff, #e0e0e0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">AI-Powered Quality Detection</h2>
+            </div>
+
+            <div class="row align-items-center" style="min-height: 600px;">
+                <!-- Video Column -->
+                <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
+                    <div class="video-wrapper" style="position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); background: linear-gradient(145deg, #2a2a2a, #1a1a1a);">
+                        <!-- Video Frame -->
+                        <div style="position: relative; padding: 15px; background: linear-gradient(145deg, #333, #222);">
+                            <div style="position: relative; border-radius: 15px; overflow: hidden; background: #000;">
+                                <video autoplay loop muted playsinline style="width: 100%; height: 400px; object-fit: cover; display: block;">
+                                    <source src="{% static 'video/1234.mp4' %}" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                                <!-- Video Overlay -->
+                                <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), transparent); pointer-events: none;"></div>
+                            </div>
+                            <!-- Tech Indicator -->
+                            <div style="position: absolute; top: 25px; right: 25px; background: rgba(76, 175, 80, 0.9); color: white; padding: 8px 15px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; backdrop-filter: blur(10px);">
+                                <i class="fas fa-play" style="margin-right: 5px;"></i>LIVE DEMO
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Content Column -->
                 <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
-                    <div class="feature-content" style="padding-left: 60px; position: relative;">
-                        <div class="generic-title" style="position: relative;">
-                            <span style="font-size: 1.1rem; letter-spacing: 3px; background: linear-gradient(45deg, var(--accent-green), #4CAF50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">SMART DETECTION</span>
-                            <h2 class="mb-4" style="font-size: 2.8rem; font-weight: 700; margin-top: 15px; background: linear-gradient(45deg, #ffffff, #e0e0e0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">Pomegranate Quality Detection</h2>
-                        </div>
-                        <div style="position: relative; padding: 30px; background: rgba(76, 175, 80, 0.1); border-radius: 20px; border-left: 4px solid var(--accent-green); backdrop-filter: blur(10px); margin-bottom: 30px;">
-                            <p style="color: rgba(255,255,255,0.95); font-size: 1.15rem; line-height: 1.8; margin-bottom: 0; font-weight: 400;">
-                                Our advanced AI-powered system revolutionizes pomegranate quality assessment through automated detection and grading. This cutting-edge technology ensures:
+                    <div class="feature-content" style="padding-left: 40px; position: relative;">
+                        <!-- Main Description -->
+                        <div style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 1px solid rgba(76, 175, 80, 0.2); position: relative; overflow: hidden;">
+                            <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--accent-green), #4CAF50);"></div>
+                            <p style="color: rgba(255,255,255,0.95); font-size: 1.15rem; line-height: 1.7; margin: 0; font-weight: 400;">
+                                Our advanced AI-powered system revolutionizes pomegranate quality assessment through automated detection and grading, ensuring consistent and accurate results.
                             </p>
                         </div>
-                        <ul class="feature-list" style="list-style: none; padding: 0; margin: 25px 0;">
-                            <li style="color: rgba(255,255,255,0.95); margin-bottom: 8px; display: flex; align-items: center; transform: translateX(0); transition: transform 0.3s ease; background: rgba(255,255,255,0.05); padding: 12px 20px; border-radius: 12px; backdrop-filter: blur(5px);" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
-                                <i class="fas fa-arrow-right" style="color: var(--accent-green); margin-right: 15px; font-size: 1.2rem; text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);"></i>
-                                <span style="font-size: 1.1rem;">Precise quality grading and sorting</span>
-                            </li>
-                            <li style="color: rgba(255,255,255,0.95); margin-bottom: 8px; display: flex; align-items: center; transform: translateX(0); transition: transform 0.3s ease; background: rgba(255,255,255,0.05); padding: 12px 20px; border-radius: 12px; backdrop-filter: blur(5px);" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
-                                <i class="fas fa-arrow-right" style="color: var(--accent-green); margin-right: 15px; font-size: 1.2rem; text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);"></i>
-                                <span style="font-size: 1.1rem;">Real-time defect detection</span>
-                            </li>
-                            <li style="color: rgba(255,255,255,0.95); margin-bottom: 8px; display: flex; align-items: center; transform: translateX(0); transition: transform 0.3s ease; background: rgba(255,255,255,0.05); padding: 12px 20px; border-radius: 12px; backdrop-filter: blur(5px);" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
-                                <i class="fas fa-arrow-right" style="color: var(--accent-green); margin-right: 15px; font-size: 1.2rem; text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);"></i>
-                                <span style="font-size: 1.1rem;">Increased efficiency and accuracy</span>
-                            </li>
-                            <li style="color: rgba(255,255,255,0.95); margin-bottom: 8px; display: flex; align-items: center; transform: translateX(0); transition: transform 0.3s ease; background: rgba(255,255,255,0.05); padding: 12px 20px; border-radius: 12px; backdrop-filter: blur(5px);" onmouseover="this.style.transform='translateX(10px)'" onmouseout="this.style.transform='translateX(0)'">
-                                <i class="fas fa-arrow-right" style="color: var(--accent-green); margin-right: 15px; font-size: 1.2rem; text-shadow: 0 0 10px rgba(76, 175, 80, 0.5);"></i>
-                                <span style="font-size: 1.1rem;">Reduced manual inspection time</span>
-                            </li>
-                        </ul>
+
+                        <!-- Feature List with Arrows -->
+                        <div class="feature-list" style="margin: 30px 0;">
+                            <div style="display: flex; align-items: center; margin-bottom: 18px;">
+                                <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Precise Detection</h6>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 18px;">
+                                <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Real-time Processing</h6>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 18px;">
+                                <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Higher Efficiency</h6>
+                            </div>
+                            <div style="display: flex; align-items: center; margin-bottom: 18px;">
+                                <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Time Saving</h6>
+                            </div>
+                        </div>
+
+                        <!-- CTA Button -->
+                        <div class="mt-4">
+                            <a href="{% url 'products' %}" class="btn" style="background: linear-gradient(135deg, var(--accent-green), #4CAF50); color: white; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; transition: all 0.3s ease; border: none;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 10px 30px rgba(76, 175, 80, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                                <i class="fas fa-eye" style="margin-right: 10px;"></i>
+                                View Our Products
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2435,10 +2649,13 @@
                         
                         <!-- Video Element -->
                         <div style="position: relative; padding: 15px;">
-                            <video controls 
-                                   style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); background: #000;"
-                                   poster="{% static 'images/video-poster.jpg' %}"
-                                   preload="metadata">
+                                                    <video id="testimonialVideo" 
+                               controls 
+                               autoplay 
+                               muted 
+                               loop 
+                               playsinline
+                               style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); background: #000;">
                                 <source src="{% static 'video/testimonial.mp4' %}" type="video/mp4">
                                 <p style="color: rgba(255, 255, 255, 0.8); text-align: center; padding: 30px;">
                                     Your browser does not support the video tag. 
@@ -2499,11 +2716,10 @@
             <div class="row">
                 {% for blog_post in blog_posts %}
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="600" {% if forloop.counter == 2 %}data-aos-delay="100"{% elif forloop.counter == 3 %}data-aos-delay="200"{% endif %}>
-                    <div class="blog-inner-box bg-dark-black" style="border: 2px solid rgba(76, 175, 80, 0.4); border-radius: 18px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: 480px; background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-bottom: 30px;">
+                    <a href="{% url 'blog_detail' blog_post.slug %}" style="text-decoration: none; display: block;">
+                        <div class="blog-inner-box bg-dark-black" style="border: 2px solid rgba(76, 175, 80, 0.4); border-radius: 18px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: 480px; background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-bottom: 30px; cursor: pointer;">
                         <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--accent-green));"></div>
-                        <div style="position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.95), rgba(102, 187, 106, 0.9)); color: #FFFFFF; padding: 6px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; z-index: 3; box-shadow: 0 3px 10px rgba(76, 175, 80, 0.4); backdrop-filter: blur(5px);">
-                            <i class="{{ blog_post.get_category_display_with_icon.icon }}" style="margin-right: 4px;"></i>{{ blog_post.get_category_display_with_icon.name|upper }}
-                        </div>
+
                         <div style="position: absolute; top: 12px; left: 12px; width: 4px; height: 4px; background: var(--accent-green); border-radius: 50%; box-shadow: 0 0 8px var(--accent-green); z-index: 1;"></div>
                         <figure class="mb-0" style="position: relative; overflow: hidden; height: 180px;">
                             {% if blog_post.featured_image %}
@@ -2530,27 +2746,59 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#" style="text-decoration: none;">
-                                <h4 style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.4; margin-bottom: 12px; transition: color 0.3s ease; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">{{ blog_post.title }}</h4>
-                            </a>
+                            <h4 style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.4; margin-bottom: 12px; transition: color 0.3s ease; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">{{ blog_post.title }}</h4>
                             <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; flex-grow: 1;">{{ blog_post.excerpt }}</p>
                             <div class="posted-details" style="border-top: 1px solid rgba(76, 175, 80, 0.4); padding-top: 15px; margin-top: auto;">
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
                                     <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px; font-weight: 500;">
                                         <i class="fas fa-calendar-alt" style="color: var(--accent-green); font-size: 0.75rem;"></i> {{ blog_post.published_at|date:"M d, Y" }}
                                     </span>
-                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px; font-weight: 500;">
-                                        <i class="fas fa-comments" style="color: var(--accent-green); font-size: 0.75rem;"></i> {{ blog_post.comments_count }} Comments
-                                    </span>
+                                    <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
                                 </div>
                             </div>
                         </div>
                         <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green)); border-radius: 0 0 18px 18px;"></div>
                         <div style="position: absolute; top: 60%; right: -30px; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.3), transparent); transform: rotate(-45deg);"></div>
                     </div>
+                    </a>
                 </div>
                 {% endfor %}
             </div>
+            
+            <!-- View All Insights Button -->
+            <div class="row mt-5">
+                <div class="col-12 text-center" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
+                    <a href="{% url 'blog_list' %}" class="view-all-insights-btn" style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: #FFFFFF; padding: 15px 40px; border-radius: 50px; text-decoration: none; display: inline-flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3); border: 2px solid transparent; position: relative; overflow: hidden;">
+                        <i class="fas fa-newspaper" style="font-size: 1.2rem; z-index: 2; position: relative;"></i>
+                        <span style="z-index: 2; position: relative;">View All Insights</span>
+                        <i class="fas fa-arrow-right" style="font-size: 1rem; z-index: 2; position: relative; transition: transform 0.3s ease;"></i>
+                        <div class="btn-glow" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent); opacity: 0; transition: opacity 0.3s ease;"></div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Add button hover effects -->
+            <style>
+                .view-all-insights-btn:hover {
+                    transform: translateY(-3px);
+                    box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+                    color: #FFFFFF !important;
+                    text-decoration: none;
+                }
+                
+                .view-all-insights-btn:hover .btn-glow {
+                    opacity: 1;
+                }
+                
+                .view-all-insights-btn:hover .fa-arrow-right {
+                    transform: translateX(3px);
+                }
+                
+                .view-all-insights-btn:active {
+                    transform: translateY(-1px);
+                }
+            </style>
+
         </div>
     </section>
     
@@ -2562,9 +2810,8 @@
         <div class="wrapper2">
             <!-- Section Title -->
             <div class="generic-title text-center" style="margin-bottom: 70px; position: relative;">
-                <span data-aos="fade-up" data-aos-duration="600" style="color: var(--accent-green); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; position: relative; display: inline-block; padding-bottom: 15px;">
+                <span data-aos="fade-up" data-aos-duration="600" style="color: var(--accent-green); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; position: relative; display: inline-block;">
                     MEDIA COVERAGE
-                    <span style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 2px; background: var(--accent-green);"></span>
                 </span>
                 <h2 data-aos="fade-up" data-aos-duration="600" style="color: #FFFFFF; margin: 25px 0 20px 0; font-size: 3.2rem; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">In the Spotlight</h2>
                 <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.85); max-width: 650px; margin: 0 auto; line-height: 1.6;">
@@ -2580,23 +2827,24 @@
                     <div class="swiper-wrapper">
                         <!-- LeadsOnTrees -->
                         <div class="swiper-slide">
-                            <a href="https://leadontrees.com/article" target="_blank" style="text-decoration: none;">
-                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 20px; border: 1px solid rgba(76, 175, 80, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden; height: 330px; display: flex; flex-direction: column;">
+                            <a href="https://www.leadsontrees.com/" target="_blank" style="text-decoration: none;">
+                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; height: 240px; display: flex; flex-direction: column;">
                                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-green), transparent);"></div>
-                                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                        <h4 style="color: #FFFFFF; margin: 0;">LeadsOnTrees</h4>
-                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 12px; font-size: 0.8rem; font-weight: 500;">Recent</span>
+                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                        <img src="{% static 'logo/leads_on_trees_logo-removebg-preview.png' %}" alt="LeadsOnTrees" style="height: 24px; width: auto; max-width: 30px; margin-right: 35px; object-fit: contain; flex-shrink: 0;">
+                                        <h4 style="color: #FFFFFF; margin: 0 0 0 15px; font-size: 1.1rem;">LeadsOnTrees</h4>
+                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 4px 10px; border-radius: 15px; margin-left: 10px; font-size: 0.75rem; font-weight: 500;">Recent</span>
                         </div>
                                     <div style="flex-grow: 1;">
-                                        <p style="color: rgba(255, 255, 255, 0.9);">
+                                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; line-height: 1.4;">
                                             SegriTech secures $100,000 in pre-seed funding to scale AI-powered grading solutions for fruits and vegetables—highlighting plans to improve AI accuracy and reach new markets.
                                         </p>
                                     </div>
-                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px;">
-                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem;">
-                                            <i class="fas fa-clock" style="margin-right: 8px;"></i>2024
+                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px;">
+                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">
+                                            <i class="fas fa-clock" style="margin-right: 6px;"></i>2024
                                 </span>
-                                        <span style="color: var(--accent-green); font-size: 0.9rem; font-weight: 500;">Read More →</span>
+                                        <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
                             </div>
                                 </div>
                             </a>
@@ -2604,47 +2852,49 @@
                 
                         <!-- New Indian Express -->
                         <div class="swiper-slide">
-                            <a href="https://www.newindianexpress.com/cities/hyderabad/2024/jan/16/hyderabads-startup-ecosystem-founders-share-challenges-growth-and-aspirations-for-the-citys-future-2645123.html" target="_blank" style="text-decoration: none;">
-                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 20px; border: 1px solid rgba(76, 175, 80, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden; height: 330px; display: flex; flex-direction: column;">
+                            <a href="https://www.newindianexpress.com/cities/hyderabad/2025/Jan/16/hyderabads-startup-ecosystem-founders-share-challenges-growth-and-aspirations-for-the-citys-future" target="_blank" style="text-decoration: none;">
+                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; height: 240px; display: flex; flex-direction: column;">
                                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-green), transparent);"></div>
-                                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                        <h4 style="color: #FFFFFF; margin: 0;">New Indian Express</h4>
-                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 12px; font-size: 0.8rem; font-weight: 500;">Founder Spotlight</span>
+                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                        <img src="{% static 'logo/The-New-Indian-Express-Logo-removebg-preview.png' %}" alt="News Express" style="height: 24px; width: auto; max-width: 30px; margin-right: 35px; object-fit: contain; flex-shrink: 0;">
+                                        <h4 style="color: #FFFFFF; margin: 0 0 0 15px; font-size: 1.1rem;">News Express</h4>
+                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 4px 10px; border-radius: 15px; margin-left: 10px; font-size: 0.75rem; font-weight: 500;">Hyderabad Deep Tech Startup Founders</span>
                                     </div>
                                     <div style="flex-grow: 1;">
-                                        <p style="color: rgba(255, 255, 255, 0.9);">
+                                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; line-height: 1.4;">
                                             Hetendra Singh featured among Hyderabad's prominent deep-tech startup founders
                                         </p>
                                     </div>
-                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px;">
-                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem;">
-                                            <i class="fas fa-clock" style="margin-right: 8px;"></i>Jan 2024
+                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px;">
+                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">
+                                            <i class="fas fa-clock" style="margin-right: 6px;"></i>Jan 2025
                                         </span>
-                                        <span style="color: var(--accent-green); font-size: 0.9rem; font-weight: 500;">Read More →</span>
+                                        <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
                                 </div>
                             </div>
                         </a>
                         </div>
 
-                        <!-- Hindu BusinessLine -->
+                        <!-- PR Newswire -->
                         <div class="swiper-slide">
-                            <a href="https://www.thehindubusinessline.com/news/cie-iiith-showcases-12-deep-tech-start-ups-at-demoday/article67892388.ece" target="_blank" style="text-decoration: none;">
-                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 20px; border: 1px solid rgba(76, 175, 80, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden; height: 330px; display: flex; flex-direction: column;">
+                            <a href="https://www.prnewswire.com/in/news-releases/12-startups-pitched-to-50-investment-funds-at-cie-iiit-hyderabads-demo-day-301760618.html" target="_blank" style="text-decoration: none;">
+                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; height: 240px; display: flex; flex-direction: column;">
                                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-green), transparent);"></div>
-                                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                        <h4 style="color: #FFFFFF; margin: 0;">Hindu BusinessLine</h4>
-                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 12px; font-size: 0.8rem; font-weight: 500;">Demo Day</span>
+                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                        <img src="{% static 'logo/hindu_business_line-removebg-preview (1).png' %}" alt="PR Newswire" style="height: 24px; width: auto; max-width: 30px; margin-right: 35px; object-fit: contain; flex-shrink: 0;">
+                                        <h4 style="color: #FFFFFF; margin: 0 0 0 15px; font-size: 1.1rem;">PR Newswire</h4>
+                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 4px 10px; border-radius: 15px; margin-left: 10px; font-size: 0.75rem; font-weight: 500;">Demo Day</span>
                                     </div>
                                     <div style="flex-grow: 1;">
-                                        <p style="color: rgba(255, 255, 255, 0.9);">
-                                            SegriTech showcased at CIE-IIITH Demo Day with 12 deep-tech startups
+                                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; line-height: 1.4;">
+                                            SegriTech featured at CIE-IIIT Hyderabad's Demo Day, pitching to 50+ investment funds among 12 startups.
                                         </p>
                                     </div>
-                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px;">
-                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem;">
-                                            <i class="fas fa-clock" style="margin-right: 8px;"></i>2024
+                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px;">
+                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">
+                                            <i class="fas fa-clock" style="margin-right: 6px;"></i>2024
                                         </span>
-                                        <span style="color: var(--accent-green); font-size: 0.9rem; font-weight: 500;">Read More →</span>
+                                        <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
                                 </div>
                             </div>
                         </a>
@@ -2653,22 +2903,23 @@
                         <!-- StartUp Hyderabad -->
                         <div class="swiper-slide">
                             <a href="https://startuphyderabad.com/cie-iith-onboards-9-startups-for-its-accelerator-cohorts/" target="_blank" style="text-decoration: none;">
-                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 20px; border: 1px solid rgba(76, 175, 80, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.2); transition: all 0.3s ease; position: relative; overflow: hidden; height: 330px; display: flex; flex-direction: column;">
+                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; height: 240px; display: flex; flex-direction: column;">
                                     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-green), transparent);"></div>
-                                    <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                        <h4 style="color: #FFFFFF; margin: 0;">StartUp Hyderabad</h4>
-                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 12px; font-size: 0.8rem; font-weight: 500;">Accelerator</span>
+                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                        <img src="{% static 'logo/startup_hyd_logo-removebg-preview.png' %}" alt="StartUp Hyderabad" style="height: 24px; width: auto; max-width: 30px; margin-right: 35px; object-fit: contain; flex-shrink: 0;">
+                                        <h4 style="color: #FFFFFF; margin: 0 0 0 15px; font-size: 1.1rem;">StartUp Hyderabad</h4>
+                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 4px 10px; border-radius: 15px; margin-left: 10px; font-size: 0.75rem; font-weight: 500;">Accelerator</span>
                                     </div>
                                     <div style="flex-grow: 1;">
-                                        <p style="color: rgba(255, 255, 255, 0.9);">
+                                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; line-height: 1.4;">
                                             CIE-IITH onboards 9 startups including SegriTech for Avishkar cohort
                                         </p>
                                     </div>
-                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px;">
-                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem;">
-                                            <i class="fas fa-clock" style="margin-right: 8px;"></i>2024
+                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px;">
+                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">
+                                            <i class="fas fa-clock" style="margin-right: 6px;"></i>2024
                                         </span>
-                                        <span style="color: var(--accent-green); font-size: 0.9rem; font-weight: 500;">Read More →</span>
+                                        <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
                                 </div>
                             </div>
                         </a>
@@ -2724,8 +2975,8 @@
             wrapper.innerHTML = slidesHTML;
 
             const swiper = new Swiper(".mediaSwiper", {
-                slidesPerView: 3,
-                spaceBetween: 20,
+                slidesPerView: 'auto',
+                spaceBetween: 30,
                 loop: true,
                 speed: 8000,
                 allowTouchMove: false,
@@ -2741,16 +2992,16 @@
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 1,
-                        spaceBetween: 10,
+                        slidesPerView: 'auto',
+                        spaceBetween: 20,
                     },
                     768: {
-                        slidesPerView: 2,
-                        spaceBetween: 15,
+                        slidesPerView: 'auto',
+                        spaceBetween: 25,
                     },
                     1024: {
-                        slidesPerView: 3,
-                        spaceBetween: 20,
+                        slidesPerView: 'auto',
+                        spaceBetween: 30,
                     }
                 },
                 on: {
@@ -2801,90 +3052,10 @@
         });
                 </script>
     
-    <!-- footer section-->
-    <section class="footer-main-sec w-100 float-left bg-dark-black" style="margin: 0 !important; padding: 30px 0 !important;">
-        <div class="wrapper2">
-            <div class="footer-inner-section" style="display: grid; grid-template-columns: 2fr 1fr 1.5fr 2fr; gap: 30px; align-items: start; margin-bottom: 0;">
-                <style>
-                    @media (max-width: 768px) {
-                        .footer-inner-section {
-                            grid-template-columns: 1fr !important;
-                            gap: 30px !important;
-                            text-align: center !important;
-                        }
-                    }
-                    @media (max-width: 992px) and (min-width: 769px) {
-                        .footer-inner-section {
-                            grid-template-columns: 1fr 1fr !important;
-                            gap: 30px !important;
-                        }
-                    }
-                </style>
-                <div class="footer-logo footer-box" style="padding: 15px;">
-                    <a href="{% url 'home' %}">
-                        <figure style="margin-bottom: 10px; height: auto; display: flex; align-items: center;">
-                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height:250px; width: auto; object-fit: contain;">
-                        </figure>
-                    </a>
-                    <p class="mb-1" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Copyright © 2023 SegriTech.</p>
-                    <p class="mb-3" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All Rights Reserved.</p>
-                    <div style="margin-top: 15px;">
-                        <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Social Media</span>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://www.facebook.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram"></i></a>
-                            <a href="https://pk.linkedin.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-box" style="padding: 15px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">About</h4>
-                    <ul class="list-unstyled" style="margin: 0;">
-                        <li style="margin-bottom: 8px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">About Company</a></li>
-                        <li style="margin-bottom: 8px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Products</a></li>
-                        <li style="margin-bottom: 8px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Services</a></li>
-                        <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Career Opportunities</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box address-box" style="padding: 15px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Address</h4>
-                    <ul class="list-unstyled" style="margin: 0;">
-                        <li style="margin-bottom: 15px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;">
-                            <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            551 Swanston Street,<br>
-                            <span style="margin-left: 25px;">Melbourne, Victoria 3053 Australia</span>
-                        </li>
-                        <li style="margin-bottom: 12px;">
-                            <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            <a href="tel:+61383766284" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">+61 3 8376 6284</a>
-                        </li>
-                        <li class="mb-0">
-                            <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            <a href="mailto:info@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">info@segritech.com</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-box footer-form-box" style="padding: 30px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Newsletter Signup</h4>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; border-radius: 25px; overflow: hidden; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
-                            <input type="text" placeholder="Enter Your Email Address" style="flex: 1; background: transparent; border: none; padding: 12px 15px; color: white; font-size: 0.9rem; outline: none;">
-                            <button style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; border: none; padding: 12px 20px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">Send</button>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.8rem;">
-                        <input type="checkbox" id="policy" name="policy" style="margin-top: 2px;">
-                        <label for="policy" style="color: rgba(255,255,255,0.8); line-height: 1.4;">
-                            I agree to the <a href="#" style="color: var(--accent-green); text-decoration: none;">Privacy Policy</a>.
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a id="button" class="show"></a>
-    <!-- footer section-->
+    <!-- Footer -->
+    {% include 'includes/footer.html' %}
+    
+
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -2898,19 +3069,7 @@
         $('.loader-mask').delay(350).fadeOut('slow');
         AOS.init();
         });
-        var btn = $('#button');         
-         $(window).scroll(function() {
-           if ($(window).scrollTop() > 300) {
-           btn.addClass('show');
-         }
-          else {
-           btn.removeClass('show');
-         }
-         });
-         btn.on('click', function(e) {
-         e.preventDefault();
-         $('html, body').animate({scrollTop:0}, '300');
-       });
+
        window.addEventListener('load',function(){
          document.querySelector('body').classList.add("loaded")  
        });
@@ -3350,11 +3509,25 @@
             
             // Set up DRACOLoader for compressed models
             const dracoLoader = new THREE.DRACOLoader();
-            dracoLoader.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.140.0/examples/js/libs/draco/');
+            dracoLoader.setDecoderPath('https://unpkg.com/three@0.146.0/examples/js/libs/draco/');
             loader.setDRACOLoader(dracoLoader);
+            console.log('DRACOLoader configured for compressed models');
             
-            const modelPath = "{% static 'models/main_assembly_final.glb' %}";
-            console.log('Attempting to load model from:', modelPath);
+            const modelPath = "{% static 'models/main_assembly_5.glb' %}";
+            console.log('Attempting to load main_assembly_5.glb from:', modelPath);
+            
+            // Test if the model file is accessible
+            fetch(modelPath, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('✓ Model file is accessible, size:', response.headers.get('content-length'), 'bytes');
+                    } else {
+                        console.error('✗ Model file not accessible, status:', response.status);
+                    }
+                })
+                .catch(error => {
+                    console.error('✗ Error checking model file:', error);
+                });
             
             loader.load(
                 modelPath,
@@ -3445,8 +3618,9 @@
                 },
                 function(error) {
                     console.error('Error loading GLB model:', error);
+                    console.error('Model path was:', modelPath);
                     if (loadingIndicator) {
-                        loadingIndicator.innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> Error loading 3D model: ' + error.message + '</div>';
+                        loadingIndicator.innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> Error loading 3D model<br><small>' + error.message + '</small></div>';
                     }
                 }
             );
@@ -3461,6 +3635,14 @@
             
             // Start render loop
             animate();
+            
+            // Add timeout fallback
+            setTimeout(function() {
+                if (loadingIndicator && loadingIndicator.style.display !== 'none') {
+                    console.warn('3D model loading timeout - showing fallback message');
+                    loadingIndicator.innerHTML = '<div style="color: #ffa726;"><i class="fas fa-clock"></i> 3D model is taking longer to load...<br><small>Please check your internet connection</small></div>';
+                }
+            }, 10000); // 10 second timeout
         }
         
         function resetView() {
@@ -3507,6 +3689,8 @@
             }
         }
         
+
+        
         function onWindowResize() {
             const container = document.getElementById('modelCanvas');
             camera.aspect = container.clientWidth / container.clientHeight;
@@ -3531,48 +3715,40 @@
             init3DModel();
         });
         
-        // Fallback initialization on window load (with timeout)
-        window.addEventListener('load', function() {
-            console.log('Window loaded, checking for Three.js libraries...');
-            
-            // Function to check if all libraries are loaded
-            function checkLibraries() {
-                console.log('THREE:', typeof THREE);
-                console.log('THREE.GLTFLoader:', typeof THREE.GLTFLoader);
-                console.log('THREE.DRACOLoader:', typeof THREE.DRACOLoader);
-                console.log('THREE.OrbitControls:', typeof THREE.OrbitControls);
-                
-                if (typeof THREE === 'undefined') {
-                    console.error('THREE.js not available');
-                    document.getElementById('loadingIndicator').innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> THREE.js not loaded</div>';
-                    return false;
-                }
-                if (typeof THREE.GLTFLoader === 'undefined') {
-                    console.error('GLTFLoader not available');
-                    document.getElementById('loadingIndicator').innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> GLTFLoader not loaded</div>';
-                    return false;
-                }
-                if (typeof THREE.DRACOLoader === 'undefined') {
-                    console.error('DRACOLoader not available');
-                    document.getElementById('loadingIndicator').innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> DRACOLoader not loaded</div>';
-                    return false;
-                }
-                if (typeof THREE.OrbitControls === 'undefined') {
-                    console.error('OrbitControls not available');
-                    document.getElementById('loadingIndicator').innerHTML = '<div style="color: #ff6b6b;"><i class="fas fa-exclamation-triangle"></i> OrbitControls not loaded</div>';
-                    return false;
-                }
-                return true;
-            }
-            
-            // Fallback with retries (only if modules haven't loaded yet)
-            setTimeout(function() {
-                if (!window.hasModelInitialized && checkLibraries()) {
-                    console.log('Fallback: All Three.js components loaded, initializing...');
-                    init3DModel();
-                }
-            }, 3000);
-        });
+                 // Ultimate fallback - show placeholder if 3D fails to load after 8 seconds
+         setTimeout(function() {
+             const loadingIndicator = document.getElementById('loadingIndicator');
+             if (loadingIndicator && loadingIndicator.style.display !== 'none') {
+                 console.warn('3D model (main_assembly_5.glb) failed to load, showing fallback content');
+                 loadingIndicator.innerHTML = `
+                     <div style="color: #4CAF50; text-align: center; padding: 40px;">
+                         <i class="fas fa-cube" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.7;"></i>
+                         <h3 style="color: #fff; margin-bottom: 15px;">Main Assembly 5 - Sorting Machine</h3>
+                         <p style="color: rgba(255,255,255,0.8); margin-bottom: 20px;">3D Model Preview (main_assembly_5.glb)</p>
+                         <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; border: 1px solid rgba(76, 175, 80, 0.3);">
+                             <small style="color: rgba(255,255,255,0.7);">Interactive 3D model temporarily unavailable</small><br>
+                             <small style="color: rgba(255,255,255,0.6);">Contact us for a live demonstration of our main assembly</small>
+                         </div>
+                     </div>
+                 `;
+                 
+                 // Show the model controls as static buttons
+                 const modelControls = document.getElementById('modelControls');
+                 if (modelControls) {
+                     modelControls.style.display = 'flex';
+                     modelControls.innerHTML = `
+                         <button class="model-control-btn" onclick="window.location.reload()" 
+                                 style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1)); border: 2px solid var(--primary-green); color: white; padding: 14px 28px; border-radius: 30px; backdrop-filter: blur(15px); font-size: 1rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);">
+                             <i class="fas fa-refresh"></i> Retry Loading
+                         </button>
+                         <a href="{% url 'contact' %}" class="model-control-btn" 
+                            style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1)); border: 2px solid var(--primary-green); color: white; padding: 14px 28px; border-radius: 30px; backdrop-filter: blur(15px); font-size: 1rem; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3); text-decoration: none; display: inline-block;">
+                             <i class="fas fa-phone"></i> Contact Us
+                         </a>
+                     `;
+                 }
+             }
+         }, 8000); // 8 second ultimate fallback
     </script>
 
     <!-- JavaScript Dependencies -->
@@ -3581,6 +3757,268 @@
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
+
+    <!-- Newsletter Form Styles -->
+    <style>
+        /* Force newsletter form visibility and functionality */
+        #newsletterForm {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+        }
+        
+        #newsletterEmail {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 12px 16px !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            border-radius: 6px !important;
+            background: rgba(255,255,255,0.1) !important;
+            color: white !important;
+            font-size: 14px !important;
+            outline: none !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            -webkit-appearance: textfield !important;
+            -moz-appearance: textfield !important;
+            appearance: textfield !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterEmail:focus {
+            border-color: #4CAF50 !important;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3) !important;
+            background: rgba(255,255,255,0.2) !important;
+        }
+        
+        #newsletterEmail::placeholder {
+            color: rgba(255, 255, 255, 0.8) !important;
+            opacity: 1 !important;
+        }
+        
+        #newsletterSubmit {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            margin-top: 12px !important;
+            padding: 12px 16px !important;
+            background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterSubmit:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        #policy {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 16px !important;
+            height: 16px !important;
+            margin: 0 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            appearance: checkbox !important;
+            -webkit-appearance: checkbox !important;
+            -moz-appearance: checkbox !important;
+            background: white !important;
+            border: 1px solid #ccc !important;
+        }
+        
+        #policy:checked {
+            background: #4CAF50 !important;
+            border-color: #4CAF50 !important;
+        }
+        
+        label[for="policy"] {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            color: rgba(255,255,255,0.9) !important;
+            line-height: 1.4 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            margin-left: 8px !important;
+            font-size: 13px !important;
+        }
+        
+        #newsletterMessage {
+            display: none;
+            position: relative !important;
+            z-index: 10000 !important;
+            margin-top: 10px !important;
+            padding: 10px !important;
+            border-radius: 4px !important;
+        }
+        
+        /* Override any conflicting styles */
+        .footer-form-box * {
+            pointer-events: auto !important;
+        }
+        
+        .footer-form-box input,
+        .footer-form-box button,
+        .footer-form-box label {
+            pointer-events: auto !important;
+            z-index: 10000 !important;
+        }
+        
+
+    </style>
+
+    <!-- Newsletter Signup Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM Content Loaded');
+        const form = document.getElementById('newsletterForm');
+        const messageDiv = document.getElementById('newsletterMessage');
+        const emailInput = document.getElementById('newsletterEmail');
+        
+        // Debug form elements
+        console.log('Newsletter form elements check:');
+        console.log('Form found:', !!form);
+        console.log('Email input found:', !!emailInput);
+        console.log('Message div found:', !!messageDiv);
+        
+        if (emailInput) {
+            console.log('Email input styles:', window.getComputedStyle(emailInput).display);
+            console.log('Email input visible:', emailInput.offsetWidth > 0 && emailInput.offsetHeight > 0);
+        }
+        
+        console.log('Form element:', form);
+        console.log('Message div:', messageDiv);
+        console.log('Email input:', emailInput);
+        
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                console.log('Form submitted');
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                const submitButton = document.getElementById('newsletterSubmit');
+                const policyCheckbox = document.getElementById('policy');
+                
+                console.log('Email:', email);
+                console.log('Policy checked:', policyCheckbox.checked);
+                
+                // Reset message styling
+                messageDiv.style.display = 'none';
+                messageDiv.style.backgroundColor = '';
+                messageDiv.style.color = '';
+                messageDiv.textContent = '';
+                
+                // Validate email
+                if (!email) {
+                    showMessage('Please enter your email address.', false);
+                    return;
+                }
+                
+                // Validate policy checkbox
+                if (!policyCheckbox.checked) {
+                    showMessage('Please accept the Privacy Policy to continue.', false);
+                    return;
+                }
+                
+                // Disable form while processing
+                submitButton.disabled = true;
+                emailInput.disabled = true;
+                policyCheckbox.disabled = true;
+                submitButton.textContent = 'Subscribing...';
+                
+                try {
+                    // Get CSRF token from the form
+                    const csrftoken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+                    console.log('CSRF token:', csrftoken ? 'Found' : 'Not found');
+                    
+                    console.log('Sending request to /newsletter/signup/');
+                    
+                    // Make the API call
+                    const response = await fetch('/newsletter/signup/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: new URLSearchParams({
+                            'email': email,
+                            'csrfmiddlewaretoken': csrftoken
+                        })
+                    });
+                    
+                    console.log('Response status:', response.status);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    console.log('Response data:', data);
+                    
+                    if (data.success) {
+                        showMessage(data.message, true);
+                        form.reset();
+                    } else {
+                        showMessage(data.message, false);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showMessage('An error occurred. Please try again later.', false);
+                } finally {
+                    // Re-enable form
+                    submitButton.disabled = false;
+                    emailInput.disabled = false;
+                    policyCheckbox.disabled = false;
+                    submitButton.textContent = 'Subscribe';
+                }
+            });
+        }
+        
+        function showMessage(message, isSuccess) {
+            console.log('Showing message:', message, 'Success:', isSuccess);
+            messageDiv.style.display = 'block';
+            messageDiv.style.backgroundColor = isSuccess ? '#4CAF50' : '#ff6b6b';
+            messageDiv.style.color = 'white';
+            messageDiv.textContent = message;
+        }
+    });
+    
+    // Simple Testimonial Video
+    document.addEventListener('DOMContentLoaded', function() {
+        const video = document.getElementById('testimonialVideo');
+        
+        if (video) {
+            // Simple autoplay attempt
+            video.play().catch(function(error) {
+                console.log('Autoplay failed:', error);
+            });
+        }
+    });
+    </script>
 
 </body>
 

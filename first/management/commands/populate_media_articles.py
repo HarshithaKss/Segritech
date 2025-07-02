@@ -32,7 +32,7 @@ class Command(BaseCommand):
                 'category': 'founder_spotlight',
                 'icon': 'fa-newspaper',
                 'description': 'Hetendra Singh featured among Hyderabad\'s prominent deep-tech startup founders, emphasizing SegriTech\'s world\'s first compact, movable smart sorting machine.',
-                'article_url': 'https://www.newindianexpress.com/cities/hyderabad/2024/jan/16/hyderabads-startup-ecosystem-founders-share-challenges-growth-and-aspirations-for-the-citys-future-2645123.html',
+                'article_url': 'https://www.newindianexpress.com/cities/hyderabad/2025/Jan/16/hyderabads-startup-ecosystem-founders-share-challenges-growth-and-aspirations-for-the-citys-future',
                 'publication_date': date(2024, 1, 16),
                 'display_order': 2,
                 'is_featured': True,

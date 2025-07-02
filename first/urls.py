@@ -28,4 +28,11 @@ urlpatterns = [
     path('inspection-box/', views.inspection_box, name='inspection_box'),
     path('send-inquiry/', views.send_inquiry, name='send_inquiry'),
     path('newsletter/signup/', views.newsletter_signup, name='newsletter_signup'),
+    
+    # Blog URLs - Now Active!
+    path('insights/', views.blog_list, name='blog_list'),
+    path('insights/<slug:slug>/', views.blog_detail, name='blog_detail'),
+    
+    # Explore Page
+    path('explore/', views.explore_coming_soon, name='explore'),
 ]

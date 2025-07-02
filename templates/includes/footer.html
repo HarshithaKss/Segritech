@@ -1,89 +1,285 @@
 {% load static %}
-<section class="footer-main-sec w-100 float-left bg-dark-black" style="margin: 0 !important; padding: 30px 0 !important;">
+<section class="footer-main-sec w-100 float-left bg-dark-black" style="margin: 0 !important; padding: 50px 0 20px 0 !important;">
     <div class="wrapper2">
-        <div class="footer-inner-section" style="display: grid; grid-template-columns: 2fr 1fr 1.5fr 2fr; gap: 30px; align-items: start; margin-bottom: 0;">
+        <div class="footer-inner-section" style="display: grid; grid-template-columns: 1.5fr 1fr 1.2fr 1.5fr; gap: 40px; align-items: flex-start; margin-bottom: 30px;">
             <style>
+                /* Force newsletter visibility on all pages */
+                .footer-form-box, 
+                .footer-form-box *,
+                #newsletterForm,
+                #newsletterForm *,
+                #newsletterEmail,
+                #policy,
+                label[for="policy"] {
+                    display: block !important;
+                    visibility: visible !important;
+                    opacity: 1 !important;
+                }
+                
+                #newsletterEmail,
+                #newsletterSubmit {
+                    width: 100% !important;
+                }
+                
+                #policy {
+                    display: inline-block !important;
+                    width: auto !important;
+                }
+                
+                label[for="policy"] {
+                    display: inline !important;
+                }
+                
+                /* Complete footer override to fix logo cutting */
+                .footer-main-sec,
+                .footer-main-sec *,
+                .footer-main-sec .wrapper2,
+                .footer-main-sec .footer-inner-section,
+                .footer-main-sec .footer-box,
+                .footer-main-sec .footer-logo {
+                    overflow: visible !important;
+                    height: auto !important;
+                    max-height: none !important;
+                    min-height: 0 !important;
+                }
+                
+                /* Improved footer alignment */
+                .footer-box {
+                    display: flex !important;
+                    flex-direction: column !important;
+                    overflow: visible !important;
+                    height: auto !important;
+                    padding: 0 !important;
+                }
+                
+                .footer-logo.footer-box {
+                    justify-content: flex-start !important;
+                    overflow: visible !important;
+                    height: auto !important;
+                    min-height: 180px !important;
+                    position: relative !important;
+                }
+                
+                .footer-logo.footer-box figure {
+                    overflow: visible !important;
+                    height: auto !important;
+                    min-height: 160px !important;
+                    max-height: none !important;
+                    position: relative !important;
+                    z-index: 1 !important;
+                }
+                
+                .footer-main-sec .footer-inner-section {
+                    overflow: visible !important;
+                    height: auto !important;
+                    min-height: 360px !important;
+                }
+                
+                .footer-main-sec {
+                    overflow: visible !important;
+                    height: auto !important;
+                }
+                
+                /* Ensure wrapper2 doesn't constrain anything */
+                .footer-main-sec .wrapper2 {
+                    overflow: visible !important;
+                    height: auto !important;
+                    max-height: none !important;
+                }
+                
+                /* Logo specific fixes */
+                .footer-logo img {
+                    display: block !important;
+                    margin: 0 auto !important;
+                    position: relative !important;
+                    z-index: 2 !important;
+                    max-height: 300px !important;
+                    height: auto !important;
+                    width: auto !important;
+                }
+                
+                /* Hover effects */
+                .footer-box a:hover {
+                    color: var(--accent-green) !important;
+                    transform: translateX(3px);
+                }
+                
+                .footer-logo a:hover {
+                    transform: none !important;
+                }
+                
+                .footer-box a:hover i {
+                    color: #fff !important;
+                }
+                
+                /* Social media hover effects */
+                .footer-logo a[href*="facebook"]:hover,
+                .footer-logo a[href*="twitter"]:hover,
+                .footer-logo a[href*="instagram"]:hover,
+                .footer-logo a[href*="linkedin"]:hover {
+                    background: var(--accent-green) !important;
+                    color: #fff !important;
+                    transform: translateY(-3px) scale(1.1) !important;
+                    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4) !important;
+                }
+                
                 @media (max-width: 768px) {
                     .footer-inner-section {
                         grid-template-columns: 1fr !important;
                         gap: 30px !important;
                         text-align: center !important;
+                        min-height: auto !important;
+                    }
+                    
+                    .footer-box {
+                        height: auto !important;
+                    }
+                    
+                    .footer-box a {
+                        justify-content: center !important;
+                    }
+                    
+                    /* Copyright responsive */
+                    .footer-main-sec div[style*="justify-content: space-between"] {
+                        flex-direction: column !important;
+                        text-align: center !important;
+                        gap: 20px !important;
                     }
                 }
                 @media (max-width: 992px) and (min-width: 769px) {
                     .footer-inner-section {
                         grid-template-columns: 1fr 1fr !important;
                         gap: 30px !important;
+                        min-height: auto !important;
                     }
                 }
             </style>
-            <div class="footer-logo footer-box" style="padding: 15px;">
-                <a href="{% url 'home' %}">
-                    <figure style="margin-bottom: 10px; height: auto; display: flex; align-items: center;">
-                        <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height:250px; width: auto; object-fit: contain;">
-                    </figure>
-                </a>
-                <p class="mb-1" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Copyright © 2023 SegriTech.</p>
-                <p class="mb-3" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All Rights Reserved.</p>
-                <div style="margin-top: 15px;">
-                    <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Social Media</span>
-                    <div style="display: flex; gap: 10px;">
-                        <a href="https://www.facebook.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://twitter.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram"></i></a>
-                        <a href="https://pk.linkedin.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+            <div class="footer-logo footer-box" style="padding: 0 15px; height: auto !important; overflow: visible !important; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
+                <!-- Logo aligned with other headers - top aligned -->
+                <div style="margin-bottom: 15px; overflow: visible !important; height: auto !important; align-self: flex-start;">
+                    <a href="{% url 'home' %}" style="display: block; overflow: visible !important;">
+                        <figure style="margin: 0; padding: 0; height: auto !important; overflow: visible !important; display: block !important;">
+                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" 
+                                  style="max-height: 180px !important; 
+                                         width: auto !important; 
+                                         height: auto !important;
+                                         display: block !important; 
+                                         margin: 0 !important; 
+                                         object-fit: contain !important;
+                                         overflow: visible !important;
+                                         position: relative !important;
+                                         z-index: 10 !important;
+                                         vertical-align: top !important;">
+                        </figure>
+                    </a>
+                </div>
+                
+                <!-- Follow Us Section -->
+                <div style="margin-top: 20px;">
+                    <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 12px; font-size: 0.95rem;">Follow Us</span>
+                    <div style="display: flex; gap: 12px; justify-content: flex-start;">
+                        <a href="https://www.facebook.com/Segritech1/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/segri_tech" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="footer-box" style="padding: 15px;">
-                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">About</h4>
+            <div class="footer-box" style="padding: 0 15px;">
+                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid var(--accent-green); padding-bottom: 8px; display: inline-block;">About</h4>
                 <ul class="list-unstyled" style="margin: 0;">
-                    <li style="margin-bottom: 8px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">About Company</a></li>
-                    <li style="margin-bottom: 8px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Products</a></li>
-                    <li style="margin-bottom: 8px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Services</a></li>
-                    <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Career Opportunities</a></li>
+                    <li style="margin-bottom: 12px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center;"><i class="fas fa-chevron-right" style="color: var(--accent-green); margin-right: 8px; font-size: 0.7rem;"></i>About Company</a></li>
+                    <li style="margin-bottom: 12px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center;"><i class="fas fa-chevron-right" style="color: var(--accent-green); margin-right: 8px; font-size: 0.7rem;"></i>Our Products</a></li>
+                    <li style="margin-bottom: 12px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center;"><i class="fas fa-chevron-right" style="color: var(--accent-green); margin-right: 8px; font-size: 0.7rem;"></i>Our Services</a></li>
+                    <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center;"><i class="fas fa-chevron-right" style="color: var(--accent-green); margin-right: 8px; font-size: 0.7rem;"></i>Career Opportunities</a></li>
                 </ul>
             </div>
-            <div class="footer-box address-box" style="padding: 15px;">
-                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Address</h4>
+            <div class="footer-box address-box" style="padding: 0 15px;">
+                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid var(--accent-green); padding-bottom: 8px; display: inline-block;">Contact Info</h4>
                 <ul class="list-unstyled" style="margin: 0;">
-                    <li style="margin-bottom: 15px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;">
-                        <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                        551 Swanston Street,<br>
-                        <span style="margin-left: 25px;">Melbourne, Victoria 3053 Australia</span>
+                    <li style="margin-bottom: 18px; color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.6;">
+                        <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 12px; width: 16px; font-size: 1rem;"></i>
+                        346, Doyens Township,<br>
+                        <span style="margin-left: 28px;">Gachibowli Road, Serilingampalli,</span><br>
+                        <span style="margin-left: 28px;">Hyderabad, Telangana - 500019</span>
                     </li>
-                    <li style="margin-bottom: 12px;">
-                        <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                        <a href="tel:+61383766284" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">+61 3 8376 6284</a>
+                    <li style="margin-bottom: 15px;">
+                        <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 12px; width: 16px; font-size: 1rem;"></i>
+                        <a href="tel:+919358859955" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease;">+91 9358859955</a>
                     </li>
                     <li class="mb-0">
-                        <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                        <a href="mailto:info@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">info@segritech.com</a>
+                        <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 12px; width: 16px; font-size: 1rem;"></i>
+                        <a href="mailto:Hetendra@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease;">Hetendra@segritech.com</a>
                     </li>
                 </ul>
             </div>
-            <div class="footer-box footer-form-box">
-                <h4>Newsletter Signup</h4>
-                <form id="newsletterForm" class="newsletter-form">
+            <div class="footer-box footer-form-box" style="padding: 0 15px; display: block !important; visibility: visible !important; opacity: 1 !important;">
+                <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid var(--accent-green); padding-bottom: 8px; display: inline-block !important;">Newsletter</h4>
+                <form id="newsletterForm" class="newsletter-form" method="post" style="display: block !important; visibility: visible !important;">
                     {% csrf_token %}
-                    <div class="form-group position-relative mb-0">
-                        <input type="email" class="bg-light-black" id="newsletterEmail" name="email" placeholder="Enter Your Email Address" required style="width: 100%; padding: 10px; border: 1px solid rgba(255,255,255,0.2); border-radius: 4px; background: rgba(255,255,255,0.1); color: white;">
-                        <button type="submit" id="newsletterSubmit" style="margin-top: 10px; width: 100%; padding: 10px; background: var(--accent-green); color: white; border: none; border-radius: 4px; cursor: pointer;">Subscribe</button>
+                    <div class="form-group position-relative mb-0" style="display: block !important; visibility: visible !important;">
+                        <input type="email" class="bg-light-black" id="newsletterEmail" name="email" placeholder="Enter Your Email Address" required style="width: 100% !important; padding: 10px !important; border: 1px solid rgba(255,255,255,0.2) !important; border-radius: 4px !important; background: rgba(255,255,255,0.1) !important; color: white !important; display: block !important; visibility: visible !important; opacity: 1 !important;">
+                        <button type="submit" id="newsletterSubmit" style="margin-top: 10px !important; width: 100% !important; padding: 10px !important; background: var(--accent-green) !important; color: white !important; border: none !important; border-radius: 4px !important; cursor: pointer !important; display: block !important; visibility: visible !important; opacity: 1 !important;">Subscribe</button>
                         <div id="newsletterMessage" class="mt-2" style="display: none; padding: 10px; border-radius: 4px;"></div>
                     </div>
-                    <div class="mt-3">
-                        <input type="checkbox" id="policy" name="policy" required>
-                        <label for="policy" class="check-box"></label>
-                        <label for="policy" style="color: rgba(255,255,255,0.8);"> I agree to the <a href="#" style="color: var(--accent-green);">Privacy Policy</a>.</label>
+                    <div class="mt-3" style="display: flex !important; visibility: visible !important; opacity: 1 !important; margin-top: 15px !important; overflow: visible !important; white-space: nowrap !important; align-items: center !important; width: 100% !important; min-width: 280px !important;">
+                        <input type="checkbox" id="policy" name="policy" required style="display: inline-block !important; visibility: visible !important; opacity: 1 !important; width: auto !important; margin-right: 6px !important; flex-shrink: 0 !important;">
+                        <span style="color: rgba(255,255,255,0.8) !important; font-size: 0.8rem !important; white-space: nowrap !important; display: inline !important; line-height: 1 !important;">I agree to the <a href="#" style="color: var(--accent-green) !important; text-decoration: none !important; white-space: nowrap !important; display: inline !important;">Privacy Policy</a>.</span>
                     </div>
                 </form>
             </div>
         </div>
+        
+        <!-- Copyright Section -->
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; margin-top: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div>
+                    <p style="color: rgba(255,255,255,0.9); font-size: 0.95rem; margin: 0; font-weight: 500;">
+                        © 2025 SegriTech. All Rights Reserved.
+                    </p>
+                    <p style="color: rgba(255,255,255,0.6); font-size: 0.85rem; margin: 5px 0 0 0;">
+                        Innovating Agriculture Through Technology
+                    </p>
+                </div>
+                <div style="display: flex; gap: 20px; align-items: center;">
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Privacy Policy</a>
+                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Terms of Service</a>
+                    <a href="{% url 'contact' %}" style="color: var(--accent-green); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; font-weight: 500;">Contact Us</a>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
-<a id="button" class="show"></a>
+  </section>
+  
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTop" class="scroll-to-top-btn">
+    <i class="fas fa-chevron-up"></i>
+  </button>
 
-<script>
+  <script>
+// Scroll to Top Button Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollToTopBtn = document.getElementById('scrollToTop');
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+            scrollToTopBtn.classList.add('show');
+        } else {
+            scrollToTopBtn.classList.remove('show');
+        }
+    });
+    
+    // Scroll to top when button is clicked
+    scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Newsletter Form Functionality
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
     const form = document.getElementById('newsletterForm');
@@ -131,8 +327,8 @@ document.addEventListener('DOMContentLoaded', function() {
             submitButton.textContent = 'Subscribing...';
             
             try {
-                // Get CSRF token
-                const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                // Get CSRF token from the form
+                const csrftoken = form.querySelector('[name=csrfmiddlewaretoken]').value;
                 console.log('CSRF token:', csrftoken ? 'Found' : 'Not found');
                 
                 console.log('Sending request to /newsletter/signup/');
@@ -145,7 +341,8 @@ document.addEventListener('DOMContentLoaded', function() {
                         'X-CSRFToken': csrftoken
                     },
                     body: new URLSearchParams({
-                        'email': email
+                        'email': email,
+                        'csrfmiddlewaretoken': csrftoken
                     })
                 });
                 

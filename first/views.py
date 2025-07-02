@@ -7,16 +7,18 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.utils import timezone
 from .forms import ContactForm, JobApplicationForm, JobFilterForm, ProductInquiryForm
 from .models import JobPosting, JobApplication, ProductCategory, Product, ProductInquiry, BlogPost, Testimonial, MediaCoverageArticle, NewsletterSubscriber
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+import json
 
 # Create your views here.
 
 def index(request):
-    # Get published blog posts for insights section (latest 3)
-    blog_posts = BlogPost.objects.filter(is_published=True)[:3]
+    # Get featured blog posts for insights section (max 3)
+    blog_posts = BlogPost.objects.filter(is_published=True, is_featured=True).order_by('-published_at', '-created_at')[:3]
     
     # Get active testimonials for testimonials section
     testimonials = Testimonial.objects.filter(is_active=True)
@@ -39,7 +41,38 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             contact_submission = form.save()
-            messages.success(request, 'Thank you for your message! We will get back to you within 24 hours.')
+            
+            # Send email notification to admin
+            try:
+                subject = f'New Contact Form Submission: {contact_submission.subject}'
+                email_message = f"""
+New contact form submission received:
+
+Name: {contact_submission.name}
+Email: {contact_submission.email}
+Phone: {contact_submission.phone or 'Not provided'}
+Company: {contact_submission.company or 'Not provided'}
+Inquiry Type: {contact_submission.get_inquiry_type_display()}
+Subject: {contact_submission.subject}
+
+Message:
+{contact_submission.message}
+
+Submitted at: {contact_submission.created_at}
+                """
+                send_mail(
+                    subject,
+                    email_message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.ADMIN_EMAIL],
+                    fail_silently=False,
+                )
+                messages.success(request, f'Thank you, {contact_submission.name}! Your message has been received. Our team will get back to you within 24 hours.')
+            except Exception as e:
+                print(f"Failed to send contact form email: {e}")
+                # Still show success message to user, but log the error
+                messages.success(request, f'Thank you, {contact_submission.name}! Your message has been received. Our team will get back to you within 24 hours.')
+            
             return redirect('contact')
         else:
             messages.error(request, 'Please correct the errors below.')
@@ -241,7 +274,7 @@ def send_inquiry(request):
             try:
                 subject = f'New Inquiry: {product}'
                 email_message = f"""
-New inquiry received:
+New inquiry received from Inspection Box page:
 
 Product: {product}
 
@@ -253,6 +286,8 @@ Company: {company or 'Not provided'}
 
 Message:
 {message}
+
+Submitted at: {timezone.now()}
                 """
                 send_mail(
                     subject,
@@ -261,10 +296,13 @@ Message:
                     [settings.ADMIN_EMAIL],
                     fail_silently=False,
                 )
-                messages.success(request, 'Thank you for your inquiry! We will get back to you soon.')
+                print(f"Inquiry email sent successfully for {product} to {settings.ADMIN_EMAIL}")
+                messages.success(request, f'Thank you, {name}! Your inquiry about the {product} has been received. We will reach out to you soon.')
             except Exception as e:
-                print(f"Failed to send email: {e}")
-                messages.error(request, 'Sorry, there was an error sending your inquiry. Please try again later.')
+                print(f"Failed to send inquiry email: {e}")
+                print(f"Email settings - Host: {settings.EMAIL_HOST}, User: {settings.EMAIL_HOST_USER}")
+                # Still show success to user but log the error for debugging
+                messages.success(request, f'Thank you, {name}! Your inquiry about the {product} has been received. We will reach out to you soon.')
             
             return redirect('inspection_box')
         except Exception as e:
@@ -375,8 +413,96 @@ def apply_job(request, job_id):
             job.applications_count += 1
             job.save()
             
+            # Send email notifications
+            try:
+                # Email to admin/HR team
+                admin_subject = f'New Job Application: {job.title} - {application.full_name}'
+                admin_message = f"""
+New job application received for: {job.title}
+
+Applicant Details:
+Name: {application.full_name}
+Email: {application.email}
+Phone: {application.phone}
+Current Location: {application.current_location}
+Willing to Relocate: {'Yes' if application.willing_to_relocate else 'No'}
+
+Professional Information:
+Current Company: {application.current_company or 'Not provided'}
+Current Role: {application.current_role or 'Not provided'}
+Years of Experience: {application.get_years_experience_display()}
+Expected Salary: {f'₹{application.expected_salary:,} per annum' if application.expected_salary else 'Not specified'}
+Earliest Start Date: {application.earliest_start_date}
+
+Cover Letter:
+{application.cover_letter}
+
+Portfolio/LinkedIn: {application.portfolio_url or 'Not provided'}
+
+Reference:
+{f'{application.reference1_name} ({application.reference1_relation}) - {application.reference1_email}' if application.reference1_name else 'No reference provided'}
+
+Visa Sponsorship Required: {'Yes' if application.visa_sponsorship_required else 'No'}
+
+Applied at: {application.applied_at}
+
+Please review the attached resume and contact the candidate if suitable.
+                """
+                
+                send_mail(
+                    admin_subject,
+                    admin_message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [settings.ADMIN_EMAIL],
+                    fail_silently=False,
+                )
+                
+                # Confirmation email to applicant
+                applicant_subject = f'Application Received: {job.title} at SegriTech'
+                applicant_message = f"""
+Dear {application.first_name},
+
+Thank you for your interest in the {job.title} position at SegriTech!
+
+We have successfully received your application and our HR team will review it shortly. Here's a summary of your application:
+
+Position Applied For: {job.title}
+Department: {job.get_department_display()}
+Application Date: {application.applied_at.strftime('%B %d, %Y at %I:%M %p')}
+
+What's Next?
+- Our team typically reviews applications within 3-5 business days
+- If your profile matches our requirements, we'll contact you to schedule an interview
+- You can expect to hear from us within a week
+
+About SegriTech:
+SegriTech is a deep-tech agritech startup focused on transforming the way fruits and vegetables are graded and sorted at the farm level. We design advanced machinery integrated with AI-based computer vision to bring automation and transparency to the agri-value chain.
+
+If you have any questions about your application or the position, feel free to reply to this email.
+
+Best regards,
+SegriTech HR Team
+Email: {settings.ADMIN_EMAIL}
+Website: https://segritech.co.in
+
+---
+This is an automated confirmation. Please do not reply directly to this email.
+                """
+                
+                send_mail(
+                    applicant_subject,
+                    applicant_message,
+                    settings.DEFAULT_FROM_EMAIL,
+                    [application.email],
+                    fail_silently=False,
+                )
+                
+            except Exception as e:
+                print(f"Failed to send job application emails: {e}")
+                # Don't fail the application submission if email fails
+            
             messages.success(request, 
-                f'Thank you for applying to {job.title}! We will review your application and get back to you soon.')
+                f'Thank you for applying to {job.title}! We have sent a confirmation email to {application.email}. Our team will review your application and get back to you soon.')
             return redirect('job_detail', job_id=job.id)
         else:
             messages.error(request, 'Please correct the errors below.')
@@ -390,8 +516,10 @@ def apply_job(request, job_id):
     
     return render(request, 'apply_job.html', context)
 
-@require_POST
 def newsletter_signup(request):
+    if request.method != 'POST':
+        return JsonResponse({'success': False, 'message': 'Invalid request method'})
+        
     print("Newsletter signup view called")  # Debug log
     email = request.POST.get('email')
     print(f"Received email: {email}")  # Debug log
@@ -433,3 +561,46 @@ def newsletter_signup(request):
             'success': False,
             'message': 'An error occurred. Please try again later.'
         })
+
+def blog_list(request):
+    """Display all published blog posts with pagination"""
+    blog_posts = BlogPost.objects.filter(is_published=True).order_by('-published_at', '-created_at')
+    
+    # Pagination
+    paginator = Paginator(blog_posts, 6)  # Show 6 posts per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'page_obj': page_obj,
+        'total_posts': paginator.count,
+    }
+    return render(request, 'blog_list.html', context)
+
+def blog_detail(request, slug):
+    """Display individual blog post"""
+    blog_post = get_object_or_404(BlogPost, slug=slug, is_published=True)
+    
+    # If the post has an external URL but we want to display it internally,
+    # we can still show the internal content. The external URL can be shown
+    # as a "Read Original Article" link if needed.
+    
+    # Get related posts (same category, excluding current post and specific article)
+    related_posts = BlogPost.objects.filter(
+        category=blog_post.category,
+        is_published=True
+    ).exclude(id=blog_post.id).exclude(slug='list-countries-importing-fruit-vegetables-india')[:3]
+    
+    # Increment views count
+    blog_post.views_count += 1
+    blog_post.save(update_fields=['views_count'])
+    
+    context = {
+        'blog_post': blog_post,
+        'related_posts': related_posts,
+    }
+    return render(request, 'blog_detail.html', context)
+
+def explore_coming_soon(request):
+    """Explore coming soon page with meme GIF"""
+    return render(request, 'explore_coming_soon.html')

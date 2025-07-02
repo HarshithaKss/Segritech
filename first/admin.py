@@ -255,41 +255,110 @@ class JobApplicationAdmin(admin.ModelAdmin):
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'author_name', 'is_published', 'is_featured', 'views_count', 'published_at']
+    list_display = ['title', 'category', 'author_name', 'estimated_read_time', 'is_published', 'is_featured', 'views_count', 'published_at']
     list_filter = ['category', 'is_published', 'is_featured', 'created_at', 'published_at']
     search_fields = ['title', 'excerpt', 'content', 'author_name', 'tags']
     prepopulated_fields = {'slug': ('title',)}
-    list_editable = ['is_published', 'is_featured']
+    list_editable = ['is_published', 'is_featured', 'estimated_read_time']
     ordering = ['-published_at', '-created_at']
     date_hierarchy = 'published_at'
     
     fieldsets = (
-        ('Basic Information', {
-            'fields': ('title', 'slug', 'category', 'excerpt')
+        ('📝 Basic Information', {
+            'fields': ('title', 'slug', 'category', 'excerpt', 'estimated_read_time'),
+            'description': 'Essential blog post information and categorization.'
         }),
-        ('Author Information', {
-            'fields': ('author_name', 'author_title', 'author_image')
+        ('👤 Author Information', {
+            'fields': ('author_name', 'author_title', 'author_image'),
+            'description': 'Author details and profile image.'
         }),
-        ('Content', {
-            'fields': ('content', 'featured_image')
+        ('📄 Main Content', {
+            'fields': ('content', 'featured_image'),
+            'description': 'Main blog content (supports HTML) and featured image.'
         }),
-        ('SEO & Meta', {
+        ('🎨 Advanced Media & Design', {
+            'fields': ('gallery_images', 'video_url', 'content_sections'),
+            'classes': ('collapse',),
+            'description': '''
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                <h4>📸 Gallery Images Format:</h4>
+                <pre>[{"url": "/static/images/blog/chart1.png", "caption": "Sales Growth Chart", "alt": "Chart showing sales growth"}]</pre>
+                
+                <h4>📋 Content Sections Format:</h4>
+                <pre>[{"type": "text", "content": "Your text here", "style": "font-size: 18px;", "order": 1},
+ {"type": "image", "content": "/static/images/blog/image.jpg", "style": "width: 100%;", "order": 2}]</pre>
+                
+                <h4>Available Section Types:</h4>
+                <ul>
+                    <li><strong>text</strong> - Regular text content</li>
+                    <li><strong>image</strong> - Single image with optional styling</li>
+                    <li><strong>video</strong> - Embedded video (YouTube/Vimeo)</li>
+                    <li><strong>chart</strong> - Data visualization</li>
+                    <li><strong>quote</strong> - Highlighted quote block</li>
+                </ul>
+            </div>
+            '''
+        }),
+        ('💻 Custom Styling & Scripts', {
+            'fields': ('custom_css', 'custom_js'),
+            'classes': ('collapse',),
+            'description': '''
+            <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                <h4>🎨 Custom CSS Example:</h4>
+                <pre>&lt;style&gt;
+.custom-highlight {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+&lt;/style&gt;</pre>
+                
+                <h4>⚡ Custom JavaScript Example:</h4>
+                <pre>&lt;script&gt;
+document.addEventListener('DOMContentLoaded', function() {
+    // Interactive charts, animations, etc.
+    console.log('Blog post loaded!');
+});
+&lt;/script&gt;</pre>
+            </div>
+            '''
+        }),
+        ('🔗 External Link', {
+            'fields': ('external_url',),
+            'classes': ('collapse',),
+            'description': 'If provided, clicking the blog card will redirect to this external URL (e.g., LinkedIn article) instead of the local blog detail page.'
+        }),
+        ('🔍 SEO & Meta', {
             'fields': ('meta_title', 'meta_description', 'tags'),
-            'classes': ('collapse',)
+            'classes': ('collapse',),
+            'description': 'Search engine optimization and metadata.'
         }),
-        ('Publishing', {
-            'fields': ('is_published', 'is_featured', 'published_at')
+        ('📢 Publishing Settings', {
+            'fields': ('is_published', 'is_featured', 'published_at'),
+            'description': '''
+            <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                <strong>📌 Important:</strong> Featured blogs will appear on the homepage in the "SEGRITECH INSIGHTS" section. 
+                Only featured AND published blogs are shown there.
+            </div>
+            '''
         }),
-        ('Statistics', {
+        ('📊 Statistics', {
             'fields': ('views_count', 'comments_count'),
             'classes': ('collapse',)
         }),
-        ('Timestamps', {
+        ('⏰ Timestamps', {
             'fields': ('created_at', 'updated_at'),
             'classes': ('collapse',)
         }),
     )
     readonly_fields = ['created_at', 'updated_at', 'views_count']
+    
+    class Media:
+        css = {
+            'all': ['admin/css/blog_admin_custom.css']
+        }
+        js = ['admin/js/blog_admin_custom.js']
     
     actions = ['mark_as_published', 'mark_as_unpublished', 'mark_as_featured', 'unmark_as_featured']
     

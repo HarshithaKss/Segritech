@@ -133,11 +133,31 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email Configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+import ssl
+
+# Use custom email backend that handles SSL certificate issues
+EMAIL_BACKEND = 'first.email_backend.CustomSMTPBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'hetendrarathore@gmail.com'
-EMAIL_HOST_PASSWORD = 'qbtc pdel ivsz shil'
-DEFAULT_FROM_EMAIL = 'Segritech Website <hetendrarathore@gmail.com>'
-ADMIN_EMAIL = 'hetendrarathore@gmail.com'  # Email to receive inquiries
+EMAIL_USE_SSL = False  # Don't use SSL when using TLS on port 587
+
+# For security, these should be environment variables in production
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', 'hetendrarathore@gmail.com')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', 'qbtc pdel ivsz shil')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Segritech Website <hetendrarathore@gmail.com>')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'hetendrarathore@gmail.com')  # Email to receive inquiries
+
+# SSL/TLS settings for email
+EMAIL_SSL_CERTFILE = None
+EMAIL_SSL_KEYFILE = None
+EMAIL_TIMEOUT = 60
+
+# For development/testing - allows less secure apps
+# In production, use proper SSL certificates
+ssl_context = ssl.create_default_context()
+ssl_context.check_hostname = False
+ssl_context.verify_mode = ssl.CERT_NONE
+
+# Note: Make sure "Less secure app access" is enabled in Gmail settings
+# or use App Passwords (recommended) for better security

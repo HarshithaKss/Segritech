@@ -19,13 +19,10 @@ class Command(BaseCommand):
                 'category': 'Size Graders',
                 'name': 'Segritech Apple Size Grading Machine',
                 'slug': 'apple-size-grader',
-                'short_description': 'The Segritech SAGM-200 is a Made in India apple grading machine designed for farm and mandi operations. It offers precise, roller-based size grading with integrated cleaning, high durability, and portability — all tailored for Indian agricultural needs. Trusted by agri innovators and validated by experts from IIT and IIIT-H.',
-                'detailed_description': '''Segritech Apple Size Grading Machine – SAGM-200 (V1.0)
-Developed by Segritech (Tikkly Agro Solution Pvt. Ltd.)
+                'short_description': 'Compact apple grading machine with roller-based sorting system. Perfect for farms and mandis with 200-250 box/day capacity.',
+                'detailed_description': '''Made-in-India apple grading solution designed for small to medium farms. Features roller-based size separation with integrated cleaning system. Built with food-grade materials for durability and hygiene.
 
-A compact and highly efficient apple size grader built for small and medium-scale farms. Powered by a roller-based grading mechanism, the SAGM-200 ensures precise size separation for better pricing and packaging. Made from stainless steel, mild steel, and food-grade nylon, the machine offers durability, hygiene, and mobility, making it ideal for Indian farm and mandi environments. Integrated cleaning and drying functionality enhances produce quality before sorting.
-
-Portable, accurate, and built for Bharat.''',
+Key capabilities: 6-grade output, portable design, and optimized for Indian agricultural conditions.''',
                 'price_range': 'Contact for Pricing',
                 'key_features': json.dumps([
                     'Roller-based size grading system',
@@ -36,36 +33,25 @@ Portable, accurate, and built for Bharat.''',
                     'Built for Indian conditions'
                 ]),
                 'specifications': json.dumps({
-                    'Specification': 'Details',
                     'Capacity': '200-250 box per day',
-                    'Grading Method': 'Roller-Based Size Grading',
                     'Grading Output': '6 Grades',
-                    'Material of Construction': 'Stainless Steel (SS), Mild Steel (MS), Nylon',
-                    'Machine Dimensions': '10 ft (L) x 4 ft (W) x 4 ft (H)',
-                    'Functionality': '1. Cleaning & Drying\n2. Size-Based Grading',
-                    'Power Requirement': '1.5 kW/HP, Single Phase/3 Phase',
-                    'Voltage': '[220V/440V, 50Hz]',
-                    'Drive Mechanism': 'Motorized rollers with adjustable RPM',
-                    'Feeding Mechanism': 'Roller-fed',
-                    'Mobility': 'Portable with wheels',
-                    'Noise Level': '< 70 dB'
+                    'Dimensions': '10 ft (L) x 4 ft (W) x 4 ft (H)',
+                    'Power': '1.5 kW, Single/3 Phase',
+                    'Material': 'Stainless Steel, Food-grade Nylon',
+                    'Features': 'Cleaning & Grading, Portable Design'
                 }),
                 'applications': json.dumps([
-                    'Farm-level collection centers',
-                    'Small and medium Farmers/FPOs',
+                    'Small to medium farms',
                     'Fruit packhouses',
-                    'Cold storage units',
-                    'Exporters and Retailers'
+                    'Agricultural cooperatives'
                 ]),
                 'benefits': json.dumps([
-                    'Accurate size grading',
                     'Better market pricing',
-                    'Lower labor costs',
-                    'Easy maintenance',
-                    'Space-efficient design',
-                    'Made for Indian conditions'
+                    'Reduced labor costs',
+                    'Consistent grading quality',
+                    'Portable and easy to use'
                 ]),
-                'lead_time': '2-3 weeks',
+                'lead_time': '',
                 'is_featured': True,
                 'is_active': True,
                 'meta_title': 'Segritech Apple Size Grading Machine | SAGM-200',
@@ -110,15 +96,15 @@ Portable, accurate, and built for Bharat.''',
             # Quality Graders
             {
                 'category': 'Quality Graders',
-                'name': 'Segritech Minisort Optical Pomegranate Grading Machine',
-                'slug': 'pomegranate-grader',
-                'short_description': 'The Segritech SPGM-2000 is a high-capacity, AI-based pomegranate grader that processes up to 2 tons per hour. It uses camera vision and smart algorithms to detect size, shape, color, and defects, ensuring export-grade consistency. Built for Indian farms and packhouses with rugged construction and rapid support.',
-                'detailed_description': '''Segritech Minisort Optical Pomegranate Grading Machine – SPGM-2000 (V1.0)
+                'name': 'Multifruit Optical Grader',
+                'slug': 'multifruit-optical-grader',
+                'short_description': 'The Segritech Multifruit Optical Grader is a high-capacity, AI-based sorting machine that processes up to 2 tons per hour. It uses advanced camera vision and smart algorithms to detect size, shape, color, and defects across multiple fruit varieties, ensuring export-grade consistency. Built for Indian farms and packhouses with rugged construction and rapid support.',
+                'detailed_description': '''Segritech Multifruit Optical Grader – MOG-2000 (V1.0)
 Developed by Segritech (Tikkly Agro Solution Pvt. Ltd.)
 
-The Segritech Minisort is an advanced AI-powered grading machine designed for high-volume pomegranate grading. With the capacity to process up to 2 tons per hour, it grades pomegranates based on size, shape, color, and skin defects using camera vision and AI synchronization. Ideal for packhouses, mandis, exporters, and farmer cooperatives, the machine ensures export-grade sorting quality with real-time reporting. It's robustly built using stainless steel, mild steel, aluminum, and food-grade plastics to withstand demanding environments.
+The Segritech Multifruit Optical Grader is an advanced AI-powered grading machine designed for high-volume fruit sorting across multiple varieties including pomegranates, apples, oranges, and other round fruits. With the capacity to process up to 2 tons per hour, it grades fruits based on size, shape, color, and skin defects using camera vision and AI synchronization. Ideal for packhouses, mandis, exporters, and farmer cooperatives, the machine ensures export-grade sorting quality with real-time reporting. It's robustly built using stainless steel, mild steel, aluminum, and food-grade plastics to withstand demanding environments.
 
-Efficient, accurate, and engineered for Indian agricultural needs.''',
+Efficient, accurate, and engineered for Indian agricultural needs with multi-fruit versatility.''',
                 'price_range': 'Contact for Pricing',
                 'key_features': json.dumps([
                     'AI-powered defect detection',
@@ -130,6 +116,7 @@ Efficient, accurate, and engineered for Indian agricultural needs.''',
                 ]),
                 'specifications': json.dumps({
                     'Capacity': '2 tons per hour (2000 kg/hour)',
+                    'Fruit Types': 'Pomegranates, apples, oranges, citrus fruits, and other round fruits',
                     'Grading Parameters': 'Size, shape, color, and external defects',
                     'Technology': 'AI, camera vision, roller assist, and conveyor sync',
                     'Output Grades': '5 to 6 grades (customizable)',
@@ -156,11 +143,11 @@ Efficient, accurate, and engineered for Indian agricultural needs.''',
                     'Customizable grading',
                     'Easy maintenance'
                 ]),
-                'lead_time': '3-4 weeks',
+                'lead_time': '',
                 'is_featured': True,
                 'is_available': True,
-                'meta_title': 'Segritech Minisort Optical Pomegranate Grading Machine | SPGM-2000',
-                'meta_description': 'Advanced AI-powered pomegranate grading machine with 2 ton/hour capacity. Features camera vision, defect detection, and export-grade sorting quality.'
+                'meta_title': 'Segritech Multifruit Optical Grader | MOG-2000',
+                'meta_description': 'Advanced AI-powered multifruit grading machine with 2 ton/hour capacity. Features camera vision, defect detection, and export-grade sorting for pomegranates, apples, oranges and more.'
             },
             
             # Weight Graders

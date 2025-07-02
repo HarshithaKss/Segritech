@@ -31,243 +31,415 @@
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
     
     <style>
+        :root {
+            --primary-green: #4CAF50;
+            --accent-green: #66BB6A;
+            --primary-dark: #121212;
+            --secondary-dark: #1e1e1e;
+            --accent-dark: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --gradient-primary: linear-gradient(135deg, #4CAF50 0%, #45a049 50%, #66BB6A 100%);
+            --shadow-primary: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --shadow-hover: 0 30px 80px rgba(0, 0, 0, 0.4);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
-        
-        .navbar-main-sec {
-            background-color: #0f0f0f;
-            padding: 10px 0;
-        }
-        
-        /* Force navbar positioning */
-        .index-page-navbar {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-        }
-        
+
+        /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-            padding: 80px 0 40px 0 !important;
-            margin-top: 0 !important;
+            min-height: 60vh;
+            background: linear-gradient(135deg, rgba(18, 18, 18, 0.95) 0%, rgba(30, 30, 30, 0.9) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 120px;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(76, 175, 80, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(76, 175, 80, 0.1) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(1deg) scale(1.02); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
         }
-        
-        .hero-title {
-            font-size: 2.5rem;
+
+        .hero-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: #4CAF50;
-            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--primary-green);
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
         }
-        
+
+        .hero-badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.3);
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
         .hero-subtitle {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.3rem;
+            font-weight: 300;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px auto;
+            line-height: 1.6;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 100px 0;
+            background: var(--primary-dark);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(76, 175, 80, 0.1) 100%);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50px;
+            padding: 10px 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
+
+                 /* Product Categories Grid */
+         .categories-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+             gap: 25px;
+             margin-top: 60px;
+         }
+
+                  .category-card {
+             background: var(--secondary-dark);
+             border-radius: 15px;
+             overflow: hidden;
+             position: relative;
+             transition: all 0.3s ease;
+             border: 1px solid rgba(76, 175, 80, 0.2);
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+             height: 420px;
+             display: flex;
+             flex-direction: column;
+         }
+
+         .category-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+             border-color: var(--primary-green);
+         }
+
+                          .category-image {
+             height: 180px;
+             position: relative;
+             overflow: hidden;
+             background: #333;
+         }
+
+         .category-image img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             transition: transform 0.3s ease;
+         }
+
+         .category-card:hover .category-image img {
+             transform: scale(1.05);
+         }
+
         
-        .products-section {
-            padding: 60px 0;
-            background: #1a1a1a;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #4CAF50;
-            margin-bottom: 10px;
-        }
-        
-        .section-title p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-        }
-        
-        .product-card {
-            background: #2a2a2a;
-            border-radius: 10px;
-            padding: 30px 20px;
-            margin-bottom: 30px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid #333;
-            height: 350px;
+
+                 .category-content {
+             padding: 20px;
+             flex-grow: 1;
+             display: flex;
+             flex-direction: column;
+             position: relative;
+             z-index: 2;
+         }
+
+                           .category-icon {
+             width: 30px;
+             height: 30px;
+             background: var(--primary-green);
+             border-radius: 6px;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             margin-bottom: 12px;
+             transition: all 0.3s ease;
+         }
+
+         .category-icon i {
+             font-size: 14px;
+             color: white;
+         }
+
+         .category-title {
+             font-size: 1.4rem;
+             font-weight: 700;
+             color: var(--text-primary);
+             margin-bottom: 10px;
+             line-height: 1.3;
+         }
+
+         .category-description {
+             color: var(--text-secondary);
+             font-size: 0.9rem;
+             line-height: 1.5;
+             margin-bottom: 15px;
+             flex-grow: 1;
+         }
+
+         
+
+                          .category-button {
+             background: var(--primary-green);
+             color: white;
+             border: none;
+             padding: 10px 20px;
+             border-radius: 8px;
+             font-size: 0.9rem;
+             font-weight: 600;
+             text-decoration: none;
+             text-align: center;
+             transition: all 0.3s ease;
+         }
+
+         .category-button:hover {
+             background: #45a049;
+             color: white;
+             text-decoration: none;
+         }
+
+        /* Coming Soon Card */
+        .coming-soon-card {
+            background: linear-gradient(145deg, rgba(51, 51, 51, 0.5), rgba(68, 68, 68, 0.3));
+            border: 2px dashed rgba(76, 175, 80, 0.3);
             display: flex;
+            align-items: center;
+            justify-content: center;
             flex-direction: column;
-            justify-content: space-between;
+            text-align: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
         }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
-            border-color: #4CAF50;
-            text-decoration: none;
-            color: inherit;
+
+        .coming-soon-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(76, 175, 80, 0.05) 10px,
+                rgba(76, 175, 80, 0.05) 20px
+            );
         }
-        
-        .product-icon {
-            font-size: 3rem;
-            color: #4CAF50;
-            margin-bottom: 20px;
+
+        .coming-soon-content {
+            position: relative;
+            z-index: 2;
         }
-        
-        .product-title {
-            font-size: 1.4rem;
+
+        .coming-soon-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px auto;
+            border: 2px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .coming-soon-icon i {
+            font-size: 32px;
+            color: var(--primary-green);
+        }
+
+        .coming-soon-title {
+            font-size: 1.5rem;
             font-weight: 600;
-            color: #ffffff;
+            color: rgba(255, 255, 255, 0.7);
             margin-bottom: 15px;
         }
-        
-        .product-description {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.95rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            flex-grow: 1;
+
+        .coming-soon-text {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
-        
-        .product-features {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .feature-tag {
-            background: rgba(76, 175, 80, 0.2);
-            color: #4CAF50;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .explore-btn {
-            background: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
+
+        .contact-button {
+            background: transparent;
+            color: var(--primary-green);
+            border: 2px solid var(--primary-green);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-block;
+            transition: var(--transition);
         }
-        
-        .explore-btn:hover {
-            background: #66BB6A;
+
+        .contact-button:hover {
+            background: var(--primary-green);
             color: white;
             text-decoration: none;
             transform: translateY(-2px);
         }
-        
-        .breadcrumb {
-            background: transparent;
-            padding: 0;
-            margin-bottom: 20px;
-        }
-        
-        .breadcrumb-item a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-        
-        .breadcrumb-item.active {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .featured-section {
-            background: #0f0f0f;
-            padding: 60px 0;
-        }
-        
-        .featured-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .featured-card {
-            background: #2a2a2a;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            border: 1px solid #333;
-        }
-        
-        .featured-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.2);
-            border-color: #4CAF50;
-        }
-        
-        .featured-image {
-            height: 200px;
-            background: #333;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .featured-content {
-            padding: 20px;
-        }
-        
-        .featured-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 10px;
-        }
-        
-        .featured-desc {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-            
-            .product-card {
-                height: auto;
-                min-height: 320px;
-            }
-            
-            .product-features {
-                gap: 8px;
-            }
-            
-            .feature-tag {
-                font-size: 0.75rem;
-                padding: 4px 8px;
-            }
-        }
-    </style>
 
-    <!-- JavaScript Dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/aos.js' %}"></script>
+                 /* Responsive Design */
+         @media (max-width: 1200px) {
+             .categories-grid {
+                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                 gap: 20px;
+             }
+         }
+
+         @media (max-width: 768px) {
+             .hero-title {
+                 font-size: 2.5rem;
+             }
+             
+             .section-title {
+                 font-size: 2.5rem;
+             }
+             
+             .categories-grid {
+                 grid-template-columns: 1fr;
+                 gap: 20px;
+             }
+             
+             .category-card {
+                 height: auto;
+                 min-height: 360px;
+             }
+             
+             .category-image {
+                 height: 160px;
+             }
+             
+             .category-content {
+                 padding: 18px;
+             }
+             
+             .hero-section {
+                 padding-top: 100px;
+                 min-height: 50vh;
+             }
+         }
+
+                 @media (max-width: 480px) {
+             .hero-title {
+                 font-size: 2rem;
+             }
+             
+             .section-title {
+                 font-size: 2rem;
+             }
+             
+             .category-content {
+                 padding: 15px;
+             }
+             
+             .category-image {
+                 height: 140px;
+             }
+             
+             .category-card {
+                 min-height: 320px;
+             }
+         }
+    </style>
 </head>
 
 <body>
@@ -276,279 +448,319 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <!-- Breadcrumb -->
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Products</li>
-                </ol>
-            </nav>
-            
-            <h1 class="hero-title">Our Product Categories</h1>
-            <p class="hero-subtitle">
-                Discover our range of AI-powered agricultural machines designed to optimize crop processing and reduce post-harvest losses.
-            </p>
+            <div class="hero-content" data-aos="fade-up" data-aos-duration="800">
+                <div class="hero-badge">
+                    <i class="fas fa-industry" style="margin-right: 8px;"></i>
+                    AGRICULTURAL TECHNOLOGY
+                </div>
+                <h1 class="hero-title">Product Categories</h1>
+                <p class="hero-subtitle">
+                    Discover our comprehensive range of AI-powered agricultural machines designed to revolutionize crop processing, reduce post-harvest losses, and maximize your agricultural productivity.
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Products Section -->
     <section class="products-section">
         <div class="container">
-            <div class="section-title">
-                <h2>Choose Your Solution</h2>
-                <p>Select from our comprehensive range of agricultural technology solutions</p>
+            <div class="section-header" data-aos="fade-up" data-aos-duration="800">
+                <div class="section-badge">
+                    <i class="fas fa-cogs" style="margin-right: 6px;"></i>
+                    OUR SOLUTIONS
+                </div>
+                <h2 class="section-title">Choose Your Technology</h2>
+                <p class="section-description">
+                    Select from our advanced range of precision agricultural technology solutions designed for modern farming operations
+                </p>
             </div>
             
-            <div class="row">
+            <div class="categories-grid">
                 <!-- Size Graders -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="{% url 'size_graders' %}" class="product-card">
-                        <div>
-                            <i class="fas fa-ruler-combined product-icon"></i>
-                            <h3 class="product-title">Size Graders</h3>
-                            <p class="product-description">
-                                Advanced optical scanning technology for precise size-based sorting of grains, seeds, and nuts with 99.5% accuracy.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">Optical Scanning</span>
-                                <span class="feature-tag">500kg/hr</span>
-                            </div>
+                <a href="{% url 'size_graders' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" style="text-decoration: none; color: inherit;">
+                                         <div class="category-image">
+                         <img src="{% static 'web/apple_size_grader.png' %}" alt="Size Graders">
+                     </div>
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-ruler-combined"></i>
                         </div>
-                        <span class="explore-btn">Explore Now</span>
-                    </a>
-                </div>
+                        <h3 class="category-title">Size Graders</h3>
+                        <p class="category-description">
+                            Advanced optical scanning technology for precise size-based sorting of grains, seeds, and nuts. Achieve 99.5% accuracy with our cutting-edge vision systems designed for high-volume processing.
+                        </p>
+                        
+                                                 <div class="category-button">
+                             View Details
+                         </div>
+                    </div>
+                </a>
 
                 <!-- Quality Graders -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="{% url 'quality_graders' %}" class="product-card">
-                        <div>
-                            <i class="fas fa-star product-icon"></i>
-                            <h3 class="product-title">Quality Graders</h3>
-                            <p class="product-description">
-                                Multi-spectrum imaging with AI analysis to detect defects and ensure only premium grade crops reach the market.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">AI Analysis</span>
-                                <span class="feature-tag">98% Detection</span>
-                            </div>
+                <a href="{% url 'quality_graders' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" style="text-decoration: none; color: inherit;">
+                                         <div class="category-image">
+                         <img src="{% static 'web/quality_grader.png' %}" alt="Quality Graders">
+                     </div>
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-star"></i>
                         </div>
-                        <span class="explore-btn">Explore Now</span>
-                    </a>
-                </div>
+                        <h3 class="category-title">Quality Graders</h3>
+                        <p class="category-description">
+                            Multi-spectrum imaging with AI analysis to detect defects, discoloration, and quality issues. Ensure only premium grade crops reach the market with our intelligent quality assessment systems.
+                        </p>
+                        
+                                                 <div class="category-button">
+                             View Details
+                         </div>
+                    </div>
+                </a>
 
                 <!-- Weight Graders -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="{% url 'weight_graders' %}" class="product-card">
-                        <div>
-                            <i class="fas fa-weight product-icon"></i>
-                            <h3 class="product-title">Weight Graders</h3>
-                            <p class="product-description">
-                                Precision weight-based sorting for density grading and uniformity, essential for premium export markets.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">±0.1g Precision</span>
-                                <span class="feature-tag">Export Ready</span>
-                            </div>
+                <a href="{% url 'weight_graders' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300" style="text-decoration: none; color: inherit;">
+                                         <div class="category-image">
+                         <img src="{% static 'web/weight_grader.png' %}" alt="Weight Graders">
+                     </div>
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-balance-scale"></i>
                         </div>
-                        <span class="explore-btn">Explore Now</span>
-                    </a>
-                </div>
+                        <h3 class="category-title">Weight Graders</h3>
+                        <p class="category-description">
+                            Precision weight-based sorting for density grading and uniformity. Essential for premium export markets requiring consistent product specifications and quality standards.
+                        </p>
+                        
+                                                 <div class="category-button">
+                             View Details
+                         </div>
+                    </div>
+                </a>
 
                 <!-- Cleaning Machines -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="{% url 'cleaning_machines' %}" class="product-card">
-                        <div>
-                            <i class="fas fa-broom product-icon"></i>
-                            <h3 class="product-title">Cleaning Machines</h3>
-                            <p class="product-description">
-                                Advanced multi-stage cleaning systems that remove impurities, dust, and foreign materials for food-grade preparation.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">Air Cleaning</span>
-                                <span class="feature-tag">99.9% Clean</span>
-                            </div>
+                <a href="{% url 'cleaning_machines' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" style="text-decoration: none; color: inherit;">
+                                         <div class="category-image">
+                         <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machines">
+                     </div>
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-wind"></i>
                         </div>
-                        <span class="explore-btn">Explore Now</span>
-                    </a>
-                </div>
+                        <h3 class="category-title">Cleaning Machines</h3>
+                        <p class="category-description">
+                            Advanced multi-stage cleaning systems that remove impurities, dust, and foreign materials. Achieve food-grade preparation standards with our comprehensive cleaning solutions.
+                        </p>
+                        
+                                                 <div class="category-button">
+                             View Details
+                         </div>
+                    </div>
+                </a>
 
                 <!-- Packing Robots -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="{% url 'packing_robots' %}" class="product-card">
-                        <div>
-                            <i class="fas fa-microchip product-icon"></i>
-                            <h3 class="product-title">Packing Robots</h3>
-                            <p class="product-description">
-                                Automated packaging solutions with robotic arms and smart weighing systems for consistent retail-ready packaging.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">Full Automation</span>
-                                <span class="feature-tag">200 packs/hr</span>
-                            </div>
+                <a href="{% url 'packing_robots' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="500" style="text-decoration: none; color: inherit;">
+                                         <div class="category-image">
+                         <img src="{% static 'web/final segripack.png' %}" alt="Packing Robots">
+                     </div>
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-robot"></i>
                         </div>
-                        <span class="explore-btn">Explore Now</span>
-                    </a>
-                </div>
+                        <h3 class="category-title">Packing Robots</h3>
+                        <p class="category-description">
+                            Fully automated packaging solutions with robotic arms and smart weighing systems. Deliver consistent retail-ready packaging with minimal human intervention.
+                        </p>
+                        
+                                                 <div class="category-button">
+                             View Details
+                         </div>
+                    </div>
+                </a>
 
                 <!-- Inspection Box -->
-                <div class="col-lg-4 col-md-6">
-                    <a href="{% url 'inspection_box' %}" class="product-card">
-                        <div>
-                            <i class="fas fa-cube product-icon"></i>
-                            <h3 class="product-title">Inspection Box</h3>
-                            <p class="product-description">
-                                Advanced quality inspection system combining cutting-edge technology with ease of use for OEMs and exporters.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag">AI Analysis</span>
-                                <span class="feature-tag">New</span>
-                            </div>
+                <a href="{% url 'inspection_box' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600" style="text-decoration: none; color: inherit;">
+                                         <div class="category-image">
+                         <img src="{% static 'web/inception_box.jpg' %}" alt="Inspection Box">
+                     </div>
+                    <div class="category-content">
+                        <div class="category-icon">
+                            <i class="fas fa-box"></i>
                         </div>
-                        <span class="explore-btn">Explore Now</span>
-                    </a>
-                </div>
+                        <h3 class="category-title">Inspection Box</h3>
+                        <p class="category-description">
+                            Advanced quality inspection system combining cutting-edge technology with ease of use. Perfect for OEMs and exporters requiring rapid quality assessment capabilities.
+                        </p>
+                        
+                                                 <div class="category-button">
+                             View Details
+                         </div>
+                    </div>
+                </a>
 
-                <!-- Additional Category Placeholder -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="product-card" style="background: #333; opacity: 0.7;">
-                        <div>
-                            <i class="fas fa-plus product-icon" style="color: #666;"></i>
-                            <h3 class="product-title" style="color: #999;">More Categories</h3>
-                            <p class="product-description" style="color: #777;">
-                                We're continuously developing new agricultural technology solutions. Contact us for custom requirements.
-                            </p>
-                            <div class="product-features">
-                                <span class="feature-tag" style="background: rgba(153, 153, 153, 0.2); color: #999;">Coming Soon</span>
-                            </div>
+                <!-- Coming Soon Card -->
+                <div class="category-card coming-soon-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="700">
+                    <div class="coming-soon-content">
+                        <div class="coming-soon-icon">
+                            <i class="fas fa-plus"></i>
                         </div>
-                        <span class="explore-btn" style="background: #666; cursor: not-allowed;">Contact Us</span>
+                        <h3 class="coming-soon-title">More Solutions Coming</h3>
+                        <p class="coming-soon-text">
+                            We're continuously developing new agricultural technology solutions. Have specific requirements? Let's discuss custom solutions for your needs.
+                        </p>
+                        <a href="{% url 'contact' %}" class="contact-button">
+                            Contact Our Team
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Products Section -->
-    {% if featured_products %}
-        <section class="featured-section">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Featured Products</h2>
-                    <p>Discover our most popular and innovative machines</p>
-                </div>
-                
-                <div class="featured-grid">
-                    {% for product in featured_products %}
-                        <div class="featured-card">
-                            <div class="featured-image">
-                                {% if product.main_image %}
-                                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover;">
-                                {% else %}
-                                    <i class="fas fa-cogs fa-3x" style="color: #4CAF50;"></i>
-                                {% endif %}
-                            </div>
-                            <div class="featured-content">
-                                <h4 class="featured-title">{{ product.name }}</h4>
-                                <p class="featured-desc">{{ product.short_description|truncatewords:15 }}</p>
-                                <a href="{% url 'product_detail' product.category.slug product.slug %}" class="explore-btn">
-                                    View Details
-                                </a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </section>
-    {% endif %}
+    {% include 'includes/footer.html' %}
 
-    <!-- footer section-->
-    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
-        <div class="wrapper2">
-            <div class="footer-inner-section" style="display: grid; grid-template-columns: 2fr 1fr 1.5fr 2fr; gap: 40px; align-items: start; margin-bottom: 20px;">
-                <style>
-                    @media (max-width: 768px) {
-                        .footer-inner-section {
-                            grid-template-columns: 1fr !important;
-                            gap: 30px !important;
-                            text-align: center !important;
-                        }
-                    }
-                    @media (max-width: 992px) and (min-width: 769px) {
-                        .footer-inner-section {
-                            grid-template-columns: 1fr 1fr !important;
-                            gap: 30px !important;
-                        }
-                    }
-                </style>
-                <div class="footer-logo footer-box" style="padding: 30px;">
-                    <a href="{% url 'home' %}">
-                        <figure style="margin-bottom: 20px; height: auto; display: flex; align-items: center;">
-                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
-                        </figure>
-                    </a>
-                    <p class="mb-1" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Copyright © 2023 SegriTech.</p>
-                    <p class="mb-3" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All Rights Reserved.</p>
-                    <div style="margin-top: 15px;">
-                        <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Social Media</span>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://www.facebook.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram"></i></a>
-                            <a href="https://pk.linkedin.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-box" style="padding: 30px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">About</h4>
-                    <ul class="list-unstyled" style="margin: 0;">
-                        <li style="margin-bottom: 8px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">About Company</a></li>
-                        <li style="margin-bottom: 8px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Products</a></li>
-                        <li style="margin-bottom: 8px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Services</a></li>
-                        <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Career Opportunities</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box address-box" style="padding: 30px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Address</h4>
-                    <ul class="list-unstyled" style="margin: 0;">
-                        <li style="margin-bottom: 15px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;">
-                            <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            551 Swanston Street,<br>
-                            <span style="margin-left: 25px;">Melbourne, Victoria 3053 Australia</span>
-                        </li>
-                        <li style="margin-bottom: 12px;">
-                            <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            <a href="tel:+61383766284" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">+61 3 8376 6284</a>
-                        </li>
-                        <li class="mb-0">
-                            <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            <a href="mailto:info@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">info@segritech.com</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-box footer-form-box" style="padding: 30px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Newsletter Signup</h4>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; border-radius: 25px; overflow: hidden; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
-                            <input type="text" placeholder="Enter Your Email Address" style="flex: 1; background: transparent; border: none; padding: 12px 15px; color: white; font-size: 0.9rem; outline: none;">
-                            <button style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; border: none; padding: 12px 20px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">Send</button>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.8rem;">
-                        <input type="checkbox" id="policy" name="policy" style="margin-top: 2px;">
-                        <label for="policy" style="color: rgba(255,255,255,0.8); line-height: 1.4;">
-                            I agree to the <a href="#" style="color: var(--accent-green); text-decoration: none;">Privacy Policy</a>.
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a id="button" class="show"></a>
-    <!-- footer section-->
+    <!-- Newsletter Form Styles -->
+    <style>
+        /* Force newsletter form visibility and functionality */
+        #newsletterForm {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+        }
+        
+        #newsletterEmail {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 12px 16px !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            border-radius: 6px !important;
+            background: rgba(255,255,255,0.1) !important;
+            color: white !important;
+            font-size: 14px !important;
+            outline: none !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            -webkit-appearance: textfield !important;
+            -moz-appearance: textfield !important;
+            appearance: textfield !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterEmail:focus {
+            border-color: #4CAF50 !important;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3) !important;
+            background: rgba(255,255,255,0.2) !important;
+        }
+        
+        #newsletterEmail::placeholder {
+            color: rgba(255, 255, 255, 0.8) !important;
+            opacity: 1 !important;
+        }
+        
+        #newsletterSubmit {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            margin-top: 12px !important;
+            padding: 12px 16px !important;
+            background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterSubmit:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        #policy {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 16px !important;
+            height: 16px !important;
+            margin: 0 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            appearance: checkbox !important;
+            -webkit-appearance: checkbox !important;
+            -moz-appearance: checkbox !important;
+            background: white !important;
+            border: 1px solid #ccc !important;
+        }
+        
+        #policy:checked {
+            background: #4CAF50 !important;
+            border-color: #4CAF50 !important;
+        }
+        
+        label[for="policy"] {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            color: rgba(255,255,255,0.9) !important;
+            line-height: 1.4 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            margin-left: 8px !important;
+            font-size: 13px !important;
+        }
+        
+        #newsletterMessage {
+            display: none;
+            position: relative !important;
+            z-index: 10000 !important;
+            margin-top: 10px !important;
+            padding: 10px !important;
+            border-radius: 4px !important;
+        }
+        
+        /* Override any conflicting styles */
+        .footer-form-box * {
+            pointer-events: auto !important;
+        }
+        
+        .footer-form-box input,
+        .footer-form-box button,
+        .footer-form-box label {
+            pointer-events: auto !important;
+            z-index: 10000 !important;
+        }
+    </style>
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
 </body>
 
 </html>

@@ -506,14 +506,18 @@
                             <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Products
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="productsDropdown">
-                                <a class="dropdown-item" href="{% url 'size_graders' %}">Size Graders</a>
-                                <a class="dropdown-item" href="{% url 'quality_graders' %}">Quality Graders</a>
-                                <a class="dropdown-item" href="{% url 'weight_graders' %}">Weight Graders</a>
-                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}">Cleaning Machines</a>
-                                <a class="dropdown-item" href="{% url 'packing_robots' %}">Packing Robots</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'products' %}">View All Categories</a>
+                            <div class="dropdown-menu" aria-labelledby="productsDropdown" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-top: 10px;">
+                                <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
+                                <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Quality Graders</a>
+                                <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Graders</a>
+                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
+                                <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
+                                <a class="dropdown-item" href="{% url 'inspection_box' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
+                                    <i class="fas fa-cube me-2"></i>Inspection Box
+                                    <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
+                                </a>
+                                <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
+                                <a class="dropdown-item" href="{% url 'products' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">View All Categories</a>
                             </div>
                         </li>
 
@@ -526,7 +530,7 @@
                     </ul>
                     <form class="d-flex">
                         <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-                            <li><a href="#"><i class="fas fa-search"></i></a></li>
+    
                         </ul>
                     </form>
                 </div>
@@ -596,7 +600,7 @@
                         </div>
                         <div class="col-md-2 mb-3">
                             <button type="submit" class="btn btn-filter w-100">
-                                <i class="fas fa-search"></i> Search
+        Search
                             </button>
                         </div>
                     </div>
@@ -643,15 +647,11 @@
                                     </div>
                                     <div class="job-meta-item">
                                         <i class="fas fa-map-marker-alt"></i>
-                                        <span>{{ job.location }}{% if job.remote_allowed %} (Remote OK){% endif %}</span>
+                                        <span>{{ job.location }}</span>
                                     </div>
                                     <div class="job-meta-item">
                                         <i class="fas fa-user-graduate"></i>
                                         <span>{{ job.get_experience_level_display }}</span>
-                                    </div>
-                                    <div class="job-meta-item">
-                                        <i class="fas fa-users"></i>
-                                        <span>{{ job.applications_count }} applicant{{ job.applications_count|pluralize }}</span>
                                     </div>
                                 </div>
 
@@ -708,7 +708,6 @@
                 {% endif %}
             {% else %}
                 <div class="no-jobs" data-aos="fade-up" data-aos-duration="600">
-                    <i class="fas fa-search"></i>
                     <h3>No positions found</h3>
                     <p>We couldn't find any jobs matching your criteria. Try adjusting your filters or check back later for new opportunities.</p>
                 </div>
@@ -783,62 +782,141 @@
         </div>
     </section>
 
-    <!-- footer -->
-    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
-        <div class="wrapper2">
-            <div class="footer-inner-section">
-                <div class="footer-logo footer-box">
-                    <a href="{% url 'home' %}">
-                        <figure>
-                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
-                        </figure>
-                    </a>
-                    <p class="mb-0">Copyright © 2024 SegriTech.</p>
-                    <p>All Rights Reserved.</p>
-                    <ul class="list-unstyled mb-0">
-                        <li><span class="d-block">Social Media</span></li>
-                        <li class="d-inline-block ml-0"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="d-inline-block"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li class="d-inline-block"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li class="d-inline-block mr-0"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                    </ul>
-                </div>
-                <div class="footer-box">
-                    <h4>Company</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="/about/">About SegriTech</a></li>
-                        <li><a href="/products/">Our Products</a></li>
-                        <li><a href="/solutions/">Solutions</a></li>
-                        <li><a href="/careers/">Careers</a></li>
-                        <li class="mb-0"><a href="/team/">Our Team</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box address-box">
-                    <h4>Contact</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative"><i class="fas fa-map-marker-alt"></i> 123 Agricultural Technology Park, Bangalore, India</li>
-                        <li class="position-relative"><i class="fas fa-phone-volume"></i> <a href="tel:+911234567890">+91 123 456 7890</a></li>
-                        <li class="mb-0 position-relative"><i class="fas fa-envelope"></i> <a href="mailto:careers@segritech.com">careers@segritech.com</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box footer-form-box">
-                    <h4>Newsletter</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative mb-0">
-                            <input class="bg-light-black" type="email" placeholder="Enter Your Email"> 
-                            <button>Subscribe</button>
-                        </li>
-                    </ul>
-                    <form>
-                        <input type="checkbox" id="policy" name="policy">
-                        <label for="policy" class="check-box"></label>
-                        <label for="policy"> I agree to the <a href="#">Privacy Policy</a>.</label>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a id="button" class="show"></a>
+    <!-- Footer -->
+    {% include 'includes/footer.html' %}
+    
+    <!-- Newsletter Form Styles -->
+    <style>
+        /* Force newsletter form visibility and functionality */
+        #newsletterForm {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+        }
+        
+        #newsletterEmail {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 12px 16px !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            border-radius: 6px !important;
+            background: rgba(255,255,255,0.1) !important;
+            color: white !important;
+            font-size: 14px !important;
+            outline: none !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            -webkit-appearance: textfield !important;
+            -moz-appearance: textfield !important;
+            appearance: textfield !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterEmail:focus {
+            border-color: #4CAF50 !important;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3) !important;
+            background: rgba(255,255,255,0.2) !important;
+        }
+        
+        #newsletterEmail::placeholder {
+            color: rgba(255, 255, 255, 0.8) !important;
+            opacity: 1 !important;
+        }
+        
+        #newsletterSubmit {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            margin-top: 12px !important;
+            padding: 12px 16px !important;
+            background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterSubmit:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        #policy {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 16px !important;
+            height: 16px !important;
+            margin: 0 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            appearance: checkbox !important;
+            -webkit-appearance: checkbox !important;
+            -moz-appearance: checkbox !important;
+            background: white !important;
+            border: 1px solid #ccc !important;
+        }
+        
+        #policy:checked {
+            background: #4CAF50 !important;
+            border-color: #4CAF50 !important;
+        }
+        
+        label[for="policy"] {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            color: rgba(255,255,255,0.9) !important;
+            line-height: 1.4 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            margin-left: 8px !important;
+            font-size: 13px !important;
+        }
+        
+        #newsletterMessage {
+            display: none;
+            position: relative !important;
+            z-index: 10000 !important;
+            margin-top: 10px !important;
+            padding: 10px !important;
+            border-radius: 4px !important;
+        }
+        
+        /* Override any conflicting styles */
+        .footer-form-box * {
+            pointer-events: auto !important;
+        }
+        
+        .footer-form-box input,
+        .footer-form-box button,
+        .footer-form-box label {
+            pointer-events: auto !important;
+            z-index: 10000 !important;
+        }
+    </style>
+    
+    
 
     <!-- Scripts -->
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
@@ -884,20 +962,7 @@
             $('.loader-mask').delay(350).fadeOut('slow');
         });
 
-        // Back to top button
-        var btn = $('#button');
-        $(window).scroll(function() {
-            if ($(window).scrollTop() > 300) {
-                btn.addClass('show');
-            } else {
-                btn.removeClass('show');
-            }
-        });
-        
-        btn.on('click', function(e) {
-            e.preventDefault();
-            $('html, body').animate({scrollTop:0}, '300');
-        });
+        // Back to top button functionality is handled in footer.html
 
         // Body loaded class
         window.addEventListener('load', function(){

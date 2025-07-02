@@ -104,7 +104,7 @@
                     </ul>
                     <form class="d-flex">
                         <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-                            <li><a href="#"><i class="fas fa-search"></i></a></li>
+    
                             <li>
                                 <button class="login-btn" type="submit">
                                     <img src="assets/images/lock-icon.png" alt="lock-icon"> Login</button>
@@ -126,7 +126,7 @@
         </div>
         <div class="social-box">
             <ul class="mb-0 list-unstyled">
-                <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+                
                 <li><a href="#"><i class="fas fa-image"></i></a></li>
                 <li><a href="#"><i class="fas fa-comment-alt"></i></a></li>
             </ul>
@@ -648,10 +648,10 @@
                     <p>All Rights Reserved.</p>
                     <ul class="list-unstyled mb-0">
                         <li><span class="d-block">Social Media</span></li>
-                        <li class="d-inline-block ml-0"><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="d-inline-block"><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                        <li class="d-inline-block"><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                        <li class="d-inline-block mr-0"><a href="https://pk.linkedin.com/"><i class="fab fa-linkedin-in"></i></a></li>
+                                                    <li class="d-inline-block ml-0"><a href="https://www.facebook.com/Segritech1/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                            <li class="d-inline-block"><a href="https://x.com/segri_tech" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                            <li class="d-inline-block"><a href="https://www.instagram.com/segritech/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                            <li class="d-inline-block mr-0"><a href="https://www.linkedin.com/company/segritech/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
                     </ul>
                 </div>
                 <div class="footer-box">
@@ -689,7 +689,7 @@
             </div>
         </div>
     </section>
-    <a id="button" class="show"></a>
+    
     <!-- footer section-->
 <script src="assets/js/jquery-3.6.0.min.js"></script>
 <script src="assets/js/popper.min.js"></script>
@@ -703,20 +703,7 @@
         $('.loader-mask').delay(350).fadeOut('slow');
         });
     AOS.init();
-    var btn = $('#button');
-         
-  $(window).scroll(function() {
-    if ($(window).scrollTop() > 300) {
-    btn.addClass('show');
-  }
-   else {
-    btn.removeClass('show');
-  }
-  });
-  btn.on('click', function(e) {
-  e.preventDefault();
-  $('html, body').animate({scrollTop:0}, '300');
-});
+    // Back to top button functionality is handled in footer.html
 window.addEventListener('load',function(){
   document.querySelector('body').classList.add("loaded")  
 });

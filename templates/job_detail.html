@@ -406,60 +406,11 @@
         </div>
     </div>
 
-    <!-- navbar section -->
-    <div class="navbar-main-sec w-100 float-left index-page-navbar">
-        <div class="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light p-0">
-                <a class="navbar-brand" href="/">
-                    <img src="{% static 'images/AiMentor-logo.png' %}" alt="SegriTech-logo">
-                </a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                    data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <ul class="navbar-nav mr-auto my-2 my-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/about/">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/products/">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/solutions/">Solutions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/team/">Team</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/careers/">Careers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/contact/">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
+    {% include 'includes/navigation.html' %}
 
     <!-- Job Hero Section -->
     <section class="job-hero">
         <div class="container">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'careers' %}">Careers</a></li>
-                    <li class="breadcrumb-item active">{{ job.title }}</li>
-                </ol>
-            </nav>
-            
             <div class="row">
                 <div class="col-lg-8">
                     <span class="job-badge badge-{{ job.job_type }}">
@@ -474,15 +425,11 @@
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span>{{ job.location }}{% if job.remote_allowed %} (Remote OK){% endif %}</span>
+                            <span>{{ job.location }}</span>
                         </div>
                         <div class="meta-item">
                             <i class="fas fa-user-graduate"></i>
                             <span>{{ job.get_experience_level_display }}</span>
-                        </div>
-                        <div class="meta-item">
-                            <i class="fas fa-users"></i>
-                            <span>{{ job.applications_count }} applicant{{ job.applications_count|pluralize }}</span>
                         </div>
                     </div>
                     
@@ -580,26 +527,15 @@
                             <span class="detail-value">{{ job.get_experience_level_display }}</span>
                         </div>
                         
-                        <div class="detail-item">
-                            <span class="detail-label">Location</span>
-                            <span class="detail-value">{{ job.location }}</span>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <span class="detail-label">Remote Work</span>
-                            <span class="detail-value">
-                                {% if job.remote_allowed %}
-                                    <i class="fas fa-check" style="color: var(--accent-green);"></i> Yes
-                                {% else %}
-                                    <i class="fas fa-times" style="color: #dc3545;"></i> No
-                                {% endif %}
-                            </span>
-                        </div>
-                        
-                        <div class="detail-item">
-                            <span class="detail-label">Salary Range</span>
-                            <span class="detail-value">{{ job.salary_range }}</span>
-                        </div>
+                                <div class="detail-item">
+            <span class="detail-label">Location</span>
+            <span class="detail-value">{{ job.location }}</span>
+        </div>
+        
+        <div class="detail-item">
+            <span class="detail-label">Salary Range</span>
+            <span class="detail-value">{{ job.salary_range }}</span>
+        </div>
                         
                         {% if job.equity_offered %}
                         <div class="detail-item">
@@ -683,61 +619,8 @@
     </div>
 
     <!-- footer -->
-    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
-        <div class="wrapper2">
-            <div class="footer-inner-section">
-                <div class="footer-logo footer-box">
-                    <a href="/">
-                        <figure>
-                            <img src="{% static 'images/AiMentor-logo.png' %}" alt="SegriTech-logo">
-                        </figure>
-                    </a>
-                    <p class="mb-0">Copyright © 2024 SegriTech.</p>
-                    <p>All Rights Reserved.</p>
-                    <ul class="list-unstyled mb-0">
-                        <li><span class="d-block">Social Media</span></li>
-                        <li class="d-inline-block ml-0"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="d-inline-block"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li class="d-inline-block"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li class="d-inline-block mr-0"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                    </ul>
-                </div>
-                <div class="footer-box">
-                    <h4>Company</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="/about/">About SegriTech</a></li>
-                        <li><a href="/products/">Our Products</a></li>
-                        <li><a href="/solutions/">Solutions</a></li>
-                        <li><a href="/careers/">Careers</a></li>
-                        <li class="mb-0"><a href="/team/">Our Team</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box address-box">
-                    <h4>Contact</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative"><i class="fas fa-map-marker-alt"></i> 123 Agricultural Technology Park, Bangalore, India</li>
-                        <li class="position-relative"><i class="fas fa-phone-volume"></i> <a href="tel:+911234567890">+91 123 456 7890</a></li>
-                        <li class="mb-0 position-relative"><i class="fas fa-envelope"></i> <a href="mailto:careers@segritech.com">careers@segritech.com</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box footer-form-box">
-                    <h4>Newsletter</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative mb-0">
-                            <input class="bg-light-black" type="email" placeholder="Enter Your Email"> 
-                            <button>Subscribe</button>
-                        </li>
-                    </ul>
-                    <form>
-                        <input type="checkbox" id="policy" name="policy">
-                        <label for="policy" class="check-box"></label>
-                        <label for="policy"> I agree to the <a href="#">Privacy Policy</a>.</label>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a id="button" class="show"></a>
+    {% include 'includes/footer.html' %}
+    
 
     <!-- Scripts -->
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
@@ -783,20 +666,7 @@
             $('.loader-mask').delay(350).fadeOut('slow');
         });
 
-        // Back to top button
-        var btn = $('#button');
-        $(window).scroll(function() {
-            if ($(window).scrollTop() > 300) {
-                btn.addClass('show');
-            } else {
-                btn.removeClass('show');
-            }
-        });
-        
-        btn.on('click', function(e) {
-            e.preventDefault();
-            $('html, body').animate({scrollTop:0}, '300');
-        });
+        // Back to top button functionality is handled in footer.html
 
         // Body loaded class
         window.addEventListener('load', function(){

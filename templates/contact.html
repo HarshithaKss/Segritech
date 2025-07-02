@@ -190,6 +190,49 @@
             background: linear-gradient(45deg, var(--primary-green), var(--dark-green));
         }
 
+        /* Fix for Inquiry Type dropdown size */
+        select#id_inquiry_type {
+            width: 100% !important;
+            min-width: 300px !important;
+            padding: 12px 40px 12px 15px !important;
+            font-size: 16px !important;
+            height: auto !important;
+            min-height: 50px !important;
+            border: 2px solid rgba(102, 187, 106, 0.3) !important;
+            border-radius: 8px !important;
+            background: var(--background-dark) !important;
+            color: var(--primary-color) !important;
+            appearance: none !important;
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2366BB6A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+            background-repeat: no-repeat !important;
+            background-position: right 15px center !important;
+            background-size: 20px !important;
+            overflow: visible !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+        }
+
+        select#id_inquiry_type:focus {
+            border-color: var(--accent-green) !important;
+            box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.25) !important;
+            outline: none !important;
+        }
+
+        select#id_inquiry_type option {
+            background: var(--background-dark) !important;
+            color: var(--primary-color) !important;
+            padding: 10px 15px !important;
+            font-size: 16px !important;
+            border: none !important;
+        }
+
+        /* Ensure the dropdown container has proper width */
+        select#id_inquiry_type:not([multiple]) {
+            padding-right: 40px !important;
+        }
+
         .contact-info-section {
             background: var(--background-medium);
             color: white;
@@ -505,14 +548,18 @@
                             <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Products
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="productsDropdown">
-                                <a class="dropdown-item" href="{% url 'size_graders' %}">Size Graders</a>
-                                <a class="dropdown-item" href="{% url 'quality_graders' %}">Quality Graders</a>
-                                <a class="dropdown-item" href="{% url 'weight_graders' %}">Weight Graders</a>
-                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}">Cleaning Machines</a>
-                                <a class="dropdown-item" href="{% url 'packing_robots' %}">Packing Robots</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'products' %}">View All Categories</a>
+                            <div class="dropdown-menu" aria-labelledby="productsDropdown" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-top: 10px;">
+                                <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
+                                <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Quality Graders</a>
+                                <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Graders</a>
+                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
+                                <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
+                                <a class="dropdown-item" href="{% url 'inspection_box' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
+                                    <i class="fas fa-cube me-2"></i>Inspection Box
+                                    <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
+                                </a>
+                                <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
+                                <a class="dropdown-item" href="{% url 'products' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">View All Categories</a>
                             </div>
                         </li>
 
@@ -525,7 +572,7 @@
                     </ul>
                     <form class="d-flex">
                         <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-                            <li><a href="#"><i class="fas fa-search"></i></a></li>
+    
                         </ul>
                     </form>
                 </div>
@@ -555,8 +602,20 @@
                         <!-- Django Messages -->
                         {% if messages %}
                             {% for message in messages %}
-                                <div class="alert alert-{{ message.tags }}">
-                                    <i class="fas fa-check-circle"></i> {{ message }}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show mb-4" 
+                                     style="background: linear-gradient(135deg, #4CAF50, #66BB6A); 
+                                            border: none; border-radius: 15px; color: white; 
+                                            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
+                                            font-size: 1.1rem; padding: 20px 25px;"
+                                     data-aos="fade-down" data-aos-duration="600">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-check-circle me-3" style="font-size: 1.5rem;"></i>
+                                        <div>
+                                            <strong>Success!</strong><br>
+                                            {{ message }}
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             {% endfor %}
                         {% endif %}
@@ -676,10 +735,16 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <h4>Visit Our Office</h4>
                         <p>
-                            SegriTech Innovation Center<br>
-                            CIE, IIIT- Hyderabad<br>
-                            Gachibowli, Telangana-500032<br>
-                            India
+                            <strong>Tikkly Agro Solutions Pvt. Ltd.</strong><br>
+                            GST: 08AAHCT8111F1ZE<br><br>
+                            
+                            <strong>Shipping Address:</strong><br>
+                            346, Doyens Township, Gachibowli Road,<br>
+                            Serilingampalli, Hyderabad, Telangana - 500019<br><br>
+                            
+                            <strong>Billing Address:</strong><br>
+                            Plot. No. 130, Shiv Nagar II, Jaipuriyo Ka Bad,<br>
+                            Hathoj, Jaipur, Rajasthan - 302012
                         </p>
                     </div>
                 </div>
@@ -689,6 +754,7 @@
                         <i class="fas fa-phone-volume"></i>
                         <h4>Call Us</h4>
                         <p>
+                            <strong>Hetendra Singh</strong><br>
                             Phone: <a href="tel:+919358859955">+91-93588 59955</a><br>
                             WhatsApp: <a href="tel:+919358859955">+91-93588 59955</a>
                         </p>
@@ -700,7 +766,8 @@
                         <i class="fas fa-envelope-open"></i>
                         <h4>Email Us</h4>
                         <p>
-                            General: <a href="mailto:namaste@segritech.com">namaste@segritech.com</a>
+                            General: <a href="mailto:namaste@segritech.com">namaste@segritech.com</a><br>
+                            <strong>Hetendra Singh:</strong> <a href="mailto:Hetendra@segritech.com">Hetendra@segritech.com</a>
                         </p>
                     </div>
                 </div>
@@ -810,83 +877,154 @@
             <h3>Connect With Us</h3>
             <p>Follow us on social media for the latest updates on agricultural technology</p>
             <div class="social-icons">
-                <a href="#" class="social-icon" data-aos="zoom-in" data-aos-duration="600">
+                <a href="https://www.facebook.com/Segritech1/" target="_blank" class="social-icon" data-aos="zoom-in" data-aos-duration="600">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="#" class="social-icon" data-aos="zoom-in" data-aos-duration="700">
+                <a href="https://x.com/segri_tech" target="_blank" class="social-icon" data-aos="zoom-in" data-aos-duration="700">
                     <i class="fab fa-twitter"></i>
                 </a>
-                <a href="#" class="social-icon" data-aos="zoom-in" data-aos-duration="800">
+                <a href="https://www.linkedin.com/company/segritech/" target="_blank" class="social-icon" data-aos="zoom-in" data-aos-duration="800">
                     <i class="fab fa-linkedin-in"></i>
                 </a>
-                <a href="#" class="social-icon" data-aos="zoom-in" data-aos-duration="900">
+                <a href="https://www.instagram.com/segritech/" target="_blank" class="social-icon" data-aos="zoom-in" data-aos-duration="900">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="#" class="social-icon" data-aos="zoom-in" data-aos-duration="1000">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="#" class="social-icon" data-aos="zoom-in" data-aos-duration="1100">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
             </div>
         </div>
     </section>
-    <!-- footer -->
-    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
-        <div class="wrapper2">
-            <div class="footer-inner-section">
-                <div class="footer-logo footer-box">
-                    <a href="{% url 'home' %}">
-                        <figure>
-                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
-                        </figure>
-                    </a>
-                    <p class="mb-0">Copyright © 2024 SegriTech.</p>
-                    <p>All Rights Reserved.</p>
-                    <ul class="list-unstyled mb-0">
-                        <li><span class="d-block">Social Media</span></li>
-                        <li class="d-inline-block ml-0"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li class="d-inline-block"><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li class="d-inline-block"><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li class="d-inline-block mr-0"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                    </ul>
-                </div>
-                <div class="footer-box">
-                    <h4>Company</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="/about/">About SegriTech</a></li>
-                        <li><a href="/products/">Our Products</a></li>
-                        <li><a href="/solutions/">Solutions</a></li>
-                        <li class="mb-0"><a href="/team/">Our Team</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box address-box">
-                    <h4>Contact</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative"><i class="fas fa-map-marker-alt"></i> CIE, IIIT- Hyderabad, Gachibowli, Telangana-500032</li>
-                        <li class="position-relative"><i class="fas fa-phone-volume"></i> <a href="tel:+919358859955">+91-93588 59955</a></li>
-                        <li class="mb-0 position-relative"><i class="fas fa-envelope"></i> <a href="mailto:namaste@segritech.com">namaste@segritech.com</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box footer-form-box">
-                    <h4>Newsletter</h4>
-                    <ul class="list-unstyled">
-                        <li class="position-relative mb-0">
-                            <input class="bg-light-black" type="email" placeholder="Enter Your Email"> 
-                            <button>Subscribe</button>
-                        </li>
-                    </ul>
-                    <form>
-                        <input type="checkbox" id="policy" name="policy">
-                        <label for="policy" class="check-box"></label>
-                        <label for="policy"> I agree to the <a href="#">Privacy Policy</a>.</label>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a id="button" class="show"></a>
-    <!-- footer section-->
+    {% include 'includes/footer.html' %}
+    
+    <!-- Newsletter Form Styles -->
+    <style>
+        /* Force newsletter form visibility and functionality */
+        #newsletterForm {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            position: relative !important;
+            z-index: 9999 !important;
+            pointer-events: auto !important;
+        }
+        
+        #newsletterEmail {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            height: auto !important;
+            padding: 12px 16px !important;
+            border: 1px solid rgba(255,255,255,0.4) !important;
+            border-radius: 6px !important;
+            background: rgba(255,255,255,0.1) !important;
+            color: white !important;
+            font-size: 14px !important;
+            outline: none !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            -webkit-appearance: textfield !important;
+            -moz-appearance: textfield !important;
+            appearance: textfield !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterEmail:focus {
+            border-color: #4CAF50 !important;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3) !important;
+            background: rgba(255,255,255,0.2) !important;
+        }
+        
+        #newsletterEmail::placeholder {
+            color: rgba(255, 255, 255, 0.8) !important;
+            opacity: 1 !important;
+        }
+        
+        #newsletterSubmit {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 100% !important;
+            margin-top: 12px !important;
+            padding: 12px 16px !important;
+            background: linear-gradient(135deg, #4CAF50, #45a049) !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            cursor: pointer !important;
+            font-size: 14px !important;
+            transition: all 0.3s ease !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            min-height: 42px !important;
+        }
+        
+        #newsletterSubmit:hover {
+            background: linear-gradient(135deg, #45a049, #4CAF50) !important;
+            transform: translateY(-2px) !important;
+        }
+        
+        #policy {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            width: 16px !important;
+            height: 16px !important;
+            margin: 0 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            appearance: checkbox !important;
+            -webkit-appearance: checkbox !important;
+            -moz-appearance: checkbox !important;
+            background: white !important;
+            border: 1px solid #ccc !important;
+        }
+        
+        #policy:checked {
+            background: #4CAF50 !important;
+            border-color: #4CAF50 !important;
+        }
+        
+        label[for="policy"] {
+            display: inline-block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            color: rgba(255,255,255,0.9) !important;
+            line-height: 1.4 !important;
+            cursor: pointer !important;
+            position: relative !important;
+            z-index: 10000 !important;
+            pointer-events: auto !important;
+            margin-left: 8px !important;
+            font-size: 13px !important;
+        }
+        
+        #newsletterMessage {
+            display: none;
+            position: relative !important;
+            z-index: 10000 !important;
+            margin-top: 10px !important;
+            padding: 10px !important;
+            border-radius: 4px !important;
+        }
+        
+        /* Override any conflicting styles */
+        .footer-form-box * {
+            pointer-events: auto !important;
+        }
+        
+        .footer-form-box input,
+        .footer-form-box button,
+        .footer-form-box label {
+            pointer-events: auto !important;
+            z-index: 10000 !important;
+        }
+    </style>
+    
     <!-- Scripts -->
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
@@ -899,6 +1037,15 @@
 <script>
     // Initialize AOS
     AOS.init();
+    
+    // Auto-hide success messages after 5 seconds
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert-success');
+        alerts.forEach(function(alert) {
+            const bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        });
+    }, 5000);
 
     // FAQ Toggle Function
     function toggleFaq(element) {
@@ -984,20 +1131,7 @@
         initMap();
     });
 
-    // Back to top button
-    var btn = $('#button');
-    $(window).scroll(function() {
-        if ($(window).scrollTop() > 300) {
-            btn.addClass('show');
-        } else {
-            btn.removeClass('show');
-        }
-    });
-    
-    btn.on('click', function(e) {
-        e.preventDefault();
-        $('html, body').animate({scrollTop:0}, '300');
-    });
+    // Back to top button functionality is handled in footer.html
 
     // Body loaded class
     window.addEventListener('load', function(){

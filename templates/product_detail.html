@@ -499,7 +499,7 @@
                     </ul>
                     <form class="d-flex">
                         <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-                            <li><a href="#"><i class="fas fa-search"></i></a></li>
+    
                             <li>
                                 <button class="explore-btn" type="button" style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important; color: #FFFFFF !important; border: none !important; padding: 10px 24px !important; border-radius: 25px !important; font-weight: 600 !important; font-size: 0.95rem !important; text-shadow: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important; transition: all 0.3s ease !important;">Explore</button>
                             </li>
@@ -516,34 +516,38 @@
             <div class="row">
                 <!-- Product Gallery -->
                 <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
-                    <div class="product-gallery" style="display: flex; align-items: center; justify-content: center; padding-top: 80px; margin-top: 180px;">
-                        {% if product.main_image %}
-                            <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 60px;">
-                        {% else %}
-                            <!-- Fallback for specific products -->
-                            {% if category.name == "Size Graders" %}
-                                {% if product.name == "Apple Grader" %}
-                                    <img src="{% static 'web/apple_size_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                                {% elif product.name == "Orange Grader" %}
-                                    <img src="{% static 'web/orange_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                                {% else %}
-                                    <img src="{% static 'web/size_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                                {% endif %}
+                    {% if category.name == "Size Graders" and product.name == "Segritech Orange Grading Machine" %}
+                        <div class="product-gallery" style="display: flex; align-items: center; justify-content: center; padding-top: 40px; margin-top: 80px;">
+                            <img src="{% static 'web/orange_grader.png' %}" alt="{{ product.name }}" style="max-width: 60%; height: auto; margin-top: 0px; display: block; margin-left: auto; margin-right: auto;">
+                        </div>
+                    {% else %}
+                        <div class="product-gallery" style="display: flex; align-items: center; justify-content: center; padding-top: 80px; margin-top: 180px;">
+                            {% if product.main_image %}
+                                <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 60px;">
+                            {% else %}
+                                <!-- Fallback for specific products -->
+                                {% if category.name == "Size Graders" %}
+                                    {% if product.name == "Apple Grader" %}
+                                        <img src="{% static 'web/apple_size_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
+                                    {% else %}
+                                        <img src="{% static 'web/apple_size_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
+                                    {% endif %}
                             {% elif category.name == "Quality Graders" %}
                                 <img src="{% static 'web/quality_grader_updated.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 60px;">
                             {% elif category.name == "Weight Graders" %}
                                 <img src="{% static 'web/weight_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
                             {% elif category.name == "Cleaning Machines" %}
                                 <img src="{% static 'web/cleaning_machine.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                            {% elif category.name == "Packing Robots" %}
-                                <img src="{% static 'web/packing_robort.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
+                                        {% elif category.name == "Packing Robots" %}
+                <img src="{% static 'web/final segripack.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
                             {% else %}
                                 <div class="d-flex align-items-center justify-content-center h-100">
                                     <i class="fas fa-cogs fa-6x" style="color: var(--accent-green);"></i>
                                 </div>
                             {% endif %}
                         {% endif %}
-                    </div>
+                        </div>
+                    {% endif %}
                 </div>
                 
                 <!-- Product Info -->
@@ -566,7 +570,7 @@
                         
 
                         
-                        <div class="product-actions" style="display: flex; gap: 15px; margin-top: 25px;">
+                        <div class="product-actions" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 25px;">
                             <a href="https://wa.me/919014809973?text=Hi! I'm interested in {{ product.name }}. Could you please provide more information?" 
                                target="_blank" 
                                class="btn-whatsapp" 
@@ -585,15 +589,18 @@
                                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37, 211, 102, 0.3)';">
                                 <i class="fas fa-envelope" style="margin-right: 8px; font-size: 16px;"></i> Send Inquiry
                             </button>
+                            <a href="#" 
+                               class="btn-download-brochure" 
+                               onclick="downloadBrochure('{{ product.slug }}')"
+                               style="background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: none; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; min-width: 180px; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);"
+                               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 107, 107, 0.4)';"
+                               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 107, 107, 0.3)';">
+                                <i class="fas fa-download" style="margin-right: 8px; font-size: 16px;"></i> 
+                                Download Brochure
+                            </a>
                         </div>
                         
-                        {% if product.lead_time %}
-                            <div class="mt-3">
-                                <small class="text-muted">
-                                    <i class="fas fa-truck"></i> Lead Time: {{ product.lead_time }}
-                                </small>
-                            </div>
-                        {% endif %}
+
                     </div>
                 </div>
             </div>
@@ -774,90 +781,12 @@
         </div>
     </div>
 
-    <!-- footer section-->
-    <section class="footer-main-sec w-100 float-left padding-top padding-bottom bg-dark-black">
-        <div class="wrapper2">
-            <div class="footer-inner-section" style="display: grid; grid-template-columns: 2fr 1fr 1.5fr 2fr; gap: 40px; align-items: start; margin-bottom: 20px;">
-                <style>
-                    @media (max-width: 768px) {
-                        .footer-inner-section {
-                            grid-template-columns: 1fr !important;
-                            gap: 30px !important;
-                            text-align: center !important;
-                        }
-                    }
-                    @media (max-width: 992px) and (min-width: 769px) {
-                        .footer-inner-section {
-                            grid-template-columns: 1fr 1fr !important;
-                            gap: 30px !important;
-                        }
-                    }
-                </style>
-                <div class="footer-logo footer-box" style="padding: 30px;">
-                    <a href="{% url 'home' %}">
-                        <figure style="margin-bottom: 20px; height: auto; display: flex; align-items: center;">
-                            <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 120px; width: auto; object-fit: contain;">
-                        </figure>
-                    </a>
-                    <p class="mb-1" style="color: rgba(255,255,255,0.9); font-size: 0.9rem;">Copyright © 2023 SegriTech.</p>
-                    <p class="mb-3" style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">All Rights Reserved.</p>
-                    <div style="margin-top: 15px;">
-                        <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 10px; font-size: 0.9rem;">Social Media</span>
-                        <div style="display: flex; gap: 10px;">
-                            <a href="https://www.facebook.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-instagram"></i></a>
-                            <a href="https://pk.linkedin.com/" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-box" style="padding: 30px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">About</h4>
-                    <ul class="list-unstyled" style="margin: 0;">
-                        <li style="margin-bottom: 8px;"><a href="{% url 'about' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">About Company</a></li>
-                        <li style="margin-bottom: 8px;"><a href="{% url 'products' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Products</a></li>
-                        <li style="margin-bottom: 8px;"><a href="{% url 'contact' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Our Services</a></li>
-                        <li class="mb-0"><a href="{% url 'careers' %}" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Career Opportunities</a></li>
-                    </ul>
-                </div>
-                <div class="footer-box address-box" style="padding: 30px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Address</h4>
-                    <ul class="list-unstyled" style="margin: 0;">
-                        <li style="margin-bottom: 15px; color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;">
-                            <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            551 Swanston Street,<br>
-                            <span style="margin-left: 25px;">Melbourne, Victoria 3053 Australia</span>
-                        </li>
-                        <li style="margin-bottom: 12px;">
-                            <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            <a href="tel:+61383766284" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">+61 3 8376 6284</a>
-                        </li>
-                        <li class="mb-0">
-                            <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 10px; width: 15px;"></i>
-                            <a href="mailto:info@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem;">info@segritech.com</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-box footer-form-box" style="padding: 30px;">
-                    <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px;">Newsletter Signup</h4>
-                    <div style="margin-bottom: 15px;">
-                        <div style="display: flex; border-radius: 25px; overflow: hidden; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);">
-                            <input type="text" placeholder="Enter Your Email Address" style="flex: 1; background: transparent; border: none; padding: 12px 15px; color: white; font-size: 0.9rem; outline: none;">
-                            <button style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; border: none; padding: 12px 20px; font-weight: 600; cursor: pointer; font-size: 0.9rem; transition: all 0.3s ease;">Send</button>
-                        </div>
-                    </div>
-                    <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.8rem;">
-                        <input type="checkbox" id="policy" name="policy" style="margin-top: 2px;">
-                        <label for="policy" style="color: rgba(255,255,255,0.8); line-height: 1.4;">
-                            I agree to the <a href="#" style="color: var(--accent-green); text-decoration: none;">Privacy Policy</a>.
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <a id="button" class="show"></a>
-    <!-- footer section-->
+
+    
+    <!-- Footer -->
+    {% include 'includes/footer.html' %}
+    
+    
 
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -953,103 +882,58 @@
         $('#inquiryModal').on('hidden.bs.modal hidden.modal', function () {
             document.getElementById('inquiryForm').reset();
         });
+
+        // Download Brochure Function
+        function downloadBrochure(productSlug) {
+            console.log('Download brochure for:', productSlug);
+            
+            // Create brochure filename based on product
+            const brochureFiles = {
+                'inspection-box': 'Inspection box bro.pdf',
+                'apple-size-grader': 'Segritech Apple Size Grader_b.pdf',
+                'multifruit-optical-grader': 'quality_grader_b.pdf',
+                'segritech-weight-grading-machine': 'weight grading machine_b.pdf',
+                'precisionweight-wg-2500-density-grader': 'weight grading machine_b.pdf',
+                'weight-grader-1': 'weight grading machine_b.pdf',
+                'cleaning-machine-1': 'cleaning-machine-brochure.pdf',
+                'segriwax-waxing-cleaning-machine': 'Segriwax Waxing Machine.pdf',
+                'segripack-by-segritech': 'Segripack (1).pdf',
+                'packing-robot-1': 'Segripack (1).pdf',
+                'robopac-rp-5000-automated-packaging-system': 'Segripack (1).pdf',
+                'flexipack-fp-3000-adaptive-packaging-robot': 'Segripack (1).pdf'
+            };
+            
+            const brochureFile = brochureFiles[productSlug] || 'product-brochure.pdf';
+            const brochurePath = `/static/brochures/${brochureFile}`;
+            
+            // Try to download the brochure
+            fetch(brochurePath, { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        // File exists, proceed with download
+                        const link = document.createElement('a');
+                        link.href = brochurePath;
+                        link.download = brochureFile;
+                        link.target = '_blank';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        
+                        // Show success message
+                        alert('Brochure download started!');
+                    } else {
+                        // File doesn't exist
+                        alert('Brochure is being prepared. Please contact us for the latest product information.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking brochure:', error);
+                    alert('Brochure is currently being updated. Please contact us for the latest product information.');
+                });
+        }
     </script>
 
-    <!-- Media Coverage Section -->
-    <section class="media-coverage-section w-100 float-left" style="padding: 80px 0; background: #1a1a1a;">
-        <!-- Section Title -->
-        <div class="container">
-            <div class="generic-title text-center" style="margin-bottom: 70px;">
-                <h2 data-aos="fade-up" data-aos-duration="600" style="color: #FFFFFF; margin: 25px 0 20px 0; font-size: 3.2rem;">Media Coverage</h2>
-            </div>
 
-            <!-- Articles Slider -->
-            <div class="swiper mediaSwiper" style="padding: 20px 0;">
-                <div class="swiper-wrapper">
-                    <!-- LeadsOnTrees -->
-                    <div class="swiper-slide" style="width: 400px; margin-right: 30px;">
-                        <a href="https://leadontrees.com/article" target="_blank" style="text-decoration: none;">
-                            <div style="background: #2a2a2a; border-radius: 15px; padding: 25px; height: 250px; border: 1px solid rgba(76, 175, 80, 0.2);">
-                                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                                    <h4 style="color: #FFFFFF; margin: 0; font-size: 1.2rem;">LeadsOnTrees</h4>
-                                    <span style="background: rgba(76, 175, 80, 0.2); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 10px; font-size: 0.8rem;">Recent</span>
-                                </div>
-                                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; line-height: 1.6;">
-                                    SegriTech secures $100,000 in pre-seed funding to scale AI-powered grading solutions for fruits and vegetables—highlighting plans to improve AI accuracy and reach new markets.
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- New Indian Express -->
-                    <div class="swiper-slide" style="width: 400px; margin-right: 30px;">
-                        <a href="https://www.newindianexpress.com/cities/hyderabad/2024/jan/16/hyderabads-startup-ecosystem-founders-share-challenges-growth-and-aspirations-for-the-citys-future-2645123.html" target="_blank" style="text-decoration: none;">
-                            <div style="background: #2a2a2a; border-radius: 15px; padding: 25px; height: 250px; border: 1px solid rgba(76, 175, 80, 0.2);">
-                                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                                    <h4 style="color: #FFFFFF; margin: 0; font-size: 1.2rem;">New Indian Express</h4>
-                                    <span style="background: rgba(76, 175, 80, 0.2); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 10px; font-size: 0.8rem;">Founder Spotlight</span>
-                                </div>
-                                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; line-height: 1.6;">
-                                    Hetendra Singh featured among Hyderabad's prominent deep-tech startup founders
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Hindu BusinessLine -->
-                    <div class="swiper-slide" style="width: 400px; margin-right: 30px;">
-                        <a href="#" target="_blank" style="text-decoration: none;">
-                            <div style="background: #2a2a2a; border-radius: 15px; padding: 25px; height: 250px; border: 1px solid rgba(76, 175, 80, 0.2);">
-                                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                                    <h4 style="color: #FFFFFF; margin: 0; font-size: 1.2rem;">Hindu BusinessLine</h4>
-                                    <span style="background: rgba(76, 175, 80, 0.2); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 10px; font-size: 0.8rem;">Demo Day</span>
-                                </div>
-                                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; line-height: 1.6;">
-                                    SegriTech showcased at CIE-IIITH Demo Day with 12 deep-tech startups
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- StartUp Hyderabad -->
-                    <div class="swiper-slide" style="width: 400px; margin-right: 30px;">
-                        <a href="https://startuphyderabad.com/cie-iith-onboards-9-startups-for-its-accelerator-cohorts/" target="_blank" style="text-decoration: none;">
-                            <div style="background: #2a2a2a; border-radius: 15px; padding: 25px; height: 250px; border: 1px solid rgba(76, 175, 80, 0.2);">
-                                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                                    <h4 style="color: #FFFFFF; margin: 0; font-size: 1.2rem;">StartUp Hyderabad</h4>
-                                    <span style="background: rgba(76, 175, 80, 0.2); color: var(--accent-green); padding: 5px 12px; border-radius: 20px; margin-left: 10px; font-size: 0.8rem;">Accelerator</span>
-                                </div>
-                                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.95rem; line-height: 1.6;">
-                                    CIE-IITH onboards 9 startups including SegriTech for Avishkar cohort
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Swiper JS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            new Swiper(".mediaSwiper", {
-                slidesPerView: "auto",
-                spaceBetween: 30,
-                loop: true,
-                speed: 3000,
-                autoplay: {
-                    delay: 0,
-                    disableOnInteraction: false,
-                },
-                grabCursor: true,
-            });
-        });
-    </script>
 </body>
 
 </html> 

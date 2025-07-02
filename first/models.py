@@ -281,13 +281,13 @@ class JobApplication(models.Model):
 
 class BlogPost(models.Model):
     CATEGORY_CHOICES = [
-        ('ai_tech', 'AI Technology'),
-        ('sustainability', 'Sustainability'),
-        ('market_access', 'Market Access'),
         ('automation', 'Automation'),
         ('research', 'Research'),
         ('case_study', 'Case Study'),
         ('industry_news', 'Industry News'),
+        ('market-analysis', 'Market Analysis'),
+        ('technology', 'Technology'),
+        ('sustainability', 'Sustainability'),
     ]
     
     title = models.CharField(max_length=200)
@@ -299,13 +299,30 @@ class BlogPost(models.Model):
     
     # Content
     excerpt = models.CharField(max_length=300, help_text='Short description shown on cards')
-    content = models.TextField(help_text='Full blog post content')
-    featured_image = models.ImageField(upload_to='blog_images/')
+    content = models.TextField(help_text='Full blog post content (supports HTML)')
+    featured_image = models.ImageField(upload_to='blog_images/', help_text='Main image shown in cards and at top of article')
+    
+    # Additional Media Support
+    gallery_images = models.TextField(blank=True, help_text='JSON array of additional images for the blog post - format: [{"url": "/static/images/blog/image1.jpg", "caption": "Image caption", "alt": "Alt text"}]')
+    video_url = models.URLField(blank=True, help_text='YouTube/Vimeo URL for embedded video')
+    
+    # Custom Styling Support
+    custom_css = models.TextField(blank=True, help_text='Custom CSS styles for this blog post only. Use <style> tags.')
+    custom_js = models.TextField(blank=True, help_text='Custom JavaScript for interactive elements. Use <script> tags.')
+    
+    # Content Sections Support
+    content_sections = models.TextField(blank=True, help_text='JSON array for structured content sections - format: [{"type": "text|image|video|chart|quote", "content": "...", "style": "...", "order": 1}]')
+    
+    # External Links
+    external_url = models.URLField(blank=True, help_text='External URL (e.g., LinkedIn article link) - if provided, clicking will redirect to this URL')
     
     # Meta Information
     meta_title = models.CharField(max_length=200, blank=True)
     meta_description = models.CharField(max_length=300, blank=True)
     tags = models.CharField(max_length=200, blank=True, help_text='Comma-separated tags')
+    
+    # Reading Metrics
+    estimated_read_time = models.IntegerField(default=5, help_text='Estimated reading time in minutes')
     
     # Status
     is_published = models.BooleanField(default=False)
@@ -328,13 +345,13 @@ class BlogPost(models.Model):
     
     def get_category_display_with_icon(self):
         category_icons = {
-            'ai_tech': 'fas fa-robot',
-            'sustainability': 'fas fa-leaf',
-            'market_access': 'fas fa-globe',
             'automation': 'fas fa-cogs',
             'research': 'fas fa-microscope',
             'case_study': 'fas fa-chart-line',
             'industry_news': 'fas fa-newspaper',
+            'market-analysis': 'fas fa-chart-bar',
+            'technology': 'fas fa-laptop',
+            'sustainability': 'fas fa-leaf',
         }
         return {
             'name': self.get_category_display(),

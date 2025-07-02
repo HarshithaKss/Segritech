@@ -4,7 +4,7 @@
     <div class="wrapper">
         <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
             <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
-                <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 70px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
+                <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 130px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
             </a>
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                 data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
@@ -14,7 +14,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarToggle">
-                <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px; margin-right: 120px;">
+                <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px;">
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'home' %}" style="color: rgba(255,255,255,0.95) !important; font-weight: 500; font-size: 1rem; padding: 12px 18px !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); transition: all 0.3s ease;">Home</a>
                     </li>
@@ -46,6 +46,37 @@
                         <a class="nav-link" href="{% url 'careers' %}" style="color: rgba(255,255,255,0.95) !important; font-weight: 500; font-size: 1rem; padding: 12px 18px !important; text-shadow: 1px 1px 3px rgba(0,0,0,0.5); transition: all 0.3s ease;">Careers</a>
                     </li>
                 </ul>
+                
+                <!-- Explore Button - Positioned to the right -->
+                <div class="navbar-nav ml-auto" style="margin-right: 20px;">
+                    <a href="{% url 'explore' %}" class="explore-btn" style="
+                        background: linear-gradient(135deg, #4CAF50, #66BB6A);
+                        color: #FFFFFF !important;
+                        text-decoration: none;
+                        padding: 12px 25px;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        font-size: 1rem;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+                        border: 2px solid transparent;
+                        text-shadow: none;
+                    " onmouseover="
+                        this.style.transform='translateY(-2px)';
+                        this.style.boxShadow='0 8px 25px rgba(76, 175, 80, 0.4)';
+                        this.style.background='linear-gradient(135deg, #66BB6A, #4CAF50)';
+                    " onmouseout="
+                        this.style.transform='translateY(0)';
+                        this.style.boxShadow='0 4px 15px rgba(76, 175, 80, 0.3)';
+                        this.style.background='linear-gradient(135deg, #4CAF50, #66BB6A)';
+                    ">
+                        <i class="fas fa-compass" style="font-size: 1.1rem;"></i>
+                        <span>Explore</span>
+                    </a>
+                </div>
             </div>
         </nav>
     </div>
