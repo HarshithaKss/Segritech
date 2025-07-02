@@ -9,31 +9,23 @@ class Command(BaseCommand):
         subscribers_data = [
             {
                 'email': 'farmer@example.com',
-                'name': 'John Smith',
-                'subscription_date': timezone.now(),
-                'is_active': True,
-                'subscription_type': 'farmer'
+                'subscribed_at': timezone.now(),
+                'is_active': True
             },
             {
                 'email': 'exporter@example.com',
-                'name': 'Sarah Johnson',
-                'subscription_date': timezone.now(),
-                'is_active': True,
-                'subscription_type': 'exporter'
+                'subscribed_at': timezone.now(),
+                'is_active': True
             },
             {
                 'email': 'distributor@example.com',
-                'name': 'Michael Chen',
-                'subscription_date': timezone.now(),
-                'is_active': True,
-                'subscription_type': 'distributor'
+                'subscribed_at': timezone.now(),
+                'is_active': True
             },
             {
                 'email': 'processor@example.com',
-                'name': 'Emma Davis',
-                'subscription_date': timezone.now(),
-                'is_active': True,
-                'subscription_type': 'processor'
+                'subscribed_at': timezone.now(),
+                'is_active': True
             }
         ]
 

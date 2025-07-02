@@ -28,52 +28,42 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self.stdout.write('Setting up brochure files...')
         
-        # Map of product slugs to their brochure files
+        # Map of product names to their brochure files
         brochure_mapping = {
-            'inspection-box': 'Inspection box bro.pdf',
-            'apple-size-grader': 'Segritech Apple Size Grader_b.pdf',
-            'multifruit-optical-grader': 'quality_grader_b.pdf',
-            'segritech-weight-grading-machine': 'weight grading machine_b.pdf',
-            'cleaning-machine-1': 'cleaning-machine-brochure.pdf',
-            'segriwax-waxing-cleaning-machine': 'Segriwax Waxing Machine.pdf',
-            'segripack-by-segritech': 'Segripack (1).pdf',
+            'Segritech Apple Size Grading Machine': 'Segritech Apple Size Grader_b.pdf',
+            'Segritech Orange Grading Machine': None,  # No brochure yet
+            'Multifruit Optical Grader': 'multifruit-optical-grader-brochure.pdf',
+            'PrecisionWeight WG-2500 Density Grader': 'weight grading machine_b.pdf',
+            'Segriwax - Waxing & Cleaning Machine': 'segriwax-waxing-machine-brochure.pdf',
+            'SegriPack by Segritech': 'Segripack (1).pdf'
         }
-        
-        # Get all products
-        products = Product.objects.all()
-        
-        for product in products:
+
+        for product_name, brochure_filename in brochure_mapping.items():
             try:
-                # If product has a brochure mapping
-                if product.slug in brochure_mapping:
-                    brochure_filename = brochure_mapping[product.slug]
-                    brochure_path = self.find_brochure(brochure_filename)
-                    
-                    # Check if brochure file exists in any location
-                    if brochure_path:
-                        with open(brochure_path, 'rb') as f:
-                            product.brochure.save(brochure_filename, File(f), save=True)
-                        self.stdout.write(
-                            self.style.SUCCESS(f'✓ Set brochure for {product.name}: {brochure_filename} (found at {brochure_path})')
-                        )
-                    else:
-                        # Clear brochure field if file doesn't exist
-                        product.brochure = None
-                        product.save()
-                        self.stdout.write(
-                            self.style.WARNING(f'! Brochure file not found for {product.name}: {brochure_filename}')
-                        )
-                else:
-                    # Clear brochure field for products without mappings
-                    product.brochure = None
-                    product.save()
+                product = Product.objects.get(name=product_name)
+                
+                if not brochure_filename:
+                    self.stdout.write(f'! No brochure available yet for {product_name}')
+                    continue
+                
+                brochure_path = self.find_brochure(brochure_filename)
+                if brochure_path:
+                    with open(brochure_path, 'rb') as f:
+                        product.brochure.save(brochure_filename, File(f), save=True)
                     self.stdout.write(
-                        self.style.WARNING(f'! No brochure mapping for {product.name}')
+                        self.style.SUCCESS(f'✓ Set brochure for {product_name}: {brochure_filename}')
                     )
-                    
+                else:
+                    self.stdout.write(
+                        self.style.WARNING(f'! Brochure file not found for {product_name}: {brochure_filename}')
+                    )
+            except Product.DoesNotExist:
+                self.stdout.write(
+                    self.style.WARNING(f'! Product not found: {product_name}')
+                )
             except Exception as e:
                 self.stdout.write(
-                    self.style.ERROR(f'✗ Error setting brochure for {product.name}: {str(e)}')
+                    self.style.ERROR(f'! Error setting brochure for {product_name}: {str(e)}')
                 )
-                
-        self.stdout.write(self.style.SUCCESS('\nBrochure setup completed!')) 
+
+        self.stdout.write('\nBrochure setup completed!') 
