@@ -439,6 +439,116 @@
                  min-height: 320px;
              }
          }
+
+        /* Product Features */
+        .product-features {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-green);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+        }
+
+        .feature-text {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* Navigation Arrows */
+        .nav-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .nav-arrow {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-green);
+            cursor: pointer;
+            transition: var(--transition);
+            position: absolute;
+            pointer-events: auto;
+        }
+
+        .nav-arrow:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+
+        .nav-arrow.prev {
+            left: 20px;
+        }
+
+        .nav-arrow.next {
+            right: 20px;
+        }
+
+        /* Products Link */
+        .products-link {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px;
+            margin-bottom: 8px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .products-link:hover {
+            transform: rotate(45deg);
+            background: var(--primary-green);
+            border-color: var(--primary-green);
+            color: white;
+        }
     </style>
 </head>
 
@@ -448,18 +558,56 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <div class="hero-content" data-aos="fade-up" data-aos-duration="800">
-                <div class="hero-badge">
-                    <i class="fas fa-industry" style="margin-right: 8px;"></i>
-                    AGRICULTURAL TECHNOLOGY
+            <div class="hero-content">
+                <span class="hero-badge">Our Products</span>
+                <h1 class="hero-title">Innovative Agricultural Solutions</h1>
+                <p class="hero-subtitle">Discover our range of cutting-edge agricultural technology solutions designed to revolutionize farming practices</p>
+                
+                <!-- Product Features -->
+                <div class="product-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <span class="feature-text">Precise Detection</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <span class="feature-text">Real-time Processing</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <span class="feature-text">Higher Efficiency</span>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <span class="feature-text">Time Saving</span>
+                    </div>
                 </div>
-                <h1 class="hero-title">Product Categories</h1>
-                <p class="hero-subtitle">
-                    Discover our comprehensive range of AI-powered agricultural machines designed to revolutionize crop processing, reduce post-harvest losses, and maximize your agricultural productivity.
-                </p>
             </div>
         </div>
+
+        <!-- Navigation Arrows -->
+        <div class="nav-arrows">
+            <button class="nav-arrow prev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="nav-arrow next">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
     </section>
+
+    <!-- Products Link -->
+    <a href="/products/" class="products-link">
+        <i class="fas fa-cog"></i>
+    </a>
 
     <!-- Products Section -->
     <section class="products-section">

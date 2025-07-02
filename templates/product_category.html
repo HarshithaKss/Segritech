@@ -583,7 +583,7 @@
                                         <a href="{% url 'product_detail' category.slug product.slug %}" style="flex: 1; min-width: 120px; background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; text-decoration: none; padding: 12px 20px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
                                             <i class="fas fa-info-circle"></i> View Details
                                         </a>
-                                        <a href="#" onclick="downloadBrochure('{{ product.slug }}')" style="background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);">
+                                        <a href="#" onclick="downloadBrochure('{{ product.slug }}')" data-product-slug="{{ product.slug }}" data-brochure-url="{{ product.brochure.url|default:'' }}" style="background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);">
                                             <i class="fas fa-download"></i>
                                         </a>
                                         <a href="#" onclick="openInquiryModal('{{ product.name }}')" style="background: rgba(255, 255, 255, 0.1); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2);">
@@ -666,53 +666,68 @@
             once: true
         });
 
+        // Navigation dropdown
+        const $dropdown = $(".dropdown");
+        const $dropdownToggle = $(".dropdown-toggle");
+        const $dropdownMenu = $(".dropdown-menu");
+        const showClass = "show";
+
+        $(window).on("load resize", function() {
+            if (this.matchMedia("(min-width: 768px)").matches) {
+                $dropdown.hover(
+                function() {
+                    const $this = $(this);
+                    $this.addClass(showClass);
+                    $this.find($dropdownToggle).attr("aria-expanded", "true");
+                    $this.find($dropdownMenu).addClass(showClass);
+                },
+                function() {
+                    const $this = $(this);
+                    $this.removeClass(showClass);
+                    $this.find($dropdownToggle).attr("aria-expanded", "false");
+                    $this.find($dropdownMenu).removeClass(showClass);
+                }
+                );
+            } else {
+                $dropdown.off("mouseenter mouseleave");
+            }
+        });
+
+        // Loader
+        $(window).on('load', function(){ 
+            $('.loader').fadeOut();
+            $('.loader-mask').delay(350).fadeOut('slow');
+        });
+
+        // Body loaded class
+        window.addEventListener('load', function(){
+            document.querySelector('body').classList.add("loaded");
+        });
+
+        // Sticky apply button visibility
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 500) {
+                $('.sticky-apply').addClass('show');
+            } else {
+                $('.sticky-apply').removeClass('show');
+            }
+        });
+
         // Download Brochure Function
         function downloadBrochure(productSlug) {
-            console.log('Download brochure for:', productSlug);
-            
-            // Create brochure filename based on product
-            const brochureFiles = {
-                'inspection-box': 'Inspection box bro.pdf',
-                'apple-size-grader': 'Segritech Apple Size Grader_b.pdf',
-                'multifruit-optical-grader': 'quality_grader_b.pdf',
-                'segritech-weight-grading-machine': 'weight grading machine_b.pdf',
-                'precisionweight-wg-2500-density-grader': 'weight grading machine_b.pdf',
-                'weight-grader-1': 'weight grading machine_b.pdf',
-                'cleaning-machine-1': 'cleaning-machine-brochure.pdf',
-                'segriwax-waxing-cleaning-machine': 'Segriwax Waxing Machine.pdf',
-                'segripack-by-segritech': 'Segripack (1).pdf',
-                'packing-robot-1': 'Segripack (1).pdf',
-                'robopac-rp-5000-automated-packaging-system': 'Segripack (1).pdf',
-                'flexipack-fp-3000-adaptive-packaging-robot': 'Segripack (1).pdf'
-            };
-            
-            const brochureFile = brochureFiles[productSlug] || 'product-brochure.pdf';
-            const brochurePath = `/static/brochures/${brochureFile}`;
-            
-            // Try to download the brochure
-            fetch(brochurePath, { method: 'HEAD' })
-                .then(response => {
-                    if (response.ok) {
-                        // File exists, proceed with download
-                        const link = document.createElement('a');
-                        link.href = brochurePath;
-                        link.download = brochureFile;
-                        link.target = '_blank';
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                        
-                        // Show success message
-                        alert('Brochure download started!');
-                    } else {
-                        // File doesn't exist
-                        alert('Brochure is being prepared. Please contact us for the latest product information.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error checking brochure:', error);
-                    alert('Brochure is currently being updated. Please contact us for the latest product information.');
-                });
+            try {
+                // Get the brochure URL from the data attribute
+                const brochureUrl = document.querySelector(`[data-product-slug="${productSlug}"]`).dataset.brochureUrl;
+                if (brochureUrl && brochureUrl.trim() !== '') {
+                    window.location.href = brochureUrl;
+                    alert('Brochure download started!');
+                } else {
+                    alert('Brochure is being prepared. Please contact us for the latest product information.');
+                }
+            } catch (error) {
+                console.error('Error downloading brochure:', error);
+                alert('Brochure is being prepared. Please contact us for the latest product information.');
+            }
         }
 
         // Open Inquiry Modal Function (placeholder)

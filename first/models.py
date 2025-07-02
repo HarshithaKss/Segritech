@@ -164,6 +164,7 @@ class JobPosting(models.Model):
     ]
     
     title = models.CharField(max_length=200)
+    company_logo = models.ImageField(upload_to='company_logos/', blank=True, null=True, help_text='Company logo to display with the job posting')
     department = models.CharField(max_length=20, choices=DEPARTMENT_CHOICES)
     job_type = models.CharField(max_length=20, choices=JOB_TYPE_CHOICES)
     experience_level = models.CharField(max_length=20, choices=EXPERIENCE_LEVEL_CHOICES)

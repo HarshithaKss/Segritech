@@ -156,7 +156,7 @@ class JobPostingAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'department', 'job_type', 'experience_level', 'location', 'remote_allowed')
+            'fields': ('title', 'company_logo', 'department', 'job_type', 'experience_level', 'location', 'remote_allowed')
         }),
         ('Job Details', {
             'fields': ('description', 'responsibilities', 'requirements', 'nice_to_have', 'benefits')

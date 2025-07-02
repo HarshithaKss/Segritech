@@ -413,6 +413,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
+                    {% if job.company_logo %}
+                    <div class="company-logo mb-4" data-aos="fade-up" data-aos-duration="500">
+                        <img src="{{ job.company_logo.url }}" alt="Company Logo" style="max-height: 80px; width: auto;">
+                    </div>
+                    {% endif %}
                     <span class="job-badge badge-{{ job.job_type }}">
                         {{ job.get_job_type_display }}
                     </span>
@@ -608,6 +613,9 @@
         <div class="container">
             <div class="sticky-apply-content">
                 <div class="sticky-job-info">
+                    {% if job.company_logo %}
+                    <img src="{{ job.company_logo.url }}" alt="Company Logo" style="max-height: 40px; width: auto; margin-bottom: 8px;">
+                    {% endif %}
                     <h5>{{ job.title }}</h5>
                     <p>{{ job.salary_range }}</p>
                 </div>

@@ -397,6 +397,12 @@
         function downloadBrochure(productSlug) {
             console.log('Download brochure for:', productSlug);
             
+            // Special case for orange grader
+            if (productSlug === 'segritech-orange-grading-machine' || productSlug === 'orange-grader') {
+                alert('Brochure is being prepared. Please contact us for the latest product information.');
+                return;
+            }
+            
             // Create brochure filename based on product
             const brochureFiles = {
                 'inspection-box': 'Inspection box bro.pdf',
