@@ -2602,3 +2602,76 @@ body{
 }
 
 /* Loader Styles */
+
+/* Blog Content Styles */
+.article-content {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.blog-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #000000;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.blog-content p {
+    margin-bottom: 1.5rem;
+}
+
+.blog-content ul, 
+.blog-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.blog-content li {
+    margin-bottom: 0.5rem;
+}
+
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 2rem 0;
+    border-radius: 8px;
+}
+
+/* Bullet point styles */
+.blog-content ul {
+    list-style: none;
+}
+
+.blog-content ul li:before {
+    content: "•";
+    color: #2E7D32;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-left: -1em;
+}
+
+/* Numbered list styles */
+.blog-content ol {
+    counter-reset: item;
+    list-style: none;
+}
+
+.blog-content ol li {
+    counter-increment: item;
+    margin-bottom: 0.5rem;
+}
+
+.blog-content ol li:before {
+    content: counter(item) ".";
+    color: #2E7D32;
+    font-weight: bold;
+    display: inline-block;
+    width: 1.5em;
+    margin-left: -1.5em;
+}
+
+/* Add this after the existing styles */

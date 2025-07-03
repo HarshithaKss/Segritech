@@ -583,9 +583,11 @@
                                         <a href="{% url 'product_detail' category.slug product.slug %}" style="flex: 1; min-width: 120px; background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; text-decoration: none; padding: 12px 20px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
                                             <i class="fas fa-info-circle"></i> View Details
                                         </a>
-                                        <a href="#" onclick="downloadBrochure('{{ product.slug }}')" data-product-slug="{{ product.slug }}" data-brochure-url="{{ product.brochure.url|default:'' }}" style="background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);">
+                                        {% if product.brochure %}
+                                        <a href="{{ product.brochure.url }}" style="background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);">
                                             <i class="fas fa-download"></i>
                                         </a>
+                                        {% endif %}
                                         <a href="#" onclick="openInquiryModal('{{ product.name }}')" style="background: rgba(255, 255, 255, 0.1); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2);">
                                             <i class="fas fa-envelope"></i>
                                         </a>
@@ -712,23 +714,6 @@
                 $('.sticky-apply').removeClass('show');
             }
         });
-
-        // Download Brochure Function
-        function downloadBrochure(productSlug) {
-            try {
-                // Get the brochure URL from the data attribute
-                const brochureUrl = document.querySelector(`[data-product-slug="${productSlug}"]`).dataset.brochureUrl;
-                if (brochureUrl && brochureUrl.trim() !== '') {
-                    window.location.href = brochureUrl;
-                    alert('Brochure download started!');
-                } else {
-                    alert('Brochure is being prepared. Please contact us for the latest product information.');
-                }
-            } catch (error) {
-                console.error('Error downloading brochure:', error);
-                alert('Brochure is being prepared. Please contact us for the latest product information.');
-            }
-        }
 
         // Open Inquiry Modal Function (placeholder)
         function openInquiryModal(productName) {
