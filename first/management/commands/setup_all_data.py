@@ -86,23 +86,28 @@ class Command(BaseCommand):
             if not self.run_command_safely('create_third_article', 'creating third article'):
                 errors.append('Failed to create third article')
             
+            # Set up blog images
+            self.stdout.write('\n5c. Setting up blog images...')
+            if not self.run_command_safely('setup_blog_images', 'setting up blog images'):
+                errors.append('Failed to set up blog images')
+            
             # Fix blog content formatting
-            self.stdout.write('\n5c. Fixing blog content formatting...')
+            self.stdout.write('\n5d. Fixing blog content formatting...')
             if not self.run_command_safely('fix_blog_content', 'fixing blog content'):
                 errors.append('Failed to fix blog content')
             
             # Remove unwanted blog posts
-            self.stdout.write('\n5d. Removing specific blog posts...')
+            self.stdout.write('\n5e. Removing specific blog posts...')
             if not self.run_command_safely('remove_dynamic_blog_example', 'removing dynamic blog example'):
                 errors.append('Failed to remove dynamic blog example')
             
             # Set up featured blogs for index page
-            self.stdout.write('\n5e. Setting up featured blogs for index page...')
+            self.stdout.write('\n5f. Setting up featured blogs for index page...')
             if not self.run_command_safely('manage_featured_blogs', 'setting up featured blogs'):
                 errors.append('Failed to set up featured blogs')
             
             # Add media coverage articles
-            self.stdout.write('\n5f. Adding media coverage articles...')
+            self.stdout.write('\n5g. Adding media coverage articles...')
             if not self.run_command_safely('populate_media_articles', 'adding media coverage'):
                 errors.append('Failed to add media coverage')
             
@@ -111,8 +116,13 @@ class Command(BaseCommand):
             if not self.run_command_safely('add_sample_jobs', 'adding job postings'):
                 errors.append('Failed to add job postings')
             
+            # Clean up any duplicate jobs
+            self.stdout.write('\n6b. Cleaning up duplicate jobs...')
+            if not self.run_command_safely('cleanup_duplicate_jobs', 'cleaning up duplicate jobs'):
+                errors.append('Failed to clean up duplicate jobs')
+            
             # Set up featured jobs
-            self.stdout.write('\n6b. Setting up featured jobs...')
+            self.stdout.write('\n6c. Setting up featured jobs...')
             if not self.run_command_safely('manage_featured_jobs', 'managing featured jobs'):
                 errors.append('Failed to manage featured jobs')
             

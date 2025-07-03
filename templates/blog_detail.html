@@ -37,13 +37,13 @@
             --accent-green: #66BB6A;
             --dark-green: #1B5E20;
             --primary-green: #2E7D32;
-            --background-dark: #0a0a0a;
-            --background-article: #ffffff;
-            --text-primary: #000000;
-            --text-secondary: #333333;
-            --text-muted: #555555;
-            --border-color: #e5e5e5;
-            --highlight-bg: #f8f9fa;
+            --background-dark: #1a1a1a;
+            --background-article: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.85);
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --highlight-bg: rgba(255, 255, 255, 0.05);
         }
         
         * {
@@ -62,19 +62,19 @@
         
         /* Navigation Override for Blog */
         .navbar {
-            background: rgba(240, 240, 240, 1) !important;
+            background: rgba(26, 26, 26, 0.95) !important;
             backdrop-filter: blur(10px);
-            border-bottom: 2px solid #d0d0d0;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
         }
         
         .navbar-brand, .nav-link {
-            color: #000000 !important;
+            color: var(--text-primary) !important;
             text-shadow: none !important;
         }
         
         .navbar-brand img {
-            filter: none !important;
+            filter: brightness(1) !important;
         }
         
         .nav-link:hover {
@@ -83,22 +83,22 @@
         
         /* Force override all navbar text colors with highest specificity */
         body .navbar-main-sec .navbar-nav .nav-item .nav-link[style] {
-            color: #000000 !important;
+            color: var(--text-primary) !important;
             text-shadow: none !important;
         }
         
         body .navbar-main-sec .navbar-nav .nav-item .nav-link {
-            color: #000000 !important;
+            color: var(--text-primary) !important;
             text-shadow: none !important;
         }
         
         body .navbar-main-sec .navbar-nav a[style] {
-            color: #000000 !important;
+            color: var(--text-primary) !important;
             text-shadow: none !important;
         }
         
         body .navbar-main-sec a[style*="color"] {
-            color: #000000 !important;
+            color: var(--text-primary) !important;
             text-shadow: none !important;
         }
         
@@ -133,7 +133,7 @@
         
         /* Blog Header */
         .blog-header {
-            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(26, 26, 26, 0.98) 100%);
             padding: 120px 0 80px 0;
             border-bottom: 1px solid var(--border-color);
         }
@@ -153,7 +153,7 @@
             border-radius: 20px;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
         }
         
         .back-button:hover {
@@ -393,7 +393,7 @@
         
         /* Related Articles */
         .related-section {
-            background: var(--highlight-bg);
+            background: rgba(255, 255, 255, 0.02);
             padding: 80px 0;
             margin-top: 80px;
             border-top: 1px solid var(--border-color);
@@ -403,13 +403,13 @@
             font-family: 'Crimson Text', serif;
             font-size: 2.2rem;
             font-weight: 600;
-            color: #000000;
+            color: var(--text-primary);
             text-align: center;
             margin-bottom: 50px;
         }
         
         .related-card {
-            background: white;
+            background: rgba(255, 255, 255, 0.02);
             border-radius: 12px;
             padding: 24px;
             height: 100%;
@@ -417,14 +417,15 @@
             color: inherit;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .related-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
             text-decoration: none;
             color: inherit;
+            border-color: var(--accent-green);
         }
         
         .related-card .category-tag {
@@ -435,19 +436,19 @@
         
         .related-card h5 {
             font-weight: 600;
-            color: #000000;
+            color: var(--text-primary);
             margin-bottom: 12px;
             line-height: 1.4;
         }
         
         .related-card p {
-            color: #333333;
+            color: var(--text-secondary);
             margin-bottom: 16px;
             line-height: 1.5;
         }
         
         .related-meta {
-            color: #555555;
+            color: var(--text-muted);
             font-size: 0.85rem;
             display: flex;
             align-items: center;
@@ -617,7 +618,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <!-- Article Body -->
-                    <div class="article-body bg-white rounded-lg shadow-sm p-4 p-md-5" data-aos="fade-up" data-aos-duration="600">
+                    <div class="article-body bg-white p-4 p-md-5" data-aos="fade-up" data-aos-duration="600">
                         <style>
                             .blog-content {
                                 font-size: 1.1rem;
@@ -667,7 +668,6 @@
                                 height: auto;
                                 margin: 2rem 0;
                                 border-radius: 8px;
-                                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                             }
                             .blog-content a {
                                 color: #2E7D32;
@@ -691,7 +691,7 @@
                             <i class="fas fa-external-link-alt"></i>
                             Original Article
                         </h6>
-                        <p style="color: #333333; margin-bottom: 16px;">
+                        <p style="color: var(--text-secondary); margin-bottom: 16px;">
                             This article was originally published on an external platform. You can read the original version here:
                         </p>
                         <a href="{{ blog_post.external_url }}" target="_blank" rel="noopener noreferrer" class="external-link-btn">
@@ -755,21 +755,21 @@
             // Get all nav links
             const navLinks = document.querySelectorAll('.navbar-main-sec .nav-link');
             navLinks.forEach(function(link) {
-                link.style.setProperty('color', '#000000', 'important');
+                link.style.setProperty('color', '#ffffff', 'important');
                 link.style.setProperty('text-shadow', 'none', 'important');
             });
             
             // Also target any anchor tags in navbar
             const navAnchors = document.querySelectorAll('.navbar-main-sec a');
             navAnchors.forEach(function(anchor) {
-                anchor.style.setProperty('color', '#000000', 'important');
-                anchor.style.setProperty('text-shadow', 'none', 'important');
+                anchor.style.setProperty('color', '#ffffff', 'important');
+                link.style.setProperty('text-shadow', 'none', 'important');
             });
             
-            // Force dropdown items to be black too
+            // Force dropdown items to be white too
             const dropdownItems = document.querySelectorAll('.navbar-main-sec .dropdown-item');
             dropdownItems.forEach(function(item) {
-                item.style.setProperty('color', '#000000', 'important');
+                item.style.setProperty('color', '#ffffff', 'important');
                 item.style.setProperty('text-shadow', 'none', 'important');
             });
             
