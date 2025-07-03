@@ -541,8 +541,25 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-    {% include 'includes/navigation.html' %}
+    <div class="loader-mask">
+        <div class="loader">
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Override navigation for blog detail -->
+    <div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
+        <div class="wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
+                <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
+                    <img src="{% static 'logo/Segregation Simplified_logo_for_blog_pages.png' %}" alt="SegriTech-logo" style="max-height: 130px !important; width: auto !important; object-fit: contain !important; filter: none !important;">
+                </a>
+                <!-- Rest of the navigation -->
+                {% include 'includes/navigation.html' with skip_logo=True %}
+            </nav>
+        </div>
+    </div>
     
     <!-- Blog Header -->
     <header class="blog-header">
