@@ -37,11 +37,11 @@
             --accent-green: #66BB6A;
             --dark-green: #1B5E20;
             --primary-green: #2E7D32;
-            --background-dark: #ffffff;
+            --background-dark: #0a0a0a;
             --background-article: #ffffff;
-            --text-primary: #333333;
-            --text-secondary: #555555;
-            --text-muted: #777777;
+            --text-primary: #000000;
+            --text-secondary: #333333;
+            --text-muted: #555555;
             --border-color: #e5e5e5;
             --highlight-bg: #f8f9fa;
         }
@@ -74,7 +74,7 @@
         }
         
         .navbar-brand img {
-            filter: brightness(1) !important;
+            filter: none !important;
         }
         
         .nav-link:hover {
@@ -83,22 +83,22 @@
         
         /* Force override all navbar text colors with highest specificity */
         body .navbar-main-sec .navbar-nav .nav-item .nav-link[style] {
-            color: var(--text-primary) !important;
+            color: #000000 !important;
             text-shadow: none !important;
         }
         
         body .navbar-main-sec .navbar-nav .nav-item .nav-link {
-            color: var(--text-primary) !important;
+            color: #000000 !important;
             text-shadow: none !important;
         }
         
         body .navbar-main-sec .navbar-nav a[style] {
-            color: var(--text-primary) !important;
+            color: #000000 !important;
             text-shadow: none !important;
         }
         
         body .navbar-main-sec a[style*="color"] {
-            color: var(--text-primary) !important;
+            color: #000000 !important;
             text-shadow: none !important;
         }
         
@@ -133,7 +133,7 @@
         
         /* Blog Header */
         .blog-header {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(26, 26, 26, 0.98) 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             padding: 120px 0 80px 0;
             border-bottom: 1px solid var(--border-color);
         }
@@ -153,7 +153,7 @@
             border-radius: 20px;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
-            background: rgba(255, 255, 255, 0.05);
+            background: white;
         }
         
         .back-button:hover {
@@ -393,7 +393,7 @@
         
         /* Related Articles */
         .related-section {
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--highlight-bg);
             padding: 80px 0;
             margin-top: 80px;
             border-top: 1px solid var(--border-color);
@@ -403,13 +403,13 @@
             font-family: 'Crimson Text', serif;
             font-size: 2.2rem;
             font-weight: 600;
-            color: var(--text-primary);
+            color: #000000;
             text-align: center;
             margin-bottom: 50px;
         }
         
         .related-card {
-            background: rgba(255, 255, 255, 0.02);
+            background: white;
             border-radius: 12px;
             padding: 24px;
             height: 100%;
@@ -417,15 +417,14 @@
             color: inherit;
             transition: all 0.3s ease;
             border: 1px solid var(--border-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         
         .related-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
             text-decoration: none;
             color: inherit;
-            border-color: var(--accent-green);
         }
         
         .related-card .category-tag {
@@ -436,19 +435,19 @@
         
         .related-card h5 {
             font-weight: 600;
-            color: var(--text-primary);
+            color: #000000;
             margin-bottom: 12px;
             line-height: 1.4;
         }
         
         .related-card p {
-            color: var(--text-secondary);
+            color: #333333;
             margin-bottom: 16px;
             line-height: 1.5;
         }
         
         .related-meta {
-            color: var(--text-muted);
+            color: #555555;
             font-size: 0.85rem;
             display: flex;
             align-items: center;
@@ -618,19 +617,18 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <!-- Article Body -->
-                    <div class="article-body" data-aos="fade-up" data-aos-duration="600">
+                    <div class="article-body bg-white rounded-lg shadow-sm p-4 p-md-5" data-aos="fade-up" data-aos-duration="600">
                         <style>
                             .blog-content {
                                 font-size: 1.1rem;
                                 line-height: 1.8;
-                                color: var(--text-primary);
+                                color: #333;
                             }
                             .blog-content p {
                                 margin-bottom: 1.5rem;
-                                color: var(--text-primary);
                             }
                             .blog-content h1, .blog-content h2, .blog-content h3 {
-                                color: var(--text-primary);
+                                color: #2E7D32;
                                 margin: 2rem 0 1rem;
                                 font-weight: 600;
                             }
@@ -640,7 +638,6 @@
                             .blog-content ul, .blog-content ol {
                                 margin-bottom: 1.5rem;
                                 padding-left: 1.5rem;
-                                color: var(--text-primary);
                             }
                             .blog-content ul {
                                 list-style: none;
@@ -649,11 +646,10 @@
                                 position: relative;
                                 margin-bottom: 0.75rem;
                                 padding-left: 1.5rem;
-                                color: var(--text-primary);
                             }
                             .blog-content ul li:before {
                                 content: "•";
-                                color: var(--accent-green);
+                                color: #2E7D32;
                                 font-weight: bold;
                                 position: absolute;
                                 left: 0;
@@ -665,23 +661,22 @@
                             .blog-content ol li {
                                 margin-bottom: 0.75rem;
                                 padding-left: 0.5rem;
-                                color: var(--text-primary);
                             }
                             .blog-content img {
                                 max-width: 100%;
                                 height: auto;
                                 margin: 2rem 0;
                                 border-radius: 8px;
-                                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+                                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
                             }
                             .blog-content a {
-                                color: var(--accent-green);
+                                color: #2E7D32;
                                 text-decoration: none;
                                 border-bottom: 1px solid transparent;
                                 transition: border-color 0.3s ease;
                             }
                             .blog-content a:hover {
-                                border-bottom-color: var(--accent-green);
+                                border-bottom-color: #2E7D32;
                             }
                         </style>
                         <div class="blog-content">
@@ -696,7 +691,7 @@
                             <i class="fas fa-external-link-alt"></i>
                             Original Article
                         </h6>
-                        <p style="color: var(--text-secondary); margin-bottom: 16px;">
+                        <p style="color: #333333; margin-bottom: 16px;">
                             This article was originally published on an external platform. You can read the original version here:
                         </p>
                         <a href="{{ blog_post.external_url }}" target="_blank" rel="noopener noreferrer" class="external-link-btn">
@@ -782,7 +777,7 @@
             const logoImg = document.querySelector('.navbar-main-sec .navbar-brand img');
             if (logoImg) {
                 // Keep original SegriTech logo path
-                logoImg.src = '/static/logo/Segregation Simplified_logo_for_blog_pages.png';
+                logoImg.src = '/static/new_logo/IMG-5466-removebg.png';
                 // Remove all filters to show original colors
                 logoImg.removeAttribute('style');
                 logoImg.style.setProperty('max-height', '130px', 'important');
