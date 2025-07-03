@@ -729,7 +729,9 @@
     
     <!-- Scripts -->
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
     
     <!-- Custom CSS for this blog post -->
@@ -744,6 +746,20 @@
     
     <!-- Initialize AOS -->
     <script>
+        // Change logo specifically for blog detail page
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoImg = document.querySelector('.navbar-main-sec .navbar-brand img');
+            if (logoImg) {
+                logoImg.src = "{% static 'logo/Segregation Simplified_logo_for_blog_pages.png' %}";
+                logoImg.style.setProperty('max-height', '130px', 'important');
+                logoImg.style.setProperty('width', 'auto', 'important');
+                logoImg.style.setProperty('object-fit', 'contain', 'important');
+                logoImg.style.setProperty('filter', 'none', 'important');
+                logoImg.style.setProperty('-webkit-filter', 'none', 'important');
+            }
+        });
+
+        // Initialize AOS
         AOS.init({
             duration: 800,
             once: true,
