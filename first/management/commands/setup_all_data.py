@@ -91,18 +91,33 @@ class Command(BaseCommand):
             if not self.run_command_safely('fix_blog_content', 'fixing blog content'):
                 errors.append('Failed to fix blog content')
             
-            # Manage featured status
-            self.stdout.write('\n5d. Managing featured blog status...')
-            if not self.run_command_safely('manage_featured_blogs', 'managing featured blogs'):
-                errors.append('Failed to manage featured blogs')
+            # Remove unwanted blog posts
+            self.stdout.write('\n5d. Removing specific blog posts...')
+            if not self.run_command_safely('remove_dynamic_blog_example', 'removing dynamic blog example'):
+                errors.append('Failed to remove dynamic blog example')
+            
+            # Set up featured blogs for index page
+            self.stdout.write('\n5e. Setting up featured blogs for index page...')
+            if not self.run_command_safely('manage_featured_blogs', 'setting up featured blogs'):
+                errors.append('Failed to set up featured blogs')
             
             # Add media coverage articles
-            self.stdout.write('\n5e. Adding media coverage articles...')
+            self.stdout.write('\n5f. Adding media coverage articles...')
             if not self.run_command_safely('populate_media_articles', 'adding media coverage'):
                 errors.append('Failed to add media coverage')
             
-            # Step 6: Add testimonials and other content
-            self.stdout.write('\n6. Adding testimonials and other content...')
+            # Step 6: Add job postings
+            self.stdout.write('\n6. Setting up job postings...')
+            if not self.run_command_safely('add_sample_jobs', 'adding job postings'):
+                errors.append('Failed to add job postings')
+            
+            # Set up featured jobs
+            self.stdout.write('\n6b. Setting up featured jobs...')
+            if not self.run_command_safely('manage_featured_jobs', 'managing featured jobs'):
+                errors.append('Failed to manage featured jobs')
+            
+            # Step 7: Add testimonials and other content
+            self.stdout.write('\n7. Adding testimonials and other content...')
             if not self.run_command_safely('add_sample_testimonials', 'adding testimonials'):
                 errors.append('Failed to add testimonials')
             if not self.run_command_safely('add_sample_contacts', 'adding contacts'):

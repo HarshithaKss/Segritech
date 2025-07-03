@@ -43,7 +43,8 @@ class Command(BaseCommand):
         elif options['featured_count']:
             self.featured_count()
         else:
-            self.stdout.write(self.style.WARNING('Please specify an action. Use --help for options.'))
+            # Default behavior: Set up the 3 specific blogs that should be featured
+            self.setup_featured_blogs()
 
     def list_featured(self):
         featured_posts = BlogPost.objects.filter(is_published=True, is_featured=True).order_by('-published_at')
@@ -106,4 +107,29 @@ class Command(BaseCommand):
         elif featured_count > 3:
             self.stdout.write(self.style.WARNING(f'⚠️  {featured_count} featured posts found - only the 3 most recent will show on homepage.'))
         else:
-            self.stdout.write(self.style.SUCCESS(f'✅ Perfect! {featured_count} featured posts will show on homepage.')) 
+            self.stdout.write(self.style.SUCCESS(f'✅ Perfect! {featured_count} featured posts will show on homepage.'))
+
+    def setup_featured_blogs(self):
+        """Set up the 3 specific blogs that should be featured on the index page"""
+        # First, clear all featured flags
+        BlogPost.objects.all().update(is_featured=False)
+        
+        # List of slugs for blogs that should be featured
+        featured_slugs = [
+            'from-farm-to-table-improving-market-access',
+            'export-fruits-and-vegetables-to-bangladesh',
+            'list-countries-importing-fruit-vegetables-india'
+        ]
+        
+        # Set featured flag for these blogs
+        for slug in featured_slugs:
+            try:
+                blog = BlogPost.objects.get(slug=slug, is_published=True)
+                blog.is_featured = True
+                blog.save()
+                self.stdout.write(self.style.SUCCESS(f'Set "{blog.title}" as featured'))
+            except BlogPost.DoesNotExist:
+                self.stdout.write(self.style.WARNING(f'Blog with slug "{slug}" not found or not published'))
+        
+        # Verify the setup
+        self.featured_count() 

@@ -45,7 +45,7 @@ Opportunity to lead and grow with the company as we scale pan-India and globally
             salary_max=500000,  # 5L
             equity_offered=False,
             is_active=True,
-            is_featured=True,
+            is_featured=False,
             deadline=timezone.now() + timedelta(days=30)
         )
 
@@ -88,7 +88,7 @@ Opportunity to lead and grow with the company as we scale pan-India and globally
             salary_max=6000,
             equity_offered=False,
             is_active=True,
-            is_featured=True,
+            is_featured=False,
             deadline=timezone.now() + timedelta(days=30)
         )
 
