@@ -6,10 +6,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            # Try to find and delete the blog post
+            # Try to find and delete the blog post with exact title match
             blog = BlogPost.objects.filter(
-                title__icontains='Dynamic Blog Post Example',
-                title__icontains='AI-Powered Agricultural Technology'
+                title='Dynamic Blog Post Example: AI-Powered Agricultural Technology'
             ).first()
             
             if blog:

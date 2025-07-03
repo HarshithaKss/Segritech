@@ -116,9 +116,9 @@ class Command(BaseCommand):
         
         # List of slugs for blogs that should be featured
         featured_slugs = [
-            'from-farm-to-table-improving-market-access',
-            'export-fruits-and-vegetables-to-bangladesh',
-            'list-countries-importing-fruit-vegetables-india'
+            'countries-importing-fruits-vegetables-india',
+            'export-fruits-vegetables-bangladesh',
+            'groundbreaking-robots-agriculture'
         ]
         
         # Set featured flag for these blogs
