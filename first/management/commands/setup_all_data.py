@@ -73,8 +73,33 @@ class Command(BaseCommand):
             
             # Step 5: Add blogs and content
             self.stdout.write('\n5. Setting up blog content...')
-            if not self.run_command_safely('add_featured_blogs', 'adding blogs'):
+            # Add base blogs
+            if not self.run_command_safely('add_featured_blogs', 'adding featured blogs'):
                 errors.append('Failed to add featured blogs')
+            
+            # Add LinkedIn articles and other important content
+            self.stdout.write('\n5b. Adding LinkedIn articles and dynamic content...')
+            if not self.run_command_safely('import_linkedin_articles', 'importing LinkedIn articles'):
+                errors.append('Failed to import LinkedIn articles')
+            if not self.run_command_safely('create_dynamic_blog_example', 'creating dynamic blog example'):
+                errors.append('Failed to create dynamic blog example')
+            if not self.run_command_safely('create_third_article', 'creating third article'):
+                errors.append('Failed to create third article')
+            
+            # Fix blog content formatting
+            self.stdout.write('\n5c. Fixing blog content formatting...')
+            if not self.run_command_safely('fix_blog_content', 'fixing blog content'):
+                errors.append('Failed to fix blog content')
+            
+            # Manage featured status
+            self.stdout.write('\n5d. Managing featured blog status...')
+            if not self.run_command_safely('manage_featured_blogs', 'managing featured blogs'):
+                errors.append('Failed to manage featured blogs')
+            
+            # Add media coverage articles
+            self.stdout.write('\n5e. Adding media coverage articles...')
+            if not self.run_command_safely('populate_media_articles', 'adding media coverage'):
+                errors.append('Failed to add media coverage')
             
             # Step 6: Add testimonials and other content
             self.stdout.write('\n6. Adding testimonials and other content...')

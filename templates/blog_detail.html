@@ -612,34 +612,71 @@
     {% endif %}
     
     <!-- Article Content -->
-    <section class="article-content">
+    <section class="article-content py-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <!-- Article Body -->
-                    <div class="article-body" data-aos="fade-up" data-aos-duration="600">
+                    <div class="article-body bg-white rounded-lg shadow-sm p-4 p-md-5" data-aos="fade-up" data-aos-duration="600">
                         <style>
                             .blog-content {
                                 font-size: 1.1rem;
                                 line-height: 1.8;
-                                color: #000000;
-                                background: #ffffff;
-                                padding: 40px;
-                                border-radius: 12px;
-                                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                                color: #333;
                             }
                             .blog-content p {
                                 margin-bottom: 1.5rem;
                             }
+                            .blog-content h1, .blog-content h2, .blog-content h3 {
+                                color: #2E7D32;
+                                margin: 2rem 0 1rem;
+                                font-weight: 600;
+                            }
+                            .blog-content h1 { font-size: 2.5rem; }
+                            .blog-content h2 { font-size: 2rem; }
+                            .blog-content h3 { font-size: 1.5rem; }
                             .blog-content ul, .blog-content ol {
                                 margin-bottom: 1.5rem;
                                 padding-left: 1.5rem;
+                            }
+                            .blog-content ul {
+                                list-style: none;
+                            }
+                            .blog-content ul li {
+                                position: relative;
+                                margin-bottom: 0.75rem;
+                                padding-left: 1.5rem;
+                            }
+                            .blog-content ul li:before {
+                                content: "•";
+                                color: #2E7D32;
+                                font-weight: bold;
+                                position: absolute;
+                                left: 0;
+                            }
+                            .blog-content ol {
+                                list-style-position: outside;
+                                padding-left: 1.5rem;
+                            }
+                            .blog-content ol li {
+                                margin-bottom: 0.75rem;
+                                padding-left: 0.5rem;
                             }
                             .blog-content img {
                                 max-width: 100%;
                                 height: auto;
                                 margin: 2rem 0;
                                 border-radius: 8px;
+                                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                            }
+                            .blog-content a {
+                                color: #2E7D32;
+                                text-decoration: none;
+                                border-bottom: 1px solid transparent;
+                                transition: border-color 0.3s ease;
+                            }
+                            .blog-content a:hover {
+                                border-bottom-color: #2E7D32;
                             }
                         </style>
                         <div class="blog-content">
