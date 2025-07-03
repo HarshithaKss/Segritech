@@ -1,13 +1,11 @@
 {% load static %}
 <!-- navbar section -->
-{% if not skip_logo %}
 <div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
     <div class="wrapper">
         <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
             <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
                 <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 130px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
             </a>
-{% endif %}
             <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
                 data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -80,8 +78,6 @@
                     </a>
                 </div>
             </div>
-{% if not skip_logo %}
         </nav>
     </div>
-</div>
-{% endif %} 
+</div> 
