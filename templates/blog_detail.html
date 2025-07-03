@@ -37,13 +37,13 @@
             --accent-green: #66BB6A;
             --dark-green: #1B5E20;
             --primary-green: #2E7D32;
-            --background-dark: #1a1a1a;
-            --background-article: #1a1a1a;
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.85);
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --highlight-bg: rgba(255, 255, 255, 0.05);
+            --background-dark: #ffffff;
+            --background-article: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #555555;
+            --text-muted: #777777;
+            --border-color: #e5e5e5;
+            --highlight-bg: #f8f9fa;
         }
         
         * {
@@ -62,14 +62,14 @@
         
         /* Navigation Override for Blog */
         .navbar {
-            background: rgba(26, 26, 26, 0.95) !important;
+            background: rgba(240, 240, 240, 1) !important;
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+            border-bottom: 2px solid #d0d0d0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.15);
         }
         
         .navbar-brand, .nav-link {
-            color: var(--text-primary) !important;
+            color: #000000 !important;
             text-shadow: none !important;
         }
         
@@ -618,18 +618,19 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <!-- Article Body -->
-                    <div class="article-body bg-white p-4 p-md-5" data-aos="fade-up" data-aos-duration="600">
+                    <div class="article-body" data-aos="fade-up" data-aos-duration="600">
                         <style>
                             .blog-content {
                                 font-size: 1.1rem;
                                 line-height: 1.8;
-                                color: #333;
+                                color: var(--text-primary);
                             }
                             .blog-content p {
                                 margin-bottom: 1.5rem;
+                                color: var(--text-primary);
                             }
                             .blog-content h1, .blog-content h2, .blog-content h3 {
-                                color: #2E7D32;
+                                color: var(--text-primary);
                                 margin: 2rem 0 1rem;
                                 font-weight: 600;
                             }
@@ -639,6 +640,7 @@
                             .blog-content ul, .blog-content ol {
                                 margin-bottom: 1.5rem;
                                 padding-left: 1.5rem;
+                                color: var(--text-primary);
                             }
                             .blog-content ul {
                                 list-style: none;
@@ -647,10 +649,11 @@
                                 position: relative;
                                 margin-bottom: 0.75rem;
                                 padding-left: 1.5rem;
+                                color: var(--text-primary);
                             }
                             .blog-content ul li:before {
                                 content: "•";
-                                color: #2E7D32;
+                                color: var(--accent-green);
                                 font-weight: bold;
                                 position: absolute;
                                 left: 0;
@@ -662,21 +665,23 @@
                             .blog-content ol li {
                                 margin-bottom: 0.75rem;
                                 padding-left: 0.5rem;
+                                color: var(--text-primary);
                             }
                             .blog-content img {
                                 max-width: 100%;
                                 height: auto;
                                 margin: 2rem 0;
                                 border-radius: 8px;
+                                box-shadow: 0 4px 6px rgba(0,0,0,0.3);
                             }
                             .blog-content a {
-                                color: #2E7D32;
+                                color: var(--accent-green);
                                 text-decoration: none;
                                 border-bottom: 1px solid transparent;
                                 transition: border-color 0.3s ease;
                             }
                             .blog-content a:hover {
-                                border-bottom-color: #2E7D32;
+                                border-bottom-color: var(--accent-green);
                             }
                         </style>
                         <div class="blog-content">
@@ -755,21 +760,21 @@
             // Get all nav links
             const navLinks = document.querySelectorAll('.navbar-main-sec .nav-link');
             navLinks.forEach(function(link) {
-                link.style.setProperty('color', '#ffffff', 'important');
+                link.style.setProperty('color', '#000000', 'important');
                 link.style.setProperty('text-shadow', 'none', 'important');
             });
             
             // Also target any anchor tags in navbar
             const navAnchors = document.querySelectorAll('.navbar-main-sec a');
             navAnchors.forEach(function(anchor) {
-                anchor.style.setProperty('color', '#ffffff', 'important');
-                link.style.setProperty('text-shadow', 'none', 'important');
+                anchor.style.setProperty('color', '#000000', 'important');
+                anchor.style.setProperty('text-shadow', 'none', 'important');
             });
             
-            // Force dropdown items to be white too
+            // Force dropdown items to be black too
             const dropdownItems = document.querySelectorAll('.navbar-main-sec .dropdown-item');
             dropdownItems.forEach(function(item) {
-                item.style.setProperty('color', '#ffffff', 'important');
+                item.style.setProperty('color', '#000000', 'important');
                 item.style.setProperty('text-shadow', 'none', 'important');
             });
             
@@ -777,7 +782,7 @@
             const logoImg = document.querySelector('.navbar-main-sec .navbar-brand img');
             if (logoImg) {
                 // Keep original SegriTech logo path
-                logoImg.src = '/static/new_logo/IMG-5466-removebg.png';
+                logoImg.src = '/static/logo/Segregation Simplified_logo_for_blog_pages.png';
                 // Remove all filters to show original colors
                 logoImg.removeAttribute('style');
                 logoImg.style.setProperty('max-height', '130px', 'important');
