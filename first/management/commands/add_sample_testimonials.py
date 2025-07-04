@@ -16,8 +16,7 @@ class Command(BaseCommand):
                 'impact_metric': '40% Time Reduction',
                 'impact_icon': 'fas fa-clock',
                 'is_featured': True,
-                'display_order': 1,
-                'rating': 4.8
+                'display_order': 1
             },
             {
                 'name': 'Priya Sharma',
@@ -28,8 +27,7 @@ class Command(BaseCommand):
                 'impact_metric': '35% Lower Rejections',
                 'impact_icon': 'fas fa-chart-line',
                 'is_featured': True,
-                'display_order': 2,
-                'rating': 5.0
+                'display_order': 2
             },
             {
                 'name': 'Dr. Amit Patel',
@@ -40,8 +38,7 @@ class Command(BaseCommand):
                 'impact_metric': '500+ Data Points Daily',
                 'impact_icon': 'fas fa-database',
                 'is_featured': False,
-                'display_order': 3,
-                'rating': 4.9
+                'display_order': 3
             },
             {
                 'name': 'Meera Reddy',
@@ -52,8 +49,7 @@ class Command(BaseCommand):
                 'impact_metric': '25% Value Increase',
                 'impact_icon': 'fas fa-rupee-sign',
                 'is_featured': True,
-                'display_order': 4,
-                'rating': 4.7
+                'display_order': 4
             },
             {
                 'name': 'John Smith',
@@ -64,8 +60,7 @@ class Command(BaseCommand):
                 'impact_metric': '95% Accuracy Rate',
                 'impact_icon': 'fas fa-check-circle',
                 'is_featured': False,
-                'display_order': 5,
-                'rating': 4.8
+                'display_order': 5
             }
         ]
 
@@ -80,7 +75,6 @@ class Command(BaseCommand):
                 impact_icon=testimonial_data['impact_icon'],
                 is_featured=testimonial_data['is_featured'],
                 display_order=testimonial_data['display_order'],
-                rating=testimonial_data['rating'],
                 is_active=True
             )
 

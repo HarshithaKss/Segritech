@@ -2554,38 +2554,86 @@
                 <!-- Left Side Text Testimonials -->
                 <div class="col-lg-6 mb-4">
                     <div class="row">
-                        {% for testimonial in testimonials %}
-                        {% if not testimonial.video_url %}  <!-- Only show text testimonials here -->
-                        <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="{% if forloop.counter == 1 %}200{% elif forloop.counter == 2 %}400{% elif forloop.counter == 3 %}600{% elif forloop.counter == 4 %}800{% else %}1000{% endif %}">
+                        <!-- Testimonial 1 -->
+                        <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="200">
                             <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
                                 <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
-                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>{{ testimonial.rating|default:"4.7" }}
+                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>5.0
                         </div>
                                 <div style="text-align: center; margin-bottom: 15px;">
                                     <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
-                                        {% if testimonial.photo %}
-                                        <img src="{{ testimonial.photo.url }}" alt="{{ testimonial.name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
-                                        {% else %}
-                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="{{ testimonial.name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
-                                        {% endif %}
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                             </figure>
-                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">{{ testimonial.name }}</h6>
-                                    <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">{{ testimonial.get_role_display }} - {{ testimonial.company_or_location }}</span>
+                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Priya Singh</h6>
+                                    <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Organic Farmer</span>
                                 </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">{{ testimonial.quote }}</p>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"SegriTech increased our crop quality by 45%. The sorting accuracy is incredible!"</p>
                                 <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
                             </div>
                         </div>
-                        {% endif %}
-                        {% endfor %}
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
+                            <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
+                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
+                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>4.9
+                                </div>
+                                <div style="text-align: center; margin-bottom: 15px;">
+                                    <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                    </figure>
+                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Ahmed Hassan</h6>
+                                    <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Commercial Grower</span>
+                                </div>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"Reduced processing time by 60%. Our productivity has never been better!"</p>
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="600">
+                            <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
+                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
+                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>4.7
+                                </div>
+                                <div style="text-align: center; margin-bottom: 15px;">
+                                    <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
+                                        <img src="{% static 'images/member-img3.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                    </figure>
+                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Maria Santos</h6>
+                                    <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Fruit Exporter</span>
+                                </div>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"Export quality improved dramatically. Our international clients are impressed!"</p>
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 4 -->
+                        <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="800">
+                            <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
+                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
+                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
+                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>4.8
+                                </div>
+                                <div style="text-align: center; margin-bottom: 15px;">
+                                    <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
+                                        <img src="{% static 'images/member-img2.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                    </figure>
+                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Rajesh Kumar</h6>
+                                    <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Farm Cooperative</span>
+                                </div>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"सेग्रीटेक मशीन से हमारी फसल की गुणवत्ता में 45% का सुधार हुआ है। यह हमारे किसान समुदाय के लिए एक बेहतरीन निवेश साबित हुआ!"</p>
+                                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Right Side Video Testimonial -->
                 <div class="col-lg-6 mb-4" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300">
-                    {% for testimonial in testimonials %}
-                    {% if testimonial.video_url and testimonial.is_featured %}  <!-- Show only featured video testimonial -->
                     <div class="video-testimonial-container" style="position: relative; border-radius: 18px; overflow: hidden; background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.4); box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(76, 175, 80, 0.2); transition: all 0.3s ease;">
                         
                         <!-- Video Badge -->
@@ -2596,7 +2644,7 @@
                         
                         <!-- Rating Badge -->
                         <div style="position: absolute; top: 15px; right: 15px; background: rgba(255, 193, 7, 0.9); color: #000; padding: 6px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; z-index: 4;">
-                            <i class="fas fa-star" style="margin-right: 3px; font-size: 0.7rem;"></i>{{ testimonial.rating|default:"4.7" }}
+                            <i class="fas fa-star" style="margin-right: 3px; font-size: 0.7rem;"></i>5.0
                         </div>
                         
                         <!-- Video Element -->
@@ -2608,16 +2656,45 @@
                                loop 
                                playsinline
                                style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); background: #000;">
-                                <source src="{{ testimonial.video_url }}" type="video/mp4">
+                                <source src="{% static 'video/testimonial.mp4' %}" type="video/mp4">
                                 <p style="color: rgba(255, 255, 255, 0.8); text-align: center; padding: 30px;">
                                     Your browser does not support the video tag. 
-                                    <a href="{{ testimonial.video_url }}" style="color: var(--accent-green);">Download the video</a> to watch it.
+                                    <a href="{% static 'video/testimonial.mp4' %}" style="color: var(--accent-green);">Download the video</a> to watch it.
                                 </p>
                             </video>
                         </div>
+                        
+                        <!-- Video Info -->
+                        <div style="padding: 15px 20px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.08), rgba(76, 175, 80, 0.03)); border-top: 1px solid rgba(76, 175, 80, 0.2);">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <div style="width: 35px; height: 35px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; background: rgba(76, 175, 80, 0.1);">
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                                     </div>
-                    {% endif %}
-                    {% endfor %}
+                                    <div>
+                                        <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Success Story</h6>
+                                        <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">
+                                            <i class="fas fa-tractor" style="color: var(--accent-green); font-size: 0.7rem; margin-right: 4px;"></i>
+                                            Real Farmer
+                            </span>
+                        </div>
+                    </div>
+                                <div style="display: flex; gap: 15px; text-align: center;">
+                                    <div>
+                                        <div style="color: var(--accent-green); font-weight: 700; font-size: 1rem;">+40%</div>
+                                        <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.7rem;">Revenue</div>
+                </div>
+                                    <div>
+                                        <div style="color: var(--accent-green); font-weight: 700; font-size: 1rem;">-35%</div>
+                                        <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.7rem;">Waste</div>
+                    </div>
+                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom accent -->
+                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green));"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2655,35 +2732,30 @@
                             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(transparent, rgba(0,0,0,0.8));"></div>
                             <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, transparent 60%, rgba(76, 175, 80, 0.1) 100%);"></div>
                         </figure>
-                        <div class="blog-text-con" style="padding: 25px; height: calc(100% - 200px); display: flex; flex-direction: column; background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%);">
-                            <!-- Author Info -->
+                        <div class="blog-text-con" style="padding: 20px; height: calc(100% - 180px); display: flex; flex-direction: column;">
                             <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <div class="author-image" style="min-width: 35px; width: 35px; height: 35px; position: relative; margin-right: 12px;">
-                                    <div style="width: 100%; height: 100%; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1)); position: absolute; top: 0; left: 0;">
-                                        <img src="/static/images/blog-profile-img.png" alt="Dr. Hetendra Singh" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover; display: block;">
+                                <figure class="mb-0" style="width: 32px; height: 32px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin-right: 10px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1)); box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);">
+                                    {% if blog_post.author_image %}
+                                        <img src="{{ blog_post.author_image.url }}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                    {% else %}
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                    {% endif %}
+                                </figure>
+                                <div>
+                                    <span style="color: var(--accent-green); font-weight: 700; font-size: 0.85rem; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">{{ blog_post.author_name }}</span>
+                                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; display: flex; align-items: center; gap: 4px;">
+                                        <i class="{{ blog_post.get_category_display_with_icon.icon }}" style="color: var(--accent-green); font-size: 0.6rem;"></i>{{ blog_post.author_title }}
                                     </div>
                                 </div>
-                                <div>
-                                    <span style="color: var(--accent-green); font-weight: 700; font-size: 0.9rem;">Dr. Hetendra Singh</span>
-                                    <div style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">CEO &amp; Founder, SegriTech</div>
                             </div>
-                            </div>
-                            
-                            <!-- Title & Excerpt -->
-                            <a href="/insights/countries-importing-fruits-vegetables-india/" style="text-decoration: none; flex-grow: 1; display: flex; flex-direction: column;">
-                                <h4 style="color: #FFFFFF; font-size: 1.2rem; line-height: 1.4; margin-bottom: 15px; font-weight: 600; transition: color 0.3s ease;">List of Countries Importing Fruit &amp; Vegetables from India</h4>
-                                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">India has solidified its position as a leading exporter of fruits and vegetables, reaching over 150 countries worldwide with a market value exceeding $2.1 billion.</p>
-                            </a>
-                            
-                            <!-- Footer -->
-                            <div style="border-top: 1px solid rgba(76, 175, 80, 0.4); padding-top: 15px; margin-top: auto;">
+                            <h4 style="color: #FFFFFF; font-size: 1.1rem; line-height: 1.4; margin-bottom: 12px; transition: color 0.3s ease; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">{{ blog_post.title }}</h4>
+                            <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.5; margin-bottom: 15px; flex-grow: 1;">{{ blog_post.excerpt }}</p>
+                            <div class="posted-details" style="border-top: 1px solid rgba(76, 175, 80, 0.4); padding-top: 15px; margin-top: auto;">
                                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
-                                        <i class="fas fa-calendar-alt" style="color: var(--accent-green);"></i> Aug 14, 2024
+                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px; font-weight: 500;">
+                                        <i class="fas fa-calendar-alt" style="color: var(--accent-green); font-size: 0.75rem;"></i> {{ blog_post.published_at|date:"M d, Y" }}
                                     </span>
-                                    <a href="/insights/countries-importing-fruits-vegetables-india/" style="color: var(--accent-green); font-size: 0.8rem; text-decoration: none; display: flex; align-items: center; gap: 6px; font-weight: 600;">
-                                        Read More <i class="fas fa-arrow-right" style="font-size: 0.7rem;"></i>
-                                    </a>
+                                    <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
                                 </div>
                             </div>
                         </div>
@@ -2981,8 +3053,158 @@
             });
         });
                 </script>
-</body>
-</html>
+    
+    <!-- Footer -->
+    {% include 'includes/footer.html' %}
+    
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/cdn.jsdelivr.net_npm_swiper%4010_swiper-bundle.min.js' %}"></script>
+    <script>
+        $(window).on('load', function(){ 
+        // Preloader
+        $('.loader').fadeOut();
+        $('.loader-mask').delay(350).fadeOut('slow');
+        AOS.init();
+        });
+
+       window.addEventListener('load',function(){
+         document.querySelector('body').classList.add("loaded")  
+       });
+        $('#owlsliderone').owlCarousel({
+            loop: true,
+            margin: 30,
+            nav: true,
+            animateOut: 'slideInLeft',
+            animateIn: 'slideOutRight',
+            responsive: {
+                0: {
+                    items: 2,
+                    margin: 15
+                },
+                576: {
+                    items: 2,
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+    </script>
+    <script>
+        // Logo Swiper with improved continuous sliding
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing improved swiper...');
+            
+            // Check if swiper element exists
+            const swiperElement = document.getElementById('logoSwiper');
+            if (!swiperElement) {
+                console.error('Swiper element not found!');
+                return;
+            }
+            
+            // Initialize with timeout to ensure everything is loaded
+            setTimeout(function() {
+                try {
+                    const logoSwiper = new Swiper('#logoSwiper', {
+                        loop: true,
+                        loopedSlides: 6,
+                        autoplay: {
+                            delay: 0,
+                            disableOnInteraction: false,
+                            pauseOnMouseEnter: false,
+                            reverseDirection: false,
+                        },
+                        speed: 2000,
+                        slidesPerView: 'auto',
+                        spaceBetween: 20,
+                        allowTouchMove: false,
+                        centeredSlides: false,
+                        freeMode: {
+                            enabled: true,
+                            momentum: false,
+                            sticky: false,
+                        },
+                        effect: 'slide',
+                        grabCursor: false,
+                        cssMode: false,
+                        breakpoints: {
+                            360: {
+                                slidesPerView: 2,
+                                spaceBetween: 15,
+                            },
+                            576: {
+                                slidesPerView: 3,
+                                spaceBetween: 20,
+                            },
+                            768: {
+                                slidesPerView: 4,
+                                spaceBetween: 25,
+                            },
+                            992: {
+                                slidesPerView: 5,
+                                spaceBetween: 30,
+                            },
+                            1200: {
+                                slidesPerView: 6,
+                                spaceBetween: 30,
+                            },
+                        },
+                        on: {
+                            init: function () {
+                                console.log('Improved Swiper initialized');
+                                this.autoplay.start();
+                            },
+                            autoplayStart: function () {
+                                console.log('Continuous autoplay started');
+                            },
+                            slideChange: function () {
+                                // Ensure continuous loop without gaps
+                                if (this.realIndex === 0) {
+                                    setTimeout(() => {
+                                        this.autoplay.start();
+                                    }, 0);
+                                }
+                            }
+                        }
+                    });
+                    
+                    console.log('Improved Swiper created successfully');
+                    
+                    // Force continuous movement
+                    logoSwiper.autoplay.start();
+                    
+                    // Prevent any pausing
+                    swiperElement.addEventListener('mouseenter', function() {
+                        logoSwiper.autoplay.start();
+                    });
+                    
+                    swiperElement.addEventListener('mouseleave', function() {
+                        logoSwiper.autoplay.start();
+                    });
+                    
+                } catch (error) {
+                    console.error('Error initializing improved swiper:', error);
+                }
+            }, 500);
+        });
+    </script>
+    
+    <script>
+        // Articles Swiper with continuous sliding
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing articles swiper...');
+            
+            // Check if articles swiper element exists
+            const articlesSwiperElement = document.getElementById('articlesSwiper');
+            if (!articlesSwiperElement) {
+                console.error('Articles swiper element not found!');
+                return;
+            }
             
             // Initialize with timeout to ensure everything is loaded
             setTimeout(function() {
@@ -3372,6 +3594,22 @@
                     
                     // Update button to show correct state
                     document.getElementById('toggleRotation').innerHTML = '<i class="fas fa-pause"></i> Stop Rotate';
+                    
+                    // Center the model in view with natural camera angle
+                    const box = new THREE.Box3().setFromObject(model);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const fov = camera.fov * (Math.PI / 180);
+                    let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+                    cameraZ *= 1.2; // Good viewing distance
+                    
+                    // Natural camera positioning - slightly elevated front view
+                    camera.position.set(cameraZ, cameraZ * 0.4, cameraZ);
+                    camera.lookAt(center);
+                    controls.target.copy(center);
+                    controls.update();
                 },
                 function(progress) {
                     const percentage = Math.round((progress.loaded / progress.total) * 100);

@@ -116,7 +116,6 @@ class Command(BaseCommand):
                 'impact_metric': '40% Loss Reduction',
                 'impact_icon': 'fas fa-chart-line',
                 'display_order': 1,
-                'rating': 4.8
             },
             {
                 'name': 'Maria Santos',
@@ -127,7 +126,6 @@ class Command(BaseCommand):
                 'impact_metric': '60% Efficiency Boost',
                 'impact_icon': 'fas fa-rocket',
                 'display_order': 2,
-                'rating': 5.0
             },
             {
                 'name': 'David Ochieng',
@@ -138,7 +136,6 @@ class Command(BaseCommand):
                 'impact_metric': '500+ Farmers',
                 'impact_icon': 'fas fa-users',
                 'display_order': 3,
-                'rating': 4.7
             },
             {
                 'name': 'Dr. Sarah Ahmed',
@@ -149,7 +146,6 @@ class Command(BaseCommand):
                 'impact_metric': 'Rural Impact',
                 'impact_icon': 'fas fa-globe-africa',
                 'display_order': 4,
-                'rating': 4.9
             },
             {
                 'name': 'James Mwangi',
@@ -160,7 +156,6 @@ class Command(BaseCommand):
                 'impact_metric': 'Community Impact',
                 'impact_icon': 'fas fa-heart',
                 'display_order': 5,
-                'rating': 4.8
             },
         ]
 
