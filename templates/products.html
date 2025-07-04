@@ -202,6 +202,8 @@
              height: 420px;
              display: flex;
              flex-direction: column;
+             opacity: 1;
+             transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
          }
 
          .category-card:hover {
@@ -491,6 +493,9 @@
             width: 100%;
             z-index: 10;
             pointer-events: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
         }
 
         .nav-arrow {
@@ -504,22 +509,23 @@
             justify-content: center;
             color: var(--primary-green);
             cursor: pointer;
-            transition: var(--transition);
-            position: absolute;
+            transition: all 0.3s ease;
+            position: relative;
             pointer-events: auto;
+            opacity: 1;
         }
 
         .nav-arrow:hover {
             background: var(--primary-green);
             color: white;
+            transform: scale(1.1);
         }
 
-        .nav-arrow.prev {
-            left: 20px;
-        }
-
-        .nav-arrow.next {
-            right: 20px;
+        .nav-arrow:disabled,
+        .nav-arrow[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
         }
 
         /* Products Link */
@@ -562,43 +568,15 @@
                 <span class="hero-badge">Our Products</span>
                 <h1 class="hero-title">Innovative Agricultural Solutions</h1>
                 <p class="hero-subtitle">Discover our range of cutting-edge agricultural technology solutions designed to revolutionize farming practices</p>
-                
-                <!-- Product Features -->
-                <div class="product-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-search"></i>
-                        </div>
-                        <span class="feature-text">Precise Detection</span>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <span class="feature-text">Real-time Processing</span>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <span class="feature-text">Higher Efficiency</span>
-                    </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <span class="feature-text">Time Saving</span>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!-- Navigation Arrows -->
         <div class="nav-arrows">
-            <button class="nav-arrow prev">
+            <button class="nav-arrow prev" onclick="navigateCategories('prev')">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button class="nav-arrow next">
+            <button class="nav-arrow next" onclick="navigateCategories('next')">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
@@ -907,6 +885,50 @@
             duration: 800,
             easing: 'ease-in-out',
             once: true
+        });
+
+        let currentPage = 0;
+        const itemsPerPage = window.innerWidth >= 1200 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+        
+        function navigateCategories(direction) {
+            const cards = document.querySelectorAll('.category-card');
+            const maxPages = Math.ceil(cards.length / itemsPerPage) - 1;
+            
+            if (direction === 'prev') {
+                currentPage = Math.max(0, currentPage - 1);
+            } else {
+                currentPage = Math.min(maxPages, currentPage + 1);
+            }
+            
+            cards.forEach((card, index) => {
+                if (index >= currentPage * itemsPerPage && index < (currentPage + 1) * itemsPerPage) {
+                    card.style.display = 'flex';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.display = 'none';
+                    card.style.opacity = '0';
+                }
+            });
+            
+            // Update button states
+            document.querySelector('.nav-arrow.prev').style.opacity = currentPage === 0 ? '0.5' : '1';
+            document.querySelector('.nav-arrow.next').style.opacity = currentPage === maxPages ? '0.5' : '1';
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            navigateCategories('next');
+            navigateCategories('prev');
+        });
+
+        // Update on window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                currentPage = 0;
+                navigateCategories('prev');
+            }, 250);
         });
     </script>
 </body>

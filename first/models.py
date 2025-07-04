@@ -382,6 +382,7 @@ class Testimonial(models.Model):
     quote = models.TextField(help_text='The testimonial quote')
     impact_metric = models.CharField(max_length=100, help_text='e.g., 40% Loss Reduction, 500+ Farmers')
     impact_icon = models.CharField(max_length=50, default='fas fa-chart-line', help_text='FontAwesome icon class')
+    rating = models.DecimalField(max_digits=2, decimal_places=1, default=5.0, help_text='Rating out of 5.0')
     
     # Media
     photo = models.ImageField(upload_to='testimonials/')

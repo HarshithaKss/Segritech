@@ -4,24 +4,23 @@ This directory contains PDF brochures for all SegriTech products.
 
 ## Expected Brochure Files:
 
-### Size Graders
-- `Segritech Apple Size Grader_b.pdf` - Apple Size Grader brochure (currently available)
-
-### Quality Graders
-- `multifruit-optical-grader-brochure.pdf` - Multifruit Optical Grader brochure
+### Apple Size Graders
+- `Segritech Apple Size Grader.pdf` - Apple Size Grader brochure
 
 ### Weight Graders
-- `weight grading machine_b.pdf` - Segritech Weight Grading Machine brochure
+- `Segritech Weight Grading Machine.pdf` - Weight Grading Machine brochure
+
+### Quality Graders
+- `Multifruit optical quality grader.pdf` - Multifruit Optical Quality Grader brochure
 
 ### Cleaning Machines
-- `cleaning-machine-brochure.pdf` - Cleaning Machine brochure
-- `Segriwax Waxing Machine.pdf` - Segriwax Waxing & Cleaning Machine brochure
+- `Segriwax cleaning and waxing machine.pdf` - Segriwax Cleaning and Waxing Machine brochure
 
 ### Packing Robots
-- `Segripack (1).pdf` - SegriPack by Segritech Smart Robotic Packing System brochure
+- `Segripack Robotic Packing System.pdf` - SegriPack Robotic Packing System brochure
 
 ### Special Products
-- `Inspection box bro.pdf` - Inspection Box brochure
+- `Inspection box.pdf` - Inspection Box brochure
 
 ## File Requirements:
 - All files should be PDF format

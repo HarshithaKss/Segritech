@@ -128,8 +128,8 @@ class Command(BaseCommand):
             
             # Step 7: Add testimonials and other content
             self.stdout.write('\n7. Adding testimonials and other content...')
-            if not self.run_command_safely('add_sample_testimonials', 'adding testimonials'):
-                errors.append('Failed to add testimonials')
+            if not self.run_command_safely('setup_testimonials', 'setting up testimonials'):
+                errors.append('Failed to set up testimonials')
             if not self.run_command_safely('add_sample_contacts', 'adding contacts'):
                 errors.append('Failed to add contacts')
             if not self.run_command_safely('add_sample_newsletter_subscribers', 'adding subscribers'):
