@@ -1,5 +1,4 @@
 {% load static %}
-{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -2557,7 +2556,7 @@
                     <div class="row">
                         {% for testimonial in testimonials %}
                         {% if not testimonial.video_url %}  <!-- Only show text testimonials here -->
-                        <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="{{ forloop.counter|add:'1'|multiply:200 }}">
+                        <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="{% if forloop.counter == 1 %}200{% elif forloop.counter == 2 %}400{% else %}600{% endif %}">
                             <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
                                 <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
