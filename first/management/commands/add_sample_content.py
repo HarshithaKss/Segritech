@@ -17,7 +17,7 @@ class Command(BaseCommand):
             {
                 'title': 'The Future of AI in Crop Grading and Agricultural Automation',
                 'category': 'ai_tech',
-                'author_name': 'Dr. Hetendra Singh',
+                'author_name': 'Hetendra Singh',
                 'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Exploring how artificial intelligence is revolutionizing crop quality assessment and transforming agricultural practices across developing nations.',
                 'content': '''
@@ -33,7 +33,7 @@ class Command(BaseCommand):
             {
                 'title': 'Reducing Post-Harvest Losses: Technology Solutions for Smallholder Farmers',
                 'category': 'sustainability',
-                'author_name': 'Dr. Hetendra Singh',
+                'author_name': 'Hetendra Singh',
                 'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Innovative approaches to minimize crop waste and maximize farmer profits through smart technology solutions designed for resource-constrained environments.',
                 'content': '''
@@ -49,7 +49,7 @@ class Command(BaseCommand):
             {
                 'title': 'Empowering Farmers: How Quality Grading Opens Global Market Access',
                 'category': 'market_access',
-                'author_name': 'Dr. Hetendra Singh',
+                'author_name': 'Hetendra Singh',
                 'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Discover how precision grading technology enables smallholder farmers to compete in international markets and command premium prices for quality produce.',
                 'content': '''

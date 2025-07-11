@@ -18,7 +18,7 @@ class Command(BaseCommand):
                     'title': "Revolutionizing Quality Control",
                     'slug': "revolutionizing-quality-control",
                     'category': 'technology',
-                    'author_name': "Dr. Hetendra Singh",
+                    'author_name': "Hetendra Singh",
                     'author_title': "CEO & Founder, SegriTech",
                     'excerpt': "Discover how artificial intelligence is transforming fruit quality assessment, reducing waste, and improving supply chain efficiency in the agricultural sector.",
                     'content': """Artificial Intelligence is revolutionizing how we assess and grade fruit quality in the agricultural sector. Through advanced computer vision and machine learning algorithms, we can now achieve unprecedented accuracy in detecting defects, measuring size, and evaluating ripeness.
@@ -43,7 +43,7 @@ The future of quality control is here, and it's powered by artificial intelligen
                     'title': "Sustainable Agriculture Through Smart Technology",
                     'slug': "sustainable-agriculture-through-smart-technology",
                     'category': 'sustainability',
-                    'author_name': "Dr. Hetendra Singh",
+                    'author_name': "Hetendra Singh",
                     'author_title': "CEO & Founder, SegriTech",
                     'excerpt': "Explore how smart agricultural technologies are helping farmers adopt more sustainable practices while maintaining profitability.",
                     'content': """Smart agricultural technologies are transforming traditional farming practices into sustainable, efficient operations. By leveraging IoT sensors, data analytics, and automated systems, farmers can optimize resource usage while improving yields.
@@ -68,7 +68,7 @@ The integration of smart technology in agriculture is not just about efficiencyâ
                     'title': "From Farm to Table: Improving Market Access for Small Farmers",
                     'slug': "from-farm-to-table-improving-market-access",
                     'category': 'case_study',
-                    'author_name': "Dr. Hetendra Singh",
+                    'author_name': "Hetendra Singh",
                     'author_title': "CEO & Founder, SegriTech",
                     'excerpt': "Learn how modern post-harvest technologies are helping small farmers reach premium markets and improve their income.",
                     'content': """Small farmers often face significant challenges in accessing premium markets due to quality control and post-harvest handling requirements. Modern technology is bridging this gap by making professional-grade sorting and grading accessible to small-scale operations.

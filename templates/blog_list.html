@@ -85,11 +85,10 @@
             <div class="row">
                 {% for blog_post in page_obj %}
                 <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="600" data-aos-delay="{{ forloop.counter0|add:1|stringformat:'d'|add:'00' }}">
-                    <div class="blog-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.4); border-radius: 18px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: 500px; box-shadow: 0 12px 30px rgba(0,0,0,0.4); cursor: pointer;">
-
+                    <div class="blog-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.4); border-radius: 18px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: 500px; box-shadow: 0 12px 30px rgba(0,0,0,0.4); cursor: pointer; display: flex; flex-direction: column;">
                         
                         <!-- Featured Image -->
-                        <div class="blog-image-container" style="position: relative; overflow: hidden; height: 200px; background-color: #2a2a2a;">
+                        <div class="blog-image-container" style="position: relative; overflow: hidden; height: 200px; background-color: #2a2a2a; flex-shrink: 0;">
                             {% if blog_post.featured_image %}
                                 <img src="{{ blog_post.featured_image.url }}" alt="{{ blog_post.title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; filter: brightness(0.9) contrast(1.1);">
                             {% else %}
@@ -101,14 +100,14 @@
                         </div>
                         
                         <!-- Content -->
-                        <div class="blog-content" style="padding: 25px; height: calc(100% - 200px); display: flex; flex-direction: column; background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%);">
+                        <div class="blog-content" style="padding: 25px; flex: 1; display: flex; flex-direction: column; background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); overflow: hidden;">
                             <!-- Author Info -->
-                            <div style="display: flex; align-items: center; margin-bottom: 15px;">
-                                <div class="author-image" style="width: 35px; height: 35px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin-right: 12px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1));">
+                            <div style="display: flex; align-items: center; margin-bottom: 15px; flex-shrink: 0;">
+                                <div class="author-image" style="width: 35px; height: 35px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin-right: 12px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(76, 175, 80, 0.1)); overflow: hidden; flex-shrink: 0; position: relative;">
                                     {% if blog_post.author_image %}
-                                        <img src="{{ blog_post.author_image.url }}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                        <img src="{{ blog_post.author_image.url }}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
                                     {% else %}
-                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="{{ blog_post.author_name }}" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
                                     {% endif %}
                                 </div>
                                 <div>
@@ -118,27 +117,23 @@
                             </div>
                             
                             <!-- Title & Excerpt -->
-                            <a href="{% url 'blog_detail' blog_post.slug %}" 
-                               style="text-decoration: none; flex-grow: 1; display: flex; flex-direction: column;">
-                                <h4 style="color: #FFFFFF; font-size: 1.2rem; line-height: 1.4; margin-bottom: 15px; font-weight: 600; transition: color 0.3s ease;">{{ blog_post.title }}</h4>
-                                <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1;">{{ blog_post.excerpt }}</p>
-                            </a>
+                            <div style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+                                <a href="{% url 'blog_detail' blog_post.slug %}" 
+                                   style="text-decoration: none;">
+                                    <h4 style="color: #FFFFFF; font-size: 1.2rem; line-height: 1.4; margin-bottom: 15px; font-weight: 600; transition: color 0.3s ease;">{{ blog_post.title }}</h4>
+                                    <p style="color: rgba(255, 255, 255, 0.8); font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{{ blog_post.excerpt }}</p>
+                                </a>
+                            </div>
                             
                             <!-- Footer -->
-                            <div style="border-top: 1px solid rgba(76, 175, 80, 0.4); padding-top: 15px; margin-top: auto;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
+                            <div style="border-top: 1px solid rgba(76, 175, 80, 0.4); padding-top: 15px; margin-top: auto; flex-shrink: 0;">
+                                <div style="display: flex; justify-content: flex-start; align-items: center;">
+                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px; white-space: nowrap; padding-bottom: 5px;">
                                         <i class="fas fa-calendar-alt" style="color: var(--accent-green);"></i> {{ blog_post.published_at|date:"M d, Y" }}
-                                    </span>
-                                    <span style="color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; display: flex; align-items: center; gap: 6px;">
-                                        <i class="fas fa-eye" style="color: var(--accent-green);"></i> {{ blog_post.views_count }} views
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Hover Indicator -->
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green)); border-radius: 0 0 18px 18px; transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left;"></div>
                     </div>
                 </div>
                 {% empty %}

@@ -277,7 +277,7 @@ blockchain-based traceability systems, and AI-powered predictive analytics for c
             title='Dynamic Blog Post Example: AI-Powered Agricultural Technology',
             slug='dynamic-blog-example-ai-agricultural-technology',
             category='technology',
-            author_name='Dr. Hetendra Singh',
+            author_name='Hetendra Singh',
             author_title='CEO & Founder, SegriTech',
             excerpt='Explore how SegriTech is revolutionizing agriculture through AI-powered sorting technology, reducing post-harvest losses by 40% and transforming the industry.',
             content=content,

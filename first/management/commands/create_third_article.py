@@ -24,7 +24,7 @@ class Command(BaseCommand):
                 title='Groundbreaking Robots in Agriculture',
                 slug='groundbreaking-robots-agriculture',
                 category='automation',
-                author_name='Dr. Hetendra Singh',
+                author_name='Hetendra Singh',
                 author_title='CEO & Founder, SegriTech',
                 excerpt='Agricultural robots are transforming the farming industry by automating various tasks and increasing efficiency. The market value for agriculture robots is expected to reach $11.58 billion by 2025.',
                 external_url='https://www.linkedin.com/pulse/groundbreaking-robots-agriculture-segritech-1xiuc/',

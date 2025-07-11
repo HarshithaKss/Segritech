@@ -399,7 +399,13 @@
             
             // Special case for orange grader
             if (productSlug === 'segritech-orange-grading-machine' || productSlug === 'orange-grader') {
-                alert('Brochure is being prepared. Please contact us for the latest product information.');
+                const link = document.createElement('a');
+                link.href = '/static/brochures/Multifruit optical quality grader.pdf';
+                link.download = 'Orange Grading Machine.pdf';
+                link.target = '_blank';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
                 return;
             }
             

@@ -12,7 +12,7 @@ class Command(BaseCommand):
                 'title': 'AI-Powered Fruit Grading: Revolutionizing Quality Control',
                 'slug': 'ai-powered-fruit-grading-revolutionizing-quality-control',
                 'category': 'ai_tech',
-                'author_name': 'Dr. Hetendra Singh',
+                'author_name': 'Hetendra Singh',
                 'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Discover how artificial intelligence is transforming fruit quality assessment, reducing waste, and improving supply chain efficiency in the agricultural sector.',
                 'content': '''
@@ -40,7 +40,7 @@ class Command(BaseCommand):
                 'title': 'Sustainable Agriculture Through Smart Technology',
                 'slug': 'sustainable-agriculture-through-smart-technology',
                 'category': 'sustainability',
-                'author_name': 'Dr. Hetendra Singh',
+                'author_name': 'Hetendra Singh',
                 'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Explore how smart agricultural technologies are helping farmers adopt more sustainable practices while maintaining profitability.',
                 'content': '''
@@ -64,7 +64,7 @@ class Command(BaseCommand):
                 'title': 'From Farm to Table: Improving Market Access for Small Farmers',
                 'slug': 'from-farm-to-table-improving-market-access',
                 'category': 'market_access',
-                'author_name': 'Dr. Hetendra Singh',
+                'author_name': 'Hetendra Singh',
                 'author_title': 'CEO & Founder, SegriTech',
                 'excerpt': 'Learn how technology is bridging the gap between small-scale farmers and premium markets, creating new opportunities for rural communities.',
                 'content': '''
