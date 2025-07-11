@@ -60,7 +60,8 @@ class Command(BaseCommand):
                 ('cleanup_cleaning_machines', 'cleaning up machines'),
                 ('update_orange_grader_name', 'updating orange grader'),
                 ('update_packing_robots', 'updating packing robots'),
-                ('update_product_brochures', 'updating product brochures')
+                ('update_product_brochures', 'updating product brochures'),
+                ('shorten_all_descriptions', 'shortening product descriptions')
             ]
             for cmd, desc in commands:
                 if not self.run_command_safely(cmd, desc):
@@ -120,11 +121,6 @@ class Command(BaseCommand):
             self.stdout.write('\n6b. Cleaning up duplicate jobs...')
             if not self.run_command_safely('cleanup_duplicate_jobs', 'cleaning up duplicate jobs'):
                 errors.append('Failed to clean up duplicate jobs')
-            
-            # Set up featured jobs
-            self.stdout.write('\n6c. Setting up featured jobs...')
-            if not self.run_command_safely('manage_featured_jobs', 'managing featured jobs'):
-                errors.append('Failed to manage featured jobs')
             
             # Step 7: Add testimonials and other content
             self.stdout.write('\n7. Adding testimonials and other content...')

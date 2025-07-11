@@ -20,9 +20,9 @@ class Command(BaseCommand):
                 'name': 'Segritech Apple Size Grading Machine',
                 'slug': 'apple-size-grader',
                 'short_description': 'Compact apple grading machine with roller-based sorting system. Perfect for farms and mandis with 200-250 box/day capacity.',
-                'detailed_description': '''Made-in-India apple grading solution designed for small to medium farms. Features roller-based size separation with integrated cleaning system. Built with food-grade materials for durability and hygiene.
+                'detailed_description': '''The Segritech Apple Size Grading Machine is a compact and efficient agricultural machine designed for small to medium-scale apple producers. With a robust roller-based grading mechanism, this model provides high accuracy in size grading, ensuring better pricing and packaging for apple growers and aggregators.
 
-Key capabilities: 6-grade output, portable design, and optimized for Indian agricultural conditions.''',
+Features a durable construction with food-grade materials and integrated cleaning system, making it perfect for farm and mandi operations with 200-250 box/day capacity.''',
                 'price_range': 'Contact for Pricing',
                 'key_features': json.dumps([
                     'Roller-based size grading system',
@@ -61,7 +61,9 @@ Key capabilities: 6-grade output, portable design, and optimized for Indian agri
                 'category': 'Size Graders',
                 'name': 'Orange Grader',
                 'short_description': 'Compact size grader perfect for oranges with reliable performance.',
-                'detailed_description': 'Designed for orange grading operations, the Orange Grader offers precision sizing in a space-efficient design. Ideal for cooperative societies, small processing units, and citrus specialty graders.',
+                'detailed_description': '''The Segritech Orange Grading Machine is specifically designed for orange grading operations, offering precision sizing in a space-efficient design. Built for Indian agricultural operations, this compact machine delivers reliable performance for cooperative societies and small processing units.
+
+Features advanced mechanical sorting technology optimized for orange characteristics, ensuring consistent size classification while maintaining fruit quality.''',
                 'price_range': '₹25,000 - ₹32,000',
                 'key_features': json.dumps([
                     'Compact design for space efficiency',
@@ -96,15 +98,12 @@ Key capabilities: 6-grade output, portable design, and optimized for Indian agri
             # Quality Graders
             {
                 'category': 'Quality Graders',
-                'name': 'Multifruit Optical Grader',
-                'slug': 'multifruit-optical-grader',
-                'short_description': 'The Segritech Multifruit Optical Grader is a high-capacity, AI-based sorting machine that processes up to 2 tons per hour. It uses advanced camera vision and smart algorithms to detect size, shape, color, and defects across multiple fruit varieties, ensuring export-grade consistency. Built for Indian farms and packhouses with rugged construction and rapid support.',
-                'detailed_description': '''Segritech Multifruit Optical Grader – MOG-2000 (V1.0)
-Developed by Segritech (Tikkly Agro Solution Pvt. Ltd.)
+                'name': 'Segritech Minisort',
+                'slug': 'segritech-minisort',
+                'short_description': 'The Segritech Minisort is a high-capacity, AI-based sorting machine that processes up to 2 tons per hour. It uses advanced camera vision and smart algorithms to detect size, shape, color, and defects across multiple fruit varieties, ensuring export-grade consistency. Built for Indian farms and packhouses with rugged construction and rapid support.',
+                'detailed_description': '''The Segritech Minisort is an advanced AI-powered grading machine designed for high-volume fruit sorting across multiple varieties including pomegranates, apples, oranges, and other round fruits. With the capacity to process up to 2 tons per hour, it grades fruits based on size, shape, color, and skin defects using camera vision and AI synchronization.
 
-The Segritech Multifruit Optical Grader is an advanced AI-powered grading machine designed for high-volume fruit sorting across multiple varieties including pomegranates, apples, oranges, and other round fruits. With the capacity to process up to 2 tons per hour, it grades fruits based on size, shape, color, and skin defects using camera vision and AI synchronization. Ideal for packhouses, mandis, exporters, and farmer cooperatives, the machine ensures export-grade sorting quality with real-time reporting. It's robustly built using stainless steel, mild steel, aluminum, and food-grade plastics to withstand demanding environments.
-
-Efficient, accurate, and engineered for Indian agricultural needs with multi-fruit versatility.''',
+Ideal for packhouses, mandis, exporters, and farmer cooperatives, the machine ensures export-grade sorting quality with real-time reporting.''',
                 'price_range': 'Contact for Pricing',
                 'key_features': json.dumps([
                     'AI-powered defect detection',
@@ -146,7 +145,7 @@ Efficient, accurate, and engineered for Indian agricultural needs with multi-fru
                 'lead_time': '',
                 'is_featured': True,
                 'is_available': True,
-                'meta_title': 'Segritech Multifruit Optical Grader | MOG-2000',
+                'meta_title': 'Segritech Minisort | Advanced AI-Powered Fruit Grading',
                 'meta_description': 'Advanced AI-powered multifruit grading machine with 2 ton/hour capacity. Features camera vision, defect detection, and export-grade sorting for pomegranates, apples, oranges and more.'
             },
             
@@ -155,7 +154,9 @@ Efficient, accurate, and engineered for Indian agricultural needs with multi-fru
                 'category': 'Weight Graders',
                 'name': 'PrecisionWeight WG-2500 Density Grader',
                 'short_description': 'Ultra-precise weight-based grading system for density sorting and export preparation.',
-                'detailed_description': 'The PrecisionWeight WG-2500 delivers exceptional accuracy in weight-based grading, essential for export markets requiring strict weight specifications. Features advanced load cells and vibration dampening for consistent results.',
+                'detailed_description': '''The Segritech Weight Grader for Fruits delivers exceptional accuracy in weight-based grading, essential for export markets requiring strict weight specifications. Features advanced load cells and vibration dampening for consistent results.
+
+Our weight grader ensures precise sorting based on weight, making it ideal for export quality standards. The machine's advanced technology and robust construction guarantee reliable performance.''',
                 'price_range': '₹45,000 - ₹60,000',
                 'key_features': json.dumps([
                     'Precision weighing ±0.1g accuracy',
@@ -192,7 +193,9 @@ Efficient, accurate, and engineered for Indian agricultural needs with multi-fru
                 'category': 'Cleaning Machines',
                 'name': 'AirClean AC-4000 Multi-Stage Cleaner',
                 'short_description': 'Comprehensive cleaning system with air separation, screening, and dust removal.',
-                'detailed_description': 'The AirClean AC-4000 provides thorough cleaning through multiple stages including pre-cleaning, air separation, fine screening, and dust collection. Specially designed to handle cleaning machines, apples, oranges, and various fruits with precision. Food-grade stainless steel construction ensures hygiene and durability.',
+                'detailed_description': '''Segriwax™ is a next-generation fruit cleaning and waxing machine tailored for India's decentralized post-harvest ecosystem. Designed for efficiency, affordability, and mobility, Segriwax brings industrial grade performance into a compact, field-deployable solution.
+
+Whether you're a farmer looking to enhance shelf life, or an exporter aiming for retail-grade presentation — Segriwax delivers the finish your produce deserves.''',
                 'price_range': '₹35,000 - ₹45,000',
                 'key_features': json.dumps([
                     'Multi-stage cleaning process',
@@ -263,7 +266,9 @@ Efficient, accurate, and engineered for Indian agricultural needs with multi-fru
                 'category': 'Packing Robots',
                 'name': 'RoboPack RP-5000 Automated Packaging System',
                 'short_description': 'Fully automated packaging robot with precision weighing and multi-format capability.',
-                'detailed_description': 'The RoboPack RP-5000 revolutionizes packaging operations with robotic arms, precision weighing, and intelligent bag handling. Suitable for various packaging formats from 1kg to 50kg bags.',
+                'detailed_description': '''SegriPack is Segritech's flagship automated packaging solution designed specifically for graded fresh produce. This intelligent robotic system combines precision handling with smart weighing technology to deliver consistent, retail-ready packaging.
+
+Built for Indian agricultural operations, SegriPack offers the perfect balance of automation, reliability, and cost-effectiveness. Whether you're packaging pomegranates, apples, citrus fruits, or other fresh produce, SegriPack ensures professional presentation while reducing labor dependency.''',
                 'price_range': '₹1,10,000 - ₹1,35,000',
                 'key_features': json.dumps([
                     'Robotic arm automation',

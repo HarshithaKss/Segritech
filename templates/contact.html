@@ -516,70 +516,13 @@
     </style>
 </head>
 <body>
+    {% include 'includes/navigation.html' %}
     <div class="loader-mask">
         <div class="loader">
             <div></div>
             <div></div>
         </div>
     </div>
-    <!-- navbar section -->
-    <div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
-        <div class="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
-                <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
-                    <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 130px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
-                </a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                    data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px; margin-right: 120px;">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Products
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="productsDropdown" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-top: 10px;">
-                                <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
-                                <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Quality Graders</a>
-                                <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Graders</a>
-                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
-                                <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
-                                <a class="dropdown-item" href="{% url 'inspection_box' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
-                                    <i class="fas fa-cube me-2"></i>Inspection Box
-                                    <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
-                                </a>
-                                <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
-                                <a class="dropdown-item" href="{% url 'products' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">View All Categories</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'contact' %}">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'careers' %}">Careers</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-    
-                        </ul>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </div>
-    <!-- navbar section -->
     <!-- banner section -->
     <section class="contact-hero">
         <div class="container text-center">
@@ -735,16 +678,8 @@
                         <i class="fas fa-map-marker-alt"></i>
                         <h4>Visit Our Office</h4>
                         <p>
-                            <strong>Tikkly Agro Solutions Pvt. Ltd.</strong><br>
-                            GST: 08AAHCT8111F1ZE<br><br>
-                            
-                            <strong>Shipping Address:</strong><br>
                             346, Doyens Township, Gachibowli Road,<br>
-                            Serilingampalli, Hyderabad, Telangana - 500019<br><br>
-                            
-                            <strong>Billing Address:</strong><br>
-                            Plot. No. 130, Shiv Nagar II, Jaipuriyo Ka Bad,<br>
-                            Hathoj, Jaipur, Rajasthan - 302012
+                            Serilingampalli, Hyderabad, Telangana - 500019
                         </p>
                     </div>
                 </div>
@@ -754,9 +689,8 @@
                         <i class="fas fa-phone-volume"></i>
                         <h4>Call Us</h4>
                         <p>
-                            <strong>Hetendra Singh</strong><br>
-                            Phone: <a href="tel:+919358859955">+91-93588 59955</a><br>
-                            WhatsApp: <a href="tel:+919358859955">+91-93588 59955</a>
+                            <strong>Segritech</strong><br>
+                            Phone: <a href="tel:+919014809973">+91 90148 09973</a>
                         </p>
                     </div>
                 </div>
@@ -766,8 +700,7 @@
                         <i class="fas fa-envelope-open"></i>
                         <h4>Email Us</h4>
                         <p>
-                            General: <a href="mailto:namaste@segritech.com">namaste@segritech.com</a><br>
-                            <strong>Hetendra Singh:</strong> <a href="mailto:Hetendra@segritech.com">Hetendra@segritech.com</a>
+                            General: <a href="mailto:namaste@segritech.com">namaste@segritech.com</a>
                         </p>
                     </div>
                 </div>
@@ -796,7 +729,7 @@
         <div class="container">
             <div class="section-title">
                 <h2>Find Us on Map</h2>
-                <p>Located at IIIT Hyderabad, Gachibowli - The innovation hub of Telangana</p>
+                <p>Located at Doyens Township, Gachibowli - The tech hub of Hyderabad</p>
             </div>
             
             <div class="row">
@@ -1067,7 +1000,7 @@
 
     // Initialize Map
     function initMap() {
-        // IIIT Hyderabad coordinates (SegriTech Innovation Center)
+        // Doyens Township, Gachibowli coordinates
         const segritechLocation = [17.4447, 78.3483];
         
         const map = L.map('contact-map').setView(segritechLocation, 15);
@@ -1087,10 +1020,11 @@
             .addTo(map)
             .bindPopup(`
                 <div style="text-align: center;">
-                    <h6 style="margin-bottom: 10px; color: #4CAF50;">SegriTech Innovation Center</h6>
-                    <p style="margin-bottom: 5px; font-size: 14px;">CIE, IIIT- Hyderabad</p>
-                    <p style="margin-bottom: 5px; font-size: 14px;">Gachibowli, Telangana-500032</p>
-                    <p style="margin-bottom: 0; font-size: 14px;"><strong>Phone:</strong> +91-93588 59955</p>
+                    <h6 style="margin-bottom: 10px; color: #4CAF50;">Segritech</h6>
+                    <p style="margin-bottom: 5px; font-size: 14px;">346, Doyens Township</p>
+                    <p style="margin-bottom: 5px; font-size: 14px;">Gachibowli Road, Serilingampalli</p>
+                    <p style="margin-bottom: 5px; font-size: 14px;">Hyderabad, Telangana - 500019</p>
+                    <p style="margin-bottom: 0; font-size: 14px;"><strong>Phone:</strong> +91 90148 09973</p>
                 </div>
             `);
     }

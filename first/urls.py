@@ -10,6 +10,7 @@ urlpatterns = [
     path('careers/', views.careers, name='careers'),
     path('careers/job/<int:job_id>/', views.job_detail, name='job_detail'),
     path('careers/apply/<int:job_id>/', views.apply_job, name='apply_job'),
+    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     
     # Products URLs
     path('products/', views.products, name='products'),

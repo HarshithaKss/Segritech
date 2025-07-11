@@ -113,58 +113,44 @@
             background: var(--dark-black);
             border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             border: 1px solid rgba(76, 175, 80, 0.1);
             height: 100%;
             display: flex;
             flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
         
         .product-card:hover {
-            transform: translateY(-8px) scale(1.02) !important;
-            box-shadow: 0 20px 50px rgba(76, 175, 80, 0.4), 
-                        inset 0 1px 0 rgba(255,255,255,0.2) !important;
-            border-color: rgba(76, 175, 80, 0.6) !important;
-        }
-        
-        .product-card:hover img {
-            transform: translate(-50%, -50%) !important;
-        }
-        
-        .product-card:hover .hover-effect-bar {
-            transform: scaleX(1) !important;
-        }
-        
-        .product-card a:hover {
-            transform: translateY(-2px) !important;
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.5) !important;
-        }
-        
-        .product-card .contact-btn:hover {
-            background: rgba(255, 255, 255, 0.2) !important;
-            border-color: rgba(255, 255, 255, 0.4) !important;
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(76, 175, 80, 0.4);
+            border-color: rgba(76, 175, 80, 0.6);
         }
         
         .product-image {
-            height: 250px;
-            overflow: hidden;
+            height: 300px;
             position: relative;
+            overflow: hidden;
             background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
         }
         
         .product-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease;
+            object-fit: contain;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.3s ease;
         }
         
-        .product-image-placeholder {
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.1));
+        .product-card:hover .product-image img {
+            transform: translate(-50%, -50%) scale(1.05);
         }
         
         .product-content {
@@ -223,10 +209,10 @@
         }
         
         .btn-learn-more:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
             color: white;
             text-decoration: none;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
         }
         
         .no-products {
@@ -272,19 +258,31 @@
         }
         
         .category-image {
-            aspect-ratio: 4/3;
-            min-height: 100px;
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.1));
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.1));
-            position: relative;
+            border-radius: 15px;
+        }
+        
+        .category-image .product-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
         }
         
         .category-image img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .category-card:hover .category-image img {
+            transform: scale(1.05);
         }
         
         .category-icon {
@@ -400,6 +398,17 @@
         .dropdown-menu {
             z-index: 1050 !important;
             position: absolute !important;
+            background: transparent !important;
+            border: none !important;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: transparent !important;
+            color: var(--accent-green) !important;
         }
     </style>
 </head>
@@ -422,9 +431,9 @@
                                 {% elif category.name == "Weight Graders" %}
                                     <i class="fas fa-weight"></i>
                                 {% elif category.name == "Cleaning Machines" %}
-                                    <i class="fas fa-broom"></i>
+                                    <i class="fas fa-apple-alt"></i>
                                 {% elif category.name == "Packing Robots" %}
-                                    <i class="fas fa-microchip"></i>
+                                    <i class="fas fa-robot"></i>
                                 {% else %}
                                     <i class="fas fa-cogs"></i>
                                 {% endif %}
@@ -433,18 +442,18 @@
                                 <h1 class="category-hero-title" style="margin-bottom: 0;">{{ category.name }}</h1>
                             </div>
                         </div>
-                        <p class="category-hero-desc" style="margin-bottom: 50px;">{{ category.description }}</p>
+                        <p class="category-hero-desc" style="margin-bottom: 50px;">Our size graders use reliable mechanical sorting technology to classify crops based on their physical dimensions. Perfect for small to medium-scale producers ensuring uniform quality and meeting market requirements.</p>
                         
                         <!-- Category Features -->
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
                             {% if category.name == "Size Graders" %}
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-eye"></i> Optical Technology</h5>
-                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Advanced cameras and sensors for precise size detection</p>
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-cogs"></i> Mechanical Design</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Robust roller-based grading mechanism for reliable size sorting</p>
                                 </div>
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-tachometer-alt"></i> High Speed</h5>
-                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Process up to 500kg per hour with 99.5% accuracy</p>
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-box"></i> Capacity</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Process 200-250 boxes per day</p>
                                 </div>
                             {% elif category.name == "Quality Graders" %}
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
@@ -466,12 +475,12 @@
                                 </div>
                             {% elif category.name == "Cleaning Machines" %}
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-wind"></i> Multi-Stage</h5>
-                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Air separation, screening, and density cleaning</p>
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-sync"></i> Three-Stage Process</h5>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Sequential cleaning, drying, and waxing for thorough crop preparation</p>
                                 </div>
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
                                     <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-shield-alt"></i> Food Grade</h5>
-                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Stainless steel construction for food safety</p>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Rust-resistant stainless steel ensures hygiene and long-term safety</p>
                                 </div>
                             {% elif category.name == "Packing Robots" %}
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
@@ -507,108 +516,286 @@
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section style="padding: 80px 0; background: var(--light-black);">
-        <div class="container">
-            {% if products %}
-                <div class="section-title" data-aos="fade-up">
-                    <h2>Our {{ category.name }}</h2>
-                    <p>Discover our range of high-quality {{ category.name|lower }} designed for efficiency and reliability.</p>
-                </div>
+    <!-- Products Grid -->
+<section class="products-section">
+    <div class="container">
+        {% if category.category_type == 'size_graders' %}
+            <!-- Section heading with modern design -->
+            <div class="section-heading text-center mb-4" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="heading-title">Our Products</h2>
+                <div class="heading-divider mx-auto"></div>
+                <p class="heading-description">Discover our range of innovative grading solutions</p>
+            </div>
 
-                <div class="row products-grid">
-                    {% for product in products %}
-                        <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="600" {% if forloop.counter == 2 %}data-aos-delay="100"{% elif forloop.counter == 3 %}data-aos-delay="200"{% elif forloop.counter == 4 %}data-aos-delay="300"{% endif %}>
-                            <div class="product-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 20px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: auto; min-height: 500px; box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
-                                <!-- Product Header -->
-                                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green));"></div>
-                                
-                                <!-- Product Image/Icon -->
-                                <div style="height: 200px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.05)); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;">
-                                    {% if product.main_image %}
-                                        <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
-                                    {% else %}
-                                        <div style="text-align: center; color: var(--accent-green);">
-                                            {% if category.name == "Size Graders" %}
-                                                {% if forloop.counter == 1 %}
-                                                    <img src="{% static 'web/orange_grader.png' %}" alt="Orange Size Grader" style="width: 90%; height: auto; max-height: 90%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
-                                                {% elif forloop.counter == 2 %}
-                                                    <img src="{% static 'web/apple_size_grader.png' %}" alt="Apple Size Grader" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
-                                                {% else %}
-                                                    <i class="fas fa-ruler-combined" style="font-size: 4rem; margin-bottom: 15px; opacity: 0.8;"></i>
-                                                {% endif %}
-                                            {% elif category.name == "Quality Graders" %}
-                                <img src="{% static 'web/quality_grader_updated.png' %}" alt="Quality Grader" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
-                                            {% elif category.name == "Weight Graders" %}
-                                <img src="{% static 'web/weight_grader.png' %}" alt="Weight Grader" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
-                                            {% elif category.name == "Cleaning Machines" %}
-                                <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machine" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
-                                            {% elif category.name == "Packing Robots" %}
-                                <img src="{% static 'web/final segripack.png' %}" alt="Packing Robot" style="width: 85%; height: 85%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
-                                            {% else %}
-                                                <i class="fas fa-cogs" style="font-size: 4rem; margin-bottom: 15px; opacity: 0.8;"></i>
-                                            {% endif %}
-                                                                        {% if category.name == "Size Graders" and forloop.counter > 2 %}
-                                <h6 style="color: white; margin: 0; font-size: 0.9rem; opacity: 0.8;">Product Image</h6>
-                            {% elif category.name not in "Size Graders,Quality Graders,Weight Graders,Cleaning Machines,Packing Robots" %}
-                                                <h6 style="color: white; margin: 0; font-size: 0.9rem; opacity: 0.8;">Product Image</h6>
-                                            {% endif %}
-                                        </div>
-                                    {% endif %}
-                                    
-
-                                    
-                                    <!-- Availability Status -->
-                                    <div style="position: absolute; top: 15px; left: 15px; background: {% if product.is_available %}rgba(76, 175, 80, 0.9){% else %}rgba(255, 87, 87, 0.9){% endif %}; color: white; padding: 5px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 600;">
-                                        {% if product.is_available %}
-                                            <i class="fas fa-check-circle"></i> Available
-                                        {% else %}
-                                            <i class="fas fa-clock"></i> Pre-Order
-                                        {% endif %}
-                                    </div>
-                                </div>
-                                
-                                <!-- Product Content -->
-                                <div style="padding: 25px;">
-                                    <h4 style="color: #FFFFFF; font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; line-height: 1.3; text-shadow: 0 1px 3px rgba(0,0,0,0.3);">{{ product.name }}</h4>
-                                    
-                                    <p style="color: rgba(255, 255, 255, 0.85); font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; height: 3.2em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ product.short_description }}</p>
-                                    
-
-                                    
-
-                                    
-                                    <!-- Action Buttons -->
-                                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto;">
-                                        <a href="{% url 'product_detail' category.slug product.slug %}" style="flex: 1; min-width: 120px; background: linear-gradient(135deg, var(--accent-green), var(--primary-green)); color: white; text-decoration: none; padding: 12px 20px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);">
-                                            <i class="fas fa-info-circle"></i> View Details
-                                        </a>
-                                        {% if product.brochure %}
-                                        <a href="{{ product.brochure.url }}" style="background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);">
-                                            <i class="fas fa-download"></i>
-                                        </a>
-                                        {% endif %}
-                                        <a href="#" onclick="openInquiryModal('{{ product.name }}')" style="background: rgba(255, 255, 255, 0.1); color: white; text-decoration: none; padding: 12px 15px; border-radius: 25px; text-align: center; font-weight: 600; font-size: 0.9rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255, 255, 255, 0.2);">
-                                            <i class="fas fa-envelope"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                
-                                <!-- Hover Effects -->
-                                <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent-green), #66BB6A, var(--primary-green)); border-radius: 0 0 20px 20px; transform: scaleX(0); transition: transform 0.3s ease; transform-origin: left;"></div>
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="800">
+                    <div class="product-card h-100 modern-card">
+                        <div class="product-image" style="height: 200px;">
+                            <div class="image-overlay"></div>
+                            <img src="/static/web/apple_size_grader.png" alt="Segritech Apple Size Grading Machine" 
+                                 style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" 
+                                 onerror="this.style.display='none';">
+                        </div>
+                        <div class="product-content compact">
+                            <div class="category-tag">Size Grader</div>
+                            <h3 class="product-title">Segritech Apple Size Grading Machine</h3>
+                            <p class="product-description">Compact and efficient apple grading machine with robust roller-based mechanism, perfect for small to medium-scale producers.</p>
+                            <div class="d-flex gap-2">
+                                <a href="/products/size-graders/segritech-apple-size-grading-machine/" class="btn-learn-more">
+                                    Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                                <a href="{% static 'brochures/Segritech Apple Size Grader.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                    <i class="fas fa-download mr-2"></i> Brochure
+                                </a>
                             </div>
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
-            {% else %}
-                <div class="no-products" data-aos="fade-up">
-                    <i class="fas fa-tools"></i>
-                    <h3>Products Coming Soon</h3>
-                    <p>We're working hard to bring you innovative {{ category.name|lower }}. Stay tuned for updates!</p>
+
+                <div class="col-lg-5 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="800">
+                    <div class="product-card h-100 modern-card">
+                        <div class="product-image" style="height: 200px;">
+                            <div class="image-overlay"></div>
+                            <img src="/static/web/orange_grader.png" alt="Segritech Orange Grading Machine" 
+                                 style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" 
+                                 onerror="this.style.display='none';">
+                        </div>
+                        <div class="product-content compact">
+                            <div class="category-tag">Size Grader</div>
+                            <h3 class="product-title">Segritech Orange Grading Machine</h3>
+                            <p class="product-description">Compact size grading machine designed specifically for oranges with reliable performance and space efficiency</p>
+                            <div class="d-flex gap-2">
+                                <a href="/products/size-graders/segritech-orange-grading-machine/" class="btn-learn-more">
+                                    Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                </a>
+                                <a href="{% static 'brochures/Segritech Apple Size Grader.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                    <i class="fas fa-download mr-2"></i> Brochure
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            {% endif %}
-        </div>
-    </section>
+            </div>
+
+        {% elif category.category_type == 'quality_graders' %}
+            <!-- Keep quality graders section unchanged -->
+            <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="section-title">Our Flagship Product</h2>
+                <p class="section-description">
+                    Introducing Segritech Minisort - Our Advanced Solution for Farm Level Grading
+                </p>
+            </div>
+            <div class="row justify-content-center">
+                {% for product in products %}
+                    <div class="col-lg-8 col-md-10 mb-4" data-aos="fade-up" data-aos-duration="800">
+                        <div class="product-card h-100">
+                            {% if product.main_image %}
+                                <div class="product-image">
+                                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% else %}
+                                <div class="product-image">
+                                    <img src="/static/web/quality_grader_updated.png" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% endif %}
+                            <div class="product-content">
+                                <h3 class="product-title">{{ product.name }}</h3>
+                                <p class="product-description">{{ product.short_description }}</p>
+                                <ul class="product-features" data-features="{{ product.key_features|escapejs }}">
+                                </ul>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'product_detail' category.slug product.slug %}" class="btn-learn-more">
+                                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                    {% if category.category_type == 'quality_graders' %}
+                                    <a href="{% static 'brochures/Multifruit optical quality grader.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                        <i class="fas fa-download mr-2"></i> Brochure
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elif category.category_type == 'weight_graders' %}
+            <!-- Section heading with modern design -->
+            <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="section-title">Weight Grader</h2>
+                <p class="section-description">
+                    Introducing Segritech Weight Grading Machine - Our Advanced Solution for Precise Weight-based Sorting
+                </p>
+            </div>
+            <div class="row justify-content-center">
+                {% for product in products %}
+                    <div class="col-lg-8 col-md-10 mb-4" data-aos="fade-up" data-aos-duration="800">
+                        <div class="product-card h-100">
+                            {% if product.main_image %}
+                                <div class="product-image">
+                                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% else %}
+                                <div class="product-image">
+                                    <img src="/static/web/weight_grader.png" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% endif %}
+                            <div class="product-content">
+                                <h3 class="product-title">{{ product.name }}</h3>
+                                <p class="product-description">{{ product.short_description }}</p>
+                                <ul class="product-features" data-features="{{ product.key_features|escapejs }}">
+                                </ul>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'product_detail' category.slug product.slug %}" class="btn-learn-more">
+                                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                    <a href="{% static 'brochures/Segritech Weight Grading Machine.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                        <i class="fas fa-download mr-2"></i> Brochure
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elif category.category_type == 'cleaning_machines' %}
+            <!-- Section heading with modern design -->
+            <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="section-title">Cleaning Machine</h2>
+                <p class="section-description">
+                    Introducing Segritech Cleaning Machine - Advanced Solution for Fruit Cleaning and Waxing
+                </p>
+            </div>
+            <div class="row justify-content-center">
+                {% for product in products %}
+                    <div class="col-lg-8 col-md-10 mb-4" data-aos="fade-up" data-aos-duration="800">
+                        <div class="product-card h-100">
+                            {% if product.main_image %}
+                                <div class="product-image">
+                                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% else %}
+                                <div class="product-image">
+                                    <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% endif %}
+                            <div class="product-content">
+                                <h3 class="product-title">{{ product.name }}</h3>
+                                <p class="product-description">{{ product.short_description }}</p>
+                                <ul class="product-features" data-features="{{ product.key_features|escapejs }}">
+                                </ul>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'product_detail' category.slug product.slug %}" class="btn-learn-more">
+                                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                    <a href="{% static 'brochures/Segriwax cleaning and waxing machine.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                        <i class="fas fa-download mr-2"></i> Brochure
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% elif category.category_type == 'packing_robots' %}
+            <!-- Section heading with modern design -->
+            <div class="section-header text-center mb-5" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="section-title">Packing Robot</h2>
+                <p class="section-description">
+                    Introducing Segritech Packing Robot - Advanced Solution for Automated Packaging
+                </p>
+            </div>
+            <div class="row justify-content-center">
+                {% for product in products %}
+                    <div class="col-lg-8 col-md-10 mb-4" data-aos="fade-up" data-aos-duration="800">
+                        <div class="product-card h-100">
+                            {% if product.main_image %}
+                                <div class="product-image">
+                                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% else %}
+                                <div class="product-image">
+                                    <img src="{% static 'web/final segripack.png' %}" alt="Packing Robot" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% endif %}
+                            <div class="product-content">
+                                <h3 class="product-title">{{ product.name }}</h3>
+                                <p class="product-description">{{ product.short_description }}</p>
+                                <ul class="product-features" data-features="{{ product.key_features|escapejs }}">
+                                </ul>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'product_detail' category.slug product.slug %}" class="btn-learn-more">
+                                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                    <a href="{% static 'brochures/Segripack Robotic Packing System.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                        <i class="fas fa-download mr-2"></i> Brochure
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="section-heading text-center mb-4" data-aos="fade-up" data-aos-duration="800">
+                <h2 class="heading-title">Our Products</h2>
+                <div class="heading-divider mx-auto"></div>
+                <p class="heading-description">Discover our range of innovative solutions</p>
+            </div>
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-lg-5 col-md-6 mb-4" data-aos="fade-up" data-aos-duration="800">
+                        <div class="product-card h-100 modern-card">
+                            {% if product.main_image %}
+                                <div class="product-image" style="height: 200px;">
+                                    <div class="image-overlay"></div>
+                                    <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% elif product.category.category_type == 'weight_graders' %}
+                                <div class="product-image" style="height: 200px;">
+                                    <div class="image-overlay"></div>
+                                    <img src="/static/web/weight_grader.png" alt="{{ product.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% elif product.category.category_type == 'cleaning_machines' %}
+                                <div class="product-image" style="height: 200px;">
+                                    <div class="image-overlay"></div>
+                                    <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% elif product.category.category_type == 'packing_robots' %}
+                                <div class="product-image" style="height: 200px;">
+                                    <div class="image-overlay"></div>
+                                    <img src="{% static 'web/final segripack.png' %}" alt="Packing Robot" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                </div>
+                            {% endif %}
+                            <div class="product-content compact">
+                                <div class="category-tag">{{ product.category.name }}</div>
+                                <h3 class="product-title">{{ product.name }}</h3>
+                                <p class="product-description">{{ product.short_description }}</p>
+                                <div class="d-flex gap-2">
+                                    <a href="{% url 'product_detail' category.slug product.slug %}" class="btn-learn-more">
+                                        Learn More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                    {% if product.category.category_type == 'weight_graders' %}
+                                    <a href="{% static 'brochures/Segritech Weight Grading Machine.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                        <i class="fas fa-download mr-2"></i> Brochure
+                                    </a>
+                                    {% elif product.category.category_type == 'cleaning_machines' %}
+                                    <a href="{% static 'brochures/Segriwax cleaning and waxing machine.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                        <i class="fas fa-download mr-2"></i> Brochure
+                                    </a>
+                                    {% elif product.category.category_type == 'packing_robots' %}
+                                    <a href="{% static 'brochures/Segripack Robotic Packing System.pdf' %}" class="btn-learn-more" target="_blank" style="background: var(--dark-green);">
+                                        <i class="fas fa-download mr-2"></i> Brochure
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</section>
 
     <!-- Other Categories -->
     <section class="other-categories-section">
@@ -623,20 +810,30 @@
                     <div class="col-lg-3 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:100 }}">
                         <a href="{% url 'category_products' other_category.slug %}" class="category-card">
                             <div class="category-image">
-                                {% if other_category.name == "Size Graders" %}
-                                    <img src="{% static 'web/apple_size_grader.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                {% if other_category.image %}
+                                    <div class="product-image">
+                                        <img src="{{ other_category.image.url }}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                    </div>
+                                {% elif other_category.name == "Size Graders" %}
+                                    <div class="product-image">
+                                        <img src="/static/web/apple_size_grader.png" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                    </div>
                                 {% elif other_category.name == "Quality Graders" %}
-                                    <img src="{% static 'web/quality_grader_updated.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                    <div class="product-image">
+                                        <img src="/static/web/quality_grader_updated.png" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                    </div>
                                 {% elif other_category.name == "Weight Graders" %}
-                                    <img src="{% static 'web/weight_grader.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                    <div class="product-image">
+                                        <img src="/static/web/weight_grader.png" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                    </div>
                                 {% elif other_category.name == "Cleaning Machines" %}
-                                    <img src="{% static 'web/cleaning_machine.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                                    <div class="product-image">
+                                        <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                    </div>
                                 {% elif other_category.name == "Packing Robots" %}
-                                    <img src="{% static 'web/final segripack.png' %}" alt="{{ other_category.name }}" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-                                {% elif other_category.image %}
-                                    <img src="{{ other_category.image.url }}" alt="{{ other_category.name }}">
-                                    {% else %}
-                                        <i class="{{ other_category.icon|default:'fas fa-cog' }} category-icon"></i>
+                                    <div class="product-image">
+                                        <img src="{% static 'web/final segripack.png' %}" alt="Packing Robot" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                    </div>
                                 {% endif %}
                             </div>
                             <div class="category-content">
@@ -719,6 +916,17 @@
         function openInquiryModal(productName) {
             alert('Inquiry for: ' + productName + '\nFeature coming soon! Please use the contact form or WhatsApp for now.');
         }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Parse key features
+            document.querySelectorAll('.product-features').forEach(function(featureList) {
+                const features = JSON.parse(featureList.dataset.features || '[]');
+                featureList.innerHTML = features.slice(0, 4).map(feature => 
+                    `<li><i class="fas fa-check"></i> ${feature}</li>`
+                ).join('');
+            });
+        });
     </script>
 </body>
 

@@ -37,6 +37,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+    <!-- Primary Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" 
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Fallback Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
         integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
@@ -151,6 +156,54 @@
     <style>
         html, body {
             overflow-x: hidden !important;
+        }
+        
+        /* Ensure icons and feature list remain visible */
+        .feature-list {
+            margin: 30px 0 !important;
+            position: relative !important;
+            z-index: 10 !important;
+        }
+        
+        .feature-list .fas,
+        .generic-btn .fas,
+        a .fas {
+            display: inline-block !important;
+            width: auto !important;
+            height: auto !important;
+            font-family: "Font Awesome 5 Free" !important;
+            font-weight: 900 !important;
+            -webkit-font-smoothing: antialiased !important;
+            font-style: normal !important;
+            font-variant: normal !important;
+            text-rendering: auto !important;
+            line-height: 1 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        .feature-list i.fas.fa-arrow-right:before {
+            content: "\f061" !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* Ensure circular buttons remain visible */
+        a[href="/products/"] {
+            position: relative !important;
+            z-index: 10 !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            background: rgba(255,255,255,0.15) !important;
+            backdrop-filter: blur(15px) !important;
+            -webkit-backdrop-filter: blur(15px) !important;
+            border: 1px solid rgba(255,255,255,0.3) !important;
+        }
+        
+        a[href="/products/"] i.fas {
+            opacity: 1 !important;
+            visibility: visible !important;
+            color: #ffffff !important;
         }
         
         /* Force remove any white backgrounds */
@@ -561,20 +614,25 @@
         
         /* Explore Button Styling */
         .explore-btn {
-            background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important;
-            color: #FFFFFF !important;
-            border: none !important;
-            padding: 12px 30px !important;
-            font-size: 1.1rem !important;
-            font-weight: 700 !important;
-            border-radius: 25px !important;
-            cursor: pointer !important;
-            transition: all 0.3s ease !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-            min-width: 120px !important;
-        }
+    background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    padding: 10px 24px !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+    border-radius: 25px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    min-width: 90px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+
         
         .explore-btn:hover {
             transform: translateY(-2px);
@@ -818,19 +876,22 @@
         #home-who-we-are-section .generic-btn a {
             background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important;
             color: #FFFFFF !important;
-            padding: 15px 35px !important;
-            border-radius: 30px !important;
-            font-weight: 700 !important;
-            font-size: 1.1rem !important;
+            padding: 12px 28px !important;
+            border-radius: 25px !important;
+            font-weight: 600 !important;
+            font-size: 0.95rem !important;
             text-decoration: none !important;
-            display: inline-block !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 8px !important;
             position: relative !important;
             overflow: hidden !important;
             transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
             box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3) !important;
             border: 2px solid transparent !important;
             text-transform: uppercase !important;
-            letter-spacing: 1px !important;
+            letter-spacing: 0.5px !important;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
         }
         
         #home-who-we-are-section .generic-btn a::before {
@@ -2072,14 +2133,23 @@
                     <div class="hero-description" data-aos="fade-up" data-aos-easing="ease-out-quart" data-aos-duration="1000" data-aos-delay="400" 
                          style="max-width: 650px; margin: 0 auto 35px auto;">
                         <p style="color: rgba(255, 255, 255, 0.98); line-height: 1.6; font-size: clamp(0.95rem, 2vw, 1.1rem); text-shadow: 2px 2px 6px rgba(0,0,0,0.9); margin-bottom: 0; font-weight: 400; letter-spacing: 0.2px;">
-                            Revolutionizing agriculture through intelligent automation. We provide <strong style="color: var(--primary-green);">affordable and accessible</strong> grading solutions for crops, empowering farmers and traders in developing countries.
+                            Revolutionizing quality assessment through intelligent automation. We provide <strong style="color: var(--primary-green);">precise and efficient</strong> grading solutions for fresh produce, reducing post-harvest losses and improving market value.
                         </p>
                     </div>
                     
                     <div class="hero-actions" data-aos="fade-up" data-aos-easing="ease-in-out-back" data-aos-duration="800" data-aos-delay="600" 
-                         style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
-                        <div class="generic-btn secondary" style="--button-color-override: transparent;">
-                            <a href="#3d-model-section" style="background: transparent; color: white; border: 2px solid var(--primary-green); padding: 12px 32px; font-size: 1rem; border-radius: 50px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease;">Learn More</a>
+                         style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                        <div class="generic-btn secondary">
+                            <a href="#3d-model-section" class="explore-btn" style="font-size: 0.9rem; padding: 12px 24px; letter-spacing: 0.5px;">
+                                <i class="fas fa-compass" style="font-size: 0.9rem;"></i>
+                                <span>Explore</span>
+                            </a>
+                        </div>
+                        <div class="generic-btn primary">
+                            <a href="{% url 'contact' %}" class="contact-btn" style="font-size: 0.9rem; padding: 12px 24px; letter-spacing: 0.5px; background: transparent; border: 2px solid var(--accent-green); color: var(--accent-green); border-radius: 25px; transition: all 0.3s ease;">
+                                <i class="fas fa-envelope" style="font-size: 0.9rem; margin-right: 6px;"></i>
+                                <span>Contact Us</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -2259,44 +2329,45 @@
         </div>
     </section>
     <!-- services section -->
-    <section class="service-slider-sec w-100 float-left padding-top padding-bottom bg-light-black" style="margin-top: 40px; margin-bottom: 100px !important; padding-bottom: 100px !important;">
-        <div class="generic-title text-center">
+    <section class="service-slider-sec w-100 float-left padding-top padding-bottom bg-light-black" style="margin-top: 80px !important; margin-bottom: 120px !important; padding-bottom: 120px !important;">
+        <div class="generic-title text-center" style="margin-bottom: 80px;">
             <span data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="700">CORE TECHNOLOGIES</span>
-            <h2 data-aos="flip-right" data-aos-easing="ease-out-cubic" data-aos-duration="700" data-aos-delay="100">Pioneering the Future of Farming</h2>
+            <h2 data-aos="flip-right" data-aos-easing="ease-out-cubic" data-aos-duration="700" data-aos-delay="100">pioneering post harvest 
+                automation</h2>
         </div>
         <div class="wrapper2">
             <div class="row segritech-core-services">
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="200">
+                <div class="col-lg-4 col-md-6 mb-5" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="200">
                     <div class="collection-box bg-dark-black h-100 d-flex flex-column">
                         <figure class="text-center mb-4">
                             <i class="fas fa-cogs fa-3x" style="color: var(--accent-green);"></i>
                         </figure>
-                        <h4 class="text-center">Automated Precision</h4>
-                        <p class="text-center flex-grow-1">Leveraging cutting-edge automation to enhance crop grading accuracy and efficiency for optimal yield.</p>
+                        <h4 class="text-center">Compact & Sleek Design</h4>
+                        <p class="text-center flex-grow-1">Smartly engineered to fit into minimal spaces without compromising functionality, making post-harvest operations more efficient and accessible for all farm sizes.</p>
                         <div class="text-center mt-auto">
                             <a href="{% url 'products' %}" class="service-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="400">
+                <div class="col-lg-4 col-md-6 mb-5" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="400">
                     <div class="collection-box bg-dark-black h-100 d-flex flex-column">
                         <figure class="text-center mb-4">
-                            <i class="fas fa-seedling fa-3x" style="color: var(--accent-green);"></i>
+                            <i class="fas fa-bolt fa-3x" style="color: var(--accent-green);"></i>
                         </figure>
-                        <h4 class="text-center">Sustainable Solutions</h4>
-                        <p class="text-center flex-grow-1">Developing eco-friendly technologies that support sustainable farming practices and resource management.</p>
+                        <h4 class="text-center">Faster Inspection</h4>
+                        <p class="text-center flex-grow-1">Accelerates crop grading and defect detection using advanced automation, significantly reducing manual effort and processing time.</p>
                         <div class="text-center mt-auto">
                             <a href="{% url 'products' %}" class="service-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="600">
+                <div class="col-lg-4 col-md-6 mb-5" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="600">
                     <div class="collection-box bg-dark-black h-100 d-flex flex-column">
                         <figure class="text-center mb-4">
                             <i class="fas fa-chart-line fa-3x" style="color: var(--accent-green);"></i>
                         </figure>
                         <h4 class="text-center">Data-Driven Insights</h4>
-                        <p class="text-center flex-grow-1">Providing actionable data analytics to empower farmers with insights for better decision-making and growth.</p>
+                        <p class="text-center flex-grow-1">Provides real-time analytics on crop quality and system performance to help optimize decisions and improve yield post-harvest.</p>
                         <div class="text-center mt-auto">
                             <a href="{% url 'products' %}" class="service-learn-more">Learn More <i class="fas fa-arrow-right"></i></a>
                         </div>
@@ -2316,10 +2387,19 @@
                         <div class="about-details-box">
                             <div class="generic-title">
                                 <span data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800">WHO WE ARE</span>
-                                <h2 class="mb-0" data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="200">Agtech company to automate, what is still done manually.</h2>
+                                <h2 class="mb-0 small-title" data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="200" style="font-size: 2.8rem !important; line-height: 3.4rem !important; font-weight: 600 !important; max-width: 90%; margin: 0 auto;">Agrideeptech company crafting intelligent machines for agri efficiency</h2>
                             </div>
+                            <style>
+                                .small-title {
+                                    font-size: 2.8rem !important;
+                                    line-height: 3.4rem !important;
+                                    font-weight: 600 !important;
+                                }
+                            </style>
                             <p data-aos="fade-left" data-aos-offset="200" data-aos-easing="ease-in-sine" data-aos-duration="800" data-aos-delay="400">
-                                Agriculture in developing countries face huge inefficiency in operational processes. Some major losses of farmers & traders due to the inefficient grading process is as follows.<br><br>On average 40% loss of the revenue in market.<br>On average 35% volume loss in fresh produce crops.<br>Average loss of 30% of productive time.<br><br>We are a team of AI & Robotics engineers. We solve such untouched problems here to improve the lives of many small farmers & traders.
+                                We are pioneering the future of agriculture through innovative AI and robotics solutions.<br><br>
+                                Our intelligent machines are designed to enhance farming operations, bringing cutting-edge technology to agricultural processes.<br><br>
+                                We strive to revolutionize traditional farming methods with smart automation and data-driven insights for maximum efficiency and productivity.
                             </p>
                             <div class="generic-btn" data-aos="zoom-in-up" data-aos-offset="100" data-aos-duration="700" data-aos-delay="600">
                                 <a href="{% url 'about' %}">Learn More About Us</a>
@@ -2345,16 +2425,16 @@
         
         <div class="wrapper2">
             <!-- Section Title -->
-            <div class="text-center mb-5" data-aos="fade-up" data-aos-duration="600">
+            <div class="text-center mb-4" data-aos="fade-up" data-aos-duration="600">
                 <span style="font-size: 1.5rem; letter-spacing: 4px; background: linear-gradient(45deg, var(--accent-green), #4CAF50); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 15px;">
                     <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.3rem;"></i>
                     SMART DETECTION
                     <i class="fas fa-arrow-left" style="color: var(--accent-green); font-size: 1.3rem;"></i>
                 </span>
-                <h2 style="font-size: 3.8rem; font-weight: 700; margin: 25px 0; background: linear-gradient(45deg, #ffffff, #e0e0e0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">AI-Powered Quality Detection</h2>
+                <h2 style="font-size: 3.8rem; font-weight: 700; margin: 20px 0; background: linear-gradient(45deg, #ffffff, #e0e0e0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2;">Smart Detection Engine for Fast and Accurate Quality Inspection</h2>
             </div>
 
-            <div class="row align-items-center" style="min-height: 600px;">
+            <div class="row align-items-center" style="min-height: 500px;">
                 <!-- Video Column -->
                 <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="800">
                     <div class="video-wrapper" style="position: relative; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); background: linear-gradient(145deg, #2a2a2a, #1a1a1a);">
@@ -2383,7 +2463,7 @@
                         <div style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 1px solid rgba(76, 175, 80, 0.2); position: relative; overflow: hidden;">
                             <div style="position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: linear-gradient(to bottom, var(--accent-green), #4CAF50);"></div>
                             <p style="color: rgba(255,255,255,0.95); font-size: 1.15rem; line-height: 1.7; margin: 0; font-weight: 400;">
-                                Our advanced AI-powered system revolutionizes pomegranate quality assessment through automated detection and grading, ensuring consistent and accurate results.
+                                Our intelligent vision system brings unmatched precision to fresh produce quality assessment. Using advanced AI and real-time image processing, it detects, grades, and classifies produce like fruits and vegetables with speed and consistency—reducing human error and boosting operational efficiency.
                             </p>
                         </div>
 
@@ -2391,19 +2471,19 @@
                         <div class="feature-list" style="margin: 30px 0;">
                             <div style="display: flex; align-items: center; margin-bottom: 18px;">
                                 <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
-                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Precise Detection</h6>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Real-time Quality Assessment</h6>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 18px;">
                                 <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
-                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Real-time Processing</h6>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Advanced AI Processing</h6>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 18px;">
                                 <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
-                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Higher Efficiency</h6>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Automated Grading System</h6>
                             </div>
                             <div style="display: flex; align-items: center; margin-bottom: 18px;">
                                 <i class="fas fa-arrow-right" style="color: var(--accent-green); font-size: 1.1rem; margin-right: 15px;"></i>
-                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Time Saving</h6>
+                                <h6 style="color: #ffffff; margin: 0; font-weight: 600; font-size: 1.1rem;">Error-free Classification</h6>
                             </div>
                         </div>
 
@@ -2428,104 +2508,128 @@
                 <span data-aos="fade-up" data-aos-duration="600" style="font-size: 1.2rem; text-transform: uppercase;">SUPPORT</span>
                 <h2 data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" style="margin-top: 10px;">Industry Backing</h2>
             </div>
-            <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" style="font-size: 1.1rem; color: var(--text-color); max-width: 800px; margin: 20px auto 40px auto;">
-                We are backed by Industry Experts & Professionals in our journey to deliver value in agriculture value chain.
+            <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" style="font-size: 1.1rem; color: var(--text-color); max-width: 900px; margin: 20px auto 40px auto; line-height: 1.8;">
+                We are proudly backed by some of the most respected institutions and experts at the intersection of Agriculture and Artificial Intelligence. From leading agri-tech incubators to top AI research ecosystems, our journey is supported by organizations committed to transforming rural agriculture through innovation.
             </p>
         </div>
-        <div class="swiper" id="logoSwiper">
+        <!-- Logo Slider with Enhanced Design -->
+        <div class="swiper" id="logoSwiper" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.08)); padding: 40px 20px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); position: relative; overflow: hidden;">
+            <!-- Decorative elements -->
+            <div style="position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(76, 175, 80, 0.03) 0%, transparent 50%); pointer-events: none; z-index: 1;"></div>
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+            
             <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
+            <div class="swiper-wrapper" style="align-items: center; position: relative; z-index: 2;">
                 <!-- First set of slides -->
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora" style="max-height: 90px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <!-- Second set for seamless loop -->
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora" style="max-height: 90px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <!-- Third set for extra smoothness -->
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-1-bg-removed-Pacdora.png' %}" alt="client-1-bg-removed-Pacdora" style="max-height: 90px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-2-bg-removed-Pacdora.png' %}" alt="client-2-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-3-bg-removed-Pacdora.png' %}" alt="client-3-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-4-bg-removed-Pacdora.png' %}" alt="client-4-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-5-bg-removed-Pacdora.png' %}" alt="client-5-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
                 <div class="swiper-slide">
-                    <figure class="mb-0">
-                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora">
+                    <figure class="mb-0" style="background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02)); padding: 25px; border-radius: 16px; transition: all 0.4s ease; position: relative; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05);" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 30px rgba(0,0,0,0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);"></div>
+                        <img src="{% static 'logos/client-6-bg-removed-Pacdora.png' %}" alt="client-6-bg-removed-Pacdora" style="max-height: 60px; width: auto; filter: brightness(1.2) contrast(1.1); transition: all 0.4s ease;" onmouseover="this.style.filter='brightness(1.3) contrast(1.2)'" onmouseout="this.style.filter='brightness(1.2) contrast(1.1)'">
                     </figure>
                 </div>
             </div>
@@ -2539,13 +2643,13 @@
         <div class="wrapper2">
             <div class="generic-title text-center" style="margin-bottom: 60px;">
                 <span data-aos="fade-up" data-aos-duration="600" style="color: var(--accent-green); font-weight: 700; letter-spacing: 3px; text-transform: uppercase; position: relative;">
-                    FARMER TESTIMONIALS
+                    What Our Users Say
                 </span>
                 <h2 data-aos="fade-up" data-aos-duration="600" style="color: #FFFFFF; margin: 25px 0 20px 0; font-size: 3.2rem; background: linear-gradient(135deg, #FFFFFF, var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Real Impact, Real Stories</h2>
                 <p data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.85); max-width: 650px; margin: 0 auto 40px auto; line-height: 1.6; position: relative;">
-                    <i class="fas fa-seedling" style="color: var(--accent-green); margin-right: 12px; font-size: 1.1rem;"></i>
-                    Hear directly from farmers about how SegriTech is transforming their agricultural operations
-                    <span style="position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 80px; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-green), transparent);"></span>
+                   
+                
+                  
                 </p>
             </div>
 
@@ -2558,17 +2662,14 @@
                         <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="200">
                             <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
-                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
-                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>5.0
-                        </div>
                                 <div style="text-align: center; margin-bottom: 15px;">
                                     <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
-                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                             </figure>
-                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Priya Singh</h6>
+                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Mahesh Patil</h6>
                                     <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Organic Farmer</span>
                                 </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"SegriTech increased our crop quality by 45%. The sorting accuracy is incredible!"</p>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"Segritech helped us accurately track quality grades, their detection precision is truly incredible!"</p>
                                 <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
                             </div>
                         </div>
@@ -2577,17 +2678,14 @@
                         <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="400">
                             <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
-                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
-                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>4.9
-                                </div>
                                 <div style="text-align: center; margin-bottom: 15px;">
                                     <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
-                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                                     </figure>
                                     <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Ahmed Hassan</h6>
                                     <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Commercial Grower</span>
                                 </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"Reduced processing time by 60%. Our productivity has never been better!"</p>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"With Segritech, we reduced post-harvest losses by 30%. That's a real operational impact for us."</p>
                                 <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
                             </div>
                         </div>
@@ -2596,17 +2694,14 @@
                         <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="600">
                             <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
-                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
-                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>4.7
-                                </div>
                                 <div style="text-align: center; margin-bottom: 15px;">
                                     <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
-
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                                     </figure>
-                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Maria Santos</h6>
+                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Atul Chaudhary</h6>
                                     <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Fruit Exporter</span>
                                 </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"Export quality improved dramatically. Our international clients are impressed!"</p>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"Their system brought complete transparency to our sorting — no more guessing or disputes."</p>
                                 <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
                             </div>
                         </div>
@@ -2615,17 +2710,14 @@
                         <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="600" data-aos-delay="800">
                             <div class="testimonial-card" style="background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); border: 2px solid rgba(76, 175, 80, 0.3); border-radius: 15px; padding: 20px; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(0,0,0,0.3);">
                                 <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent-green), #66BB6A);"></div>
-                                <div style="position: absolute; top: 10px; right: 10px; background: rgba(76, 175, 80, 0.2); padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; color: var(--accent-green); font-weight: 600;">
-                                    <i class="fas fa-star" style="font-size: 0.6rem; margin-right: 3px;"></i>4.8
-                                </div>
                                 <div style="text-align: center; margin-bottom: 15px;">
                                     <figure style="width: 50px; height: 50px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; margin: 0 auto 10px auto; background: rgba(76, 175, 80, 0.1);">
-
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                                     </figure>
-                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Rajesh Kumar</h6>
+                                    <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Rajesh Rao</h6>
                                     <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">Farm Cooperative</span>
                                 </div>
-                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"सेग्रीटेक मशीन से हमारी फसल की गुणवत्ता में 45% का सुधार हुआ है। यह हमारे किसान समुदाय के लिए एक बेहतरीन निवेश साबित हुआ!"</p>
+                                <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.85rem; line-height: 1.5; margin: 0; text-align: center;">"After using Segritech, rejection rates dropped by 40%. It's a game-changer for our margins."</p>
                                 <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--primary-green), var(--accent-green));"></div>
                             </div>
                         </div>
@@ -2639,29 +2731,26 @@
                         <!-- Video Badge -->
                         <div style="position: absolute; top: 15px; left: 15px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(102, 187, 106, 0.8)); color: #FFFFFF; padding: 6px 12px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; z-index: 4; box-shadow: 0 3px 10px rgba(76, 175, 80, 0.4); backdrop-filter: blur(5px); display: flex; align-items: center; gap: 6px;">
                             <i class="fas fa-video" style="font-size: 0.7rem;"></i>
-                            LIVE TESTIMONIAL
-                        </div>
-                        
-                        <!-- Rating Badge -->
-                        <div style="position: absolute; top: 15px; right: 15px; background: rgba(255, 193, 7, 0.9); color: #000; padding: 6px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; z-index: 4;">
-                            <i class="fas fa-star" style="margin-right: 3px; font-size: 0.7rem;"></i>5.0
+                            On Site Feedback
                         </div>
                         
                         <!-- Video Element -->
-                        <div style="position: relative; padding: 15px;">
-                                                    <video id="testimonialVideo" 
-                               controls 
-                               autoplay 
-                               muted 
-                               loop 
-                               playsinline
-                               style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); background: #000;">
-                                <source src="{% static 'video/testimonial.mp4' %}" type="video/mp4">
-                                <p style="color: rgba(255, 255, 255, 0.8); text-align: center; padding: 30px;">
-                                    Your browser does not support the video tag. 
-                                    <a href="{% static 'video/testimonial.mp4' %}" style="color: var(--accent-green);">Download the video</a> to watch it.
-                                </p>
-                            </video>
+                        <div style="position: relative; padding: 15px; max-width: 100%; overflow: hidden;">
+                            <div style="position: relative; width: 100%; padding-top: 56.25%;">
+                                <video id="testimonialVideo" 
+                                    controls 
+                                    autoplay 
+                                    muted 
+                                    loop 
+                                    playsinline
+                                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); background: #000; object-fit: cover;">
+                                    <source src="{% static 'video/testimonial.mp4' %}" type="video/mp4">
+                                    <p style="color: rgba(255, 255, 255, 0.8); text-align: center; padding: 30px;">
+                                        Your browser does not support the video tag. 
+                                        <a href="{% static 'video/testimonial.mp4' %}" style="color: var(--accent-green);">Download the video</a> to watch it.
+                                    </p>
+                                </video>
+                            </div>
                         </div>
                         
                         <!-- Video Info -->
@@ -2669,26 +2758,18 @@
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div style="display: flex; align-items: center; gap: 10px;">
                                     <div style="width: 35px; height: 35px; border: 2px solid var(--accent-green); border-radius: 50%; padding: 2px; background: rgba(76, 175, 80, 0.1);">
-                                        <img src="{% static 'images/blog-profile-img.png' %}" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
+                                        <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Farmer" style="border-radius: 50%; width: 100%; height: 100%; object-fit: cover;">
                                     </div>
                                     <div>
-                                        <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Success Story</h6>
-                                        <span style="color: rgba(255, 255, 255, 0.7); font-size: 0.75rem;">
-                                            <i class="fas fa-tractor" style="color: var(--accent-green); font-size: 0.7rem; margin-right: 4px;"></i>
-                                            Real Farmer
-                            </span>
+                                        <h6 style="color: var(--accent-green); font-weight: 600; margin: 0; font-size: 0.9rem;">Orange Trader, Hyderabad.</h6>
+                                       
                         </div>
                     </div>
                                 <div style="display: flex; gap: 15px; text-align: center;">
                                     <div>
-                                        <div style="color: var(--accent-green); font-weight: 700; font-size: 1rem;">+40%</div>
-                                        <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.7rem;">Revenue</div>
-                </div>
-                                    <div>
-                                        <div style="color: var(--accent-green); font-weight: 700; font-size: 1rem;">-35%</div>
-                                        <div style="color: rgba(255, 255, 255, 0.6); font-size: 0.7rem;">Waste</div>
-                    </div>
-                </div>
+                                        <div style="color: var(--accent-green); font-weight: 700; font-size: 1rem;">+95% Sorting Accuracy</div>
+                                        
+                                </div>
                             </div>
                         </div>
                         
@@ -3397,6 +3478,7 @@
         let scene, camera, renderer, model, controls, mixer;
         let isAutoRotating = false;
         let originalPosition, originalRotation, originalScale;
+        let initialCameraPosition, initialCameraRotation;
         
         function init3DModel() {
             // Prevent double initialization
@@ -3426,8 +3508,8 @@
             scene.background = new THREE.Color(0x1a1a1a);
             
             // Camera setup with better initial position
-            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.set(6, 4, 6);
+            camera = new THREE.PerspectiveCamera(65, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(15, 10, 15); // Adjusted camera position for more centered view
             
             // Renderer setup
             renderer = new THREE.WebGLRenderer({ 
@@ -3483,12 +3565,12 @@
             controls.enableZoom = true;
             controls.enablePan = true;
             controls.enableRotate = true;
-            controls.maxDistance = 20;
-            controls.minDistance = 2;
+            controls.maxDistance = 60;
+            controls.minDistance = 5;
             
             // Ensure controls are responsive
-            controls.rotateSpeed = 1.0;
-            controls.zoomSpeed = 1.2;
+            controls.rotateSpeed = 0.8;
+            controls.zoomSpeed = 1.0;
             controls.panSpeed = 0.8;
             
             // Add debug event listeners to test mouse interaction
@@ -3537,14 +3619,16 @@
                     console.log('Model loaded successfully!', gltf);
                     model = gltf.scene;
                     
-                    // Store original transform
+                    // Scale and position the model (no fixed rotation)
+                    model.scale.setScalar(6); // Increased scale further
+                    model.position.set(-3, -1, 0); // Moved left for better centering
+
+                    // Store initial state after setting up the model
                     originalPosition = model.position.clone();
                     originalRotation = model.rotation.clone();
                     originalScale = model.scale.clone();
-                    
-                    // Scale and position the model (no fixed rotation)
-                    model.scale.setScalar(1.3);
-                    model.position.set(0, -0.5, 0);
+                    initialCameraPosition = camera.position.clone();
+                    initialCameraRotation = camera.rotation.clone();
                     
                     // Enable shadows
                     model.traverse(function(child) {
@@ -3648,17 +3732,17 @@
         }
         
         function resetView() {
-            if (model) {
-                camera.position.set(6, 4, 6);
-                camera.lookAt(0, 0, 0);
+            if (model && initialCameraPosition && initialCameraRotation) {
+                // Restore camera to initial state
+                camera.position.copy(initialCameraPosition);
+                camera.rotation.copy(initialCameraRotation);
                 controls.target.set(0, 0, 0);
                 controls.update();
                 
+                // Restore model to initial state
                 model.position.copy(originalPosition);
                 model.rotation.copy(originalRotation);
                 model.scale.copy(originalScale);
-                model.scale.setScalar(1.3);
-                model.position.set(0, -0.5, 0);
                 // No fixed rotation - let it auto-rotate naturally
             }
         }
@@ -4022,6 +4106,41 @@
     });
     </script>
 
+    <!-- Font Awesome Visibility Check -->
+    <script>
+        function checkFontAwesome() {
+            const testIcon = document.createElement('i');
+            testIcon.className = 'fas fa-arrow-right';
+            testIcon.style.opacity = '0';
+            testIcon.style.position = 'absolute';
+            document.body.appendChild(testIcon);
+            
+            const isIconVisible = window.getComputedStyle(testIcon).fontFamily.includes('Font Awesome');
+            document.body.removeChild(testIcon);
+            
+            if (!isIconVisible) {
+                console.log('Font Awesome not loaded, reloading...');
+                const link = document.createElement('link');
+                link.rel = 'stylesheet';
+                link.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css';
+                link.integrity = 'sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==';
+                link.crossOrigin = 'anonymous';
+                link.referrerPolicy = 'no-referrer';
+                document.head.appendChild(link);
+            }
+        }
+
+        // Check initially and periodically
+        checkFontAwesome();
+        setInterval(checkFontAwesome, 5000);
+
+        // Also check when the page becomes visible again
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                checkFontAwesome();
+            }
+        });
+    </script>
 </body>
 
 <!-- Mirrored from html.designingmedia.com/aimentor/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 May 2025 09:01:11 GMT -->

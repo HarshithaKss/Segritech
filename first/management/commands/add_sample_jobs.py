@@ -6,90 +6,93 @@ from datetime import timedelta
 class Command(BaseCommand):
     help = 'Add sample job postings'
 
-    def handle(self, *args, **kwargs):
-        # Mechanical Engineer Position
-        mechanical_engineer = JobPosting.objects.create(
-            title="Mechanical Engineer",
-            department="hardware",
-            job_type="full_time",
-            experience_level="mid",
-            location="Hyderabad",
-            remote_allowed=False,
-            description="""About Segritech:
-Segritech is a deep-tech agritech startup focused on transforming the way fruits and vegetables are graded and sorted at the farm level. We design advanced machinery integrated with AI-based computer vision to bring automation and transparency to the agri-value chain.
+    def handle(self, *args, **options):
+        # Sample job postings data
+        jobs_data = [
+            {
+                'title': 'Mechanical Engineer',
+                'department': 'engineering',
+                'job_type': 'full_time',
+                'experience_level': 'mid',
+                'location': 'Bangalore, India',
+                'remote_allowed': False,
+                'description': 'We are looking for a skilled Mechanical Engineer to join our R&D team...',
+                'responsibilities': '''
+- Design and develop mechanical components for agricultural machinery
+- Create detailed 3D models and technical drawings using CAD software
+- Collaborate with cross-functional teams to optimize product designs
+- Conduct structural and thermal analyses
+- Oversee prototyping and testing of new designs
+                ''',
+                'requirements': '''
+- B.Tech/M.Tech in Mechanical Engineering
+- 3-5 years experience in product development
+- Proficiency in SolidWorks or similar CAD software
+- Strong understanding of GD&T and manufacturing processes
+- Experience with agricultural machinery is a plus
+                ''',
+                'nice_to_have': '''
+- Experience with automation systems
+- Knowledge of IoT and sensor integration
+- Familiarity with rapid prototyping technologies
+                ''',
+                'benefits': '''
+- Competitive salary package
+- Health insurance for self and family
+- Professional development opportunities
+- Flexible work hours
+- Stock options
+                ''',
+                'salary_min': 1000000,
+                'salary_max': 1800000,
+                'equity_offered': True,
+                'deadline': timezone.now().date() + timedelta(days=30),
+                'is_active': True
+            },
+            {
+                'title': 'Mechatronics Internship',
+                'department': 'engineering',
+                'job_type': 'internship',
+                'experience_level': 'entry',
+                'location': 'Bangalore, India',
+                'remote_allowed': False,
+                'description': 'Join our innovative team as a Mechatronics Intern...',
+                'responsibilities': '''
+- Assist in the development of automated systems
+- Work on integration of sensors and actuators
+- Help with testing and validation of prototypes
+- Document technical processes and results
+                ''',
+                'requirements': '''
+- Currently pursuing B.Tech/M.Tech in Mechatronics/Mechanical/Electronics
+- Strong foundation in mechanical and electronic systems
+- Basic programming skills (Python/Arduino)
+- Eager to learn and contribute to real projects
+                ''',
+                'nice_to_have': '''
+- Previous internship experience
+- Knowledge of ROS
+- Experience with microcontrollers
+                ''',
+                'benefits': '''
+- Stipend based on capabilities
+- Certificate upon completion
+- Potential for pre-placement offer
+- Hands-on experience with cutting-edge technology
+                ''',
+                'salary_min': 25000,
+                'salary_max': 40000,
+                'equity_offered': False,
+                'deadline': timezone.now().date() + timedelta(days=15),
+                'is_active': True
+            }
+        ]
 
-Role Overview:
-We are seeking a passionate and detail-oriented Mechanical Engineer with 3–4 years of experience in designing electro-mechanical systems or agri/industrial machinery. You will be responsible for the end-to-end mechanical design, prototyping, testing, and integration of our fruit-sorting and inspection systems.""",
-            responsibilities="""- Lead mechanical design and development of grading/sorting machines
-- Work with cross-functional teams (software, electronics, AI) to integrate systems
-- Design assemblies, frames, conveyors, and sensor/camera housings using CAD tools (SolidWorks/AutoCAD/Fusion 360)
-- Prepare fabrication drawings and BOMs
-- Optimize designs for cost, manufacturability, and robustness
-- Oversee prototyping, vendor management, and field deployment
-- Troubleshoot issues in live environments and implement design improvements""",
-            requirements="""- B.E./B.Tech in Mechanical Engineering (M.E./M.Tech is a plus)
-- 3–4 years of experience in machine design, preferably in automation, robotics, or agri/packaging equipment
-- Proficiency in CAD software (SolidWorks preferred)
-- Good understanding of mechanical systems, sheet metal, gear systems, motors, conveyors, and structural analysis
-- Exposure to pneumatics, motion systems, and industrial sensors is a plus
-- Hands-on approach with a passion for building things from scratch
-- Experience with vendor coordination and fabrication processes
-- Strong problem-solving and project management skills""",
-            nice_to_have="""- Experience working in startups or product development teams
-- Familiarity with computer vision or camera integration
-- Knowledge of IP ratings, ruggedization for field use, or agricultural applications""",
-            benefits="""Be part of a fast-growing deep-tech startup making real-world impact
-Work on challenging problems that combine mechanical, AI, and agri-tech
-Opportunity to lead and grow with the company as we scale pan-India and globally""",
-            salary_min=450000,  # 4.5L
-            salary_max=500000,  # 5L
-            equity_offered=False,
-            is_active=True,
-            is_featured=False,
-            deadline=timezone.now() + timedelta(days=30)
-        )
-
-        # Mechatronics Internship Position
-        mechatronics_intern = JobPosting.objects.create(
-            title="Mechatronics Internship",
-            department="hardware",
-            job_type="internship",
-            experience_level="entry",
-            location="Hyderabad",
-            remote_allowed=False,
-            description="""Duties Of The Mechatronics Intern:
-- Embedded Systems
-- 3D modeling of hardware design on Solid Works/Fusion360/blender
-- Electronics hardware & PCB Designing
-- Working on mechanical design and electronic circuits
-- Fabrication and assembly work-stream
-- Working on pre-product deployment tests
-- Firmware & Programming
-- Working on Raspberry Pi/Nvidia Jetson Nano/Arduino
-- Python/embedded C programming
-- Documentation and release of components for manufacturing
-- Coordination with the software team""",
-            requirements="""Essential Skills Required:
-- Good handson in 3d designing on Solidworks or Fusion360
-- Experience on Raspberry Pi and Arduino
-- Familiar with ARM/PIC32 processor family
-- Experience with communication protocols like UART, CAN, MODBUS, RS232, Ethernet etc
-- Experience with PCB designing and debugging
-- Self-motivated, problem solver, good communication skills
-- Good level of presentation skills (verbal and written)
-- Good multi-tasking skills""",
-            nice_to_have="""Desirable Skills:
-- Knowledge of design in safety critical environments
-- Knowledge of ISO 26262
-- Knowledge of Raspberry pi
-- Knowledge of embedded programming on rpi
-- Knowledge of Solid Works""",
-            salary_min=5000,
-            salary_max=6000,
-            equity_offered=False,
-            is_active=True,
-            is_featured=False,
-            deadline=timezone.now() + timedelta(days=30)
-        )
+        # Create job postings
+        for job_data in jobs_data:
+            JobPosting.objects.get_or_create(
+                title=job_data['title'],
+                defaults=job_data
+            )
 
         self.stdout.write(self.style.SUCCESS('Successfully added sample job postings')) 

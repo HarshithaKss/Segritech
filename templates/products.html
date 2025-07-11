@@ -70,7 +70,8 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding-top: 120px;
+            padding-top: 160px; /* Increased from 200px to 220px */
+            padding-bottom: 120px; /* Increased from 100px to 120px */
         }
 
         .hero-section::before {
@@ -593,15 +594,7 @@
             </div>
         </div>
 
-        <!-- Navigation Arrows -->
-        <div class="nav-arrows">
-            <button class="nav-arrow prev">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button class="nav-arrow next">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
+        
     </section>
 
     <!-- Products Link -->
@@ -617,7 +610,7 @@
                     <i class="fas fa-cogs" style="margin-right: 6px;"></i>
                     OUR SOLUTIONS
                 </div>
-                <h2 class="section-title">Choose Your Technology</h2>
+                <h2 class="section-title">Choose Your Product</h2>
                 <p class="section-description">
                     Select from our advanced range of precision agricultural technology solutions designed for modern farming operations
                 </p>
@@ -626,9 +619,9 @@
             <div class="categories-grid">
                 <!-- Size Graders -->
                 <a href="{% url 'size_graders' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100" style="text-decoration: none; color: inherit;">
-                                         <div class="category-image">
-                         <img src="{% static 'web/apple_size_grader.png' %}" alt="Size Graders">
-                     </div>
+                    <div class="category-image">
+                        <img src="{% static 'web/apple_size_grader.png' %}" alt="Size Graders" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                    </div>
                     <div class="category-content">
                         <div class="category-icon">
                             <i class="fas fa-ruler-combined"></i>
@@ -637,18 +630,17 @@
                         <p class="category-description">
                             Advanced optical scanning technology for precise size-based sorting of grains, seeds, and nuts. Achieve 99.5% accuracy with our cutting-edge vision systems designed for high-volume processing.
                         </p>
-                        
-                                                 <div class="category-button">
-                             View Details
-                         </div>
+                        <div class="category-button">
+                            View Details
+                        </div>
                     </div>
                 </a>
 
                 <!-- Quality Graders -->
                 <a href="{% url 'quality_graders' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" style="text-decoration: none; color: inherit;">
                                          <div class="category-image">
-                         <img src="{% static 'web/quality_grader.png' %}" alt="Quality Graders">
-                     </div>
+                                            <img src="{% static 'web/quality_grader_updated.png' %}" alt="Quality Grader Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                                        </div>
                     <div class="category-content">
                         <div class="category-icon">
                             <i class="fas fa-star"></i>
@@ -686,21 +678,23 @@
 
                 <!-- Cleaning Machines -->
                 <a href="{% url 'cleaning_machines' %}" class="category-card" data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" style="text-decoration: none; color: inherit;">
-                                         <div class="category-image">
-                         <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machines">
-                     </div>
+                    <div class="category-image">
+                        <img src="{% static 'web/cleaning_machine.png' %}" alt="Cleaning Machines" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                    </div>
                     <div class="category-content">
-                        <div class="category-icon">
-                            <i class="fas fa-wind"></i>
+                        <div class="category-icon" style="position: relative;">
+                            <i class="fas fa-apple-alt" style="color: var(--accent-green); position: relative; z-index: 2;"></i>
+                            <i class="fas fa-sun" style="color: var(--accent-green); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; z-index: 1;"></i>
+                            <i class="fas fa-sparkles" style="color: var(--accent-green); position: absolute; top: -5px; right: -5px; font-size: 0.6em;"></i>
+                            <i class="fas fa-sparkles" style="color: var(--accent-green); position: absolute; bottom: -5px; left: -5px; font-size: 0.6em;"></i>
                         </div>
                         <h3 class="category-title">Cleaning Machines</h3>
                         <p class="category-description">
-                            Advanced multi-stage cleaning systems that remove impurities, dust, and foreign materials. Achieve food-grade preparation standards with our comprehensive cleaning solutions.
+                            Complete post-harvest cleaning systems designed to remove impurities and enhance produce appearance. Our three-stage setup- cleaning, drying, and waxing ensures crops are hygienic, visually appealing, and market-ready.
                         </p>
-                        
-                                                 <div class="category-button">
-                             View Details
-                         </div>
+                        <div class="category-button">
+                            View Details
+                        </div>
                     </div>
                 </a>
 
@@ -896,19 +890,35 @@
         }
     </style>
 
-    <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <!-- Scripts -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
-    
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            easing: 'ease-in-out',
-            once: true
+        $(document).ready(function() {
+            // Initialize AOS
+            AOS.init();
+            
+            // Initialize dropdowns
+            $('.dropdown-toggle').dropdown();
+            
+            // Add hover effect for dropdown
+            $('.dropdown').hover(
+                function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(200);
+                },
+                function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(200);
+                }
+            );
+            
+            // Add click handler for dropdown items
+            $('.dropdown-item').click(function(e) {
+                e.preventDefault();
+                window.location.href = $(this).attr('href');
+            });
         });
     </script>
 </body>
-
 </html>

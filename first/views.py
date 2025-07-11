@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
 from django.conf import settings
@@ -176,6 +176,10 @@ def category_products(request, category_slug):
 
 def product_detail(request, category_slug, product_slug):
     """Individual product detail page"""
+    # Handle redirect for old Multifruit Optical Grader URL
+    if category_slug == 'quality-graders' and product_slug == 'multifruit-optical-grader':
+        return redirect('product_detail', category_slug='quality-graders', product_slug='segritech-minisort', permanent=True)
+    
     category = get_object_or_404(ProductCategory, slug=category_slug, is_active=True)
     product = get_object_or_404(Product, slug=product_slug, category=category, is_active=True)
     related_products = Product.objects.filter(category=category, is_active=True).exclude(id=product.id)[:3]
@@ -318,19 +322,15 @@ def solutions(request):
 
 def careers(request):
     # Get filter form
-    filter_form = JobFilterForm(request.GET)
+    form = JobFilterForm(request.GET)
     
-    # Start with active job postings
+    # Base queryset
     jobs = JobPosting.objects.filter(is_active=True)
     
-    # Apply filters
-    if filter_form.is_valid():
-        search = filter_form.cleaned_data.get('search')
-        department = filter_form.cleaned_data.get('department')
-        job_type = filter_form.cleaned_data.get('job_type')
-        experience_level = filter_form.cleaned_data.get('experience_level')
-        remote_allowed = filter_form.cleaned_data.get('remote_allowed')
-        
+    # Apply filters if form is valid
+    if form.is_valid():
+        # Search by title or description
+        search = form.cleaned_data.get('search')
         if search:
             jobs = jobs.filter(
                 Q(title__icontains=search) |
@@ -338,36 +338,38 @@ def careers(request):
                 Q(requirements__icontains=search)
             )
         
+        # Department filter
+        department = form.cleaned_data.get('department')
         if department:
             jobs = jobs.filter(department=department)
         
+        # Job type filter
+        job_type = form.cleaned_data.get('job_type')
         if job_type:
             jobs = jobs.filter(job_type=job_type)
         
+        # Experience level filter
+        experience_level = form.cleaned_data.get('experience_level')
         if experience_level:
             jobs = jobs.filter(experience_level=experience_level)
         
+        # Remote filter
+        remote_allowed = form.cleaned_data.get('remote_allowed')
         if remote_allowed:
             jobs = jobs.filter(remote_allowed=True)
     
-    # Pagination
-    paginator = Paginator(jobs, 10)  # Show 10 jobs per page
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
+    # Get department counts for sidebar
+    department_counts = JobPosting.objects.filter(is_active=True).values('department').annotate(count=Count('id'))
     
-    # Get some stats for the page
-    stats = {
-        'total_jobs': JobPosting.objects.filter(is_active=True).count(),
-        'internships': JobPosting.objects.filter(is_active=True, job_type='internship').count(),
-        'full_time': JobPosting.objects.filter(is_active=True, job_type='full_time').count(),
-        'remote': JobPosting.objects.filter(is_active=True, remote_allowed=True).count(),
-    }
+    # Get job type counts for sidebar
+    job_type_counts = JobPosting.objects.filter(is_active=True).values('job_type').annotate(count=Count('id'))
     
     context = {
-        'page_obj': page_obj,
-        'filter_form': filter_form,
-        'stats': stats,
-        'total_jobs': paginator.count,
+        'jobs': jobs,
+        'form': form,
+        'department_counts': department_counts,
+        'job_type_counts': job_type_counts,
+        'total_jobs': jobs.count(),
     }
     
     return render(request, 'careers.html', context)
@@ -449,13 +451,16 @@ Applied at: {application.applied_at}
 Please review the attached resume and contact the candidate if suitable.
                 """
                 
-                send_mail(
+                from django.core.mail import EmailMessage
+                email = EmailMessage(
                     admin_subject,
                     admin_message,
                     settings.DEFAULT_FROM_EMAIL,
-                    [settings.ADMIN_EMAIL],
-                    fail_silently=False,
+                    [settings.ADMIN_EMAIL]
                 )
+                if application.resume:
+                    email.attach(application.resume.name, application.resume.read(), application.resume.content_type)
+                email.send(fail_silently=False)
                 
                 # Confirmation email to applicant
                 applicant_subject = f'Application Received: {job.title} at SegriTech'
@@ -604,3 +609,6 @@ def blog_detail(request, slug):
 def explore_coming_soon(request):
     """Explore coming soon page with meme GIF"""
     return render(request, 'explore_coming_soon.html')
+
+def privacy_policy(request):
+    return render(request, 'privacy_policy.html')

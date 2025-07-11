@@ -161,6 +161,22 @@ class JobApplicationForm(forms.ModelForm):
         
         return resume
 
+    def clean_earliest_start_date(self):
+        from datetime import date
+        start_date = self.cleaned_data.get('earliest_start_date')
+        
+        if start_date:
+            # Check if date is not in the past
+            if start_date < date.today():
+                raise forms.ValidationError('Start date cannot be in the past.')
+            
+            # Check if date is not too far in the future (e.g., within next 2 years)
+            max_future_date = date.today().replace(year=date.today().year + 2)
+            if start_date > max_future_date:
+                raise forms.ValidationError('Start date cannot be more than 2 years in the future.')
+        
+        return start_date
+
 class JobFilterForm(forms.Form):
     DEPARTMENT_CHOICES = [('', 'All Departments')] + JobApplication._meta.get_field('job_posting').related_model.DEPARTMENT_CHOICES
     JOB_TYPE_CHOICES = [('', 'All Types')] + JobApplication._meta.get_field('job_posting').related_model.JOB_TYPE_CHOICES

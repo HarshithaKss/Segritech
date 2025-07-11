@@ -1,973 +1,453 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
-    
-    <title>Careers - SegriTech | Join Our Agricultural Technology Team</title>
-    
-    <!-- CSS Files -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
-    <link rel="stylesheet" href="{% static 'css/superclasses.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
-    
-    <style>
-        /* SegriTech Careers Page - Dark Theme */
-        :root {
-            --primary-green: #2E7D32;
-            --dark-green: #1B5E20;
-            --light-green: #A5D6A7;
-            --accent-green: #66BB6A;
-            --text-on-green: #FFFFFF;
-            --text-on-light: #121212;
-            --background-dark: #1A1A1A;
-            --background-medium: #2C2C2C;
-            --background-light: #F0F4F0;
-            
-            --primary-color: #fff;
-            --button-color: var(--accent-green);
-            --accent: var(--accent-green);
-            --text-color: rgba(240, 244, 240, 0.75);
-            --title-color: #fff;
-            --dark-color: #000;
-            --secondary-color: var(--background-medium);
-            --black-color: var(--background-dark);
-        }
 
-        html, body {
-            background: var(--background-dark) !important;
-            color: var(--text-color);
-            padding: 0 !important;
-            margin: 0 !important;
+{% block title %}Careers - SegriTech | Join Our Agricultural Technology Team{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* SegriTech Careers Page - Dark Theme */
+    :root {
+        --primary-green: #2E7D32;
+        --dark-green: #1B5E20;
+        --light-green: #A5D6A7;
+        --accent-green: #66BB6A;
+        --text-on-green: #FFFFFF;
+        --text-on-light: #121212;
+        --background-dark: #1A1A1A;
+        --background-medium: #2C2C2C;
+        --background-light: #F0F4F0;
+        
+        --primary-color: #fff;
+        --button-color: var(--accent-green);
+        --accent: var(--accent-green);
+        --text-color: rgba(240, 244, 240, 0.75);
+        --title-color: #fff;
+        --dark-color: #000;
+        --secondary-color: var(--background-medium);
+        --black-color: var(--background-dark);
+    }
+
+    /* Form Controls */
+    .form-control {
+        background: var(--background-dark);
+        border: 1px solid rgba(102, 187, 106, 0.3);
+        color: var(--primary-color);
+        border-radius: 8px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+        background: var(--background-dark);
+        border-color: var(--accent-green);
+        box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.25);
+        color: var(--primary-color);
+    }
+
+    .form-control::placeholder {
+        color: var(--text-color);
+        opacity: 0.7;
+    }
+
+    .form-check-input {
+        background-color: var(--background-dark);
+        border-color: rgba(102, 187, 106, 0.3);
+    }
+
+    .form-check-input:checked {
+        background-color: var(--accent-green);
+        border-color: var(--accent-green);
+    }
+
+    /* Filter Section */
+    .filters-sidebar {
+        background: var(--background-medium);
+        border-radius: 15px;
+        padding: 30px;
+        border: 1px solid rgba(102, 187, 106, 0.2);
+    }
+
+    .filters-sidebar h3 {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 25px;
+    }
+
+    .job-filter-form label {
+        color: var(--primary-color);
+        font-weight: 500;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    .job-filter-form .form-group {
+        margin-bottom: 20px;
+    }
+
+    .job-filter-form .remote-check {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .job-filter-form .remote-check label {
+        color: var(--text-color);
+        font-weight: normal;
+        margin-left: 8px;
+    }
+
+    .btn-filter {
+        background: var(--accent-green);
+        color: var(--text-on-green);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        width: 100%;
+        margin-bottom: 10px;
+        transition: all 0.3s ease;
+    }
+
+    .btn-filter:hover {
+        background: var(--primary-green);
+        transform: translateY(-2px);
+    }
+
+    .btn-clear {
+        background: transparent;
+        color: var(--text-color);
+        border: 1px solid rgba(102, 187, 106, 0.3);
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        width: 100%;
+        transition: all 0.3s ease;
+    }
+
+    .btn-clear:hover {
+        background: rgba(102, 187, 106, 0.1);
+        color: var(--primary-color);
+        border-color: var(--accent-green);
+    }
+
+    .filter-stats {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(102, 187, 106, 0.2);
+    }
+
+    .filter-stats h5 {
+        color: var(--primary-color);
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .filter-stats ul li {
+        color: var(--text-color);
+        font-size: 0.9rem;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Banner Section */
+    .banner-section {
+        background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(44, 44, 44, 0.95)), url('{% static "web/back.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        padding: 140px 0 40px 0;
+        color: white;
+        text-align: center;
+    }
+
+    .banner-content h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+
+    .banner-content p {
+        font-size: 1.3rem;
+        color: var(--text-color);
+    }
+
+    /* Jobs Section */
+    .jobs-section {
+        padding: 60px 0;
+        background: var(--background-dark);
+    }
+
+    .jobs-header {
+        margin-bottom: 30px;
+    }
+
+    .jobs-header h3 {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+
+    .job-card {
+        background: var(--background-medium);
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(102, 187, 106, 0.2);
+    }
+
+    .job-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-green);
+    }
+
+    .job-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .job-header h4 {
+        margin: 0;
+    }
+
+    .job-header h4 a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .job-type {
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        background: rgba(102, 187, 106, 0.2);
+        color: var(--accent-green);
+    }
+
+    .job-meta {
+        margin-bottom: 15px;
+        color: var(--text-color);
+    }
+
+    .job-meta span {
+        margin-right: 20px;
+    }
+
+    .job-meta i {
+        color: var(--accent-green);
+        margin-right: 5px;
+    }
+
+    .job-description {
+        color: var(--text-color);
+        margin-bottom: 20px;
+    }
+
+    .job-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .job-footer .btn-apply {
+        background: var(--accent-green);
+        color: var(--text-on-green);
+        padding: 8px 20px;
+        border-radius: 20px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .job-footer .btn-apply:hover {
+        background: var(--primary-green);
+        transform: translateY(-2px);
+    }
+
+    .job-footer .job-deadline {
+        display: none; /* Hide the deadline */
+    }
+
+    .no-jobs {
+        text-align: center;
+        padding: 50px 20px;
+        background: var(--background-medium);
+        border-radius: 10px;
+        color: var(--text-color);
+    }
+
+    @media (max-width: 768px) {
+        .banner-content h1 {
+            font-size: 2.5rem;
         }
         
-        /* Remove all spacing around navbar */
-        .navbar-main-sec {
-            position: relative !important;
-            z-index: 1000;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-        
-        /* Remove wrapper padding */
-        .wrapper, .wrapper2 {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-        }
-
-        /* Force navbar positioning */
-        .index-page-navbar {
-            padding-top: 0 !important;
-            padding-bottom: 0 !important;
-            margin-top: 0 !important;
-            margin-bottom: 0 !important;
-        }
-
-        /* Hero Section */
-        .careers-hero {
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95), rgba(44, 44, 44, 0.95)), url('{% static "web/back.jpg" %}');
-            background-size: cover;
-            background-position: center;
-            padding: 140px 0 40px 0 !important;
-            margin-top: 0 !important;
-            color: white;
-            position: relative;
-        }
-
-        .careers-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .careers-hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: var(--text-color);
-            max-width: 700px;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 20px;
-            background: rgba(102, 187, 106, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(102, 187, 106, 0.3);
-            min-width: 120px;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent-green);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            margin-top: 5px;
-        }
-
-        /* Filter Section */
-        .filter-section {
-            background: var(--background-medium);
-            padding: 40px 0;
-            border-bottom: 1px solid rgba(102, 187, 106, 0.2);
-        }
-
-        .filter-card {
-            background: var(--background-dark);
-            border-radius: 15px;
-            padding: 30px;
-            border: 1px solid rgba(102, 187, 106, 0.2);
-        }
-
-        .filter-title {
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        .form-control {
-            background: var(--background-medium);
-            border: 2px solid rgba(102, 187, 106, 0.3);
-            color: var(--primary-color);
-            border-radius: 8px;
-        }
-
-        .form-control:focus {
-            background: var(--background-medium);
-            border-color: var(--accent-green);
-            color: var(--primary-color);
-            box-shadow: 0 0 0 0.2rem rgba(102, 187, 106, 0.25);
-        }
-
-        .form-control::placeholder {
-            color: var(--text-color);
-            opacity: 0.7;
-        }
-
-        .btn-filter {
-            background: var(--accent-green);
-            border: none;
-            color: var(--text-on-green);
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-filter:hover {
-            background: var(--primary-green);
-            color: var(--text-on-green);
-            transform: translateY(-2px);
-        }
-
-        /* Jobs Section */
-        .jobs-section {
-            background: var(--background-dark);
-            padding: 60px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            color: var(--primary-color);
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .section-title p {
-            color: var(--text-color);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .job-card {
-            background: var(--background-medium);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 25px;
-            border: 2px solid rgba(102, 187, 106, 0.2);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .job-card:hover {
-            border-color: var(--accent-green);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
         .job-header {
-            display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: flex-start;
-            margin-bottom: 20px;
-        }
-
-        .job-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-            text-decoration: none;
-        }
-
-        .job-title:hover {
-            color: var(--accent-green);
-            text-decoration: none;
-        }
-
-        .job-company {
-            color: var(--accent-green);
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        .job-badge {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .badge-full-time { background: rgba(102, 187, 106, 0.2); color: var(--accent-green); }
-        .badge-part-time { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
-        .badge-internship { background: rgba(23, 162, 184, 0.2); color: #17a2b8; }
-        .badge-contract { background: rgba(108, 117, 125, 0.2); color: #6c757d; }
-        .badge-remote { background: rgba(220, 53, 69, 0.2); color: #dc3545; }
-
-        .job-meta {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .job-meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-color);
-            font-size: 0.9rem;
-        }
-
-        .job-meta-item i {
-            color: var(--accent-green);
-            width: 16px;
-        }
-
-        .job-description {
-            color: var(--text-color);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .job-tags {
-            display: flex;
             gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
         }
-
-        .job-tag {
-            background: rgba(102, 187, 106, 0.1);
-            color: var(--accent-green);
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(102, 187, 106, 0.3);
+        
+        .job-meta span {
+            display: block;
+            margin-bottom: 5px;
         }
-
+        
         .job-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
         }
+    }
+</style>
+{% endblock %}
 
-        .job-salary {
-            color: var(--accent-green);
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .btn-apply {
-            background: var(--accent-green);
-            color: var(--text-on-green);
-            padding: 10px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid var(--accent-green);
-        }
-
-        .btn-apply:hover {
-            background: transparent;
-            color: var(--accent-green);
-            text-decoration: none;
-            transform: translateY(-2px);
-        }
-
-        .featured-badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: linear-gradient(45deg, var(--accent-green), var(--primary-green));
-            color: var(--text-on-green);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        /* Pagination */
-        .pagination {
-            justify-content: center;
-            margin-top: 40px;
-        }
-
-        .page-link {
-            background: var(--background-medium);
-            border: 1px solid rgba(102, 187, 106, 0.3);
-            color: var(--text-color);
-        }
-
-        .page-link:hover {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            color: var(--text-on-green);
-        }
-
-        .page-item.active .page-link {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            color: var(--text-on-green);
-        }
-
-        /* No jobs message */
-        .no-jobs {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .no-jobs i {
-            font-size: 4rem;
-            color: var(--accent-green);
-            margin-bottom: 20px;
-        }
-
-        .no-jobs h3 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .no-jobs p {
-            color: var(--text-color);
-            font-size: 1.1rem;
-        }
-
-        /* Benefits Section */
-        .benefits-section {
-            background: var(--background-medium);
-            padding: 80px 0;
-        }
-
-        .benefit-card {
-            background: var(--background-dark);
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
-            border: 2px solid rgba(102, 187, 106, 0.2);
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .benefit-card:hover {
-            border-color: var(--accent-green);
-            transform: translateY(-5px);
-        }
-
-        .benefit-icon {
-            font-size: 3rem;
-            color: var(--accent-green);
-            margin-bottom: 20px;
-        }
-
-        .benefit-card h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .benefit-card p {
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .careers-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero-stats {
-                gap: 20px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
-            .job-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .job-footer {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="loader-mask">
-        <div class="loader">
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-
-    <!-- navbar section -->
-    <div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
-        <div class="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
-                <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
-                    <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 130px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
-                </a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                    data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px; margin-right: 120px;">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Products
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="productsDropdown" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-top: 10px;">
-                                <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
-                                <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Quality Graders</a>
-                                <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Graders</a>
-                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
-                                <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
-                                <a class="dropdown-item" href="{% url 'inspection_box' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
-                                    <i class="fas fa-cube me-2"></i>Inspection Box
-                                    <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
-                                </a>
-                                <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
-                                <a class="dropdown-item" href="{% url 'products' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">View All Categories</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'careers' %}">Careers</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-    
-                        </ul>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="careers-hero">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <h1 data-aos="fade-up" data-aos-duration="600">Join SegriTech</h1>
-                    <p data-aos="fade-up" data-aos-duration="800">
-                        Shape the future of agriculture with cutting-edge AI and robotics technology. 
-                        Join our mission to revolutionize farming and reduce post-harvest losses worldwide.
-                    </p>
-                    <div class="hero-stats" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="stat-card">
-                            <span class="stat-number">{{ stats.total_jobs }}</span>
-                            <span class="stat-label">Open Positions</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">{{ stats.internships }}</span>
-                            <span class="stat-label">Internships</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">{{ stats.remote }}</span>
-                            <span class="stat-label">Remote Jobs</span>
-                        </div>
-                        <div class="stat-card">
-                            <span class="stat-number">8</span>
-                            <span class="stat-label">Departments</span>
-                        </div>
-                    </div>
+{% block content %}
+<!-- Banner Section -->
+<section class="banner-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="banner-content">
+                    <h1>Join Our Team</h1>
+                    <p>Be part of our mission to revolutionize agricultural technology</p>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Filter Section -->
-    <section class="filter-section">
-        <div class="container">
-            <div class="filter-card" data-aos="fade-up" data-aos-duration="600">
-                <h3 class="filter-title"><i class="fas fa-filter"></i> Find Your Perfect Role</h3>
-                <form method="get" action="{% url 'careers' %}">
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            {{ filter_form.search }}
+<!-- Jobs Section -->
+<section class="jobs-section">
+    <div class="container">
+        <div class="row">
+            <!-- Filters Sidebar -->
+            <div class="col-lg-3">
+                <div class="filters-sidebar">
+                    <h3><i class="fas fa-filter"></i> Find Your Perfect Role</h3>
+                    <form method="get" class="job-filter-form">
+                        <div class="form-group">
+                            <label for="id_search">Search Jobs</label>
+                            <input type="text" name="search" class="form-control" placeholder="Search jobs by title or keywords..." id="id_search">
                         </div>
-                        <div class="col-md-2 mb-3">
-                            {{ filter_form.department }}
+
+                        <div class="form-group">
+                            <label for="id_department">Department</label>
+                            <select name="department" class="form-control" id="id_department">
+                                <option value="" selected>All Departments</option>
+                                <option value="engineering">Engineering & Development</option>
+                                <option value="ai_ml">AI & Machine Learning</option>
+                                <option value="hardware">Hardware & Robotics</option>
+                                <option value="product">Product Management</option>
+                                <option value="sales">Sales & Marketing</option>
+                                <option value="operations">Operations</option>
+                                <option value="finance">Finance & Administration</option>
+                                <option value="hr">Human Resources</option>
+                            </select>
                         </div>
-                        <div class="col-md-2 mb-3">
-                            {{ filter_form.job_type }}
+
+                        <div class="form-group">
+                            <label for="id_job_type">Job Type</label>
+                            <select name="job_type" class="form-control" id="id_job_type">
+                                <option value="" selected>All Types</option>
+                                <option value="full_time">Full Time</option>
+                                <option value="part_time">Part Time</option>
+                                <option value="internship">Internship</option>
+                                <option value="contract">Contract</option>
+                                <option value="remote">Remote</option>
+                            </select>
                         </div>
-                        <div class="col-md-2 mb-3">
-                            {{ filter_form.experience_level }}
+
+                        <div class="form-group">
+                            <label for="id_experience_level">Experience Level</label>
+                            <select name="experience_level" class="form-control" id="id_experience_level">
+                                <option value="" selected>All Levels</option>
+                                <option value="entry">Entry Level</option>
+                                <option value="junior">Junior (1-3 years)</option>
+                                <option value="mid">Mid Level (3-5 years)</option>
+                                <option value="senior">Senior (5+ years)</option>
+                                <option value="lead">Lead/Principal</option>
+                            </select>
                         </div>
-                        <div class="col-md-1 mb-3 d-flex align-items-center">
+
+                        <div class="remote-check">
                             <div class="form-check">
-                                {{ filter_form.remote_allowed }}
-                                <label class="form-check-label text-light" for="id_remote_allowed">
-                                    Remote
-                                </label>
+                                <input type="checkbox" name="remote_allowed" class="form-check-input" id="id_remote_allowed">
+                                <label class="form-check-label" for="id_remote_allowed">Remote Work Available</label>
                             </div>
                         </div>
-                        <div class="col-md-2 mb-3">
-                            <button type="submit" class="btn btn-filter w-100">
-        Search
-                            </button>
+
+                        <button type="submit" class="btn btn-filter">
+                            <i class="fas fa-search"></i> Search Jobs
+                        </button>
+                        <a href="{% url 'careers' %}" class="btn btn-clear">
+                            <i class="fas fa-undo"></i> Clear Filters
+                        </a>
+                    </form>
+                    
+                    <div class="filter-stats">
+                        <h5>Departments</h5>
+                        <ul class="list-unstyled">
+                            {% for dept in department_counts %}
+                            <li>
+                                <span>{{ dept.department|title }}</span>
+                                <span class="count">{{ dept.count }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        
+                        <h5>Job Types</h5>
+                        <ul class="list-unstyled">
+                            {% for type in job_type_counts %}
+                            <li>
+                                <span>{{ type.job_type|title }}</span>
+                                <span class="count">{{ type.count }}</span>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jobs List -->
+            <div class="col-lg-9">
+                <div class="jobs-header">
+                    <h3>Open Positions ({{ total_jobs }})</h3>
+                </div>
+                
+                {% if jobs %}
+                <div class="jobs-list">
+                    {% for job in jobs %}
+                    <div class="job-card">
+                        <div class="job-header">
+                            <h4><a href="{% url 'job_detail' job.id %}">{{ job.title }}</a></h4>
+                            <span class="job-type {{ job.job_type }}">{{ job.get_job_type_display }}</span>
+                        </div>
+                        <div class="job-meta">
+                            <span><i class="fas fa-building"></i> {{ job.get_department_display }}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> {{ job.location }}</span>
+                            <span><i class="fas fa-briefcase"></i> {{ job.get_experience_level_display }}</span>
+                            {% if job.remote_allowed %}
+                            <span><i class="fas fa-laptop-house"></i> Remote Available</span>
+                            {% endif %}
+                        </div>
+                        <div class="job-description">
+                            {{ job.description|truncatewords:50 }}
+                        </div>
+                        <div class="job-footer">
+                            <a href="{% url 'job_detail' job.id %}" class="btn btn-outline-primary">View Details</a>
                         </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Jobs Section -->
-    <section class="jobs-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Current Openings</h2>
-                <p>Discover exciting opportunities to make a real impact in agricultural technology</p>
-            </div>
-
-            {% if page_obj %}
-                <div class="row">
-                    {% for job in page_obj %}
-                        <div class="col-12" data-aos="fade-up" data-aos-duration="600">
-                            <div class="job-card">
-                                {% if job.is_featured %}
-                                    <div class="featured-badge">
-                                        <i class="fas fa-star"></i> Featured
-                                    </div>
-                                {% endif %}
-                                
-                                <div class="job-header">
-                                    <div>
-                                        <a href="{% url 'job_detail' job.id %}" class="job-title">
-                                            {{ job.title }}
-                                        </a>
-                                        <div class="job-company">SegriTech</div>
-                                    </div>
-                                    <span class="job-badge badge-{{ job.job_type }}">
-                                        {{ job.get_job_type_display }}
-                                    </span>
-                                </div>
-
-                                <div class="job-meta">
-                                    <div class="job-meta-item">
-                                        <i class="fas fa-building"></i>
-                                        <span>{{ job.get_department_display }}</span>
-                                    </div>
-                                    <div class="job-meta-item">
-                                        <i class="fas fa-map-marker-alt"></i>
-                                        <span>{{ job.location }}</span>
-                                    </div>
-                                    <div class="job-meta-item">
-                                        <i class="fas fa-user-graduate"></i>
-                                        <span>{{ job.get_experience_level_display }}</span>
-                                    </div>
-                                </div>
-
-                                <div class="job-description">
-                                    {{ job.description|truncatewords:25 }}
-                                </div>
-
-                                <div class="job-footer">
-                                    <div class="job-salary">
-                                        <i class="fas fa-money-bill-wave"></i> {{ job.salary_range }}
-                                    </div>
-                                    <a href="{% url 'job_detail' job.id %}" class="btn-apply">
-                                        View Details <i class="fas fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
                     {% endfor %}
                 </div>
-
-                <!-- Pagination -->
-                {% if page_obj.has_other_pages %}
-                    <nav aria-label="Job listings pagination">
-                        <ul class="pagination">
-                            {% if page_obj.has_previous %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                            
-                            {% for num in page_obj.paginator.page_range %}
-                                {% if page_obj.number == num %}
-                                    <li class="page-item active">
-                                        <span class="page-link">{{ num }}</span>
-                                    </li>
-                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                                    <li class="page-item">
-                                        <a class="page-link" href="?page={{ num }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">{{ num }}</a>
-                                    </li>
-                                {% endif %}
-                            {% endfor %}
-                            
-                            {% if page_obj.has_next %}
-                                <li class="page-item">
-                                    <a class="page-link" href="?page={{ page_obj.next_page_number }}{% for key, value in request.GET.items %}{% if key != 'page' %}&{{ key }}={{ value }}{% endif %}{% endfor %}">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
+                {% else %}
+                <div class="no-jobs">
+                    <p>No jobs found matching your criteria.</p>
+                </div>
                 {% endif %}
-            {% else %}
-                <div class="no-jobs" data-aos="fade-up" data-aos-duration="600">
-                    <h3>No positions found</h3>
-                    <p>We couldn't find any jobs matching your criteria. Try adjusting your filters or check back later for new opportunities.</p>
-                </div>
-            {% endif %}
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section class="benefits-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Work at SegriTech?</h2>
-                <p>We offer more than just a job - we offer a chance to make a difference</p>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="600">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-seedling"></i>
-                        </div>
-                        <h4>Make Real Impact</h4>
-                        <p>Work on technology that directly helps farmers reduce losses and increase efficiency worldwide.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="700">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h4>Innovation First</h4>
-                        <p>Work with cutting-edge AI, machine learning, and robotics technologies in agriculture.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="800">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h4>Great Team</h4>
-                        <p>Collaborate with passionate engineers, researchers, and agricultural experts from around the world.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="900">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h4>Growth Opportunities</h4>
-                        <p>Continuous learning, mentorship programs, and clear career advancement paths.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="1000">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-balance-scale"></i>
-                        </div>
-                        <h4>Work-Life Balance</h4>
-                        <p>Flexible working hours, remote work options, and comprehensive wellness programs.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-duration="1100">
-                    <div class="benefit-card">
-                        <div class="benefit-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <h4>Competitive Benefits</h4>
-                        <p>Competitive salaries, equity options, health insurance, and performance bonuses.</p>
-                    </div>
-                </div>
             </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    {% include 'includes/footer.html' %}
-    
-    <!-- Newsletter Form Styles -->
-    <style>
-        /* Force newsletter form visibility and functionality */
-        #newsletterForm {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            position: relative !important;
-            z-index: 9999 !important;
-            pointer-events: auto !important;
-        }
-        
-        #newsletterEmail {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            width: 100% !important;
-            height: auto !important;
-            padding: 12px 16px !important;
-            border: 1px solid rgba(255,255,255,0.4) !important;
-            border-radius: 6px !important;
-            background: rgba(255,255,255,0.1) !important;
-            color: white !important;
-            font-size: 14px !important;
-            outline: none !important;
-            transition: all 0.3s ease !important;
-            position: relative !important;
-            z-index: 10000 !important;
-            pointer-events: auto !important;
-            -webkit-appearance: textfield !important;
-            -moz-appearance: textfield !important;
-            appearance: textfield !important;
-            min-height: 42px !important;
-        }
-        
-        #newsletterEmail:focus {
-            border-color: #4CAF50 !important;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3) !important;
-            background: rgba(255,255,255,0.2) !important;
-        }
-        
-        #newsletterEmail::placeholder {
-            color: rgba(255, 255, 255, 0.8) !important;
-            opacity: 1 !important;
-        }
-        
-        #newsletterSubmit {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            width: 100% !important;
-            margin-top: 12px !important;
-            padding: 12px 16px !important;
-            background: linear-gradient(135deg, #4CAF50, #45a049) !important;
-            color: white !important;
-            border: none !important;
-            border-radius: 6px !important;
-            font-weight: 600 !important;
-            cursor: pointer !important;
-            font-size: 14px !important;
-            transition: all 0.3s ease !important;
-            position: relative !important;
-            z-index: 10000 !important;
-            pointer-events: auto !important;
-            min-height: 42px !important;
-        }
-        
-        #newsletterSubmit:hover {
-            background: linear-gradient(135deg, #45a049, #4CAF50) !important;
-            transform: translateY(-2px) !important;
-        }
-        
-        #policy {
-            display: inline-block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            width: 16px !important;
-            height: 16px !important;
-            margin: 0 !important;
-            cursor: pointer !important;
-            position: relative !important;
-            z-index: 10000 !important;
-            pointer-events: auto !important;
-            appearance: checkbox !important;
-            -webkit-appearance: checkbox !important;
-            -moz-appearance: checkbox !important;
-            background: white !important;
-            border: 1px solid #ccc !important;
-        }
-        
-        #policy:checked {
-            background: #4CAF50 !important;
-            border-color: #4CAF50 !important;
-        }
-        
-        label[for="policy"] {
-            display: inline-block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            color: rgba(255,255,255,0.9) !important;
-            line-height: 1.4 !important;
-            cursor: pointer !important;
-            position: relative !important;
-            z-index: 10000 !important;
-            pointer-events: auto !important;
-            margin-left: 8px !important;
-            font-size: 13px !important;
-        }
-        
-        #newsletterMessage {
-            display: none;
-            position: relative !important;
-            z-index: 10000 !important;
-            margin-top: 10px !important;
-            padding: 10px !important;
-            border-radius: 4px !important;
-        }
-        
-        /* Override any conflicting styles */
-        .footer-form-box * {
-            pointer-events: auto !important;
-        }
-        
-        .footer-form-box input,
-        .footer-form-box button,
-        .footer-form-box label {
-            pointer-events: auto !important;
-            z-index: 10000 !important;
-        }
-    </style>
-    
-    
-
-    <!-- Scripts -->
-    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.js' %}"></script>
-    <script src="{% static 'js/aos.js' %}"></script>
-
-    <script>
-        // Initialize AOS
-        AOS.init();
-
-        // Navigation dropdown
-        const $dropdown = $(".dropdown");
-        const $dropdownToggle = $(".dropdown-toggle");
-        const $dropdownMenu = $(".dropdown-menu");
-        const showClass = "show";
-
-        $(window).on("load resize", function() {
-            if (this.matchMedia("(min-width: 768px)").matches) {
-                $dropdown.hover(
-                function() {
-                    const $this = $(this);
-                    $this.addClass(showClass);
-                    $this.find($dropdownToggle).attr("aria-expanded", "true");
-                    $this.find($dropdownMenu).addClass(showClass);
-                },
-                function() {
-                    const $this = $(this);
-                    $this.removeClass(showClass);
-                    $this.find($dropdownToggle).attr("aria-expanded", "false");
-                    $this.find($dropdownMenu).removeClass(showClass);
-                }
-                );
-            } else {
-                $dropdown.off("mouseenter mouseleave");
-            }
-        });
-
-        // Loader
-        $(window).on('load', function(){ 
-            $('.loader').fadeOut();
-            $('.loader-mask').delay(350).fadeOut('slow');
-        });
-
-        // Back to top button functionality is handled in footer.html
-
-        // Body loaded class
-        window.addEventListener('load', function(){
-            document.querySelector('body').classList.add("loaded");
-        });
-    </script>
-</body>
-</html> 
+    </div>
+</section>
+{% endblock %} 

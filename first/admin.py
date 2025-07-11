@@ -147,16 +147,13 @@ class ProductInquiryAdmin(admin.ModelAdmin):
 
 @admin.register(JobPosting)
 class JobPostingAdmin(admin.ModelAdmin):
-    list_display = ['title', 'department', 'job_type', 'experience_level', 'location', 'applications_count', 'is_active', 'is_featured', 'created_at']
-    list_filter = ['department', 'job_type', 'experience_level', 'is_active', 'is_featured', 'remote_allowed', 'created_at']
-    search_fields = ['title', 'description', 'requirements']
-    readonly_fields = ['created_at', 'updated_at', 'applications_count']
-    list_editable = ['is_active', 'is_featured']
-    ordering = ['-is_featured', '-created_at']
-    
+    list_display = ('title', 'department', 'job_type', 'experience_level', 'location', 'remote_allowed', 'is_active', 'applications_count', 'created_at')
+    list_filter = ('department', 'job_type', 'experience_level', 'remote_allowed', 'is_active')
+    search_fields = ('title', 'description', 'requirements', 'responsibilities')
+    readonly_fields = ('applications_count', 'created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
-            'fields': ('title', 'company_logo', 'department', 'job_type', 'experience_level', 'location', 'remote_allowed')
+            'fields': ('title', 'department', 'job_type', 'experience_level', 'location', 'remote_allowed')
         }),
         ('Job Details', {
             'fields': ('description', 'responsibilities', 'requirements', 'nice_to_have', 'benefits')
@@ -164,16 +161,16 @@ class JobPostingAdmin(admin.ModelAdmin):
         ('Compensation', {
             'fields': ('salary_min', 'salary_max', 'equity_offered')
         }),
-        ('Settings', {
-            'fields': ('is_active', 'is_featured', 'deadline')
+        ('Status', {
+            'fields': ('is_active', 'deadline')
         }),
-        ('Statistics', {
+        ('Meta Information', {
             'fields': ('applications_count', 'created_at', 'updated_at'),
             'classes': ('collapse',)
-        }),
+        })
     )
     
-    actions = ['mark_as_active', 'mark_as_inactive', 'mark_as_featured', 'unmark_as_featured']
+    actions = ['mark_as_active', 'mark_as_inactive']
     
     def mark_as_active(self, request, queryset):
         updated = queryset.update(is_active=True)
@@ -184,16 +181,6 @@ class JobPostingAdmin(admin.ModelAdmin):
         updated = queryset.update(is_active=False)
         self.message_user(request, f'{updated} job postings marked as inactive.')
     mark_as_inactive.short_description = "Mark selected jobs as inactive"
-    
-    def mark_as_featured(self, request, queryset):
-        updated = queryset.update(is_featured=True)
-        self.message_user(request, f'{updated} job postings marked as featured.')
-    mark_as_featured.short_description = "Mark selected jobs as featured"
-    
-    def unmark_as_featured(self, request, queryset):
-        updated = queryset.update(is_featured=False)
-        self.message_user(request, f'{updated} job postings unmarked as featured.')
-    unmark_as_featured.short_description = "Unmark selected jobs as featured"
 
 
 @admin.register(JobApplication)

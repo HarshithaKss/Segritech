@@ -39,7 +39,7 @@ class Command(BaseCommand):
                 'category_type': 'cleaning_machines',
                 'short_description': 'Advanced cleaning and debris removal systems',
                 'description': 'Comprehensive cleaning solutions that remove impurities, foreign materials, and damaged crops. Multi-stage cleaning process ensures your crops meet the highest hygiene and quality standards.',
-                'icon': 'fas fa-broom',
+                'icon': 'fas fa-apple-alt',
                 'display_order': 4
             },
             {

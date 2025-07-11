@@ -606,69 +606,13 @@
 </head>
 
 <body>
+    {% include 'includes/navigation.html' %}
+    
     <!-- Loading Screen -->
     <div class="loader-mask">
         <div class="loader">
             <div></div>
             <div></div>
-        </div>
-    </div>
-
-    <!-- Navigation -->
-    <div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
-        <div class="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
-                <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
-                    <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 130px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
-                </a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                    data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px; margin-right: 120px;">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'about' %}">About Us</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Products
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="productsDropdown" style="background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-top: 10px;">
-                                <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
-                                <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Quality Graders</a>
-                                <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Graders</a>
-                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
-                                <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
-                                <a class="dropdown-item" href="{% url 'inspection_box' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
-                                    <i class="fas fa-cube me-2"></i>Inspection Box
-                                    <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
-                                </a>
-                                <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
-                                <a class="dropdown-item" href="{% url 'products' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">View All Categories</a>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'careers' %}">Careers</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-    
-                        </ul>
-                    </form>
-                </div>
-            </nav>
         </div>
     </div>
 
@@ -679,7 +623,7 @@
                 <div class="col-lg-7">
                     <div class="hero-content" data-aos="fade-right" data-aos-duration="800">
                         <span class="hero-badge">WHO WE ARE</span>
-                        <h1 class="hero-title">Revolutionizing Agriculture with AI Technology</h1>
+                        <h1 class="hero-title">Revolutionizing Agriculture with AI & Robotics.</h1>
                         <p class="hero-subtitle">Automating what's still done manually in agricultural processing</p>
                         <p class="hero-description">
                             We are a team of AI & Robotics engineers solving untouched problems in agriculture to improve the lives of farmers and traders worldwide. Our innovative solutions address major inefficiencies in operational processes, reducing revenue losses and improving productivity.
@@ -761,10 +705,10 @@
 
                 <!-- Coming Soon -->
                 <div class="timeline-item right" data-aos="fade-left" data-aos-duration="800" style="position: relative; margin-bottom: 60px; width: 50%; margin-left: 50%; padding-left: 50px;">
-                    <div class="timeline-content" style="background: linear-gradient(135deg, var(--secondary-dark), rgba(76, 175, 80, 0.1)); padding: 30px; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); position: relative;">
-                        <div class="timeline-date" style="position: absolute; left: -85px; background: linear-gradient(135deg, var(--accent-green), #2E7D32); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600;">Coming Soon</div>
-                        <h3 style="color: var(--text-primary); margin-bottom: 15px; font-size: 1.5rem;">Something Special</h3>
-                        <p style="color: var(--text-secondary); margin: 0;">Stay tuned for an exciting announcement...</p>
+                    <div class="timeline-content" style="background: linear-gradient(135deg, var(--secondary-dark), rgba(76, 175, 80, 0.1)); padding: 40px 30px; border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); position: relative; margin-top: -20px;">
+                        <div class="timeline-date" style="position: absolute; left: -85px; background: linear-gradient(135deg, var(--accent-green), #2E7D32); color: white; padding: 10px 20px; border-radius: 25px; font-weight: 600; margin-top: -30px;">Coming Soon</div>
+                        <h3 style="color: var(--text-primary); margin: 5px 0 15px; font-size: 1.5rem;">Something Special</h3>
+                        <p style="color: var(--text-secondary); margin: 0; line-height: 1.6;">Stay tuned for an exciting announcement...</p>
                     </div>
                 </div>
             </div>

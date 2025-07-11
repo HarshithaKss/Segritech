@@ -1,9 +1,9 @@
 {% load static %}
 <section class="footer-main-sec w-100 float-left bg-dark-black" style="margin: 0 !important; padding: 50px 0 20px 0 !important;">
-    <div class="wrapper2">
-        <div class="footer-inner-section" style="display: grid; grid-template-columns: 1.5fr 1fr 1.2fr 1.5fr; gap: 40px; align-items: flex-start; margin-bottom: 30px;">
+    <div class="wrapper2" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+        <div class="footer-inner-section" style="display: grid; grid-template-columns: 1.5fr 1fr 1.2fr 1.5fr; gap: 30px; align-items: flex-start; margin-bottom: 30px; width: 100%;">
             <style>
-                /* Force newsletter visibility on all pages */
+                /* Force newsletter visibility and proper sizing on all pages */
                 .footer-form-box, 
                 .footer-form-box *,
                 #newsletterForm,
@@ -14,20 +14,50 @@
                     display: block !important;
                     visibility: visible !important;
                     opacity: 1 !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
                 }
                 
-                #newsletterEmail,
+                #newsletterEmail {
+                    width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                    padding: 10px 15px !important;
+                    border-radius: 4px !important;
+                    border: 1px solid rgba(255,255,255,0.2) !important;
+                    background: rgba(255,255,255,0.1) !important;
+                    color: #fff !important;
+                    margin-bottom: 10px !important;
+                }
+                
                 #newsletterSubmit {
                     width: 100% !important;
+                    max-width: 100% !important;
+                    box-sizing: border-box !important;
+                    padding: 10px 20px !important;
+                    border-radius: 4px !important;
+                    background: var(--accent-green) !important;
+                    border: none !important;
+                    color: #fff !important;
+                    cursor: pointer !important;
+                    transition: all 0.3s ease !important;
+                }
+                
+                #newsletterSubmit:hover {
+                    background: var(--primary-green) !important;
+                    transform: translateY(-2px) !important;
                 }
                 
                 #policy {
                     display: inline-block !important;
                     width: auto !important;
+                    margin-right: 8px !important;
                 }
                 
                 label[for="policy"] {
                     display: inline !important;
+                    font-size: 0.9rem !important;
+                    color: rgba(255,255,255,0.8) !important;
                 }
                 
                 /* Complete footer override to fix logo cutting */
@@ -175,13 +205,13 @@
                 </div>
                 
                 <!-- Follow Us Section -->
-                <div style="margin-top: 20px;">
+                <div style="margin-top: 20px; max-width: 100%; box-sizing: border-box;">
                     <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 12px; font-size: 0.95rem;">Follow Us</span>
-                    <div style="display: flex; gap: 12px; justify-content: flex-start;">
-                        <a href="https://www.facebook.com/Segritech1/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com/segri_tech" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/company/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3);"><i class="fab fa-linkedin-in"></i></a>
+                    <div style="display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap;">
+                        <a href="https://www.facebook.com/Segritech1/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/segri_tech" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
@@ -198,10 +228,14 @@
                 <h4 style="color: #FFFFFF; font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; border-bottom: 2px solid var(--accent-green); padding-bottom: 8px; display: inline-block;">Contact Info</h4>
                 <ul class="list-unstyled" style="margin: 0;">
                     <li style="margin-bottom: 18px; color: rgba(255,255,255,0.8); font-size: 0.95rem; line-height: 1.6;">
-                        <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 12px; width: 16px; font-size: 1rem;"></i>
-                        346, Doyens Township,<br>
-                        <span style="margin-left: 28px;">Gachibowli Road, Serilingampalli,</span><br>
-                        <span style="margin-left: 28px;">Hyderabad, Telangana - 500019</span>
+                        <div style="display: flex; align-items: flex-start;">
+                            <i class="fas fa-map-marker-alt" style="color: var(--accent-green); margin-right: 12px; width: 16px; font-size: 1rem; margin-top: 4px;"></i>
+                            <div>
+                                346, Doyens Township,<br>
+                                Gachibowli Road, Serilingampalli,<br>
+                                Hyderabad, Telangana - 500019
+                            </div>
+                        </div>
                     </li>
                     <li style="margin-bottom: 15px;">
                         <i class="fas fa-phone-volume" style="color: var(--accent-green); margin-right: 12px; width: 16px; font-size: 1rem;"></i>
@@ -209,7 +243,7 @@
                     </li>
                     <li class="mb-0">
                         <i class="fas fa-envelope" style="color: var(--accent-green); margin-right: 12px; width: 16px; font-size: 1rem;"></i>
-                        <a href="mailto:Hetendra@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease;">Hetendra@segritech.com</a>
+                        <a href="mailto:namaste@segritech.com" style="color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.95rem; transition: color 0.3s ease;">namaste@segritech.com</a>
                     </li>
                 </ul>
             </div>
@@ -242,8 +276,7 @@
                     </p>
                 </div>
                 <div style="display: flex; gap: 20px; align-items: center;">
-                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Privacy Policy</a>
-                    <a href="#" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Terms of Service</a>
+                    <a href="{% url 'privacy_policy' %}" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease;">Privacy Policy</a>
                     <a href="{% url 'contact' %}" style="color: var(--accent-green); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; font-weight: 500;">Contact Us</a>
                 </div>
             </div>

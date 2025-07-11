@@ -185,14 +185,13 @@ class JobPosting(models.Model):
     
     # Meta Information
     is_active = models.BooleanField(default=True)
-    is_featured = models.BooleanField(default=False)
     applications_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deadline = models.DateField(blank=True, null=True)
     
     class Meta:
-        ordering = ['-is_featured', '-created_at']
+        ordering = ['-created_at']
     
     def __str__(self):
         return f"{self.title} - {self.get_job_type_display()}"

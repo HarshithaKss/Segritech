@@ -154,27 +154,44 @@
             overflow: hidden;
         }
         
+        /* Product Gallery Styles */
         .product-gallery {
             background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.05));
             border-radius: 20px;
             overflow: hidden;
             position: relative;
-            aspect-ratio: 4/3;
-            min-height: 280px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            min-height: 400px;
+            margin-bottom: 30px;
             border: 2px solid rgba(76, 175, 80, 0.2);
-            padding-top: 40px;
         }
-        
+
         .main-image {
             width: 100%;
             height: 100%;
             object-fit: contain;
             position: absolute;
-            top: 60%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            padding-top: 20px;
+            padding: 20px;
+        }
+
+        .gallery-thumb {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(102, 187, 106, 0.05));
+            border-radius: 10px;
+            overflow: hidden;
+            padding: 10px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
         
         .product-info {
@@ -449,8 +466,95 @@
         .dropdown-menu {
             z-index: 1050 !important;
             position: absolute !important;
+            background: rgba(26, 26, 26, 0.98) !important;
+            backdrop-filter: blur(15px) !important;
+            border: none !important;
+            border-radius: 8px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+            margin-top: 10px !important;
+        }
+
+        .dropdown-menu .dropdown-item {
+            color: rgba(255,255,255,0.9) !important;
+            padding: 12px 20px !important;
+            transition: all 0.3s ease !important;
+            border-radius: 4px !important;
+            margin: 2px !important;
+        }
+
+        .dropdown-menu .dropdown-item:hover {
+            background: rgba(255,255,255,0.1) !important;
+        }
+
+        .dropdown-divider {
+            border-color: rgba(255,255,255,0.1) !important;
+        }
+
+        /* Toast Notification Styles */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .toast {
+            background: rgba(42, 42, 42, 0.95);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            border-left: 4px solid var(--accent-green);
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast i {
+            font-size: 20px;
+            color: var(--accent-green);
+        }
+        
+        .toast-message {
+            flex-grow: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
         }
     </style>
+    
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
 </head>
 
 <body>
@@ -513,45 +617,9 @@
     <!-- Product Detail -->
     <section class="product-hero">
         <div class="container">            
-            <div class="row">
-                <!-- Product Gallery -->
+            <div class="row align-items-center">
+                <!-- Product Info Section -->
                 <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
-                    {% if category.name == "Size Graders" and product.name == "Segritech Orange Grading Machine" %}
-                        <div class="product-gallery" style="display: flex; align-items: center; justify-content: center; padding-top: 40px; margin-top: 80px;">
-                            <img src="{% static 'web/orange_grader.png' %}" alt="{{ product.name }}" style="max-width: 60%; height: auto; margin-top: 0px; display: block; margin-left: auto; margin-right: auto;">
-                        </div>
-                    {% else %}
-                        <div class="product-gallery" style="display: flex; align-items: center; justify-content: center; padding-top: 80px; margin-top: 180px;">
-                            {% if product.main_image %}
-                                <img src="{{ product.main_image.url }}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 60px;">
-                            {% else %}
-                                <!-- Fallback for specific products -->
-                                {% if category.name == "Size Graders" %}
-                                    {% if product.name == "Apple Grader" %}
-                                        <img src="{% static 'web/apple_size_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                                    {% else %}
-                                        <img src="{% static 'web/apple_size_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                                    {% endif %}
-                            {% elif category.name == "Quality Graders" %}
-                                <img src="{% static 'web/quality_grader_updated.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 60px;">
-                            {% elif category.name == "Weight Graders" %}
-                                <img src="{% static 'web/weight_grader.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                            {% elif category.name == "Cleaning Machines" %}
-                                <img src="{% static 'web/cleaning_machine.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                                        {% elif category.name == "Packing Robots" %}
-                <img src="{% static 'web/final segripack.png' %}" alt="{{ product.name }}" style="max-width: 90%; height: auto; margin-top: 40px;">
-                            {% else %}
-                                <div class="d-flex align-items-center justify-content-center h-100">
-                                    <i class="fas fa-cogs fa-6x" style="color: var(--accent-green);"></i>
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                        </div>
-                    {% endif %}
-                </div>
-                
-                <!-- Product Info -->
-                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
                     <div class="product-info">
                         <div class="product-category">{{ category.name }}</div>
                         <h1 class="product-title">{{ product.name }}</h1>
@@ -567,8 +635,6 @@
                         {% endif %}
                         
                         <p class="product-description">{{ product.detailed_description }}</p>
-                        
-
                         
                         <div class="product-actions" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 25px;">
                             <a href="https://wa.me/919014809973?text=Hi! I'm interested in {{ product.name }}. Could you please provide more information?" 
@@ -589,19 +655,54 @@
                                     onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37, 211, 102, 0.3)';">
                                 <i class="fas fa-envelope" style="margin-right: 8px; font-size: 16px;"></i> Send Inquiry
                             </button>
-                            <a href="#" 
-                               class="btn-download-brochure" 
-                               onclick="downloadBrochure('{{ product.slug }}')"
-                               style="background: linear-gradient(135deg, #FF6B6B, #FF5252); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: none; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; min-width: 180px; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);"
-                               onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(255, 107, 107, 0.4)';"
-                               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 107, 107, 0.3)';">
-                                <i class="fas fa-download" style="margin-right: 8px; font-size: 16px;"></i> 
-                                Download Brochure
-                            </a>
+                            {% if product.brochure %}
+                            <button type="button" class="btn btn-primary" onclick="downloadBrochure('{{ product.slug }}')" id="brochureDownloadBtn" data-brochure-url="{{ product.brochure.url }}">
+                                <i class="fas fa-download me-1"></i>Download Brochure
+                            </button>
+                            {% endif %}
                         </div>
-                        
-
                     </div>
+                </div>
+
+                <!-- Product Image Section -->
+                <div class="col-lg-6" data-aos="fade-left" data-aos-duration="800">
+                    <!-- Product Gallery -->
+                    <div class="product-gallery">
+                        {% if product.main_image %}
+                            <img src="{{ product.main_image.url }}" alt="{{ product.name }}" class="main-image">
+                        {% elif product.name == "Segritech Orange Grading Machine" %}
+                            <img src="{% static 'web/orange_grader.png' %}" alt="{{ product.name }}" class="main-image">
+                        {% elif product.name == "Multifruit Optical Grader" %}
+                            <img src="{% static 'web/quality_grader_updated.png' %}" alt="{{ product.name }}" class="main-image">
+                        {% elif product.category.category_type == 'size_graders' %}
+                            <img src="{% static 'web/apple_size_grader.png' %}" alt="{{ product.name }}" class="main-image">
+                        {% elif product.category.category_type == 'quality_graders' %}
+                            <img src="{% static 'web/quality_grader_updated.png' %}" alt="{{ product.name }}" class="main-image">
+                        {% elif product.category.category_type == 'weight_graders' %}
+                            <img src="{% static 'web/weight_grader.png' %}" alt="{{ product.name }}" class="main-image">
+                        {% elif product.category.category_type == 'cleaning_machines' %}
+                            <img src="{% static 'web/cleaning_machine.png' %}" alt="{{ product.name }}" class="main-image">
+                        {% elif product.category.category_type == 'packing_robots' %}
+                            <img src="{% static 'web/final segripack.png' %}" alt="{{ product.name }}" class="main-image" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
+                        {% else %}
+                            <img src="{% static 'web/default_product.png' %}" alt="{{ product.name }}" class="main-image">
+                        {% endif %}
+                    </div>
+
+                    <!-- Product Gallery Thumbnails -->
+                    {% if product.gallery_images %}
+                    <div class="product-gallery-thumbs mt-4">
+                        <div class="row">
+                            {% for image_url in product.gallery_images.split %}
+                            <div class="col-md-3 mb-3">
+                                <div class="gallery-thumb">
+                                    <img src="{{ image_url }}" alt="{{ product.name }} - Gallery Image" class="img-fluid">
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -802,6 +903,55 @@
             once: true
         });
 
+        // Function to show toast notification
+        function showToast(message, type = 'info') {
+            const toastContainer = document.querySelector('.toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            
+            let icon = '';
+            switch(type) {
+                case 'loading':
+                    icon = '<div class="loading-spinner"></div>';
+                    break;
+                case 'success':
+                    icon = '<i class="fas fa-check-circle"></i>';
+                    break;
+                case 'error':
+                    icon = '<i class="fas fa-exclamation-circle"></i>';
+                    break;
+                default:
+                    icon = '<i class="fas fa-info-circle"></i>';
+            }
+            
+            toast.innerHTML = `
+                ${icon}
+                <div class="toast-message">${message}</div>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    toast.style.opacity = '0';
+                    toast.style.transform = 'translateX(100%)';
+                    setTimeout(() => toast.remove(), 300);
+                }, 3000);
+            }
+            
+            return toast;
+        }
+
+        // Function to download brochure based on product category
+        function downloadBrochure(productSlug) {
+            const brochureBtn = document.getElementById('brochureDownloadBtn');
+            if (brochureBtn && brochureBtn.dataset.brochureUrl) {
+                window.open(brochureBtn.dataset.brochureUrl, '_blank');
+            } else {
+                showToast('Sorry, brochure not available at the moment. Please contact us for more information.', 'error');
+            }
+        }
+
         // Product Inquiry Form Submission
         function submitInquiry() {
             console.log('Submit inquiry function called');
@@ -892,26 +1042,13 @@
                     return;
                 }
                 
-                const brochureUrl = '{{ product.brochure.url|default:"" }}';
-                if (!brochureUrl || brochureUrl.trim() === '') {
+                const brochureUrl = document.getElementById('brochureDownloadBtn').dataset.brochureUrl;
+                if (brochureUrl) {
+                    window.location.href = brochureUrl;
+                    alert('Brochure download started!');
+                } else {
                     alert('Brochure is being prepared. Please contact us for the latest product information.');
-                    return;
                 }
-                
-                // Check if file exists before trying to download
-                fetch(brochureUrl, { method: 'HEAD' })
-                    .then(response => {
-                        if (response.ok) {
-                            window.location.href = brochureUrl;
-                            alert('Brochure download started!');
-                        } else {
-                            alert('Brochure is being prepared. Please contact us for the latest product information.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error checking brochure:', error);
-                        alert('Brochure is being prepared. Please contact us for the latest product information.');
-                    });
             } catch (error) {
                 console.error('Error downloading brochure:', error);
                 alert('Brochure is being prepared. Please contact us for the latest product information.');
