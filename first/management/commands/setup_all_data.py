@@ -17,6 +17,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         # List of commands to run in order
         commands = [
+            # Database migrations (run first to ensure schema is up to date)
+            'migrate',                   # Run all pending migrations
+            
             # Initial setup
             'setup_categories',  # Set up product categories
             'setup_brochures',   # Set up product brochures

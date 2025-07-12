@@ -31,8 +31,9 @@ class Migration(migrations.Migration):
             name='jobposting',
             options={'ordering': ['-created_at']},
         ),
-        migrations.RemoveField(
-            model_name='jobposting',
-            name='is_featured',
-        ),
+        # Remove the RemoveField operation that's causing the issue
+        # migrations.RemoveField(
+        #     model_name='jobposting',
+        #     name='is_featured',
+        # ),
     ]
