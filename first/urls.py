@@ -11,6 +11,8 @@ urlpatterns = [
     path('careers/job/<int:job_id>/', views.job_detail, name='job_detail'),
     path('careers/apply/<int:job_id>/', views.apply_job, name='apply_job'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('faq/', views.faq_page, name='faq_page'),
+    path('faq-section/', views.faq_section, name='faq_section'),
     
     # Products URLs
     path('products/', views.products, name='products'),

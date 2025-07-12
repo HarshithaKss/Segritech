@@ -750,54 +750,26 @@
             
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <div class="faq-item" data-aos="fade-up" data-aos-duration="600">
+                    {% for faq in faqs %}
+                    <div class="faq-item" data-aos="fade-up" data-aos-duration="{{ forloop.counter|add:"5" }}00">
                         <div class="faq-header" onclick="toggleFaq(this)">
-                            <h5>How does SegriTech's seed sorting technology work?</h5>
+                            <h5>{{ faq.question }}</h5>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-content">
-                            <p>Our advanced AI-powered seed sorting machines use computer vision and machine learning algorithms to analyze each seed individually. The system can detect size, shape, color, density, and quality parameters to ensure only the highest grade seeds pass through, reducing post-harvest losses by up to 40%.</p>
+                            <p>{{ faq.answer|linebreaks }}</p>
                         </div>
                     </div>
-
-                    <div class="faq-item" data-aos="fade-up" data-aos-duration="700">
-                        <div class="faq-header" onclick="toggleFaq(this)">
-                            <h5>What crops can your machines process?</h5>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-content">
-                            <p>Our technology supports a wide range of crops including wheat, rice, maize, soybeans, pulses, sunflower seeds, and many specialty crops. Each machine can be calibrated for specific crop types and varieties to ensure optimal sorting accuracy.</p>
-                        </div>
+                    {% empty %}
+                    <div class="text-center">
+                        <p>No FAQs available at the moment.</p>
                     </div>
-
-                    <div class="faq-item" data-aos="fade-up" data-aos-duration="800">
-                        <div class="faq-header" onclick="toggleFaq(this)">
-                            <h5>How long is the warranty and what support do you provide?</h5>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-content">
-                            <p>We provide a comprehensive 2-year warranty on all equipment with 24/7 technical support. Our service includes on-site installation, training, regular maintenance, and remote monitoring capabilities. Extended warranty options are also available.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-aos="fade-up" data-aos-duration="900">
-                        <div class="faq-header" onclick="toggleFaq(this)">
-                            <h5>Can I see a demonstration of the technology?</h5>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-content">
-                            <p>Absolutely! We offer live demonstrations at our Innovation Center in Bangalore, virtual demos via video call, and can arrange on-site demonstrations at your facility. Contact us to schedule a demo that works best for you.</p>
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="faq-header" onclick="toggleFaq(this)">
-                            <h5>What financing options are available?</h5>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="faq-content">
-                            <p>We offer flexible financing solutions including equipment leasing, installment plans, and partnerships with agricultural banks. Government subsidies for agricultural technology may also be available. Our finance team can help you find the best option for your needs.</p>
-                        </div>
+                    {% endfor %}
+                    
+                    <div class="text-center mt-5" data-aos="fade-up" data-aos-duration="1100">
+                        <a href="{% url 'faq_page' %}" class="btn btn-segritech" style="background: linear-gradient(45deg, #4CAF50, #66BB6A); border: none; color: white; padding: 15px 40px; border-radius: 50px; font-weight: 600; font-size: 16px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);">
+                            View More Questions
+                        </a>
                     </div>
                 </div>
             </div>

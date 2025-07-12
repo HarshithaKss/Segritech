@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.utils import timezone
 from .forms import ContactForm, JobApplicationForm, JobFilterForm, ProductInquiryForm
-from .models import JobPosting, JobApplication, ProductCategory, Product, ProductInquiry, BlogPost, Testimonial, MediaCoverageArticle, NewsletterSubscriber
+from .models import JobPosting, JobApplication, ProductCategory, Product, ProductInquiry, BlogPost, Testimonial, MediaCoverageArticle, NewsletterSubscriber, FAQ
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import json
@@ -17,19 +17,19 @@ import json
 # Create your views here.
 
 def index(request):
-    # Get featured blog posts for insights section (max 3)
-    blog_posts = BlogPost.objects.filter(is_published=True, is_featured=True).order_by('-published_at', '-created_at')[:3]
-    
-    # Get active testimonials for testimonials section
-    testimonials = Testimonial.objects.filter(is_active=True)
-    
-    # Get active media coverage articles for media section
-    media_articles = MediaCoverageArticle.objects.filter(is_active=True)
+    """
+    View for the homepage
+    """
+    featured_products = Product.objects.filter(is_featured=True)[:6]
+    featured_blogs = BlogPost.objects.filter(is_featured=True)[:3]
+    testimonials = Testimonial.objects.all()[:3]
+    featured_faqs = FAQ.objects.filter(is_featured=True)[:5]  # Get top 5 featured FAQs
     
     context = {
-        'blog_posts': blog_posts,
+        'featured_products': featured_products,
+        'featured_blogs': featured_blogs,
         'testimonials': testimonials,
-        'media_articles': media_articles,
+        'faqs': featured_faqs,  # Add FAQs to context
     }
     return render(request, 'index.html', context)
 
@@ -40,46 +40,19 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            contact_submission = form.save()
-            
-            # Send email notification to admin
-            try:
-                subject = f'New Contact Form Submission: {contact_submission.subject}'
-                email_message = f"""
-New contact form submission received:
-
-Name: {contact_submission.name}
-Email: {contact_submission.email}
-Phone: {contact_submission.phone or 'Not provided'}
-Company: {contact_submission.company or 'Not provided'}
-Inquiry Type: {contact_submission.get_inquiry_type_display()}
-Subject: {contact_submission.subject}
-
-Message:
-{contact_submission.message}
-
-Submitted at: {contact_submission.created_at}
-                """
-                send_mail(
-                    subject,
-                    email_message,
-                    settings.DEFAULT_FROM_EMAIL,
-                    [settings.ADMIN_EMAIL],
-                    fail_silently=False,
-                )
-                messages.success(request, f'Thank you, {contact_submission.name}! Your message has been received. Our team will get back to you within 24 hours.')
-            except Exception as e:
-                print(f"Failed to send contact form email: {e}")
-                # Still show success message to user, but log the error
-                messages.success(request, f'Thank you, {contact_submission.name}! Your message has been received. Our team will get back to you within 24 hours.')
-            
+            form.save()
+            messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
             return redirect('contact')
-        else:
-            messages.error(request, 'Please correct the errors below.')
     else:
         form = ContactForm()
     
-    return render(request, 'contact.html', {'form': form})
+    # Get featured FAQs for the contact page
+    featured_faqs = FAQ.objects.filter(is_featured=True)[:5]
+    
+    return render(request, 'contact.html', {
+        'form': form,
+        'faqs': featured_faqs,
+    })
 
 def team(request):
     return render(request, 'team.html')
@@ -612,3 +585,17 @@ def explore_coming_soon(request):
 
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
+
+def faq_section(request):
+    """
+    View for the homepage FAQ section that shows only featured questions
+    """
+    featured_faqs = FAQ.objects.filter(is_featured=True)
+    return render(request, 'faq_section.html', {'faqs': featured_faqs})
+
+def faq_page(request):
+    """
+    View for the full FAQ page that shows all questions
+    """
+    all_faqs = FAQ.objects.all()
+    return render(request, 'faq.html', {'faqs': all_faqs})

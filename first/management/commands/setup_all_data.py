@@ -21,10 +21,12 @@ class Command(BaseCommand):
             'setup_categories',  # Set up product categories
             'setup_brochures',   # Set up product brochures
             'setup_blog_images', # Set up blog images
+            'add_sample_faqs',   # Set up FAQs
             
             # Products setup
             'add_enhanced_products',     # Add main products
             'add_segriwax_machine',      # Add Segriwax machine
+            'cleanup_cleaning_machines', # Remove unwanted cleaning machines
             'update_minisort_name',      # Update Minisort product name
             'update_weight_grader_name', # Update Weight Grader name
             'update_orange_grader_name', # Update Orange Grader name

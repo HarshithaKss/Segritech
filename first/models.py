@@ -520,3 +520,24 @@ class NewsletterSubscriber(models.Model):
     class Meta:
         verbose_name = 'Newsletter Subscriber'
         verbose_name_plural = 'Newsletter Subscribers'
+
+
+class FAQ(models.Model):
+    """
+    Model to store Frequently Asked Questions and their answers.
+    Questions can be marked as featured to appear on the homepage.
+    """
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+    is_featured = models.BooleanField(default=False, help_text="If selected, this question will appear on the homepage")
+    order = models.IntegerField(default=0, help_text="Order in which the question should appear")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['order', 'created_at']
+        verbose_name = "FAQ"
+        verbose_name_plural = "FAQs"
+
+    def __str__(self):
+        return self.question

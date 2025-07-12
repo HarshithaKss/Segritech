@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, JobPosting, JobApplication, ProductCategory, Product, ProductInquiry, BlogPost, Testimonial, MediaCoverageArticle, NewsletterSubscriber
+from .models import Contact, JobPosting, JobApplication, ProductCategory, Product, ProductInquiry, BlogPost, Testimonial, MediaCoverageArticle, NewsletterSubscriber, FAQ
 
 # Register your models here.
 
@@ -494,3 +494,12 @@ class NewsletterSubscriberAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'subscribed_at')
     search_fields = ('email',)
     date_hierarchy = 'subscribed_at'
+
+
+@admin.register(FAQ)
+class FAQAdmin(admin.ModelAdmin):
+    list_display = ('question', 'is_featured', 'order', 'created_at')
+    list_filter = ('is_featured',)
+    search_fields = ('question', 'answer')
+    ordering = ('order', 'created_at')
+    list_editable = ('is_featured', 'order')
