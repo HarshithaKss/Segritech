@@ -19,10 +19,10 @@ class Command(BaseCommand):
             'Groundbreaking Robots in Agriculture': 'Ground.png'
         }
 
-        # Path to the source images
-        source_image_dir = os.path.join(settings.STATIC_ROOT, 'images', 'blog')
+        # Path to the source images - look in static directory first, then staticfiles
+        source_image_dir = os.path.join(settings.BASE_DIR, 'static', 'images', 'blog')
         if not os.path.exists(source_image_dir):
-            source_image_dir = os.path.join(settings.BASE_DIR, 'static', 'images', 'blog')
+            source_image_dir = os.path.join(settings.STATIC_ROOT, 'images', 'blog')
             if not os.path.exists(source_image_dir):
                 self.stdout.write(self.style.ERROR(f'Blog images directory not found at {source_image_dir}'))
                 return

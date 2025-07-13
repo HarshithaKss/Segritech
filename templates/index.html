@@ -2795,7 +2795,7 @@
                 </p>
             </div>
             <div class="row">
-                {% for blog_post in blog_posts %}
+                {% for blog_post in featured_blogs %}
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="600" {% if forloop.counter == 2 %}data-aos-delay="100"{% elif forloop.counter == 3 %}data-aos-delay="200"{% endif %}>
                     <a href="{% url 'blog_detail' blog_post.slug %}" style="text-decoration: none; display: block;">
                         <div class="blog-inner-box bg-dark-black" style="border: 2px solid rgba(76, 175, 80, 0.4); border-radius: 18px; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; height: 480px; background: linear-gradient(135deg, #2a2a2a 0%, #333333 50%, #2a2a2a 100%); box-shadow: 0 12px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1); backdrop-filter: blur(10px); margin-bottom: 30px; cursor: pointer;">

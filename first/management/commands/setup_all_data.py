@@ -23,8 +23,20 @@ class Command(BaseCommand):
             # Initial setup
             'setup_categories',  # Set up product categories
             'setup_brochures',   # Set up product brochures
-            'setup_blog_images', # Set up blog images
             'add_sample_faqs',   # Set up FAQs
+            
+            # Blog content setup (run before setup_blog_images)
+            'add_featured_blogs',        # Add featured blogs
+            'add_sample_blogs',          # Add sample blog posts
+            'import_linkedin_articles',   # Import LinkedIn articles
+            'populate_media_articles',    # Add media articles
+            'manage_featured_blogs',      # Manage featured blog status
+            'update_author_name',        # Update author names in blogs
+            'fix_blog_content',          # Fix any blog content issues
+            'shorten_all_descriptions',  # Ensure blog descriptions are proper length
+            
+            # Set up blog images after blogs are created
+            'setup_blog_images', # Set up blog images
             
             # Products setup
             'add_enhanced_products',     # Add main products
@@ -35,16 +47,6 @@ class Command(BaseCommand):
             'update_orange_grader_name', # Update Orange Grader name
             'update_packing_robots',     # Update packing robot products
             'update_product_brochures',  # Update product brochures
-            
-            # Blog content setup
-            'add_featured_blogs',        # Add featured blogs
-            'add_sample_blogs',          # Add sample blog posts
-            'import_linkedin_articles',   # Import LinkedIn articles
-            'populate_media_articles',    # Add media articles
-            'manage_featured_blogs',      # Manage featured blog status
-            'update_author_name',        # Update author names in blogs
-            'fix_blog_content',          # Fix any blog content issues
-            'shorten_all_descriptions',  # Ensure blog descriptions are proper length
             
             # Jobs and careers setup
             'add_sample_jobs',           # Add job postings
