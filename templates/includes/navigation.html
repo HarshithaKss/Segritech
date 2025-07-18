@@ -146,4 +146,128 @@
     .dropdown-toggle::after {
         border-top-color: rgba(255,255,255,0.95) !important;
     }
+
+    /* ===== MOBILE RESPONSIVE FIXES ===== */
+    
+    /* Tablet and Mobile (max-width: 991px) */
+    @media (max-width: 991px) {
+        /* Logo sizing for mobile */
+        .navbar-brand img {
+            max-height: 80px !important;
+        }
+        
+        /* Navbar padding adjustment */
+        .navbar {
+            padding: 15px 0 !important;
+        }
+        
+        /* Remove left margin from nav items on mobile */
+        .navbar-nav {
+            margin-left: 0 !important;
+        }
+        
+        /* Better mobile nav item spacing */
+        .navbar-nav .nav-item .nav-link {
+            padding: 15px 20px !important;
+            font-size: 1.1rem !important;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        /* Mobile dropdown styling */
+        .dropdown-menu {
+            background: rgba(26, 26, 26, 0.95) !important;
+            border: none !important;
+            border-radius: 0 !important;
+            margin-top: 0 !important;
+            box-shadow: none !important;
+        }
+        
+        .dropdown-item {
+            color: rgba(255,255,255,0.9) !important;
+            padding: 12px 30px !important;
+            border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+        }
+        
+        /* Explore button mobile positioning */
+        .navbar-nav.ml-auto {
+            margin-right: 0 !important;
+            margin-top: 15px !important;
+            text-align: center !important;
+        }
+        
+        .explore-btn {
+            justify-content: center !important;
+            width: 100% !important;
+            max-width: 200px !important;
+            margin: 0 auto !important;
+        }
+    }
+    
+    /* Small Mobile (max-width: 767px) */
+    @media (max-width: 767px) {
+        /* Smaller logo for very small screens */
+        .navbar-brand img {
+            max-height: 70px !important;
+        }
+        
+        /* Reduced navbar padding */
+        .navbar {
+            padding: 10px 0 !important;
+        }
+        
+        /* Better touch targets for mobile */
+        .navbar-nav .nav-item .nav-link {
+            padding: 18px 20px !important;
+            font-size: 1.2rem !important;
+        }
+        
+        /* Mobile dropdown improvements */
+        .dropdown-item {
+            padding: 15px 30px !important;
+            font-size: 1.1rem !important;
+        }
+        
+        /* Explore button mobile optimization */
+        .explore-btn {
+            padding: 12px 25px !important;
+            font-size: 1.1rem !important;
+            min-width: 120px !important;
+        }
+    }
+    
+    /* Extra Small Mobile (max-width: 575px) */
+    @media (max-width: 575px) {
+        /* Even smaller logo */
+        .navbar-brand img {
+            max-height: 60px !important;
+        }
+        
+        /* Minimal navbar padding */
+        .navbar {
+            padding: 8px 0 !important;
+        }
+        
+        /* Larger touch targets */
+        .navbar-nav .nav-item .nav-link {
+            padding: 20px 20px !important;
+            font-size: 1.3rem !important;
+        }
+        
+        /* Dropdown items for small screens */
+        .dropdown-item {
+            padding: 18px 30px !important;
+            font-size: 1.2rem !important;
+        }
+        
+        /* Explore button for very small screens */
+        .explore-btn {
+            padding: 15px 30px !important;
+            font-size: 1.2rem !important;
+            min-width: 140px !important;
+        }
+        
+        .explore-btn i {
+            font-size: 1.3rem !important;
+        }
+    }
 </style> 
