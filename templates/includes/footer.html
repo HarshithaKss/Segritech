@@ -161,17 +161,120 @@
                 @media (max-width: 768px) {
                     .footer-inner-section {
                         grid-template-columns: 1fr !important;
-                        gap: 30px !important;
+                        gap: 40px !important;
                         text-align: center !important;
                         min-height: auto !important;
+                        justify-items: center !important;
                     }
                     
                     .footer-box {
                         height: auto !important;
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important;
+                        text-align: center !important;
+                        max-width: 100% !important;
+                    }
+                    
+                    .footer-box h4 {
+                        text-align: center !important;
+                        margin-bottom: 20px !important;
+                    }
+                    
+                    .footer-box ul {
+                        text-align: center !important;
+                        width: 100% !important;
+                    }
+                    
+                    .footer-box ul li {
+                        justify-content: center !important;
+                        text-align: center !important;
                     }
                     
                     .footer-box a {
                         justify-content: center !important;
+                        text-align: center !important;
+                    }
+                    
+                    /* Logo section mobile alignment */
+                    .footer-logo.footer-box {
+                        align-items: center !important;
+                        text-align: center !important;
+                    }
+                    
+                    .footer-logo.footer-box > div:first-child {
+                        align-self: center !important;
+                        text-align: center !important;
+                    }
+                    
+                    .footer-logo.footer-box figure {
+                        text-align: center !important;
+                        margin: 0 auto !important;
+                    }
+                    
+                    .footer-logo img {
+                        margin: 0 auto !important;
+                        display: block !important;
+                    }
+                    
+                    /* Follow Us section mobile alignment */
+                    .footer-logo.footer-box > div:last-child {
+                        text-align: center !important;
+                        width: 100% !important;
+                    }
+                    
+                    .footer-logo.footer-box > div:last-child span {
+                        text-align: center !important;
+                        display: block !important;
+                        width: 100% !important;
+                    }
+                    
+                    .footer-logo.footer-box > div:last-child > div {
+                        justify-content: center !important;
+                        text-align: center !important;
+                        margin: 0 auto !important;
+                    }
+                    
+                    /* Address section mobile fixes */
+                    .address-box ul li {
+                        text-align: center !important;
+                        justify-content: center !important;
+                    }
+                    
+                    .address-box ul li div {
+                        text-align: center !important;
+                    }
+                    
+                    /* Newsletter form mobile alignment */
+                    .footer-form-box {
+                        text-align: center !important;
+                        align-items: center !important;
+                    }
+                    
+                    .footer-form-box form {
+                        text-align: center !important;
+                        width: 100% !important;
+                        max-width: 300px !important;
+                        margin: 0 auto !important;
+                    }
+                    
+                    .footer-form-box .form-group {
+                        text-align: center !important;
+                    }
+                    
+                    .footer-form-box .mt-3 {
+                        justify-content: center !important;
+                        text-align: center !important;
+                        flex-wrap: wrap !important;
+                        max-width: 300px !important;
+                        margin: 15px auto 0 auto !important;
+                    }
+                    
+                    .footer-form-box .mt-3 span {
+                        text-align: center !important;
+                        white-space: normal !important;
+                        line-height: 1.4 !important;
+                        margin-left: 0 !important;
                     }
                     
                     /* Copyright responsive */
@@ -179,6 +282,21 @@
                         flex-direction: column !important;
                         text-align: center !important;
                         gap: 20px !important;
+                        align-items: center !important;
+                    }
+                    
+                    .footer-main-sec div[style*="justify-content: space-between"] > div:first-child {
+                        text-align: center !important;
+                    }
+                    
+                    .footer-main-sec div[style*="justify-content: space-between"] > div:first-child p {
+                        text-align: center !important;
+                        margin: 0 auto !important;
+                    }
+                    
+                    .footer-main-sec div[style*="justify-content: space-between"] > div:last-child {
+                        justify-content: center !important;
+                        gap: 15px !important;
                     }
                 }
                 @media (max-width: 992px) and (min-width: 769px) {
@@ -186,6 +304,53 @@
                         grid-template-columns: 1fr 1fr !important;
                         gap: 30px !important;
                         min-height: auto !important;
+                        text-align: center !important;
+                        justify-items: center !important;
+                    }
+                    
+                    .footer-box {
+                        text-align: center !important;
+                        display: flex !important;
+                        flex-direction: column !important;
+                        align-items: center !important;
+                    }
+                    
+                    .footer-box h4 {
+                        text-align: center !important;
+                    }
+                    
+                    .footer-logo.footer-box {
+                        align-items: center !important;
+                        text-align: center !important;
+                    }
+                    
+                    .footer-logo.footer-box > div:last-child > div {
+                        justify-content: center !important;
+                    }
+                }
+                
+                /* Extra mobile responsive improvements */
+                @media (max-width: 480px) {
+                    .footer-inner-section {
+                        gap: 35px !important;
+                        padding: 0 10px !important;
+                    }
+                    
+                    .footer-box {
+                        padding: 0 10px !important;
+                    }
+                    
+                    .footer-logo img {
+                        max-height: 150px !important;
+                    }
+                    
+                    .footer-form-box form {
+                        max-width: 280px !important;
+                    }
+                    
+                    .footer-main-sec div[style*="justify-content: space-between"] > div:last-child {
+                        flex-direction: column !important;
+                        gap: 10px !important;
                     }
                 }
             </style>
@@ -212,11 +377,11 @@
                 <!-- Follow Us Section -->
                 <div style="margin-top: 20px; max-width: 100%; box-sizing: border-box;">
                     <span class="d-block" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 12px; font-size: 0.95rem;">Follow Us</span>
-                    <div style="display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap;">
-                        <a href="https://www.facebook.com/Segritech1/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://x.com/segri_tech" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/company/segritech/" target="_blank" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0;"><i class="fab fa-linkedin-in"></i></a>
+                    <div style="display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; align-items: center;">
+                        <a href="https://www.facebook.com/Segritech1/" target="_blank" class="social-icon-circle" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 42px !important; height: 42px !important; min-width: 42px !important; min-height: 42px !important; max-width: 42px !important; max-height: 42px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 50% !important; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0 !important; margin: 0 !important; box-sizing: border-box !important; flex-shrink: 0 !important; flex-grow: 0 !important; aspect-ratio: 1 / 1 !important; overflow: hidden !important; position: relative !important;"><i class="fab fa-facebook-f" style="font-size: 16px !important; line-height: 1 !important; width: auto !important; height: auto !important; display: block !important; text-align: center !important;"></i></a>
+                        <a href="https://x.com/segri_tech" target="_blank" class="social-icon-circle" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 42px !important; height: 42px !important; min-width: 42px !important; min-height: 42px !important; max-width: 42px !important; max-height: 42px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 50% !important; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0 !important; margin: 0 !important; box-sizing: border-box !important; flex-shrink: 0 !important; flex-grow: 0 !important; aspect-ratio: 1 / 1 !important; overflow: hidden !important; position: relative !important;"><i class="fab fa-twitter" style="font-size: 16px !important; line-height: 1 !important; width: auto !important; height: auto !important; display: block !important; text-align: center !important;"></i></a>
+                        <a href="https://www.instagram.com/segritech/" target="_blank" class="social-icon-circle" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 42px !important; height: 42px !important; min-width: 42px !important; min-height: 42px !important; max-width: 42px !important; max-height: 42px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 50% !important; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0 !important; margin: 0 !important; box-sizing: border-box !important; flex-shrink: 0 !important; flex-grow: 0 !important; aspect-ratio: 1 / 1 !important; overflow: hidden !important; position: relative !important;"><i class="fab fa-instagram" style="font-size: 16px !important; line-height: 1 !important; width: auto !important; height: auto !important; display: block !important; text-align: center !important;"></i></a>
+                        <a href="https://www.linkedin.com/company/segritech/" target="_blank" class="social-icon-circle" style="background: rgba(255,255,255,0.1); color: var(--accent-green); width: 42px !important; height: 42px !important; min-width: 42px !important; min-height: 42px !important; max-width: 42px !important; max-height: 42px !important; display: flex !important; align-items: center !important; justify-content: center !important; border-radius: 50% !important; transition: all 0.3s ease; text-decoration: none; border: 1px solid rgba(76, 175, 80, 0.3); padding: 0 !important; margin: 0 !important; box-sizing: border-box !important; flex-shrink: 0 !important; flex-grow: 0 !important; aspect-ratio: 1 / 1 !important; overflow: hidden !important; position: relative !important;"><i class="fab fa-linkedin-in" style="font-size: 16px !important; line-height: 1 !important; width: auto !important; height: auto !important; display: block !important; text-align: center !important;"></i></a>
                     </div>
                 </div>
             </div>

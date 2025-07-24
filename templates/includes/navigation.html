@@ -26,15 +26,21 @@
                             Products
                         </a>
                         <div class="dropdown-menu" aria-labelledby="productsDropdown" style="background: rgba(26, 26, 26, 0.98); backdrop-filter: blur(15px); border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); margin-top: 10px;">
-                            <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
-                            <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Quality Graders</a>
-                            <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Graders</a>
-                            <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
-                            <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
+                            <a class="dropdown-item" href="{% url 'product_detail' category_slug='quality-graders' product_slug='segritech-minisort' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
+                                <i class="fas fa-eye me-2"></i>Segritech Minisort
+                                <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
+                            </a>
                             <a class="dropdown-item" href="{% url 'inspection_box' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
                                 <i class="fas fa-cube me-2"></i>Inspection Box
                                 <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
                             </a>
+                            <a class="dropdown-item" href="{% url 'packing_robots' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Packing Robots</a>
+                            <a class="dropdown-item" href="{% url 'quality_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">
+                                <i class="fas fa-camera me-2"></i>Optical AI Graders
+                            </a>
+                            <a class="dropdown-item" href="{% url 'size_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Size Graders</a>
+                            <a class="dropdown-item" href="{% url 'cleaning_machines' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Cleaning Machines</a>
+                            <a class="dropdown-item" href="{% url 'weight_graders' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">Weight Grader</a>
                             <div class="dropdown-divider" style="border-color: rgba(255,255,255,0.1);"></div>
                             <a class="dropdown-item" href="{% url 'products' %}" style="color: rgba(255,255,255,0.9) !important; padding: 12px 20px; transition: all 0.3s ease; border-radius: 4px; margin: 2px;">View All Categories</a>
                         </div>
@@ -146,4 +152,224 @@
     .dropdown-toggle::after {
         border-top-color: rgba(255,255,255,0.95) !important;
     }
-</style> 
+
+    /* Fix navbar toggler for mobile */
+    .navbar-toggler {
+        border: 2px solid rgba(255,255,255,0.7) !important;
+        border-radius: 8px !important;
+        padding: 8px 10px !important;
+        background: rgba(0,0,0,0.2) !important;
+        backdrop-filter: blur(10px) !important;
+    }
+    
+    .navbar-toggler:focus {
+        box-shadow: 0 0 0 0.2rem rgba(255,255,255,0.25) !important;
+    }
+    
+    .navbar-toggler-icon {
+        background-image: none !important;
+        width: 20px !important;
+        height: 2px !important;
+        background-color: rgba(255,255,255,0.9) !important;
+        display: block !important;
+        margin: 3px 0 !important;
+        transition: all 0.3s ease !important;
+        border-radius: 1px !important;
+    }
+    
+    .navbar-toggler.collapsed .navbar-toggler-icon:nth-child(2) {
+        opacity: 1 !important;
+    }
+    
+    .navbar-toggler:not(.collapsed) .navbar-toggler-icon:first-child {
+        transform: rotate(45deg) translate(5px, 5px) !important;
+    }
+    
+    .navbar-toggler:not(.collapsed) .navbar-toggler-icon:nth-child(2) {
+        opacity: 0 !important;
+    }
+    
+    .navbar-toggler:not(.collapsed) .navbar-toggler-icon:last-child {
+        transform: rotate(-45deg) translate(7px, -6px) !important;
+    }
+
+    /* Mobile responsive navbar */
+    @media (max-width: 991px) {
+        .navbar-collapse {
+            background: rgba(26, 26, 26, 0.98) !important;
+            backdrop-filter: blur(15px) !important;
+            border-radius: 12px !important;
+            margin-top: 15px !important;
+            padding: 20px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+        }
+        
+        .navbar-nav {
+            margin-left: 0 !important;
+        }
+        
+        .nav-link {
+            padding: 15px 20px !important;
+            border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+        }
+        
+        .nav-link:last-child {
+            border-bottom: none !important;
+        }
+        
+        /* Ensure dropdown works in mobile */
+        .dropdown-menu {
+            position: static !important;
+            float: none !important;
+            width: auto !important;
+            margin-top: 0 !important;
+            background-color: rgba(40, 40, 40, 0.95) !important;
+            border: none !important;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.1) !important;
+        }
+        
+        .dropdown-menu.show {
+            display: block !important;
+        }
+        
+        .dropdown-item {
+            color: rgba(255,255,255,0.8) !important;
+            padding: 10px 20px !important;
+        }
+        
+        .dropdown-item:hover, .dropdown-item:focus {
+            background-color: rgba(255,255,255,0.1) !important;
+            color: rgba(255,255,255,1) !important;
+        }
+    }
+</style>
+
+<script>
+$(document).ready(function() {
+    // Enhanced navbar functionality with proper Bootstrap integration
+    function initializeNavbar() {
+        const $navbarToggler = $('.navbar-toggler');
+        const $navbarCollapse = $('.navbar-collapse');
+        
+        if ($navbarToggler.length === 0 || $navbarCollapse.length === 0) return;
+        
+        // Remove Bootstrap's default data handlers to prevent conflicts
+        $navbarToggler.off('click.bs.collapse.data-api');
+        
+        // Custom toggle handler that works with Bootstrap's classes
+        $navbarToggler.on('click', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            
+            const isExpanded = $(this).attr('aria-expanded') === 'true';
+            
+            if (isExpanded) {
+                $navbarCollapse.removeClass('show').addClass('collapse');
+                $(this).addClass('collapsed').attr('aria-expanded', 'false');
+            } else {
+                $navbarCollapse.addClass('show').removeClass('collapse');
+                $(this).removeClass('collapsed').attr('aria-expanded', 'true');
+            }
+        });
+        
+        // Enhanced dropdown functionality for mobile
+        function initializeDropdowns() {
+            const $dropdownToggles = $('.dropdown-toggle');
+            
+            $dropdownToggles.each(function() {
+                const $toggle = $(this);
+                const $parent = $toggle.closest('.dropdown');
+                const $menu = $parent.find('.dropdown-menu');
+                
+                // Remove existing handlers
+                $toggle.off('click.navbar-custom');
+                
+                // Add custom mobile dropdown handler
+                $toggle.on('click.navbar-custom', function(e) {
+                    if ($(window).width() <= 991) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const isOpen = $menu.hasClass('show');
+                        
+                        // Close all other dropdowns
+                        $('.dropdown-menu.show').not($menu).removeClass('show');
+                        $('.dropdown.show').not($parent).removeClass('show');
+                        $('.dropdown-toggle[aria-expanded="true"]').not($toggle).attr('aria-expanded', 'false');
+                        
+                        if (isOpen) {
+                            $menu.removeClass('show');
+                            $parent.removeClass('show');
+                            $toggle.attr('aria-expanded', 'false');
+                        } else {
+                            $menu.addClass('show');
+                            $parent.addClass('show');
+                            $toggle.attr('aria-expanded', 'true');
+                        }
+                    }
+                });
+                
+                // Prevent dropdown items from closing dropdown
+                $menu.on('click', function(e) {
+                    if ($(window).width() <= 991) {
+                        if ($(e.target).hasClass('dropdown-item')) {
+                            // Allow navigation
+                            return true;
+                        }
+                        e.stopPropagation();
+                    }
+                });
+            });
+        }
+        
+        // Initialize dropdowns
+        initializeDropdowns();
+        
+        // Enhanced outside click handling with debouncing
+        let outsideClickTimer;
+        $(document).on('click.navbar-outside', function(e) {
+            clearTimeout(outsideClickTimer);
+            
+            outsideClickTimer = setTimeout(function() {
+                const $target = $(e.target);
+                const clickedNavbar = $target.closest('.navbar-toggler, .navbar-collapse').length > 0;
+                
+                if (!clickedNavbar && $navbarCollapse.hasClass('show')) {
+                    $navbarCollapse.removeClass('show').addClass('collapse');
+                    $navbarToggler.addClass('collapsed').attr('aria-expanded', 'false');
+                }
+                
+                // Close dropdowns when clicking outside (mobile only)
+                if ($(window).width() <= 991) {
+                    const clickedDropdown = $target.closest('.dropdown').length > 0;
+                    if (!clickedDropdown) {
+                        $('.dropdown-menu.show').removeClass('show');
+                        $('.dropdown.show').removeClass('show');
+                        $('.dropdown-toggle[aria-expanded="true"]').attr('aria-expanded', 'false');
+                    }
+                }
+            }, 150); // Increased delay to prevent conflicts
+        });
+        
+        // Cleanup on window resize
+        $(window).on('resize.navbar-custom', function() {
+            if ($(window).width() > 991) {
+                // Reset mobile-specific states on desktop
+                $('.dropdown-menu.show').removeClass('show');
+                $('.dropdown.show').removeClass('show');
+                $('.dropdown-toggle[aria-expanded="true"]').attr('aria-expanded', 'false');
+            }
+        });
+    }
+    
+    // Initialize after DOM and Bootstrap are ready
+    setTimeout(function() {
+        initializeNavbar();
+    }, 200);
+    
+    // Reinitialize on page changes if needed
+    $(window).on('load', function() {
+        setTimeout(initializeNavbar, 100);
+    });
+});
+</script> 

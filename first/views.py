@@ -23,7 +23,7 @@ def index(request):
     featured_products = Product.objects.filter(is_featured=True)[:6]
     featured_blogs = BlogPost.objects.filter(is_featured=True)[:3]
     testimonials = Testimonial.objects.all()[:3]
-    featured_faqs = FAQ.objects.filter(is_featured=True)[:5]  # Get top 5 featured FAQs
+    featured_faqs = FAQ.objects.filter(is_featured=True).order_by('order')[:6]  # Get top 6 featured FAQs
     
     context = {
         'featured_products': featured_products,
@@ -47,7 +47,7 @@ def contact(request):
         form = ContactForm()
     
     # Get featured FAQs for the contact page
-    featured_faqs = FAQ.objects.filter(is_featured=True)[:5]
+    featured_faqs = FAQ.objects.filter(is_featured=True).order_by('order')[:6]
     
     return render(request, 'contact.html', {
         'form': form,

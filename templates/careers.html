@@ -436,7 +436,7 @@
                             {{ job.description|truncatewords:50 }}
                         </div>
                         <div class="job-footer">
-                            <a href="{% url 'job_detail' job.id %}" class="btn btn-outline-primary">View Details</a>
+                            <a href="{% url 'job_detail' job.id %}" class="btn btn-success" style="background: linear-gradient(135deg, #4CAF50, #66BB6A); border: none; padding: 10px 20px; border-radius: 50px; font-weight: 600; color: white; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(76, 175, 80, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(76, 175, 80, 0.3)';">View Details</a>
                         </div>
                     </div>
                     {% endfor %}

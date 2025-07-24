@@ -5,19 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192"  href="{% static 'images/favicon/android-icon-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/small_lo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/small_lo.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/small_lo.png' %}">
     <title>SegriTech | Team</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
@@ -69,8 +59,23 @@
                                 Products
                             </a>
                             <div class="dropdown-menu" aria-labelledby="productsDropdown">
-                                <a class="dropdown-item" href="{% url 'products' %}">Categories</a>
-                                <a class="dropdown-item" href="#">Mechanical Machines</a>
+                                <a class="dropdown-item" href="{% url 'product_detail' category_slug='quality-graders' product_slug='segritech-minisort' %}">
+                                    <i class="fas fa-eye me-2"></i>Segritech Minisort
+                                    <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
+                                </a>
+                                <a class="dropdown-item" href="{% url 'inspection_box' %}">
+                                    <i class="fas fa-cube me-2"></i>Inspection Box
+                                    <span class="badge badge-success ml-2" style="font-size: 0.7rem; padding: 3px 6px; background: #4CAF50;">New</span>
+                                </a>
+                                <a class="dropdown-item" href="{% url 'packing_robots' %}">Packing Robots</a>
+                                <a class="dropdown-item" href="{% url 'quality_graders' %}">
+                                    <i class="fas fa-camera me-2"></i>Optical AI Graders
+                                </a>
+                                <a class="dropdown-item" href="{% url 'size_graders' %}">Size Graders</a>
+                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}">Cleaning Machines</a>
+                                <a class="dropdown-item" href="{% url 'weight_graders' %}">Weight Grader</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'products' %}">View All Categories</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -218,31 +223,7 @@
     AOS.init();
 
 
-    const $dropdown = $(".dropdown");
-    const $dropdownToggle = $(".dropdown-toggle");
-    const $dropdownMenu = $(".dropdown-menu");
-    const showClass = "show";
 
-    $(window).on("load resize", function() {
-    if (this.matchMedia("(min-width: 768px)").matches) {
-        $dropdown.hover(
-        function() {
-            const $this = $(this);
-            $this.addClass(showClass);
-            $this.find($dropdownToggle).attr("aria-expanded", "true");
-            $this.find($dropdownMenu).addClass(showClass);
-        },
-        function() {
-            const $this = $(this);
-            $this.removeClass(showClass);
-            $this.find($dropdownToggle).attr("aria-expanded", "false");
-            $this.find($dropdownMenu).removeClass(showClass);
-        }
-        );
-    } else {
-        $dropdown.off("mouseenter mouseleave");
-    }
-    });
     </script>
 </body>
 </html>

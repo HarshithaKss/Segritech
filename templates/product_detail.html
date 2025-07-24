@@ -8,19 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- Favicon Links -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/small_lo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/small_lo.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/small_lo.png' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     
@@ -35,6 +25,9 @@
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    
+    <!-- Load jQuery in head for navbar functionality -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     
     <style>
         :root {
@@ -134,7 +127,7 @@
         }
         
         body {
-            background-color: var(--light-black);
+            background: #121212 !important;
             color: #ffffff;
         }
         
@@ -147,7 +140,7 @@
         }
         
         .product-hero {
-            background: linear-gradient(135deg, var(--dark-black) 0%, var(--light-black) 100%);
+            background: #121212 !important;
             padding: 140px 0 40px 0 !important;
             margin-top: 0 !important;
             position: relative;
@@ -217,9 +210,15 @@
         
         .product-description {
             font-size: 1.1rem;
-            line-height: 1.8;
+            line-height: 1.6;
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 30px;
+            margin: 20px 0;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            max-height: 7.2em;
         }
         
         .price-range {
@@ -354,7 +353,7 @@
         
         .related-products {
             padding: 80px 0;
-            background: var(--dark-black);
+            background: #121212;
         }
         
         .product-card {
@@ -558,61 +557,7 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <div class="navbar-main-sec w-100 float-left index-page-navbar" style="position: absolute; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; margin: 0; padding: 0;">
-        <div class="wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light p-0" style="padding: 20px 0 !important; background: transparent;">
-                <a class="navbar-brand" href="{% url 'home' %}" style="padding: 0; margin: 0; line-height: 1;">
-                    <img src="{% static 'new_logo/IMG-5466-removebg.png' %}" alt="SegriTech-logo" style="max-height: 130px; width: auto; object-fit: contain; filter: brightness(1.1) drop-shadow(1px 1px 3px rgba(0,0,0,0.4));">
-                </a>
-                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
-                    data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggle">
-                    <ul class="navbar-nav mr-auto my-2 my-lg-0" style="margin-left: 100px; margin-right: 120px;">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">About Us</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{% url 'products' %}" id="productsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Products
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="productsDropdown">
-                                <a class="dropdown-item" href="{% url 'size_graders' %}">Size Graders</a>
-                                <a class="dropdown-item" href="{% url 'quality_graders' %}">Quality Graders</a>
-                                <a class="dropdown-item" href="{% url 'weight_graders' %}">Weight Graders</a>
-                                <a class="dropdown-item" href="{% url 'cleaning_machines' %}">Cleaning Machines</a>
-                                <a class="dropdown-item" href="{% url 'packing_robots' %}">Packing Robots</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{% url 'products' %}">View All Categories</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'careers' %}">Careers</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <ul class="mb-0 list-unstyled d-flex align-items-center navbar-right-box">
-    
-                            <li>
-                                <button class="explore-btn" type="button" style="background: linear-gradient(135deg, var(--accent-green), var(--primary-green)) !important; color: #FFFFFF !important; border: none !important; padding: 10px 24px !important; border-radius: 25px !important; font-weight: 600 !important; font-size: 0.95rem !important; text-shadow: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important; transition: all 0.3s ease !important;">Explore</button>
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-            </nav>
-        </div>
-    </div>
+    {% include 'includes/navigation.html' %}
 
     <!-- Product Detail -->
     <section class="product-hero">
@@ -634,32 +579,50 @@
                             </span>
                         {% endif %}
                         
-                        <p class="product-description">{{ product.detailed_description }}</p>
+                        <p class="product-description">
+                            {{ product.detailed_description|truncatewords:35 }}
+                        </p>
                         
                         <div class="product-actions" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 25px;">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#inquiryModal"
+                                    style="background: linear-gradient(135deg, #4CAF50, #66BB6A); 
+                                           border: none; 
+                                           padding: 12px 24px; 
+                                           border-radius: 50px; 
+                                           font-weight: 600; 
+                                           box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); 
+                                           transition: all 0.3s ease; 
+                                           margin-right: 15px; 
+                                           color: white;"
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(37, 211, 102, 0.4)';" 
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37, 211, 102, 0.3)';">
+                                <i class="fas fa-envelope" style="margin-right: 8px; font-size: 16px;"></i> Send Inquiry
+                            </button>
+                            
                             <a href="https://wa.me/919014809973?text=Hi! I'm interested in {{ product.name }}. Could you please provide more information?" 
                                target="_blank" 
                                class="btn-whatsapp" 
-                               style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 14px; border: none; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; min-width: 180px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);"
+                               style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 14px; border: none; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; min-width: 180px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);"
                                onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(37, 211, 102, 0.4)';"
                                onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37, 211, 102, 0.3)';">
                                 <i class="fab fa-whatsapp" style="margin-right: 8px; font-size: 16px;"></i> 
                                 Book via WhatsApp
                             </a>
-                            <button type="button" 
-                                    class="btn-inquiry" 
-                                    data-toggle="modal" 
-                                    data-target="#inquiryModal"
-                                    style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 14px; min-width: 180px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); transition: all 0.3s ease; border: none;"
-                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(37, 211, 102, 0.4)';"
-                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(37, 211, 102, 0.3)';">
-                                <i class="fas fa-envelope" style="margin-right: 8px; font-size: 16px;"></i> Send Inquiry
+                            
+                            <!-- Download Brochure Button - Always Available -->
+                            <button type="button" class="btn btn-success" onclick="downloadBrochure('{{ product.slug }}')" id="brochureDownloadBtn"
+                                    style="background: linear-gradient(135deg, #4CAF50, #66BB6A); 
+                                           border: none; 
+                                           padding: 12px 24px; 
+                                           border-radius: 50px; 
+                                           font-weight: 600; 
+                                           box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3); 
+                                           transition: all 0.3s ease; 
+                                           color: white;"
+                                    onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(76, 175, 80, 0.4)';" 
+                                    onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(76, 175, 80, 0.3)';">
+                                <i class="fas fa-download" style="margin-right: 8px; font-size: 16px;"></i>Download Brochure
                             </button>
-                            {% if product.brochure %}
-                            <button type="button" class="btn btn-primary" onclick="downloadBrochure('{{ product.slug }}')" id="brochureDownloadBtn" data-brochure-url="{{ product.brochure.url }}">
-                                <i class="fas fa-download me-1"></i>Download Brochure
-                            </button>
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -708,77 +671,303 @@
         </div>
     </section>
 
-    <!-- Specifications and Features -->
-    <section class="py-5">
+    <!-- Specifications Details -->
+    <section class="py-5" style="background: #121212;">
         <div class="container">
-            <div class="row">
-                <!-- Specifications -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800">
-                    <div class="spec-card">
-                        <h3><i class="fas fa-cogs"></i> Technical Specifications</h3>
-                        <table class="spec-table">
-                            {% if product.dimensions %}
-                                <tr>
-                                    <td>Dimensions</td>
-                                    <td>{{ product.dimensions }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if product.weight %}
-                                <tr>
-                                    <td>Weight</td>
-                                    <td>{{ product.weight }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if product.power_requirements %}
-                                <tr>
-                                    <td>Power Requirements</td>
-                                    <td>{{ product.power_requirements }}</td>
-                                </tr>
-                            {% endif %}
-                            {% if product.capacity %}
-                                <tr>
-                                    <td>Processing Capacity</td>
-                                    <td>{{ product.capacity }}</td>
-                                </tr>
-                            {% endif %}
-                        </table>
-                    </div>
-                </div>
-                
-                <!-- Key Features -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                    <div class="feature-card">
-                        <h3><i class="fas fa-star"></i> Key Features</h3>
-                        <ul class="feature-list">
-                            <!-- You can parse JSON features or add static ones -->
-                            <li>
-                                <i class="fas fa-check-circle"></i>
-                                <span>Advanced sorting algorithms for maximum accuracy</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-check-circle"></i>
-                                <span>Energy-efficient operation reduces operational costs</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-check-circle"></i>
-                                <span>User-friendly interface with touch screen controls</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-check-circle"></i>
-                                <span>Robust construction for long-lasting performance</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-check-circle"></i>
-                                <span>Easy maintenance and cleaning procedures</span>
-                            </li>
-                        </ul>
+            <div class="row justify-content-center">
+                <div class="col-lg-10" data-aos="fade-up" data-aos-duration="800">
+                    <div class="specification-box" style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 40px; border: 1px solid rgba(76, 175, 80, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                        <h3 style="color: var(--accent-green); font-weight: 600; margin-bottom: 30px; text-align: center; font-size: 1.8rem;">
+                            <i class="fas fa-clipboard-list" style="margin-right: 10px;"></i>Specification Details
+                        </h3>
+                        
+                        <div class="table-responsive">
+                            <table class="specification-table" style="width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.03); border-radius: 10px; overflow: hidden;">
+                                <thead>
+                                    <tr style="background: rgba(76, 175, 80, 0.1);">
+                                        <th style="padding: 15px 20px; border: 1px solid rgba(76, 175, 80, 0.3); color: var(--accent-green); font-weight: 600; text-align: left; font-size: 1.1rem;">Specification</th>
+                                        <th style="padding: 15px 20px; border: 1px solid rgba(76, 175, 80, 0.3); color: var(--accent-green); font-weight: 600; text-align: left; font-size: 1.1rem;">Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if 'minisort' in product.name.lower or 'minisort' in product.slug %}
+                                        <!-- Segritech Minisort Specifications -->
+                                        <tr>
+                                            <td class="spec-label">Capacity</td>
+                                            <td class="spec-value">2 Tons/Hour (2000 Kg/hour)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Parameters</td>
+                                            <td class="spec-value">Size, Shape, Color, Skin Defects (External Quality)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Technology</td>
+                                            <td class="spec-value">AI + Camera + Vision-Based + Roller Assist</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Output</td>
+                                            <td class="spec-value">5–6 Grades (Customizable)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Material of Construction</td>
+                                            <td class="spec-value">Stainless Steel (SS), Mild Steel (MS), Aluminium, Food-Grade Plastic</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Machine Dimensions</td>
+                                            <td class="spec-value">10 ft (L) x 5 ft (W) x 5 ft (H)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Functionality</td>
+                                            <td class="spec-value">1. AI-based Grading<br>2. Sorting<br>3. Reporting/Documentation</td>
+                                        </tr>
+                                    {% elif 'cleaning' in product.name.lower or 'cleaning' in product.slug or 'waxing' in product.name.lower %}
+                                        <!-- Cleaning Machine (Segriwax™) Specifications -->
+                                        <tr>
+                                            <td class="spec-label">Machine Name</td>
+                                            <td class="spec-value">Segriwax™ – Compact Waxing Line</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Functionality</td>
+                                            <td class="spec-value">Cleaning, Waxing, or Combined</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Capacity</td>
+                                            <td class="spec-value">Up to 10 tons per hour</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Transportability</td>
+                                            <td class="spec-value">Portable – Fits in 12 ft. loading space</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Power Requirement</td>
+                                            <td class="spec-value">Single/three Phase, 230V AC, <2 kW</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Size (Approx.)</td>
+                                            <td class="spec-value">10 ft L × 4 ft W × 4.5 ft H (stackable)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Structure Material</td>
+                                            <td class="spec-value">Stainless Steel (Food Grade) + Mild Steel</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Brush System</td>
+                                            <td class="spec-value">Soft nylon/sisal brush rollers</td>
+                                        </tr>
+                                    {% elif 'weight' in product.name.lower or 'weight' in product.slug %}
+                                        <!-- Weight Grader Specifications -->
+                                        <tr>
+                                            <td class="spec-label">Capacity</td>
+                                            <td class="spec-value">2 tons/hour</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Conveyor</td>
+                                            <td class="spec-value">Cup-Based Conveyor</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Output</td>
+                                            <td class="spec-value">6-10 Grades</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Material of Construction</td>
+                                            <td class="spec-value">Stainless Steel (SS), Mild Steel (MS), PU, etc.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Machine Dimensions</td>
+                                            <td class="spec-value">12 ft (L) x 3 ft (W) x 4 ft (H)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Functionality</td>
+                                            <td class="spec-value">1. Weight-Based Grading</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Power Requirement</td>
+                                            <td class="spec-value">1.5 kW/HP, Single Phase/3 Phase</td>
+                                        </tr>
+                                    {% elif 'packing' in product.name.lower or 'robot' in product.name.lower %}
+                                        <!-- Packing Machine Specifications -->
+                                        <tr>
+                                            <td class="spec-label">Operation Type</td>
+                                            <td class="spec-value">Robotic Pick & Place with AI Vision</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Throughput</td>
+                                            <td class="spec-value">3–5 tons/hour</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Packing Formats</td>
+                                            <td class="spec-value">Crate, Box, Tray, Punnet</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Fruit Compatibility</td>
+                                            <td class="spec-value">Apple, Pomegranate, Orange, Mango, Kiwi, Avocado, Guava, Sapota, etc.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Power Requirement</td>
+                                            <td class="spec-value">230V AC / 3-Phase</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Control System</td>
+                                            <td class="spec-value">PLC + Edge AI (Jetson/NVIDIA module)</td>
+                                        </tr>
+                                    {% elif 'apple' in product.name.lower or 'apple' in product.slug %}
+                                        <!-- Apple Grader Specifications -->
+                                        <tr>
+                                            <td class="spec-label">Capacity</td>
+                                            <td class="spec-value">200-250 box per day</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Method</td>
+                                            <td class="spec-value">Roller-Based Size Grading</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Output</td>
+                                            <td class="spec-value">6 Grades</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Material of Construction</td>
+                                            <td class="spec-value">Stainless Steel (SS), Mild Steel (MS), Nylon</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Machine Dimensions</td>
+                                            <td class="spec-value">10 ft (L) x 4 ft (W) x 4 ft (H)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Functionality</td>
+                                            <td class="spec-value">1. Cleaning & Drying<br>2. Size-Based Grading</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Power Requirement</td>
+                                            <td class="spec-value">1.5 kW/HP, Single Phase/3 Phase</td>
+                                        </tr>
+                                    {% elif 'orange' in product.name.lower or 'orange' in product.slug %}
+                                        <!-- Orange Grader Specifications -->
+                                        <tr>
+                                            <td class="spec-label">Capacity</td>
+                                            <td class="spec-value">5-8 tons/hr</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Method</td>
+                                            <td class="spec-value">Roller-Based Size Grading</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Output</td>
+                                            <td class="spec-value">6 Grades</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Material of Construction</td>
+                                            <td class="spec-value">Stainless Steel (SS), Mild Steel (MS), Nylon</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Machine Dimensions</td>
+                                            <td class="spec-value">12 ft (L) x 4 ft (W) x 4 ft (H)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Functionality</td>
+                                            <td class="spec-value">1. Cleaning & Drying<br>2. Size-Based Grading</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Power Requirement</td>
+                                            <td class="spec-value">1.5 kW/HP, Single Phase/3 Phase</td>
+                                        </tr>
+                                    {% else %}
+                                        <!-- Default specifications for other products -->
+                                        <tr>
+                                            <td class="spec-label">Capacity</td>
+                                            <td class="spec-value">To be specified based on model</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Method</td>
+                                            <td class="spec-value">Advanced AI-Based Sorting</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Grading Output</td>
+                                            <td class="spec-value">Multiple Grades Available</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Material of Construction</td>
+                                            <td class="spec-value">Stainless Steel (SS), Mild Steel (MS)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Machine Dimensions</td>
+                                            <td class="spec-value">Customizable based on requirements</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Functionality</td>
+                                            <td class="spec-value">Advanced Processing & Quality Control</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="spec-label">Power Requirement</td>
+                                            <td class="spec-value">As per machine specifications</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-
         </div>
     </section>
+
+    <style>
+        .specification-table tbody tr {
+            transition: all 0.3s ease;
+        }
+        
+        .specification-table tbody tr:hover {
+            background: rgba(76, 175, 80, 0.05) !important;
+        }
+        
+        .specification-table tbody tr:nth-child(even) {
+            background: rgba(255,255,255,0.02);
+        }
+        
+        .specification-table tbody tr:nth-child(odd) {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .spec-label {
+            padding: 15px 20px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            color: rgba(255,255,255,0.95);
+            font-weight: 600;
+            font-size: 0.95rem;
+            background: rgba(76, 175, 80, 0.05);
+            width: 30%;
+            vertical-align: top;
+        }
+        
+        .spec-value {
+            padding: 15px 20px;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            vertical-align: top;
+        }
+        
+        @media (max-width: 768px) {
+            .specification-table {
+                font-size: 0.85rem;
+            }
+            
+            .spec-label, .spec-value {
+                padding: 12px 15px !important;
+                display: block;
+                width: 100% !important;
+            }
+            
+            .specification-box {
+                padding: 25px !important;
+            }
+            
+            .specification-table thead th {
+                padding: 12px 15px !important;
+                font-size: 1rem !important;
+            }
+        }
+    </style>
 
     <!-- Related Products -->
     {% if related_products %}
@@ -890,9 +1079,8 @@
     
 
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
     
     <script>
@@ -944,12 +1132,88 @@
 
         // Function to download brochure based on product category
         function downloadBrochure(productSlug) {
-            const brochureBtn = document.getElementById('brochureDownloadBtn');
-            if (brochureBtn && brochureBtn.dataset.brochureUrl) {
-                window.open(brochureBtn.dataset.brochureUrl, '_blank');
-            } else {
-                showToast('Sorry, brochure not available at the moment. Please contact us for more information.', 'error');
+            console.log('Downloading brochure for:', productSlug);
+            
+            // Comprehensive brochure mapping for all products
+            const brochureMapping = {
+                // Size Graders
+                'segritech-apple-size-grader': 'Segritech Apple Size Grader.pdf',
+                'apple-size-grader': 'Segritech Apple Size Grader.pdf',
+                'size-grader': 'Segritech Apple Size Grader.pdf',
+                
+                // Quality Graders  
+                'segritech-minisort': 'Multifruit optical quality grader.pdf',
+                'multifruit-optical-grader': 'Multifruit optical quality grader.pdf',
+                'quality-grader': 'Multifruit optical quality grader.pdf',
+                'segritech-orange-grading-machine': 'Orange_grading_machine .pdf',
+                'orange-grader': 'Orange_grading_machine .pdf',
+                
+                // Weight Graders
+                'segritech-weight-grading-machine': 'Segritech Weight Grading Machine.pdf',
+                'weight-grader': 'Segritech Weight Grading Machine.pdf',
+                
+                // Cleaning Machines
+                'segriwax-cleaning-and-waxing-machine': 'Segriwax cleaning and waxing machine.pdf',
+                'cleaning-machine': 'Segriwax cleaning and waxing machine.pdf',
+                'segriwax': 'Segriwax cleaning and waxing machine.pdf',
+                
+                // Packing Robots
+                'segripack-by-segritech': 'Segripack Robotic Packing System.pdf',
+                'segripack-robotic-packing-system': 'Segripack Robotic Packing System.pdf',
+                'packing-robot': 'Segripack Robotic Packing System.pdf',
+                'robotic-packing': 'Segripack Robotic Packing System.pdf',
+                'robopack-rp-5000-automated-packaging-system': 'Segripack Robotic Packing System.pdf',
+                
+                // Inspection Box
+                'inspection-box': 'Inspection box.pdf',
+                'segribox': 'Inspection box.pdf'
+            };
+            
+            // Get brochure file name
+            let brochureFile = brochureMapping[productSlug];
+            
+            // Fallback logic for unknown products based on category
+            if (!brochureFile) {
+                const productName = document.querySelector('h1')?.textContent?.toLowerCase() || '';
+                
+                if (productName.includes('size') || productName.includes('apple')) {
+                    brochureFile = 'Segritech Apple Size Grader.pdf';
+                } else if (productName.includes('quality') || productName.includes('optical') || productName.includes('minisort')) {
+                    brochureFile = 'Multifruit optical quality grader.pdf';
+                } else if (productName.includes('weight')) {
+                    brochureFile = 'Segritech Weight Grading Machine.pdf';
+                } else if (productName.includes('cleaning') || productName.includes('wax')) {
+                    brochureFile = 'Segriwax cleaning and waxing machine.pdf';
+                } else if (productName.includes('packing') || productName.includes('robot')) {
+                    brochureFile = 'Segripack Robotic Packing System.pdf';
+                } else if (productName.includes('inspection') || productName.includes('box')) {
+                    brochureFile = 'Inspection box.pdf';
+                } else if (productName.includes('orange')) {
+                    brochureFile = 'Orange_grading_machine .pdf';
+                } else {
+                    // Default to quality grader brochure
+                    brochureFile = 'Multifruit optical quality grader.pdf';
+                }
             }
+            
+            const brochurePath = `/static/brochures/${brochureFile}`;
+            
+            // Create download link
+            const downloadLink = document.createElement('a');
+            downloadLink.href = brochurePath;
+            downloadLink.download = brochureFile;
+            downloadLink.target = '_blank';
+            
+            // Trigger download
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+            
+            // Show success message
+            const productName = document.querySelector('h1')?.textContent || 'Product';
+            showToast(`${productName} brochure download started!`, 'success');
+            
+            console.log('Brochure download initiated:', brochurePath);
         }
 
         // Product Inquiry Form Submission
@@ -1033,27 +1297,6 @@
             document.getElementById('inquiryForm').reset();
         });
 
-        // Download Brochure Function
-        function downloadBrochure(productSlug) {
-            try {
-                // Special case for orange grader
-                if (productSlug === 'segritech-orange-grading-machine' || productSlug === 'orange-grader') {
-                    alert('Brochure is being prepared. Please contact us for the latest product information.');
-                    return;
-                }
-                
-                const brochureUrl = document.getElementById('brochureDownloadBtn').dataset.brochureUrl;
-                if (brochureUrl) {
-                    window.location.href = brochureUrl;
-                    alert('Brochure download started!');
-                } else {
-                    alert('Brochure is being prepared. Please contact us for the latest product information.');
-                }
-            } catch (error) {
-                console.error('Error downloading brochure:', error);
-                alert('Brochure is being prepared. Please contact us for the latest product information.');
-            }
-        }
     </script>
 
 

@@ -8,19 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- Favicon Links -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/small_lo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/small_lo.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/small_lo.png' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     
@@ -58,6 +48,54 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: var(--primary-dark);
             color: var(--text-primary);
+        }
+        
+        /* Global Mobile Responsive Image Fixes */
+        @media (max-width: 768px) {
+            /* Fix all product image containers */
+            .product-image-container,
+            .category-hero-image > div,
+            .product-item .product-image,
+            .product-card .product-image,
+            .category-card .category-image {
+                min-height: 180px !important;
+                aspect-ratio: 16/10 !important;
+                margin-bottom: 15px !important;
+            }
+            
+            /* Fix all images with absolute positioning */
+            img[style*="position: absolute"][style*="transform: translate(-50%, -50%)"] {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 90% !important;
+                height: 90% !important;
+                object-fit: contain !important;
+                margin: auto !important;
+                display: block !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra small devices */
+            .product-image-container,
+            .category-hero-image > div,
+            .product-item .product-image,
+            .product-card .product-image,
+            .category-card .category-image {
+                min-height: 160px !important;
+                aspect-ratio: 3/2 !important;
+            }
+            
+            img[style*="position: absolute"][style*="transform: translate(-50%, -50%)"] {
+                width: 85% !important;
+                height: 85% !important;
+            }
+        }
+        
+        /* Additional body styles */
+        body {
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -643,9 +681,9 @@
                                         </div>
                     <div class="category-content">
                         <div class="category-icon">
-                            <i class="fas fa-star"></i>
+                            <i class="fas fa-camera"></i>
                         </div>
-                        <h3 class="category-title">Quality Graders</h3>
+                        <h3 class="category-title">Optical AI Graders</h3>
                         <p class="category-description">
                             Multi-spectrum imaging with AI analysis to detect defects, discoloration, and quality issues. Ensure only premium grade crops reach the market with our intelligent quality assessment systems.
                         </p>
@@ -683,10 +721,7 @@
                     </div>
                     <div class="category-content">
                         <div class="category-icon" style="position: relative;">
-                            <i class="fas fa-apple-alt" style="color: var(--accent-green); position: relative; z-index: 2;"></i>
-                            <i class="fas fa-sun" style="color: var(--accent-green); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(1.5); opacity: 0.3; z-index: 1;"></i>
-                            <i class="fas fa-sparkles" style="color: var(--accent-green); position: absolute; top: -5px; right: -5px; font-size: 0.6em;"></i>
-                            <i class="fas fa-sparkles" style="color: var(--accent-green); position: absolute; bottom: -5px; left: -5px; font-size: 0.6em;"></i>
+                            <i class="fas fa-star" ></i>
                         </div>
                         <h3 class="category-title">Cleaning Machines</h3>
                         <p class="category-description">
@@ -899,25 +934,6 @@
         $(document).ready(function() {
             // Initialize AOS
             AOS.init();
-            
-            // Initialize dropdowns
-            $('.dropdown-toggle').dropdown();
-            
-            // Add hover effect for dropdown
-            $('.dropdown').hover(
-                function() {
-                    $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(200);
-                },
-                function() {
-                    $(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(200);
-                }
-            );
-            
-            // Add click handler for dropdown items
-            $('.dropdown-item').click(function(e) {
-                e.preventDefault();
-                window.location.href = $(this).attr('href');
-            });
         });
     </script>
 </body>

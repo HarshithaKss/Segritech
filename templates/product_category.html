@@ -8,19 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- Favicon Links -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/small_lo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/small_lo.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/small_lo.png' %}">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
     
@@ -32,6 +22,9 @@
     <link rel="stylesheet" href="{% static 'css/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    
+    <!-- Load jQuery in head for navbar functionality -->
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
     
     <style>
         :root {
@@ -45,6 +38,62 @@
         body {
             background-color: var(--light-black);
             color: #ffffff;
+        }
+        
+        /* Global Mobile Responsive Image Fixes */
+        @media (max-width: 768px) {
+            /* Fix all product image containers */
+            .product-image-container,
+            .category-hero-image > div,
+            .product-item .product-image,
+            .product-card .product-image {
+                min-height: 180px !important;
+                aspect-ratio: 16/10 !important;
+                margin-bottom: 15px !important;
+            }
+            
+            /* Fix all images with absolute positioning */
+            img[style*="position: absolute"][style*="transform: translate(-50%, -50%)"] {
+                position: relative !important;
+                top: auto !important;
+                left: auto !important;
+                transform: none !important;
+                width: 90% !important;
+                height: 90% !important;
+                object-fit: contain !important;
+                margin: auto !important;
+                display: block !important;
+            }
+            
+            /* Additional mobile optimizations */
+            .category-hero-image {
+                padding-left: 15px !important;
+                margin-bottom: 30px !important;
+            }
+            
+            .product-item {
+                margin-bottom: 30px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            /* Extra small devices */
+            .product-image-container,
+            .category-hero-image > div,
+            .product-item .product-image,
+            .product-card .product-image {
+                min-height: 160px !important;
+                aspect-ratio: 3/2 !important;
+            }
+            
+            img[style*="position: absolute"][style*="transform: translate(-50%, -50%)"] {
+                width: 85% !important;
+                height: 85% !important;
+            }
+            
+            .category-hero-image {
+                padding-left: 10px !important;
+            }
         }
         
         /* Force navbar positioning */
@@ -410,6 +459,31 @@
             background: transparent !important;
             color: var(--accent-green) !important;
         }
+
+        /* Global mobile spacing fixes to prevent content collision */
+        @media (max-width: 991px) {
+            .product-hero {
+                padding-bottom: 80px !important;
+            }
+            .products-section {
+                padding-top: 60px !important;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .product-hero {
+                padding-bottom: 60px !important;
+            }
+            .products-section {
+                padding-top: 40px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .product-hero {
+                padding-bottom: 50px !important;
+            }
+        }
     </style>
 </head>
 
@@ -427,11 +501,11 @@
                                 {% if category.name == "Size Graders" %}
                                     <i class="fas fa-ruler-combined"></i>
                                 {% elif category.name == "Quality Graders" %}
-                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-camera"></i>
                                 {% elif category.name == "Weight Graders" %}
                                     <i class="fas fa-weight"></i>
                                 {% elif category.name == "Cleaning Machines" %}
-                                    <i class="fas fa-apple-alt"></i>
+                                    <i class="fas fa-magic"></i>
                                 {% elif category.name == "Packing Robots" %}
                                     <i class="fas fa-robot"></i>
                                 {% else %}
@@ -439,7 +513,13 @@
                                 {% endif %}
                             </div>
                             <div style="flex: 1;">
-                                <h1 class="category-hero-title" style="margin-bottom: 0;">{{ category.name }}</h1>
+                                <h1 class="category-hero-title" style="margin-bottom: 0;">
+                                    {% if category.name == "Quality Graders" %}
+                                        Optical AI Graders
+                                    {% else %}
+                                        {{ category.name }}
+                                    {% endif %}
+                                </h1>
                             </div>
                         </div>
                         <p class="category-hero-desc" style="margin-bottom: 50px;">Our size graders use reliable mechanical sorting technology to classify crops based on their physical dimensions. Perfect for small to medium-scale producers ensuring uniform quality and meeting market requirements.</p>
@@ -453,7 +533,7 @@
                                 </div>
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
                                     <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-box"></i> Capacity</h5>
-                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Process 200-250 boxes per day</p>
+                                    <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Process 5 to 10 tons per hour</p>
                                 </div>
                             {% elif category.name == "Quality Graders" %}
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
@@ -461,7 +541,7 @@
                                     <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">Machine learning algorithms for defect detection</p>
                                 </div>
                                 <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border-left: 4px solid var(--accent-green);">
-                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-camera"></i> Multi-Spectrum</h5>
+                                    <h5 style="color: var(--accent-green); margin-bottom: 10px;"><i class="fas fa-camera"></i> High-Speed Grading </h5>
                                     <p style="color: rgba(255,255,255,0.8); margin: 0; font-size: 0.9rem;">RGB, NIR, and UV imaging for comprehensive analysis</p>
                                 </div>
                             {% elif category.name == "Weight Graders" %}
@@ -497,7 +577,79 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="category-hero-image" data-aos="fade-left" data-aos-duration="800" style="padding-left: 40px;">
-                                                  <div style="position: relative; border-radius: 25px; overflow: hidden; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(102, 187, 106, 0.1)); aspect-ratio: 4/3; min-height: 250px; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 40px rgba(0,0,0,0.3);">
+                                                  <div class="product-image-container" style="position: relative; border-radius: 25px; overflow: hidden; background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(102, 187, 106, 0.1)); aspect-ratio: 4/3; min-height: 250px; display: flex; align-items: center; justify-content: center; box-shadow: 0 15px 40px rgba(0,0,0,0.3);">
+                              <!-- Mobile Responsive Styles -->
+                              <style>
+                                  /* Fix collision between image and content on mobile */
+                                  @media (max-width: 991px) {
+                                      .category-hero-image {
+                                          padding-left: 0 !important;
+                                          margin-top: 40px !important;
+                                          margin-bottom: 60px !important;
+                                      }
+                                      .category-hero-content {
+                                          padding-right: 0 !important;
+                                      }
+                                      .product-hero .row {
+                                          flex-direction: column-reverse !important;
+                                      }
+                                      .product-hero .col-lg-7 {
+                                          order: 2 !important;
+                                      }
+                                      .product-hero .col-lg-5 {
+                                          order: 1 !important;
+                                          margin-bottom: 30px !important;
+                                      }
+                                  }
+                                  
+                                  @media (max-width: 768px) {
+                                      .product-image-container {
+                                          min-height: 200px !important;
+                                          aspect-ratio: 3/2 !important;
+                                          margin-bottom: 30px !important;
+                                      }
+                                      .product-image-container img {
+                                          width: 90% !important;
+                                          height: 90% !important;
+                                          object-fit: contain !important;
+                                          position: relative !important;
+                                          top: auto !important;
+                                          left: auto !important;
+                                          transform: none !important;
+                                      }
+                                      .category-hero-image {
+                                          margin-bottom: 50px !important;
+                                      }
+                                      /* Fix feature boxes spacing */
+                                      .category-hero-content > div:last-child {
+                                          margin-top: 30px !important;
+                                          gap: 20px !important;
+                                      }
+                                  }
+                                  
+                                  @media (max-width: 480px) {
+                                      .product-image-container {
+                                          min-height: 180px !important;
+                                          aspect-ratio: 16/10 !important;
+                                      }
+                                      .product-image-container img {
+                                          width: 85% !important;
+                                          height: 85% !important;
+                                      }
+                                      .category-hero-image {
+                                          margin-bottom: 40px !important;
+                                      }
+                                      /* Adjust feature box layout for small screens */
+                                      .category-hero-content > div:last-child {
+                                          grid-template-columns: 1fr !important;
+                                          gap: 15px !important;
+                                          margin-top: 25px !important;
+                                      }
+                                      .category-hero-content > div:last-child > div {
+                                          padding: 15px !important;
+                                      }
+                                  }
+                              </style>
                               {% if category.name == "Size Graders" %}
                                   <img src="{% static 'web/apple_size_grader.png' %}" alt="Segritech Apple Size Grading Machine" style="width: 100%; height: 100%; object-fit: contain; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);" onerror="this.style.display='none';">
                               {% elif category.name == "Quality Graders" %}
@@ -853,8 +1005,8 @@
     
 
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/aos.js' %}"></script>
     
     <script>
@@ -863,33 +1015,6 @@
             duration: 800,
             easing: 'ease-out-quart',
             once: true
-        });
-
-        // Navigation dropdown
-        const $dropdown = $(".dropdown");
-        const $dropdownToggle = $(".dropdown-toggle");
-        const $dropdownMenu = $(".dropdown-menu");
-        const showClass = "show";
-
-        $(window).on("load resize", function() {
-            if (this.matchMedia("(min-width: 768px)").matches) {
-                $dropdown.hover(
-                function() {
-                    const $this = $(this);
-                    $this.addClass(showClass);
-                    $this.find($dropdownToggle).attr("aria-expanded", "true");
-                    $this.find($dropdownMenu).addClass(showClass);
-                },
-                function() {
-                    const $this = $(this);
-                    $this.removeClass(showClass);
-                    $this.find($dropdownToggle).attr("aria-expanded", "false");
-                    $this.find($dropdownMenu).removeClass(showClass);
-                }
-                );
-            } else {
-                $dropdown.off("mouseenter mouseleave");
-            }
         });
 
         // Loader

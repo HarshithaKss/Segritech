@@ -1,0 +1,547 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$SFFmvnFn91RwIiddO2aSHH$7dniLyhRuHlBLTp/NDh0TkFHWSx7pY/3CTuIzpgBC38=",
+    "last_login": "2025-07-14T15:57:12.645Z",
+    "is_superuser": true,
+    "username": "harshitha",
+    "first_name": "",
+    "last_name": "",
+    "email": "kssharshitha2105@gmail.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-07-11T06:01:16.494Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "quqzybndmehzuyzkqh1thiqfxmd5wot9",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCYkTJ16d4zNMBMpWogKe3KeHdD0oVu_3vvv9UU9i1Pe5N1WlhdlFWn3y2G9JTSAT9CuVedatnWJequ6IM2fassr-vh_h3k0HKvvTAmnGEkJs-WmY2zFDgRCTiLZ2ticIAODTARChk3AoAZ2A6zV58v5Ag3Dw:1ubLYG:aNE101GjJHkOEnlZRCoe-uNztSPuzKnoRMAnudjdk5U",
+    "expire_date": "2025-07-28T15:57:12.650Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rouo9qmy5ika8eej0nvbc029c4x5k1p0",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCYkTJ16d4zNMBMpWogKe3KeHdD0oVu_3vvv9UU9i1Pe5N1WlhdlFWn3y2G9JTSAT9CuVedatnWJequ6IM2fassr-vh_h3k0HKvvTAmnGEkJs-WmY2zFDgRCTiLZ2ticIAODTARChk3AoAZ2A6zV58v5Ag3Dw:1ua6pR:RpAn2Az02TkKbNwOJHx8fa6yzv-QfA0d2LCEUdS5xrI",
+    "expire_date": "2025-07-25T06:01:49.551Z"
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 1,
+  "fields": {
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com",
+    "phone": "+91 9876543210",
+    "company": "Fresh Fruits Co.",
+    "inquiry_type": "product",
+    "subject": "Apple Grading Machine Inquiry",
+    "message": "We are interested in your apple grading machine. We process about 5 tons of apples daily and looking for an automated solution. Please share detailed specifications and pricing.",
+    "created_at": "2025-07-11T10:22:06.387Z",
+    "is_read": true
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 2,
+  "fields": {
+    "name": "Sarah Johnson",
+    "email": "sarah.j@example.com",
+    "phone": "+1 234-567-8900",
+    "company": "Global Agri Exports",
+    "inquiry_type": "partnership",
+    "subject": "Distribution Partnership Opportunity",
+    "message": "We are a leading agricultural equipment distributor in the US and interested in partnering with SegriTech. Would like to discuss distribution rights for North America.",
+    "created_at": "2025-07-11T10:22:06.390Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 3,
+  "fields": {
+    "name": "Rajesh Kumar",
+    "email": "rajesh.k@example.com",
+    "phone": "+91 8765432109",
+    "company": "Kumar Orchards",
+    "inquiry_type": "demo",
+    "subject": "Request for Live Demo",
+    "message": "Interested in seeing your grading machine in action. We have an orange farm in Maharashtra. Can you arrange a demo at a nearby location?",
+    "created_at": "2025-07-11T10:22:06.393Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 4,
+  "fields": {
+    "name": "Maria Garcia",
+    "email": "maria.g@example.com",
+    "phone": "+34 612345678",
+    "company": "Spanish Fruits SL",
+    "inquiry_type": "pricing",
+    "subject": "Pricing for Bulk Order",
+    "message": "Looking to upgrade our entire sorting facility. Need pricing for 5 machines with installation and training. Also interested in annual maintenance contract.",
+    "created_at": "2025-07-11T10:22:06.400Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 5,
+  "fields": {
+    "name": "Dr. Amit Shah",
+    "email": "amit.shah@example.com",
+    "phone": "+91 7654321098",
+    "company": "Agri Research Institute",
+    "inquiry_type": "support",
+    "subject": "Technical Documentation Request",
+    "message": "Working on a research paper about AI in agricultural automation. Would like to know if you can share any technical documentation about your AI grading algorithms.",
+    "created_at": "2025-07-11T10:22:06.404Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 6,
+  "fields": {
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com",
+    "phone": "+91 9876543210",
+    "company": "Fresh Fruits Co.",
+    "inquiry_type": "product",
+    "subject": "Apple Grading Machine Inquiry",
+    "message": "We are interested in your apple grading machine. We process about 5 tons of apples daily and looking for an automated solution. Please share detailed specifications and pricing.",
+    "created_at": "2025-07-12T10:27:53.211Z",
+    "is_read": true
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 7,
+  "fields": {
+    "name": "Sarah Johnson",
+    "email": "sarah.j@example.com",
+    "phone": "+1 234-567-8900",
+    "company": "Global Agri Exports",
+    "inquiry_type": "partnership",
+    "subject": "Distribution Partnership Opportunity",
+    "message": "We are a leading agricultural equipment distributor in the US and interested in partnering with SegriTech. Would like to discuss distribution rights for North America.",
+    "created_at": "2025-07-12T10:27:53.217Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 8,
+  "fields": {
+    "name": "Rajesh Kumar",
+    "email": "rajesh.k@example.com",
+    "phone": "+91 8765432109",
+    "company": "Kumar Orchards",
+    "inquiry_type": "demo",
+    "subject": "Request for Live Demo",
+    "message": "Interested in seeing your grading machine in action. We have an orange farm in Maharashtra. Can you arrange a demo at a nearby location?",
+    "created_at": "2025-07-12T10:27:53.220Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 9,
+  "fields": {
+    "name": "Maria Garcia",
+    "email": "maria.g@example.com",
+    "phone": "+34 612345678",
+    "company": "Spanish Fruits SL",
+    "inquiry_type": "pricing",
+    "subject": "Pricing for Bulk Order",
+    "message": "Looking to upgrade our entire sorting facility. Need pricing for 5 machines with installation and training. Also interested in annual maintenance contract.",
+    "created_at": "2025-07-12T10:27:53.223Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 10,
+  "fields": {
+    "name": "Dr. Amit Shah",
+    "email": "amit.shah@example.com",
+    "phone": "+91 7654321098",
+    "company": "Agri Research Institute",
+    "inquiry_type": "support",
+    "subject": "Technical Documentation Request",
+    "message": "Working on a research paper about AI in agricultural automation. Would like to know if you can share any technical documentation about your AI grading algorithms.",
+    "created_at": "2025-07-12T10:27:53.226Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 11,
+  "fields": {
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com",
+    "phone": "+91 9876543210",
+    "company": "Fresh Fruits Co.",
+    "inquiry_type": "product",
+    "subject": "Apple Grading Machine Inquiry",
+    "message": "We are interested in your apple grading machine. We process about 5 tons of apples daily and looking for an automated solution. Please share detailed specifications and pricing.",
+    "created_at": "2025-07-13T07:08:18.550Z",
+    "is_read": true
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 12,
+  "fields": {
+    "name": "Sarah Johnson",
+    "email": "sarah.j@example.com",
+    "phone": "+1 234-567-8900",
+    "company": "Global Agri Exports",
+    "inquiry_type": "partnership",
+    "subject": "Distribution Partnership Opportunity",
+    "message": "We are a leading agricultural equipment distributor in the US and interested in partnering with SegriTech. Would like to discuss distribution rights for North America.",
+    "created_at": "2025-07-13T07:08:18.553Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 13,
+  "fields": {
+    "name": "Rajesh Kumar",
+    "email": "rajesh.k@example.com",
+    "phone": "+91 8765432109",
+    "company": "Kumar Orchards",
+    "inquiry_type": "demo",
+    "subject": "Request for Live Demo",
+    "message": "Interested in seeing your grading machine in action. We have an orange farm in Maharashtra. Can you arrange a demo at a nearby location?",
+    "created_at": "2025-07-13T07:08:18.557Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 14,
+  "fields": {
+    "name": "Maria Garcia",
+    "email": "maria.g@example.com",
+    "phone": "+34 612345678",
+    "company": "Spanish Fruits SL",
+    "inquiry_type": "pricing",
+    "subject": "Pricing for Bulk Order",
+    "message": "Looking to upgrade our entire sorting facility. Need pricing for 5 machines with installation and training. Also interested in annual maintenance contract.",
+    "created_at": "2025-07-13T07:08:18.559Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 15,
+  "fields": {
+    "name": "Dr. Amit Shah",
+    "email": "amit.shah@example.com",
+    "phone": "+91 7654321098",
+    "company": "Agri Research Institute",
+    "inquiry_type": "support",
+    "subject": "Technical Documentation Request",
+    "message": "Working on a research paper about AI in agricultural automation. Would like to know if you can share any technical documentation about your AI grading algorithms.",
+    "created_at": "2025-07-13T07:08:18.563Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 16,
+  "fields": {
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com",
+    "phone": "+91 9876543210",
+    "company": "Fresh Fruits Co.",
+    "inquiry_type": "product",
+    "subject": "Apple Grading Machine Inquiry",
+    "message": "We are interested in your apple grading machine. We process about 5 tons of apples daily and looking for an automated solution. Please share detailed specifications and pricing.",
+    "created_at": "2025-07-13T07:20:44.749Z",
+    "is_read": true
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 17,
+  "fields": {
+    "name": "Sarah Johnson",
+    "email": "sarah.j@example.com",
+    "phone": "+1 234-567-8900",
+    "company": "Global Agri Exports",
+    "inquiry_type": "partnership",
+    "subject": "Distribution Partnership Opportunity",
+    "message": "We are a leading agricultural equipment distributor in the US and interested in partnering with SegriTech. Would like to discuss distribution rights for North America.",
+    "created_at": "2025-07-13T07:20:44.753Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 18,
+  "fields": {
+    "name": "Rajesh Kumar",
+    "email": "rajesh.k@example.com",
+    "phone": "+91 8765432109",
+    "company": "Kumar Orchards",
+    "inquiry_type": "demo",
+    "subject": "Request for Live Demo",
+    "message": "Interested in seeing your grading machine in action. We have an orange farm in Maharashtra. Can you arrange a demo at a nearby location?",
+    "created_at": "2025-07-13T07:20:44.756Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 19,
+  "fields": {
+    "name": "Maria Garcia",
+    "email": "maria.g@example.com",
+    "phone": "+34 612345678",
+    "company": "Spanish Fruits SL",
+    "inquiry_type": "pricing",
+    "subject": "Pricing for Bulk Order",
+    "message": "Looking to upgrade our entire sorting facility. Need pricing for 5 machines with installation and training. Also interested in annual maintenance contract.",
+    "created_at": "2025-07-13T07:20:44.759Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 20,
+  "fields": {
+    "name": "Dr. Amit Shah",
+    "email": "amit.shah@example.com",
+    "phone": "+91 7654321098",
+    "company": "Agri Research Institute",
+    "inquiry_type": "support",
+    "subject": "Technical Documentation Request",
+    "message": "Working on a research paper about AI in agricultural automation. Would like to know if you can share any technical documentation about your AI grading algorithms.",
+    "created_at": "2025-07-13T07:20:44.762Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 21,
+  "fields": {
+    "name": "Vikram Singh",
+    "email": "vikram.singh@example.com",
+    "phone": "+91 9876543210",
+    "company": "Fresh Fruits Co.",
+    "inquiry_type": "product",
+    "subject": "Apple Grading Machine Inquiry",
+    "message": "We are interested in your apple grading machine. We process about 5 tons of apples daily and looking for an automated solution. Please share detailed specifications and pricing.",
+    "created_at": "2025-07-13T07:25:36.442Z",
+    "is_read": true
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 22,
+  "fields": {
+    "name": "Sarah Johnson",
+    "email": "sarah.j@example.com",
+    "phone": "+1 234-567-8900",
+    "company": "Global Agri Exports",
+    "inquiry_type": "partnership",
+    "subject": "Distribution Partnership Opportunity",
+    "message": "We are a leading agricultural equipment distributor in the US and interested in partnering with SegriTech. Would like to discuss distribution rights for North America.",
+    "created_at": "2025-07-13T07:25:36.445Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 23,
+  "fields": {
+    "name": "Rajesh Kumar",
+    "email": "rajesh.k@example.com",
+    "phone": "+91 8765432109",
+    "company": "Kumar Orchards",
+    "inquiry_type": "demo",
+    "subject": "Request for Live Demo",
+    "message": "Interested in seeing your grading machine in action. We have an orange farm in Maharashtra. Can you arrange a demo at a nearby location?",
+    "created_at": "2025-07-13T07:25:36.448Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 24,
+  "fields": {
+    "name": "Maria Garcia",
+    "email": "maria.g@example.com",
+    "phone": "+34 612345678",
+    "company": "Spanish Fruits SL",
+    "inquiry_type": "pricing",
+    "subject": "Pricing for Bulk Order",
+    "message": "Looking to upgrade our entire sorting facility. Need pricing for 5 machines with installation and training. Also interested in annual maintenance contract.",
+    "created_at": "2025-07-13T07:25:36.451Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.contact",
+  "pk": 25,
+  "fields": {
+    "name": "Dr. Amit Shah",
+    "email": "amit.shah@example.com",
+    "phone": "+91 7654321098",
+    "company": "Agri Research Institute",
+    "inquiry_type": "support",
+    "subject": "Technical Documentation Request",
+    "message": "Working on a research paper about AI in agricultural automation. Would like to know if you can share any technical documentation about your AI grading algorithms.",
+    "created_at": "2025-07-13T07:25:36.454Z",
+    "is_read": false
+  }
+},
+{
+  "model": "first.productcategory",
+  "pk": 1,
+  "fields": {
+    "name": "Size Graders",
+    "slug": "size-graders",
+    "category_type": "size_graders",
+    "description": "Our size graders use advanced optical and mechanical sorting technology to classify crops based on their physical dimensions. Perfect for ensuring uniform quality and meeting specific market requirements.",
+    "short_description": "Precision size-based sorting machines for uniform crop grading",
+    "image": "",
+    "icon": "fas fa-ruler-horizontal",
+    "is_active": true,
+    "display_order": 1,
+    "created_at": "2025-07-11T10:22:06.020Z",
+    "updated_at": "2025-07-13T07:25:36.072Z"
+  }
+},
+{
+  "model": "first.productcategory",
+  "pk": 2,
+  "fields": {
+    "name": "Quality Graders",
+    "slug": "quality-graders",
+    "category_type": "quality_graders",
+    "description": "Intelligent quality grading systems that use computer vision and AI to assess crop quality, color, defects, and overall grade. Ensures consistent quality standards across your entire harvest.",
+    "short_description": "AI-powered quality assessment and classification systems",
+    "image": "",
+    "icon": "fas fa-star",
+    "is_active": true,
+    "display_order": 2,
+    "created_at": "2025-07-11T10:22:06.025Z",
+    "updated_at": "2025-07-13T07:25:36.085Z"
+  }
+},
+{
+  "model": "first.productcategory",
+  "pk": 3,
+  "fields": {
+    "name": "Weight Graders",
+    "slug": "weight-graders",
+    "category_type": "weight_graders",
+    "description": "Accurate weight-based grading systems that sort crops into precise weight categories. Essential for premium packaging and meeting specific weight requirements for different market segments.",
+    "short_description": "High-precision weight-based sorting and classification",
+    "image": "",
+    "icon": "fas fa-weight",
+    "is_active": true,
+    "display_order": 3,
+    "created_at": "2025-07-11T10:22:06.029Z",
+    "updated_at": "2025-07-13T07:25:36.089Z"
+  }
+},
+{
+  "model": "first.productcategory",
+  "pk": 4,
+  "fields": {
+    "name": "Cleaning Machines",
+    "slug": "cleaning-machines",
+    "category_type": "cleaning_machines",
+    "description": "Comprehensive cleaning solutions that remove impurities, foreign materials, and damaged crops. Multi-stage cleaning process ensures your crops meet the highest hygiene and quality standards.",
+    "short_description": "Advanced cleaning and debris removal systems",
+    "image": "",
+    "icon": "fas fa-apple-alt",
+    "is_active": true,
+    "display_order": 4,
+    "created_at": "2025-07-11T10:22:06.034Z",
+    "updated_at": "2025-07-13T07:25:36.094Z"
+  }
+},
+{
+  "model": "first.productcategory",
+  "pk": 5,
+  "fields": {
+    "name": "Packing Robots",
+    "slug": "packing-robots",
+    "category_type": "packing_robots",
+    "description": "State-of-the-art robotic systems for automated packaging, handling, and palletizing. Increase efficiency while reducing labor costs and ensuring consistent packaging quality.",
+    "short_description": "Automated robotic packaging and handling solutions",
+    "image": "",
+    "icon": "fas fa-robot",
+    "is_active": true,
+    "display_order": 5,
+    "created_at": "2025-07-11T10:22:06.039Z",
+    "updated_at": "2025-07-13T07:25:36.098Z"
+  }
+},
+{
+  "model": "first.product",
+  "pk": 37,
+  "fields": {
+    "category": 1,
+    "name": "Segritech Apple Size Grading Machine",
+    "slug": "segritech-apple-size-grading-machine",
+    "short_description": "Compact apple grading machine with roller-based sorting system. Perfect for farms and mandis with 200-250 box/day capacity.",
+    "detailed_description": "The Segritech Apple Size Grading Machine is a compact and efficient agricultural machine designed for small to medium-scale apple producers. With a robust roller-based grading mechanism, this model provides high accuracy in size grading, ensuring better pricing and packaging for apple growers and aggregators.\n\nFeatures a durable construction with food-grade materials and integrated cleaning system, making it perfect for farm and mandi operations with 200-250 box/day capacity.",
+    "specifications": "{\"Capacity\": \"200-250 box per day\", \"Grading Output\": \"6 Grades\", \"Dimensions\": \"10 ft (L) x 4 ft (W) x 4 ft (H)\", \"Power\": \"1.5 kW, Single/3 Phase\", \"Material\": \"Stainless Steel, Food-grade Nylon\", \"Features\": \"Cleaning & Grading, Portable Design\"}",
+    "dimensions": "",
+    "weight": "",
+    "power_requirements": "",
+    "capacity": "",
+    "main_image": "",
+    "gallery_images": "",
+    "video_url": "",
+    "brochure": "",
+    "price_range": "Contact for Pricing",
+    "is_available": true,
+    "lead_time": "",
+    "key_features": "[\"Roller-based size grading system\", \"Integrated cleaning & drying section\", \"Food-grade materials (FDA-compliant)\", \"6-grade output capacity\", \"Portable design with wheels\", \"Built for Indian conditions\"]",
+    "applications": "[\"Small to medium farms\", \"Fruit packhouses\", \"Agricultural cooperatives\"]",
+    "benefits": "[\"Better market pricing\", \"Reduced labor costs\", \"Consistent grading quality\", \"Portable and easy to use\"]",
+    "meta_title": "",
+    "meta_description": "",
+    "is_featured": true,
+    "is_active": true,
+    "display_order": 0,
+    "created_at": "2025-07-13T07:25:36.328Z",
+    "updated_at": "2025-07-13T07:25:36.328Z"
+  }
+},
+{
+  "model": "first.product",
+  "pk": 38,
+  "fields": {
+    "category": 1,
+    "name": "Segritech Orange Grading Machine",
+    "slug": "segritech-orange-grading-machine",
+    "short_description": "Compact size grading machine designed specifically for oranges with reliable performance and space efficiency",
+    "detailed_description": "Segritech Orange Grading Machine - Specialized Citrus Sorting System\n\nThe Segritech Orange Grading Machine is specifically designed for orange grading operations, offering precision sizing in a space-efficient design. Built for Indian agricultural operations, this compact machine delivers reliable performance for cooperative societies, small processing units, and citrus specialty graders.\n\nFeatures advanced mechanical sorting technology optimized for orange characteristics, ensuring consistent size classification while maintaining fruit quality. The system provides cost-effective sorting solutions with durable construction designed for continuous operation in agricultural environments.\n\nPerfect for operations requiring dedicated orange processing with space constraints and budget considerations.",
+    "specifications": "{\"Model\": \"Segritech OGM-250\", \"Processing Capacity\": \"250 kg/hour\", \"Accuracy\": \"98.5%\", \"Power Consumption\": \"3.0 kW\", \"Dimensions\": \"1.8m x 1.2m x 1.5m\", \"Weight\": \"450 kg\", \"Material\": \"Mild Steel with food-grade coating\", \"Output Grades\": \"3-5 size categories\", \"Voltage\": \"220V/440V, 50 Hz\"}",
+    "dimensions": "",
+    "weight": "",
+    "power_requirements": "",
+    "capacity": "",
+    "main_image": "",
+    "gallery_images": "",
+    "video_url": "",
+    "brochure": "",
+    "price_range": 

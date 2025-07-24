@@ -62,9 +62,9 @@ class ProductCategory(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='products')
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=400)
     slug = models.SlugField(unique=True)
-    short_description = models.CharField(max_length=300)
+    short_description = models.CharField(max_length=400)
     detailed_description = models.TextField()
     
     # Technical Specifications
@@ -92,7 +92,7 @@ class Product(models.Model):
     
     # SEO and Meta
     meta_title = models.CharField(max_length=200, blank=True)
-    meta_description = models.CharField(max_length=300, blank=True)
+    meta_description = models.CharField(max_length=400, blank=True)
     
     # Status
     is_featured = models.BooleanField(default=False)
@@ -298,7 +298,7 @@ class BlogPost(models.Model):
     author_image = models.ImageField(upload_to='blog_authors/', blank=True)
     
     # Content
-    excerpt = models.CharField(max_length=300, help_text='Short description shown on cards')
+    excerpt = models.CharField(max_length=400, help_text='Short description shown on cards')
     content = models.TextField(help_text='Full blog post content (supports HTML)')
     featured_image = models.ImageField(upload_to='blog_images/', help_text='Main image shown in cards and at top of article')
     
@@ -318,7 +318,7 @@ class BlogPost(models.Model):
     
     # Meta Information
     meta_title = models.CharField(max_length=200, blank=True)
-    meta_description = models.CharField(max_length=300, blank=True)
+    meta_description = models.CharField(max_length=400, blank=True)
     tags = models.CharField(max_length=200, blank=True, help_text='Comma-separated tags')
     
     # Reading Metrics
@@ -485,7 +485,7 @@ class MediaCoverageArticle(models.Model):
     
     # SEO
     meta_title = models.CharField(max_length=200, blank=True)
-    meta_description = models.CharField(max_length=300, blank=True)
+    meta_description = models.CharField(max_length=400, blank=True)
     
     # Internal tracking
     clicks_count = models.IntegerField(default=0, help_text='Number of times this article link was clicked')

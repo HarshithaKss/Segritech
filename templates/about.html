@@ -4,22 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - SegriTech</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     
     <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="57x57" href="{% static 'images/favicon/apple-icon-57x57.png' %}">
-    <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/favicon/apple-icon-60x60.png' %}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{% static 'images/favicon/apple-icon-72x72.png' %}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'images/favicon/apple-icon-76x76.png' %}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{% static 'images/favicon/apple-icon-114x114.png' %}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{% static 'images/favicon/apple-icon-120x120.png' %}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'images/favicon/apple-icon-144x144.png' %}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'images/favicon/apple-icon-152x152.png' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-icon-180x180.png' %}">
-    <link rel="icon" type="image/png" sizes="192x192" href="{% static 'images/favicon/android-icon-192x192.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/small_lo.png' %}">
+    <link rel="apple-touch-icon" href="{% static 'images/small_lo.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/small_lo.png' %}">
     
     <!-- External CSS -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
@@ -656,7 +646,13 @@
             
             <div class="timeline" style="position: relative; max-width: 1200px; margin: 50px auto;">
                 <!-- Timeline Line -->
-                <div class="timeline-line" style="position: absolute; width: 4px; background: var(--accent-green); top: 0; bottom: 0; left: 50%; transform: translateX(-50%); border-radius: 2px;"></div>
+                <div class="timeline-line" style="position: absolute; width: 4px; background: var(--accent-green); top: 0; height: calc(100% - 120px); left: 50%; transform: translateX(-50%); border-radius: 2px;"></div>
+                
+                <!-- Timeline Line Start Blob -->
+                <div class="timeline-start-blob" style="position: absolute; width: 16px; height: 16px; background: var(--accent-green); border-radius: 50%; top: 0; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); border: 3px solid rgba(76, 175, 80, 0.2);"></div>
+                
+                <!-- Timeline Line End Blob -->
+                <div class="timeline-end-blob" style="position: absolute; width: 16px; height: 16px; background: var(--accent-green); border-radius: 50%; top: calc(100% - 120px); left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px rgba(76, 175, 80, 0.5); border: 3px solid rgba(76, 175, 80, 0.2);"></div>
                 
                 <!-- 2022 -->
                 <div class="timeline-item" data-aos="fade-right" data-aos-duration="800" style="position: relative; margin-bottom: 60px; width: 50%; padding-right: 50px; text-align: right;">
@@ -919,17 +915,19 @@
             </div>
             
             <div class="team-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; justify-items: center;">
+                <!-- 1st Place: Sri Kusulu Devalla (CTO) -->
                 <div class="team-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="100" style="background: var(--secondary-dark); border-radius: 20px; padding: 40px 30px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1); max-width: 350px; width: 100%;">
-                    <img src="{% static 'web/image_1.png' %}" alt="Team Member" class="team-image" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: center; margin: 0 auto 30px; display: block; border: 4px solid var(--accent-green);">
+                    <img src="{% static 'web/image_3.png' %}" alt="Team Member" class="team-image" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: center; margin: 0 auto 30px; display: block; border: 4px solid var(--accent-green);">
                     <div class="team-info">
-                        <h3 class="team-name" style="font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Vijay Pratap Singh</h3>
-                        <p class="team-role" style="font-size: 16px; color: var(--accent-green); margin-bottom: 20px; font-weight: 500;">Chief Operating Officer</p>
+                        <h3 class="team-name" style="font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Sri Kusulu Devalla</h3>
+                        <p class="team-role" style="font-size: 16px; color: var(--accent-green); margin-bottom: 20px; font-weight: 500;">Chief Technical Officer</p>
                         <div class="team-social" style="display: flex; justify-content: center; gap: 15px;">
-                            <a href="https://www.linkedin.com/in/vijay-pratap-singh-agri/" target="_blank" style="width: 40px; height: 40px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green); transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.linkedin.com/in/sri-kusulu/" target="_blank" style="width: 40px; height: 40px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green); transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
                 
+                <!-- 2nd Place: Hetendra Singh (CEO) -->
                 <div class="team-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="200" style="background: var(--secondary-dark); border-radius: 20px; padding: 40px 30px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1); max-width: 350px; width: 100%;">
                     <img src="{% static 'web/image_2.png' %}" alt="Team Member" class="team-image" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: center; margin: 0 auto 30px; display: block; border: 4px solid var(--accent-green);">
                     <div class="team-info">
@@ -941,13 +939,14 @@
                     </div>
                 </div>
                 
+                <!-- 3rd Place: Vijay Pratap Singh (COO) -->
                 <div class="team-card" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300" style="background: var(--secondary-dark); border-radius: 20px; padding: 40px 30px; text-align: center; transition: all 0.3s ease; border: 1px solid rgba(76, 175, 80, 0.1); max-width: 350px; width: 100%;">
-                    <img src="{% static 'web/image_3.png' %}" alt="Team Member" class="team-image" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: center; margin: 0 auto 30px; display: block; border: 4px solid var(--accent-green);">
+                    <img src="{% static 'web/image_1.png' %}" alt="Team Member" class="team-image" style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover; object-position: center; margin: 0 auto 30px; display: block; border: 4px solid var(--accent-green);">
                     <div class="team-info">
-                        <h3 class="team-name" style="font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Sri Kusulu Devalla</h3>
-                        <p class="team-role" style="font-size: 16px; color: var(--accent-green); margin-bottom: 20px; font-weight: 500;">Chief Technical Officer</p>
+                        <h3 class="team-name" style="font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Vijay Pratap Singh</h3>
+                        <p class="team-role" style="font-size: 16px; color: var(--accent-green); margin-bottom: 20px; font-weight: 500;">Chief Operating Officer</p>
                         <div class="team-social" style="display: flex; justify-content: center; gap: 15px;">
-                            <a href="https://www.linkedin.com/in/sri-kusulu/" target="_blank" style="width: 40px; height: 40px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green); transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.linkedin.com/in/vijay-pratap-singh-agri/" target="_blank" style="width: 40px; height: 40px; background: rgba(76, 175, 80, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-green); transition: all 0.3s ease; text-decoration: none;"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
