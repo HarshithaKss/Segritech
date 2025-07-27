@@ -1,9 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="zxx">
-
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2090,14 +2087,18 @@
     <section class="banner-sec w-100 float-left bg-light-black" style="padding-top: 0; position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center;">
         <!-- Background Video -->
         <div class="video-background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
-            <video autoplay muted loop playsinline style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
-                <source src="{% static 'video/Untitled design.mp4' %}" type="video/mp4">
-                <!-- Fallback gradient background if video doesn't load -->
-            </video>
+            <video autoplay muted loop playsinline preload="auto" decode="async"
+            poster="{% static 'images/poster_image.jpg' %}"
+            style="width: 100%; height: 100%; object-fit: cover; opacity: 0.6;">
+         <source src="{% static 'video/main_video.mp4' %}" type="video/mp4">
+         Your browser does not support the video tag.
+     </video>
+     
+            
             <!-- Video overlay for better text readability -->
             <div class="video-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,50,0,0.3) 50%, rgba(0,0,0,0.5) 100%); z-index: 2;"></div>
         </div>
-        
+    
         <!-- Main Content Container -->
         <div class="banner-content-wrapper" style="position: relative; z-index: 3; width: 100%; padding: 100px 0 60px 0; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
             <!-- Text Content Section -->
@@ -2492,7 +2493,7 @@
                         <!-- Video Frame -->
                         <div style="position: relative; padding: 15px; background: linear-gradient(145deg, #333, #222);">
                             <div style="position: relative; border-radius: 15px; overflow: hidden; background: #000;">
-                                <video autoplay loop muted playsinline style="width: 100%; height: 400px; object-fit: cover; display: block;">
+                                <video autoplay loop muted playsinline decode="async" style="width: 100%; height: 400px; object-fit: cover; display: block;">
                                     <source src="{% static 'video/1234.mp4' %}" type="video/mp4">
                                     Your browser does not support the video tag.
                                 </video>
@@ -3772,8 +3773,11 @@
             // Handle window resize
             window.addEventListener('resize', onWindowResize);
             
-            // Start render loop
-            animate();
+            // Start render loop only if scrolled past video section, otherwise defer
+            if (window.scrollY > 300) {
+                animate();
+            }
+            // If at top of page, animation will start when user scrolls down
             
             // Add timeout fallback
             setTimeout(function() {
@@ -3830,6 +3834,30 @@
         
 
         
+        // Global variables to control 3D rendering based on scroll position
+        let shouldRender = true;
+        let animationId = null;
+        let isAnimating = false;
+        
+        // Listen to scroll events to aggressively pause/resume animation loop
+        window.addEventListener('scroll', function() {
+            if (window.scrollY <= 300) {
+                shouldRender = false;
+                // Aggressively pause animation loop to free up resources for video
+                if (isAnimating && animationId) {
+                    cancelAnimationFrame(animationId);
+                    isAnimating = false;
+                    animationId = null;
+                }
+            } else {
+                shouldRender = true;
+                // Resume animation loop when scrolled past video section
+                if (!isAnimating) {
+                    animate();
+                }
+            }
+        });
+        
         function onWindowResize() {
             const container = document.getElementById('modelCanvas');
             camera.aspect = container.clientWidth / container.clientHeight;
@@ -3838,14 +3866,22 @@
         }
         
         function animate() {
-            requestAnimationFrame(animate);
+            if (!isAnimating) {
+                isAnimating = true;
+            }
+            
+            animationId = requestAnimationFrame(animate);
             
             if (mixer) {
                 mixer.update(0.016); // Assuming 60fps
             }
             
             controls.update();
-            renderer.render(scene, camera);
+            
+            // Only render when shouldRender is true (scroll-based throttling)
+            if (shouldRender === true) {
+                renderer.render(scene, camera);
+            }
         }
         
         // Initialize 3D model when modules are ready
@@ -4194,6 +4230,8 @@
             }
         });
     </script>
+   
+      
 </body>
 
 <!-- Mirrored from html.designingmedia.com/aimentor/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 May 2025 09:01:11 GMT -->
