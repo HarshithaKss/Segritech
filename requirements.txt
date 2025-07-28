@@ -1,6 +1,7 @@
-Django==5.2.2
-Pillow==10.0.0  # For image handling
-django-crispy-forms==2.0
-python-dotenv==1.0.0
-whitenoise==6.5.0  # For serving static files
-gunicorn==21.2.0  # For production deployment 
+asgiref==3.8.1
+Django==5.2.1
+pillow==11.2.1
+psycopg2-binary==2.9.10
+python-decouple==3.8
+sqlparse==0.5.3
+tzdata==2025.2
