@@ -427,6 +427,19 @@
             width: 200% !important;
         }
         
+        /* Mobile-specific fallback animation */
+        @media (max-width: 480px) {
+            #logoSwiper .swiper-wrapper {
+                animation: scroll-logos 15s linear infinite !important;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            #logoSwiper .swiper-wrapper {
+                animation: scroll-logos 12s linear infinite !important;
+            }
+        }
+        
         /* Force swiper container to show overflow */
         #logoSwiper {
             overflow: hidden !important;
@@ -549,6 +562,54 @@
             .generic-title span {
                 font-size: 1.1rem !important;
                 letter-spacing: 2px !important;
+            }
+            
+            /* Mobile-specific logo slider fixes */
+            #logoSwiper {
+                overflow: hidden !important;
+                width: 100% !important;
+            }
+            
+            #logoSwiper .swiper-wrapper {
+                display: flex !important;
+                transition-timing-function: linear !important;
+            }
+            
+            #logoSwiper .swiper-slide {
+                flex-shrink: 0 !important;
+                width: calc(50% - 5px) !important;
+                min-width: 140px !important;
+                max-width: 160px !important;
+            }
+            
+            #logoSwiper .swiper-slide figure {
+                padding: 15px !important;
+                height: 120px !important;
+            }
+            
+            #logoSwiper .swiper-slide figure img {
+                max-width: 100% !important;
+                max-height: 50px !important;
+                width: auto !important;
+                height: auto !important;
+            }
+        }
+        
+        /* Extra small mobile devices (320px and below) */
+        @media (max-width: 360px) {
+            #logoSwiper .swiper-slide {
+                width: calc(50% - 5px) !important;
+                min-width: 120px !important;
+                max-width: 140px !important;
+            }
+            
+            #logoSwiper .swiper-slide figure {
+                padding: 10px !important;
+                height: 100px !important;
+            }
+            
+            #logoSwiper .swiper-slide figure img {
+                max-height: 40px !important;
             }
         }
         
@@ -1285,9 +1346,11 @@
             text-decoration: none !important;
         }
         
-        /* Restore dropdown hover effects */
-        .dropdown:hover .dropdown-menu {
-            display: block !important;
+        /* Restore dropdown hover effects - desktop only */
+        @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu {
+                display: block !important;
+            }
         }
         
         .dropdown-item:hover {
@@ -3306,9 +3369,25 @@
                         grabCursor: false,
                         cssMode: false,
                         breakpoints: {
+                            320: {
+                                slidesPerView: 2,
+                                spaceBetween: 10,
+                                autoplay: {
+                                    delay: 0,
+                                    disableOnInteraction: false,
+                                    pauseOnMouseEnter: false,
+                                    reverseDirection: false,
+                                },
+                            },
                             360: {
                                 slidesPerView: 2,
                                 spaceBetween: 15,
+                                autoplay: {
+                                    delay: 0,
+                                    disableOnInteraction: false,
+                                    pauseOnMouseEnter: false,
+                                    reverseDirection: false,
+                                },
                             },
                             576: {
                                 slidesPerView: 3,
@@ -3356,6 +3435,31 @@
                     swiperElement.addEventListener('mouseleave', function() {
                         logoSwiper.autoplay.start();
                     });
+                    
+                    // Mobile-specific autoplay handling
+                    const isMobile = window.innerWidth <= 480;
+                    if (isMobile) {
+                        // Force autoplay to start and never stop on mobile
+                        setTimeout(() => {
+                            logoSwiper.autoplay.start();
+                        }, 100);
+                        
+                        // Ensure autoplay continues after any interaction
+                        logoSwiper.on('touchEnd', function() {
+                            setTimeout(() => {
+                                this.autoplay.start();
+                            }, 50);
+                        });
+                        
+                        // Force autoplay restart on resize
+                        window.addEventListener('resize', function() {
+                            if (window.innerWidth <= 480) {
+                                setTimeout(() => {
+                                    logoSwiper.autoplay.start();
+                                }, 100);
+                            }
+                        });
+                    }
                     
                 } catch (error) {
                     console.error('Error initializing improved swiper:', error);
@@ -3529,31 +3633,17 @@
             $(this).addClass('open');
         });
 
-    const $dropdown = $(".dropdown");
-    const $dropdownToggle = $(".dropdown-toggle");
-    const $dropdownMenu = $(".dropdown-menu");
-    const showClass = "show";
-
-    $(window).on("load resize", function() {
-    if (this.matchMedia("(min-width: 768px)").matches) {
-        $dropdown.hover(
-        function() {
-            const $this = $(this);
-            $this.addClass(showClass);
-            $this.find($dropdownToggle).attr("aria-expanded", "true");
-            $this.find($dropdownMenu).addClass(showClass);
-        },
-        function() {
-            const $this = $(this);
-            $this.removeClass(showClass);
-            $this.find($dropdownToggle).attr("aria-expanded", "false");
-            $this.find($dropdownMenu).removeClass(showClass);
-        }
-        );
-    } else {
-        $dropdown.off("mouseenter mouseleave");
-    }
-    });
+            // Mobile dropdown functionality - using Bootstrap's built-in behavior
+        // No custom JavaScript needed as Bootstrap handles mobile dropdowns automatically
+        
+        // Add scroll effect to navigation (same as About Us page)
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 50) {
+                $('.navbar-main-sec').addClass('scrolled');
+            } else {
+                $('.navbar-main-sec').removeClass('scrolled');
+            }
+        });
     </script>
     
     <!-- 3D Model Viewer Script -->
@@ -3961,12 +4051,8 @@
          }, 8000); // 8 second ultimate fallback
     </script>
 
-    <!-- JavaScript Dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/aos.js' %}"></script>
+    <!-- Additional JavaScript Dependencies -->
+    <!-- Note: jQuery, Bootstrap, and AOS are already included earlier in the page -->
 
     <!-- Newsletter Form Styles -->
     <style>

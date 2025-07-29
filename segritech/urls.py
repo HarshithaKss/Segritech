@@ -25,3 +25,9 @@ urlpatterns = [
     path('favicon.ico', RedirectView.as_view(url=f'{settings.STATIC_URL}images/small_lo.png', permanent=True)),
     path('', include('first.urls')),  # This includes all URLs from the first app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
