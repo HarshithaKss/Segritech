@@ -3153,6 +3153,31 @@
                         </a>
                         </div>
 
+                        <!-- Zee Business -->
+                        <div class="swiper-slide">
+                            <a href="https://www.zeebiz.com/startups/news-t-hub-selects-10-startups-to-drive-ai-semiconductor-innovation-in-india-272816" target="_blank" style="text-decoration: none;">
+                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; height: 240px; display: flex; flex-direction: column;">
+                                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-green), transparent);"></div>
+                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                        <img src="{% static 'logo/fate_new.png' %}" alt="Zee Business" style="height: 24px; width: auto; max-width: 30px; margin-right: 35px; object-fit: contain; flex-shrink: 0;">
+                                        <h4 style="color: #FFFFFF; margin: 0 0 0 15px; font-size: 1.1rem;">Zee Business</h4>
+                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 4px 10px; border-radius: 15px; margin-left: 10px; font-size: 0.75rem; font-weight: 500;">AI Innovation</span>
+                                    </div>
+                                    <div style="flex-grow: 1;">
+                                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; line-height: 1.4;">
+                                            SegriTech Among 10 Startups Selected by T-Hub to Drive AI and Semiconductor Innovation in India
+                                        </p>
+                                    </div>
+                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px;">
+                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">
+                                            <i class="fas fa-clock" style="margin-right: 6px;"></i>2024
+                                        </span>
+                                        <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+
                         <!-- StartUp Hyderabad -->
                         <div class="swiper-slide">
                             <a href="https://startuphyderabad.com/cie-iith-onboards-9-startups-for-its-accelerator-cohorts/" target="_blank" style="text-decoration: none;">
@@ -3176,6 +3201,32 @@
                                 </div>
                             </div>
                         </a>
+                        </div>
+
+                        <!-- Indian Express -->
+                        <div class="swiper-slide">
+                            <a href="https://www.linkedin.com/posts/activity-7285583985148145664-c9Ce?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAB7i3e4BoSwInpGFDJHbG_L9IElvN7dbWB0" target="_blank" style="text-decoration: none;">
+                                <div style="background: linear-gradient(145deg, #2a2a2a, #222222); border-radius: 15px; border: 1px solid rgba(76, 175, 80, 0.3); box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; position: relative; overflow: hidden; height: 240px; display: flex; flex-direction: column;">
+                                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent-green), transparent);"></div>
+                                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
+                                        <img src="{% static 'logo/The-New-Indian-Express-Logo-removebg-preview.png' %}" alt="Indian Express" style="height: 24px; width: auto; max-width: 30px; margin-right: 35px; object-fit: contain; flex-shrink: 0;">
+                                        <h4 style="color: #FFFFFF; margin: 0 0 0 15px; font-size: 1.1rem;">Indian Express</h4>
+                                        <span style="background: rgba(76, 175, 80, 0.15); color: var(--accent-green); padding: 4px 10px; border-radius: 15px; margin-left: 10px; font-size: 0.75rem; font-weight: 500;">Today's Coverage</span>
+                                    </div>
+                                    <div style="flex-grow: 1;">
+                                        <p style="color: rgba(255, 255, 255, 0.9); font-size: 0.9rem; line-height: 1.4;">
+                                            Segritech got coverage in today's Indian express newspaper.
+                                        </p>
+                                    </div>
+                                    <div style="margin-top: auto; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 12px;">
+                                        <span style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;">
+                                            <i class="fas fa-clock" style="margin-right: 6px;"></i>2025
+                                        </span>
+                                        <span style="color: var(--accent-green); font-size: 0.85rem; font-weight: 500;">Read More →</span>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3222,16 +3273,16 @@
             
             // Create many copies to ensure continuous loop
             let slidesHTML = '';
-            for(let i = 0; i < 10; i++) {
+            for(let i = 0; i < 15; i++) {
                 slidesHTML += originalSlides;
             }
             wrapper.innerHTML = slidesHTML;
 
             const swiper = new Swiper(".mediaSwiper", {
-                slidesPerView: 'auto',
+                slidesPerView: 3,
                 spaceBetween: 30,
                 loop: true,
-                speed: 8000,
+                speed: 12000,
                 allowTouchMove: false,
                 simulateTouch: false,
                 freeMode: {
@@ -3239,21 +3290,25 @@
                     momentum: false,
                 },
                 autoplay: {
-                    delay: 1,
+                    delay: 0,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: false,
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 'auto',
+                        slidesPerView: 1,
                         spaceBetween: 20,
                     },
+                    576: {
+                        slidesPerView: 2,
+                        spaceBetween: 25,
+                    },
                     768: {
-                        slidesPerView: 'auto',
+                        slidesPerView: 2,
                         spaceBetween: 25,
                     },
                     1024: {
-                        slidesPerView: 'auto',
+                        slidesPerView: 3,
                         spaceBetween: 30,
                     }
                 },
