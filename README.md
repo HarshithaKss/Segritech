@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # SegriTech
 
 SegriTech is a comprehensive web application for an agricultural technology company, showcasing various products and services in the agricultural sector.
@@ -79,6 +78,3 @@ Visit http://127.0.0.1:8000/ to see the application.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details. 
-=======
-# Segritech
->>>>>>> f29b7b12514b0de8925373628f99fba001d98093
