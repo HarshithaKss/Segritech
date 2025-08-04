@@ -2105,32 +2105,69 @@
 
         @media (max-width: 768px) {
             .mediaSwiper {
-                margin: 0 -15px;
-                padding: 15px;
+                margin: 0 -10px;
+                padding: 10px;
             }
             
             .mediaSwiper.swiper .swiper-wrapper .swiper-slide {
-                width: 420px !important;
-                min-width: 420px !important;
-                max-width: 420px !important;
-                flex: 0 0 420px !important;
+                width: 280px !important;
+                min-width: 280px !important;
+                max-width: 280px !important;
+                flex: 0 0 280px !important;
             }
 
             .swiper-slide > a > div {
-                height: 260px !important;
-                padding: 25px !important;
-                border-radius: 15px !important;
+                height: 240px !important;
+                padding: 20px !important;
+                border-radius: 12px !important;
+                font-size: 0.85rem !important;
             }
 
             .swiper-slide h4 {
-                font-size: 1.3rem !important;
-                margin-bottom: 12px !important;
+                font-size: 1.1rem !important;
+                margin-bottom: 10px !important;
+                line-height: 1.3 !important;
             }
 
             .swiper-slide p {
-                font-size: 0.95rem !important;
-                -webkit-line-clamp: 5 !important;
-                margin: 0 0 15px 0 !important;
+                font-size: 0.85rem !important;
+                -webkit-line-clamp: 4 !important;
+                margin: 0 0 12px 0 !important;
+                line-height: 1.4 !important;
+            }
+            
+            /* Make cards more compact for faster viewing */
+            .swiper-slide img {
+                height: 20px !important;
+                max-width: 25px !important;
+            }
+            
+            .swiper-slide span {
+                font-size: 0.7rem !important;
+                padding: 3px 8px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .mediaSwiper.swiper .swiper-wrapper .swiper-slide {
+                width: 260px !important;
+                min-width: 260px !important;
+                max-width: 260px !important;
+                flex: 0 0 260px !important;
+            }
+            
+            .swiper-slide > a > div {
+                height: 220px !important;
+                padding: 15px !important;
+            }
+            
+            .swiper-slide h4 {
+                font-size: 1rem !important;
+            }
+            
+            .swiper-slide p {
+                font-size: 0.8rem !important;
+                -webkit-line-clamp: 3 !important;
             }
         }
     </style>
@@ -2147,7 +2184,7 @@
     <!-- Preloader -->
     {% include 'includes/navigation.html' %}
     <!-- banner section -->
-    <section class="banner-sec w-100 float-left bg-light-black" style="padding-top: 0; position: relative; overflow: hidden; min-height: 100vh; display: flex; align-items: center;">
+    <section class="banner-sec w-100 float-left bg-light-black" style="padding-top: 0; position: relative; overflow: hidden; height: 100vh; display: flex; align-items: center; justify-content: center;">
         <!-- Background Video -->
         <div class="video-background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; overflow: hidden;">
             <video autoplay muted loop playsinline preload="auto"
@@ -2163,112 +2200,39 @@
             <div class="video-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,50,0,0.3) 50%, rgba(0,0,0,0.5) 100%); z-index: 2;"></div>
         </div>
     
-        <!-- Main Content Container -->
-        <div class="banner-content-wrapper" style="position: relative; z-index: 3; width: 100%; padding: 100px 0 60px 0; display: flex; align-items: center; justify-content: center; min-height: 100vh;">
-            <!-- Text Content Section -->
-            <div class="wrapper2" style="width: 100%; margin: 0 auto; padding: 0; display: flex; justify-content: center;">
-                <div class="text-content-section" style="text-align: center; padding: 0 40px; margin: 0 auto; display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; max-width: 900px;">
-                    <!-- Responsive Style Override -->
-                    <style>
-                        @media (max-width: 768px) {
-                            .text-content-section {
-                                padding: 0 15px !important;
-                                margin: 0 auto !important;
-                                max-width: 100% !important;
-                            }
-                        }
-                        @media (max-width: 480px) {
-                            .text-content-section {
-                                padding: 0 10px !important;
-                            }
-                        }
-                        @media (min-width: 769px) and (max-width: 1024px) {
-                            .text-content-section {
-                                padding: 0 30px !important;
-                            }
-                        }
-                        @media (min-width: 1025px) {
-                            .text-content-section {
-                                padding: 0 60px !important;
-                            }
-                        }
-                        /* Perfect centering for desktop */
-                        @media (min-width: 1200px) {
-                            .wrapper2 {
-                                max-width: 1400px !important;
-                            }
-                            .text-content-section {
-                                padding: 0 80px !important;
-                            }
-                        }
-                        
-                        /* Force center alignment for all text elements */
-                        .text-content-section h1,
-                        .text-content-section h1 span,
-                        .text-content-section .hero-description,
-                        .text-content-section .hero-description p {
-                            text-align: center !important;
-                            margin-left: auto !important;
-                            margin-right: auto !important;
-                        }
-                    </style>
-                    <h1 data-aos="zoom-out-up" data-aos-easing="ease-out-quart" data-aos-duration="1200" data-aos-delay="100" 
-                        style="font-family: 'Montserrat', sans-serif; font-weight: bold; line-height: 1.2; margin-bottom: 30px; text-align: center !important; width: 100% !important; display: block !important;">
-                        <span style="display: block !important; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #FFFFFF; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); margin-bottom: 10px; letter-spacing: 0.02em; font-weight: 300; text-align: center !important; width: 100% !important;">Welcome to</span>
-                        <span style="font-size: clamp(2.8rem, 6.5vw, 4.5rem); color: #FFFFFF; text-shadow: 3px 3px 10px rgba(0,0,0,0.9); letter-spacing: -0.02em; font-weight: 700;">Segri</span><span style="font-size: clamp(2.8rem, 6.5vw, 4.5rem); color: var(--primary-green); font-weight: 900; text-shadow: 2px 2px 0px var(--dark-green), 3px 3px 10px rgba(0,0,0,0.9); letter-spacing: -0.02em;">Tech</span>
-                    </h1>
-                    
-                    <div class="hero-description" data-aos="fade-up" data-aos-easing="ease-out-quart" data-aos-duration="1000" data-aos-delay="400" 
-                         style="max-width: 650px; margin: 0 auto 35px auto; text-align: center !important;">
-                        <p style="color: rgba(255, 255, 255, 0.98); line-height: 1.6; font-size: clamp(0.95rem, 2vw, 1.1rem); text-shadow: 2px 2px 6px rgba(0,0,0,0.9); margin-bottom: 0; font-weight: 400; letter-spacing: 0.2px; text-align: center !important;">
-                            Revolutionizing quality assessment through intelligent automation. We provide <strong style="color: var(--primary-green);">precise and efficient</strong> grading solutions for fresh produce, reducing post-harvest losses and improving market value.
-                        </p>
+        <!-- Main Content Container - Clean Minimal Centering -->
+        <div class="banner-content-wrapper" style="position: relative; z-index: 3; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center;">
+            <!-- Text Content Section - Simplified -->
+            <div class="text-content-section" style="text-align: center; padding: 0 20px; max-width: 900px;">
+                <h1 data-aos="zoom-out-up" data-aos-easing="ease-out-quart" data-aos-duration="1200" data-aos-delay="100" 
+                    style="font-family: 'Montserrat', sans-serif; font-weight: bold; line-height: 1.2; margin-bottom: 30px;">
+                    <span style="display: block; font-size: clamp(1.8rem, 4vw, 2.8rem); color: #FFFFFF; text-shadow: 2px 2px 8px rgba(0,0,0,0.9); margin-bottom: 10px; letter-spacing: 0.02em; font-weight: 300;">Welcome to</span>
+                    <span style="font-size: clamp(2.8rem, 6.5vw, 4.5rem); color: #FFFFFF; text-shadow: 3px 3px 10px rgba(0,0,0,0.9); letter-spacing: -0.02em; font-weight: 700;">Segri</span><span style="font-size: clamp(2.8rem, 6.5vw, 4.5rem); color: var(--primary-green); font-weight: 900; text-shadow: 2px 2px 0px var(--dark-green), 3px 3px 10px rgba(0,0,0,0.9); letter-spacing: -0.02em;">Tech</span>
+                </h1>
+                
+                <div class="hero-description" data-aos="fade-up" data-aos-easing="ease-out-quart" data-aos-duration="1000" data-aos-delay="400" 
+                     style="max-width: 650px; margin: 0 auto 35px auto;">
+                    <p style="color: rgba(255, 255, 255, 0.98); line-height: 1.6; font-size: clamp(0.95rem, 2vw, 1.1rem); text-shadow: 2px 2px 6px rgba(0,0,0,0.9); margin-bottom: 0; font-weight: 400; letter-spacing: 0.2px;">
+                        Revolutionizing quality assessment through intelligent automation. We provide <strong style="color: var(--primary-green);">precise and efficient</strong> grading solutions for fresh produce, reducing post-harvest losses and improving market value.
+                    </p>
+                </div>
+                
+                <div class="hero-actions" data-aos="fade-up" data-aos-easing="ease-in-out-back" data-aos-duration="800" data-aos-delay="600" 
+                     style="display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;">
+                    <div class="generic-btn secondary">
+                        <a href="#3d-model-section" class="explore-btn" style="font-size: 0.9rem; padding: 12px 24px; letter-spacing: 0.5px;">
+                            <i class="fas fa-compass" style="font-size: 0.9rem;"></i>
+                            <span>View in 3d</span>
+                        </a>
                     </div>
-                    
-                    <div class="hero-actions" data-aos="fade-up" data-aos-easing="ease-in-out-back" data-aos-duration="800" data-aos-delay="600" 
-                         style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; width: 100%;">
-                        <!-- Button Responsive Styles -->
-                        <style>
-                            @media (max-width: 768px) {
-                                .hero-actions {
-                                    gap: 10px !important;
-                                    flex-direction: column !important;
-                                    align-items: center !important;
-                                }
-                                .hero-actions .generic-btn {
-                                    width: 100% !important;
-                                    max-width: 280px !important;
-                                }
-                                .hero-actions .generic-btn a {
-                                    width: 100% !important;
-                                    display: block !important;
-                                    text-align: center !important;
-                                }
-                            }
-                            @media (max-width: 480px) {
-                                .hero-actions {
-                                    gap: 8px !important;
-                                }
-                                .hero-actions .generic-btn a {
-                                    font-size: 0.85rem !important;
-                                    padding: 10px 20px !important;
-                                }
-                            }
-                        </style>
-                        <div class="generic-btn secondary">
-                            <a href="#3d-model-section" class="explore-btn" style="font-size: 0.9rem; padding: 12px 24px; letter-spacing: 0.5px;">
-                                <i class="fas fa-compass" style="font-size: 0.9rem;"></i>
-                                <span>View in 3d</span>
-                            </a>
-                        </div>
-                        <div class="generic-btn primary">
-                            <a href="{% url 'contact' %}" class="contact-btn" style="font-size: 0.9rem; padding: 12px 24px; letter-spacing: 0.5px; background: transparent; border: 2px solid var(--accent-green); color: var(--accent-green); border-radius: 25px; transition: all 0.3s ease;">
-                                <i class="fas fa-envelope" style="font-size: 0.9rem; margin-right: 6px;"></i>
-                                <span>Contact Us</span>
-                            </a>
-                        </div>
+                    <div class="generic-btn primary">
+                        <a href="{% url 'contact' %}" class="contact-btn" style="font-size: 0.9rem; padding: 12px 24px; letter-spacing: 0.5px; background: transparent; border: 2px solid var(--accent-green); color: var(--accent-green); border-radius: 25px; transition: all 0.3s ease;">
+                            <i class="fas fa-envelope" style="font-size: 0.9rem; margin-right: 6px;"></i>
+                            <span>Contact Us</span>
+                        </a>
                     </div>
                 </div>
+            </div>
             </div>
         </div>
         
@@ -2282,13 +2246,7 @@
             </ul>
         </div>
         
-        <!-- Scroll down indicator -->
-        <div class="scroll-indicator" data-aos="bounce" data-aos-duration="2000" data-aos-delay="1500" 
-             style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 4; text-align: center;">
-            <div style="color: rgba(255,255,255,0.8); font-size: 0.8rem; margin-bottom: 6px; text-shadow: 1px 1px 4px rgba(0,0,0,0.9);">Scroll to explore</div>
-            <div style="width: 2px; height: 20px; background: linear-gradient(to bottom, var(--primary-green), transparent); margin: 0 auto; border-radius: 1px;"></div>
-            <i class="fas fa-chevron-down" style="color: var(--primary-green); font-size: 1rem; margin-top: 3px; animation: float 2s ease-in-out infinite;"></i>
-        </div>
+
     </section>
     <!-- banner section -->
     
@@ -3276,9 +3234,12 @@
             const wrapper = document.querySelector('.mediaSwiper .swiper-wrapper');
             const originalSlides = wrapper.innerHTML;
             
-            // Create many copies to ensure continuous loop
+            // Create many copies to ensure continuous loop (much more copies for mobile to see all articles)
             let slidesHTML = '';
-            for(let i = 0; i < 15; i++) {
+            const isMobile = window.innerWidth <= 768;
+            const duplicateCount = isMobile ? 50 : 15; // Much more duplicates for mobile
+            
+            for(let i = 0; i < duplicateCount; i++) {
                 slidesHTML += originalSlides;
             }
             wrapper.innerHTML = slidesHTML;
@@ -3290,6 +3251,9 @@
                 speed: 12000,
                 allowTouchMove: false,
                 simulateTouch: false,
+                loopFillGroupWithBlank: false,
+                loopedSlides: isMobile ? 10 : 5, // More looped slides for mobile
+                centeredSlides: false,
                 freeMode: {
                     enabled: true,
                     momentum: false,
@@ -3298,39 +3262,57 @@
                     delay: 0,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: false,
+                    waitForTransition: false,
+                    stopOnLastSlide: false,
                 },
                 breakpoints: {
                     320: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
+                        slidesPerView: 2, // Show more articles at once
+                        spaceBetween: 8,
+                        speed: 300, // Extremely fast for mobile
+                        allowTouchMove: true,
+                        autoplay: {
+                            delay: 0,
+                            disableOnInteraction: false,
+                        },
+                    },
+                    480: {
+                        slidesPerView: 2.2,
+                        spaceBetween: 10,
+                        speed: 400, // Very fast for larger mobile
+                        allowTouchMove: true,
+                        autoplay: {
+                            delay: 0,
+                            disableOnInteraction: false,
+                        },
                     },
                     576: {
-                        slidesPerView: 2,
-                        spaceBetween: 25,
+                        slidesPerView: 2.5,
+                        spaceBetween: 12,
+                        speed: 600, // Fast for small tablets
+                        allowTouchMove: true,
                     },
                     768: {
                         slidesPerView: 2,
-                        spaceBetween: 25,
+                        spaceBetween: 20,
+                        speed: 3000, // Medium speed for tablets
                     },
                     1024: {
                         slidesPerView: 3,
                         spaceBetween: 30,
+                        speed: 12000, // Keep original speed for desktop
                     }
                 },
                 on: {
                     init: function() {
                         this.el.style.visibility = 'visible';
+                        // Force continuous autoplay
+                        this.autoplay.start();
                     },
                     beforeInit: function() {
                         this.el.style.visibility = 'hidden';
-                    },
-                    reachEnd: function() {
-                        this.slideTo(0, 0, false);
-                        this.autoplay.start();
-                    },
-                    fromEdge: function() {
-                        this.autoplay.start();
                     }
+                    // Removed reachEnd handler that was causing premature restarts
                 }
             });
 
@@ -3561,14 +3543,17 @@
                 try {
                     const articlesSwiper = new Swiper('#articlesSwiper', {
                         loop: true,
-                        loopAdditionalSlides: mediaCoverageArticles.length * 2, // Dynamic count based on articles array
+                        loopAdditionalSlides: mediaCoverageArticles.length * 5, // More slides for longer loops
+                        loopFillGroupWithBlank: false,
                         autoplay: {
                             delay: 0, // Continuous movement
                             disableOnInteraction: false,
                             pauseOnMouseEnter: true,
                             reverseDirection: false,
+                            waitForTransition: false,
+                            stopOnLastSlide: false,
                         },
-                        speed: 5000, // Slower, smoother movement
+                        speed: 5000, // Default speed for desktop
                         slidesPerView: 'auto', // Use auto for custom widths
                         spaceBetween: 0, // No gaps between slides
                         allowTouchMove: true,
@@ -3591,26 +3576,37 @@
                             360: {
                                 slidesPerView: 'auto',
                                 spaceBetween: 0,
+                                speed: 200, // Lightning fast for mobile
+                            },
+                            480: {
+                                slidesPerView: 'auto',
+                                spaceBetween: 0,
+                                speed: 250, // Ultra fast for larger mobile
                             },
                             576: {
                                 slidesPerView: 'auto',
                                 spaceBetween: 0,
+                                speed: 350, // Very fast for small tablets
                             },
                             768: {
                                 slidesPerView: 'auto',
                                 spaceBetween: 0,
+                                speed: 800, // Fast for tablets
                             },
                             992: {
                                 slidesPerView: 'auto',
                                 spaceBetween: 0,
+                                speed: 1500, // Medium for large tablets
                             },
                             1200: {
                                 slidesPerView: 'auto',
                                 spaceBetween: 0,
+                                speed: 2500, // Medium speed for small desktops
                             },
                             1400: {
                                 slidesPerView: 'auto',
                                 spaceBetween: 0,
+                                speed: 5000, // Original speed for large desktops
                             },
                         },
                         on: {
