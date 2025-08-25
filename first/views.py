@@ -13,7 +13,6 @@ from .models import JobPosting, JobApplication, ProductCategory, Product, Produc
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 import json
-
 # Create your views here.
 
 def index(request):
@@ -40,7 +39,17 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            contact_obj = form.save()  # save to DB first
+
+            # Send email to admin
+            send_mail(
+                subject=f"New Contact Us Inquiry from {contact_obj.name}",
+                message=f"Name: {contact_obj.name}\nEmail: {contact_obj.email}\n\nMessage:\n{contact_obj.message}",
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.ADMIN_EMAIL],
+                fail_silently=False,
+            )
+
             messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
             return redirect('contact')
     else:
@@ -157,8 +166,7 @@ def product_detail(request, category_slug, product_slug):
     product = get_object_or_404(Product, slug=product_slug, category=category, is_active=True)
     related_products = Product.objects.filter(category=category, is_active=True).exclude(id=product.id)[:3]
     other_categories = ProductCategory.objects.filter(is_active=True).exclude(id=category.id)
-    
-    # Initialize the inquiry form
+      # Initialize the inquiry form
     inquiry_form = ProductInquiryForm()
     
     context = {
@@ -218,17 +226,22 @@ Message:
                     [settings.ADMIN_EMAIL],
                     fail_silently=False,
                 )
+                return JsonResponse({'success': True, 'message': 'Inquiry submitted successfully.'})
             except Exception as e:
                 print(f"Failed to send email: {e}")
-            
-            return JsonResponse({'status': 'success'})
+                return JsonResponse({'success': False, 'message': 'Inquiry saved, but failed to send email.'}, status=500)
         except Exception as e:
-            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+            return JsonResponse({'success': False, 'message': str(e)}, status=400)
+    
+    return JsonResponse({'success': False, 'message': 'Invalid request method'}, status=405)
+ 
+
+
 
 def inspection_box(request):
     """Inspection Box product page"""
     return render(request, 'inspection_box.html')
+
 
 @csrf_exempt
 def send_inquiry(request):
@@ -371,23 +384,24 @@ def apply_job(request, job_id):
         if form.is_valid():
             application = form.save(commit=False)
             application.job_posting = job
-            
+
             # Check for duplicate application
             existing_application = JobApplication.objects.filter(
                 job_posting=job,
                 email=application.email
             ).first()
-            
+
             if existing_application:
                 messages.error(request, 'You have already applied for this position.')
                 return redirect('job_detail', job_id=job.id)
-            
+
+            # Save new application
             application.save()
-            
+
             # Update applications count
             job.applications_count += 1
             job.save()
-            
+
             # Send email notifications
             try:
                 # Email to admin/HR team
@@ -420,10 +434,9 @@ Reference:
 Visa Sponsorship Required: {'Yes' if application.visa_sponsorship_required else 'No'}
 
 Applied at: {application.applied_at}
-
 Please review the attached resume and contact the candidate if suitable.
                 """
-                
+
                 from django.core.mail import EmailMessage
                 email = EmailMessage(
                     admin_subject,
@@ -434,7 +447,7 @@ Please review the attached resume and contact the candidate if suitable.
                 if application.resume:
                     email.attach(application.resume.name, application.resume.read(), application.resume.content_type)
                 email.send(fail_silently=False)
-                
+
                 # Confirmation email to applicant
                 applicant_subject = f'Application Received: {job.title} at SegriTech'
                 applicant_message = f"""
@@ -454,19 +467,19 @@ What's Next?
 - You can expect to hear from us within a week
 
 About SegriTech:
-SegriTech is a deep-tech agritech startup focused on transforming the way fruits and vegetables are graded and sorted at the farm level. We design advanced machinery integrated with AI-based computer vision to bring automation and transparency to the agri-value chain.
+SegriTech is a deep-tech agritech startup focused on transforming the way fruits and vegetables are graded and sorted at the farm level.
 
 If you have any questions about your application or the position, feel free to reply to this email.
 
-Best regards,
-SegriTech HR Team
-Email: {settings.ADMIN_EMAIL}
-Website: https://segritech.co.in
+Best regards,  
+SegriTech HR Team  
+Email: {settings.ADMIN_EMAIL}  
+Website: https://segritech.co.in  
 
 ---
 This is an automated confirmation. Please do not reply directly to this email.
                 """
-                
+
                 send_mail(
                     applicant_subject,
                     applicant_message,
@@ -474,14 +487,20 @@ This is an automated confirmation. Please do not reply directly to this email.
                     [application.email],
                     fail_silently=False,
                 )
-                
+                messages.success(
+                    request,
+                    f"Thank you for applying to {job.title}! A confirmation email has been sent to {application.email}."
+                )
+
             except Exception as e:
                 print(f"Failed to send job application emails: {e}")
-                # Don't fail the application submission if email fails
-            
-            messages.success(request, 
-                f'Thank you for applying to {job.title}! We have sent a confirmation email to {application.email}. Our team will review your application and get back to you soon.')
+                messages.warning(
+                    request,
+                    f"Thank you for applying to {job.title}! However, we could not send a confirmation email right now."
+                )
+
             return redirect('job_detail', job_id=job.id)
+
         else:
             messages.error(request, 'Please correct the errors below.')
     else:
@@ -494,13 +513,18 @@ This is an automated confirmation. Please do not reply directly to this email.
     
     return render(request, 'apply_job.html', context)
 
+
+
+from django.http import JsonResponse
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from .models import NewsletterSubscriber
+
 def newsletter_signup(request):
     if request.method != 'POST':
         return JsonResponse({'success': False, 'message': 'Invalid request method'})
-        
-    print("Newsletter signup view called")  # Debug log
-    email = request.POST.get('email')
-    print(f"Received email: {email}")  # Debug log
+    
+    email = request.POST.get('email', '').strip()
     
     if not email:
         return JsonResponse({'success': False, 'message': 'Email is required'})
@@ -508,19 +532,16 @@ def newsletter_signup(request):
     try:
         # Validate email format
         validate_email(email)
-        print(f"Email validation passed for: {email}")  # Debug log
         
         # Check if email already exists
         if NewsletterSubscriber.objects.filter(email=email).exists():
-            print(f"Email already exists: {email}")  # Debug log
             return JsonResponse({
                 'success': False,
                 'message': 'You are already subscribed to our newsletter!'
             })
         
         # Create new subscriber
-        subscriber = NewsletterSubscriber.objects.create(email=email)
-        print(f"Created new subscriber: {subscriber.id}")  # Debug log
+        NewsletterSubscriber.objects.create(email=email)
         
         return JsonResponse({
             'success': True,
@@ -528,17 +549,16 @@ def newsletter_signup(request):
         })
         
     except ValidationError:
-        print(f"Email validation failed for: {email}")  # Debug log
         return JsonResponse({
             'success': False,
             'message': 'Please enter a valid email address'
         })
     except Exception as e:
-        print(f"Unexpected error: {str(e)}")  # Debug log
         return JsonResponse({
             'success': False,
-            'message': 'An error occurred. Please try again later.'
+            'message': f'An error occurred: {str(e)}'
         })
+
 
 def blog_list(request):
     """Display all published blog posts with pagination"""

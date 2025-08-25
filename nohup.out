@@ -1,0 +1,52 @@
+[2025-07-24 03:47:22 +0000] [16195] [INFO] Starting gunicorn 21.2.0
+[2025-07-24 03:47:22 +0000] [16195] [INFO] Listening at: http://0.0.0.0:8000 (16195)
+[2025-07-24 03:47:22 +0000] [16195] [INFO] Using worker: sync
+[2025-07-24 03:47:22 +0000] [16196] [INFO] Booting worker with pid: 16196
+[2025-07-24 03:48:18 +0000] [16195] [CRITICAL] WORKER TIMEOUT (pid:16196)
+[2025-07-24 03:48:18 +0000] [16196] [INFO] Worker exiting (pid: 16196)
+[2025-07-24 03:48:18 +0000] [16195] [ERROR] Worker (pid:16196) exited with code 1
+[2025-07-24 03:48:18 +0000] [16195] [ERROR] Worker (pid:16196) exited with code 1.
+[2025-07-24 03:48:18 +0000] [16199] [INFO] Booting worker with pid: 16199
+[2025-07-24 04:13:11 +0000] [16199] [INFO] Worker exiting (pid: 16199)
+[2025-07-24 04:13:11 +0000] [16195] [INFO] Handling signal: term
+[2025-07-24 04:13:11 +0000] [16195] [INFO] Shutting down: Master
+[2025-07-24 04:13:17 +0000] [19007] [INFO] Starting gunicorn 21.2.0
+[2025-07-24 04:13:17 +0000] [19007] [INFO] Listening at: http://0.0.0.0:8000 (19007)
+[2025-07-24 04:13:17 +0000] [19007] [INFO] Using worker: sync
+[2025-07-24 04:13:17 +0000] [19008] [INFO] Booting worker with pid: 19008
+[2025-07-24 04:26:18 +0000] [19007] [INFO] Handling signal: term
+[2025-07-24 04:26:18 +0000] [19008] [INFO] Worker exiting (pid: 19008)
+[2025-07-24 04:26:18 +0000] [19007] [INFO] Shutting down: Master
+[2025-07-24 15:31:10 +0000] [24016] [INFO] Starting gunicorn 21.2.0
+[2025-07-24 15:31:10 +0000] [24016] [INFO] Listening at: http://127.0.0.1:8000 (24016)
+[2025-07-24 15:31:10 +0000] [24016] [INFO] Using worker: sync
+[2025-07-24 15:31:10 +0000] [24017] [INFO] Booting worker with pid: 24017
+[2025-07-24 16:00:38 +0000] [24016] [INFO] Handling signal: hup
+[2025-07-24 16:00:38 +0000] [24016] [INFO] Hang up: Master
+[2025-07-24 16:00:38 +0000] [24016] [ERROR] Worker (pid:24017) was sent SIGHUP!
+[2025-07-24 16:00:38 +0000] [24217] [INFO] Booting worker with pid: 24217
+[2025-07-24 17:15:07 +0000] [24016] [INFO] Handling signal: term
+[2025-07-24 17:15:07 +0000] [24217] [INFO] Worker exiting (pid: 24217)
+[2025-07-24 17:15:07 +0000] [24016] [INFO] Shutting down: Master
+[2025-07-24 17:18:04 +0000] [26722] [INFO] Starting gunicorn 21.2.0
+[2025-07-24 17:18:04 +0000] [26722] [INFO] Listening at: http://127.0.0.1:8000 (26722)
+[2025-07-24 17:18:04 +0000] [26722] [INFO] Using worker: sync
+[2025-07-24 17:18:04 +0000] [26723] [INFO] Booting worker with pid: 26723
+[2025-07-24 17:46:14 +0000] [26722] [INFO] Handling signal: term
+[2025-07-24 17:46:14 +0000] [26723] [INFO] Worker exiting (pid: 26723)
+[2025-07-24 17:46:14 +0000] [26722] [INFO] Shutting down: Master
+[2025-07-24 17:46:24 +0000] [29326] [INFO] Starting gunicorn 21.2.0
+[2025-07-24 17:46:24 +0000] [29326] [INFO] Listening at: http://127.0.0.1:8000 (29326)
+[2025-07-24 17:46:24 +0000] [29326] [INFO] Using worker: sync
+[2025-07-24 17:46:24 +0000] [29327] [INFO] Booting worker with pid: 29327
+[2025-07-24 17:51:53 +0000] [29326] [INFO] Handling signal: term
+[2025-07-24 17:51:53 +0000] [29327] [INFO] Worker exiting (pid: 29327)
+[2025-07-24 17:51:53 +0000] [29326] [INFO] Shutting down: Master
+[2025-07-24 17:52:07 +0000] [29358] [INFO] Starting gunicorn 21.2.0
+[2025-07-24 17:52:07 +0000] [29358] [INFO] Listening at: http://127.0.0.1:8000 (29358)
+[2025-07-24 17:52:07 +0000] [29358] [INFO] Using worker: sync
+[2025-07-24 17:52:07 +0000] [29359] [INFO] Booting worker with pid: 29359
+[2025-07-24 18:19:39 +0000] [29358] [INFO] Handling signal: hup
+[2025-07-24 18:19:39 +0000] [29358] [INFO] Hang up: Master
+[2025-07-24 18:19:39 +0000] [29358] [ERROR] Worker (pid:29359) was sent SIGHUP!
+[2025-07-24 18:19:39 +0000] [29483] [INFO] Booting worker with pid: 29483

@@ -4332,7 +4332,95 @@
 
     </style>
 
-<script>
+    <!-- Newsletter Signup Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('newsletterForm');
+        const messageDiv = document.getElementById('newsletterMessage');
+        const emailInput = document.getElementById('newsletterEmail');
+        
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = emailInput.value.trim();
+                const submitButton = document.getElementById('newsletterSubmit');
+                const policyCheckbox = document.getElementById('policy');
+                
+                // Reset message styling
+                messageDiv.style.display = 'none';
+                messageDiv.style.backgroundColor = '';
+                messageDiv.style.color = '';
+                messageDiv.textContent = '';
+                
+                // Validate email
+                if (!email) {
+                    showMessage('Please enter your email address.', false);
+                    return;
+                }
+                
+                // Validate policy checkbox
+                if (!policyCheckbox.checked) {
+                    showMessage('Please accept the Privacy Policy to continue.', false);
+                    return;
+                }
+                
+                // Disable form while processing
+                submitButton.disabled = true;
+                emailInput.disabled = true;
+                policyCheckbox.disabled = true;
+                submitButton.textContent = 'Subscribing...';
+                
+                try {
+                    // Get CSRF token from the form
+                    const csrftoken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+                    
+                    // Make the API call
+                    const response = await fetch('/newsletter/signup/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': csrftoken
+                        },
+                        body: new URLSearchParams({
+                            'email': email,
+                            'csrfmiddlewaretoken': csrftoken
+                        })
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        showMessage(data.message, true);
+                        form.reset();
+                    } else {
+                        showMessage(data.message, false);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    showMessage('An error occurred. Please try again later.', false);
+                } finally {
+                    // Re-enable form
+                    submitButton.disabled = false;
+                    emailInput.disabled = false;
+                    policyCheckbox.disabled = false;
+                    submitButton.textContent = 'Subscribe';
+                }
+            });
+        }
+        
+        function showMessage(message, isSuccess) {
+            messageDiv.style.display = 'block';
+            messageDiv.style.backgroundColor = isSuccess ? '#4CAF50' : '#ff6b6b';
+            messageDiv.style.color = 'white';
+            messageDiv.textContent = message;
+        }
+    });
+    
     // Simple Testimonial Video
     document.addEventListener('DOMContentLoaded', function() {
         const video = document.getElementById('testimonialVideo');
@@ -4344,7 +4432,7 @@
             });
         }
     });
-</script>
+    </script>
 
     <!-- Font Awesome Visibility Check -->
     <script>
