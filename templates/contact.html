@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">                                             
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{% static 'images/small_lo.png' %}">
@@ -27,6 +27,9 @@
     
     <!-- Leaflet CSS for Map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- reCAPTCHA v2 Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
     <style>
         /* SegriTech Contact Page Styles - Dark Theme Matching Index */
@@ -158,6 +161,16 @@
         .form-control::placeholder {
             color: var(--text-color);
             opacity: 0.7;
+        }
+
+        /* reCAPTCHA styling */
+        .g-recaptcha {
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .g-recaptcha div {
+            margin: 0 auto;
         }
 
         .btn-segritech {
@@ -553,6 +566,19 @@
                             {% endfor %}
                         {% endif %}
 
+                        <!-- Display non-field errors (e.g., reCAPTCHA errors) -->
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger alert-dismissible fade show mb-4">
+                                {% for error in form.non_field_errors %}
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-exclamation-circle me-3"></i>
+                                        <div>{{ error }}</div>
+                                    </div>
+                                {% endfor %}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+
                         <form method="post" action="{% url 'contact' %}">
                             {% csrf_token %}
                             <div class="row">
@@ -637,6 +663,13 @@
                                 {{ form.message }}
                                 {% if form.message.errors %}
                                     <small class="text-danger">{{ form.message.errors.0 }}</small>
+                                {% endif %}
+                            </div>
+                            <!-- reCAPTCHA v2 Checkbox -->
+                            <div class="form-group mb-4">
+                                {{ form.captcha }}
+                                {% if form.captcha.errors %}
+                                    <small class="text-danger">{{ form.captcha.errors.0 }}</small>
                                 {% endif %}
                             </div>
 

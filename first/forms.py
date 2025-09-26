@@ -1,7 +1,10 @@
 from django import forms
 from .models import Contact, JobApplication, ProductInquiry
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 
 class ContactForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
     class Meta:
         model = Contact
         fields = ['name', 'email', 'phone', 'company', 'inquiry_type', 'subject', 'message']
@@ -38,6 +41,7 @@ class ContactForm(forms.ModelForm):
                 'rows': 5,
                 'required': True
             }),
+
         }
     
     def clean_email(self):
@@ -215,6 +219,7 @@ class JobFilterForm(forms.Form):
 
 
 class ProductInquiryForm(forms.ModelForm):
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox)
     class Meta:
         model = ProductInquiry
         fields = ['name', 'email', 'phone', 'company', 'inquiry_type', 'message']
