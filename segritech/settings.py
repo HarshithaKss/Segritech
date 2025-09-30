@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'first',
+    'django_recaptcha'
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ DATABASES = {
   'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'segritech',
-        'USER': 'postgres',
+        'USER': 'segritech',
         'PASSWORD': 'segritech',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -196,3 +197,15 @@ CSRF_TRUSTED_ORIGINS = [
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+# reCAPTCHA settings
+RECAPTCHA_PUBLIC_KEY = '6LdsotYrAAAAAGan-tMgFzf7_rwJr9LgRkbp7lqS'
+RECAPTCHA_PRIVATE_KEY = '6LdsotYrAAAAAO7hxmGEMz4yuo-t30vDCzyQBhgw'
+
+# # Media settings
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# # Create media directories if they don't exist
+# os.makedirs(os.path.join(MEDIA_ROOT, 'segmented_images'), exist_ok=True)
+# os.makedirs(os.path.join(MEDIA_ROOT, 'temp'), exist_ok=True)

@@ -12,7 +12,10 @@ from .forms import ContactForm, JobApplicationForm, JobFilterForm, ProductInquir
 from .models import JobPosting, JobApplication, ProductCategory, Product, ProductInquiry, BlogPost, Testimonial, MediaCoverageArticle, NewsletterSubscriber, FAQ
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.core.files.storage import FileSystemStorage
+import os
 import json
+import uuid
 # Create your views here.
 
 def index(request):
@@ -35,23 +38,60 @@ def index(request):
 def about(request):
     return render(request, 'about.html')
 
+# def contact(request):
+#     if request.method == 'POST':
+#         form = ContactForm(request.POST)
+        
+#         if form.is_valid():
+#             contact_obj = form.save()  # save to DB first
+
+#             # Send email to admin
+#             send_mail(
+#                 subject=f"New Contact Us Inquiry from {contact_obj.name}",
+#                 message=f"Name: {contact_obj.name}\nEmail: {contact_obj.email}\n\nMessage:\n{contact_obj.message}",
+#                 from_email=settings.DEFAULT_FROM_EMAIL,
+#                 recipient_list=[settings.ADMIN_EMAIL],
+#                 fail_silently=False,
+#             )
+
+#             messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
+#             return redirect('contact')
+#     else:
+#         form = ContactForm()
+    
+#     # Get featured FAQs for the contact page
+#     featured_faqs = FAQ.objects.filter(is_featured=True).order_by('order')[:6]
+    
+#     return render(request, 'contact.html', {
+#         'form': form,
+#         'faqs': featured_faqs,
+#     })
+
 def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
+        
         if form.is_valid():
-            contact_obj = form.save()  # save to DB first
+            contact_obj = form.save()  # Save to DB first
 
             # Send email to admin
-            send_mail(
-                subject=f"New Contact Us Inquiry from {contact_obj.name}",
-                message=f"Name: {contact_obj.name}\nEmail: {contact_obj.email}\n\nMessage:\n{contact_obj.message}",
-                from_email=settings.DEFAULT_FROM_EMAIL,
-                recipient_list=[settings.ADMIN_EMAIL],
-                fail_silently=False,
-            )
-
-            messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
-            return redirect('contact')
+            try:
+                send_mail(
+                    subject=f"New Contact Us Inquiry from {contact_obj.name}",
+                    message=f"Name: {contact_obj.name}\nEmail: {contact_obj.email}\n\nMessage:\n{contact_obj.message}",
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.ADMIN_EMAIL],
+                    fail_silently=False,
+                )
+                messages.success(request, 'Thank you for contacting us! We will get back to you soon.')
+                return redirect('contact')
+            except Exception as e:
+                print(f"Failed to send email: {e}")
+                messages.warning(request, 'Your message was saved, but we encountered an issue sending the email. We will contact you soon.')
+                return redirect('contact')
+        else:
+            # Display form errors, including reCAPTCHA errors
+            messages.error(request, 'Please correct the errors below.')
     else:
         form = ContactForm()
     
@@ -601,7 +641,8 @@ def blog_detail(request, slug):
 
 def explore_coming_soon(request):
     """Explore coming soon page with meme GIF"""
-    return render(request, 'explore_coming_soon.html')
+    # return render(request, 'explore_coming_soon.html')
+    return render(request, 'explore.html')
 
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
@@ -619,3 +660,400 @@ def faq_page(request):
     """
     all_faqs = FAQ.objects.all()
     return render(request, 'faq.html', {'faqs': all_faqs})
+
+
+def explore(request):
+    """Explore page with crop analysis functionality"""
+    return render(request, 'explore.html')
+
+@csrf_exempt
+def analyze_image(request, crop_type):
+    """Generic function to handle image analysis for any crop"""
+    if request.method == 'POST' and request.FILES.get('image'):
+        # Save uploaded file
+        uploaded_file = request.FILES['image']
+        fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'temp'))
+        filename = fs.save(uploaded_file.name, uploaded_file)
+        file_path = fs.path(filename)
+        
+        try:
+            # Import and use the appropriate model based on crop type
+            if crop_type == 'potato':
+                from .ml_models.guava_grader import grade_guava
+                result = grade_guava(file_path)
+            elif crop_type == 'apple':
+                from .ml_models.apple_grader import grade_apple
+                result = grade_apple(file_path)
+            elif crop_type == 'pomegranate':
+                from .ml_models.pome_grade import grade_pomegranate
+                result = grade_pomegranate(file_path)
+            elif crop_type == 'orange':
+                from .ml_models.orange_grader import grade_orange
+                result = grade_orange(file_path)
+
+            # Add other crop types as you implement them
+            # elif crop_type == 'apple':
+            #     from .ml_models.apple_grader import grade_apple
+            #     result = grade_apple(file_path)
+            else:
+                return JsonResponse({
+                    'success': False, 
+                    'error': f'Analysis for {crop_type} is not yet implemented'
+                })
+            
+            # Format the response
+            response_data = {
+                'success': True,
+                'top_prediction': f"{result['top_prediction']['class']} (confidence: {result['top_prediction']['confidence']:.2f})",
+                'detailed_results': result
+            }
+            
+            return JsonResponse(response_data)
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+        
+        finally:
+            # Clean up temporary file
+            if os.path.exists(file_path):
+                os.remove(file_path)
+    
+    return JsonResponse({'success': False, 'error': 'No image provided'})
+
+# Individual crop analysis views
+# @csrf_exempt
+# def analyze_potato(request):
+#     return analyze_image(request, 'potato')
+
+@csrf_exempt
+def analyze_potato(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        # Save uploaded file
+        uploaded_file = request.FILES['image']
+        fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'temp'))
+        filename = fs.save(uploaded_file.name, uploaded_file)
+        file_path = fs.path(filename)
+        
+        print(f"📁 Processing apple image: {file_path}")
+        print(f"📁 File exists: {os.path.exists(file_path)}")
+        
+        try:
+            from .ml_models.guava_grader import grade_guava
+            result = grade_guava(file_path)
+            
+            print(f"🔍 ML Model result keys: {list(result.keys())}")
+            print(f"🔍 Result content: {result}")
+            
+            # Ensure media directories exist
+            original_images_dir = os.path.join(settings.MEDIA_ROOT, 'original_images')
+            os.makedirs(original_images_dir, exist_ok=True)
+            
+            # Save the original image for display
+            original_filename = f"original_guava_{uuid.uuid4().hex[:8]}.jpg"
+            original_image_path = os.path.join(original_images_dir, original_filename)
+            
+            # Copy the uploaded file to original_images directory
+            import shutil
+            shutil.copy2(file_path, original_image_path)
+            
+            print(f"💾 Original image saved to: {original_image_path}")
+            print(f"💾 Original file exists: {os.path.exists(original_image_path)}")
+            
+            # Create absolute URLs
+            original_image_url = f"{settings.MEDIA_URL}original_images/{original_filename}"
+            segmented_image_url = result.get("segmented_image_url", "")
+            
+            # If segmented_image_url is relative, make it absolute
+            if segmented_image_url and not segmented_image_url.startswith(('http://', 'https://', '/')):
+                segmented_image_url = f"{settings.MEDIA_URL}{segmented_image_url}"
+            
+            print(f"🌐 Original image URL: {original_image_url}")
+            print(f"🌐 Segmented image URL: {segmented_image_url}")
+            
+            # Check if files actually exist
+            if os.path.exists(original_image_path):
+                print("✅ Original image file exists on server")
+            else:
+                print("❌ Original image file NOT found on server")
+            
+            # Format the response
+            response_data = {
+                'success': True,
+                'top_prediction': f"{result['top_prediction']['class']} (confidence: {result['top_prediction']['confidence']:.2f})",
+                'detailed_results': result,
+                'original_image_url': original_image_url,
+                'segmented_image_url': segmented_image_url
+            }
+            
+            return JsonResponse(response_data)
+            
+        except Exception as e:
+            print(f"❌ Error in analyze_guava: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return JsonResponse({'success': False, 'error': str(e)})
+        
+        finally:
+            # Clean up temporary file
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                print("🧹 Temporary file cleaned up")
+    
+    return JsonResponse({'success': False, 'error': 'No image provided'})
+
+# @csrf_exempt
+# def analyze_apple(request):
+#     return analyze_image(request, 'apple')
+
+@csrf_exempt
+def analyze_apple(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        # Save uploaded file
+        uploaded_file = request.FILES['image']
+        fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'temp'))
+        filename = fs.save(uploaded_file.name, uploaded_file)
+        file_path = fs.path(filename)
+        
+        print(f"📁 Processing apple image: {file_path}")
+        print(f"📁 File exists: {os.path.exists(file_path)}")
+        
+        try:
+            from .ml_models.apple_grader import grade_apple
+            result = grade_apple(file_path)
+            
+            print(f"🔍 ML Model result keys: {list(result.keys())}")
+            print(f"🔍 Result content: {result}")
+            
+            # Ensure media directories exist
+            original_images_dir = os.path.join(settings.MEDIA_ROOT, 'original_images')
+            os.makedirs(original_images_dir, exist_ok=True)
+            
+            # Save the original image for display
+            original_filename = f"original_apple_{uuid.uuid4().hex[:8]}.jpg"
+            original_image_path = os.path.join(original_images_dir, original_filename)
+            
+            # Copy the uploaded file to original_images directory
+            import shutil
+            shutil.copy2(file_path, original_image_path)
+            
+            print(f"💾 Original image saved to: {original_image_path}")
+            print(f"💾 Original file exists: {os.path.exists(original_image_path)}")
+            
+            # Create absolute URLs
+            original_image_url = f"{settings.MEDIA_URL}original_images/{original_filename}"
+            segmented_image_url = result.get("segmented_image_url", "")
+            
+            # If segmented_image_url is relative, make it absolute
+            if segmented_image_url and not segmented_image_url.startswith(('http://', 'https://', '/')):
+                segmented_image_url = f"{settings.MEDIA_URL}{segmented_image_url}"
+            
+            print(f"🌐 Original image URL: {original_image_url}")
+            print(f"🌐 Segmented image URL: {segmented_image_url}")
+            
+            # Check if files actually exist
+            if os.path.exists(original_image_path):
+                print("✅ Original image file exists on server")
+            else:
+                print("❌ Original image file NOT found on server")
+            
+            # Format the response
+            response_data = {
+                'success': True,
+                'top_prediction': f"{result['top_prediction']['class']} (confidence: {result['top_prediction']['confidence']:.2f})",
+                'detailed_results': result,
+                'original_image_url': original_image_url,
+                'segmented_image_url': segmented_image_url
+            }
+            
+            return JsonResponse(response_data)
+            
+        except Exception as e:
+            print(f"❌ Error in analyze_apple: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return JsonResponse({'success': False, 'error': str(e)})
+        
+        finally:
+            # Clean up temporary file
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                print("🧹 Temporary file cleaned up")
+    
+    return JsonResponse({'success': False, 'error': 'No image provided'})
+
+# @csrf_exempt
+# def analyze_pomegranate(request):
+#     return analyze_image(request, 'pomegranate')
+
+@csrf_exempt
+def analyze_pomegranate(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        # Save uploaded file
+        uploaded_file = request.FILES['image']
+        fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'temp'))
+        filename = fs.save(uploaded_file.name, uploaded_file)
+        file_path = fs.path(filename)
+        
+        print(f"📁 Processing ppomegranate image: {file_path}")
+        print(f"📁 File exists: {os.path.exists(file_path)}")
+        
+        try:
+            from .ml_models.pome_grade import grade_pomegranate
+            result = grade_pomegranate(file_path)
+            
+            print(f"🔍 ML Model result keys: {list(result.keys())}")
+            print(f"🔍 Result content: {result}")
+            
+            # Ensure media directories exist
+            original_images_dir = os.path.join(settings.MEDIA_ROOT, 'original_images')
+            os.makedirs(original_images_dir, exist_ok=True)
+            
+            # Save the original image for display
+            original_filename = f"original_pomegranate_{uuid.uuid4().hex[:8]}.jpg"
+            original_image_path = os.path.join(original_images_dir, original_filename)
+            
+            # Copy the uploaded file to original_images directory
+            import shutil
+            shutil.copy2(file_path, original_image_path)
+            
+            print(f"💾 Original image saved to: {original_image_path}")
+            print(f"💾 Original file exists: {os.path.exists(original_image_path)}")
+            
+            # Create absolute URLs
+            original_image_url = f"{settings.MEDIA_URL}original_images/{original_filename}"
+            segmented_image_url = result.get("segmented_image_url", "")
+            
+            # If segmented_image_url is relative, make it absolute
+            if segmented_image_url and not segmented_image_url.startswith(('http://', 'https://', '/')):
+                segmented_image_url = f"{settings.MEDIA_URL}{segmented_image_url}"
+            
+            print(f"🌐 Original image URL: {original_image_url}")
+            print(f"🌐 Segmented image URL: {segmented_image_url}")
+            
+            # Check if files actually exist
+            if os.path.exists(original_image_path):
+                print("✅ Original image file exists on server")
+            else:
+                print("❌ Original image file NOT found on server")
+            
+            # Format the response
+            response_data = {
+                'success': True,
+                'top_prediction': f"{result['top_prediction']['class']} (confidence: {result['top_prediction']['confidence']:.2f})",
+                'detailed_results': result,
+                'original_image_url': original_image_url,
+                'segmented_image_url': segmented_image_url
+            }
+            
+            return JsonResponse(response_data)
+            
+        except Exception as e:
+            print(f"❌ Error in analyze_pomegranate: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return JsonResponse({'success': False, 'error': str(e)})
+        
+        finally:
+            # Clean up temporary file
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                print("🧹 Temporary file cleaned up")
+    
+    return JsonResponse({'success': False, 'error': 'No image provided'})
+
+# @csrf_exempt
+# def analyze_orange(request):
+#     return analyze_image(request, 'orange')
+
+@csrf_exempt
+def analyze_orange(request):
+    if request.method == 'POST' and request.FILES.get('image'):
+        # Save uploaded file
+        uploaded_file = request.FILES['image']
+        fs = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'temp'))
+        filename = fs.save(uploaded_file.name, uploaded_file)
+        file_path = fs.path(filename)
+        
+        print(f"📁 Processing orange image: {file_path}")
+        print(f"📁 File exists: {os.path.exists(file_path)}")
+        
+        try:
+            from .ml_models.orange_grader import grade_orange
+            result = grade_orange(file_path)
+            
+            print(f"🔍 ML Model result keys: {list(result.keys())}")
+            print(f"🔍 Result content: {result}")
+            
+            # Ensure media directories exist
+            original_images_dir = os.path.join(settings.MEDIA_ROOT, 'original_images')
+            os.makedirs(original_images_dir, exist_ok=True)
+            
+            # Save the original image for display
+            original_filename = f"original_orange_{uuid.uuid4().hex[:8]}.jpg"
+            original_image_path = os.path.join(original_images_dir, original_filename)
+            
+            # Copy the uploaded file to original_images directory
+            import shutil
+            shutil.copy2(file_path, original_image_path)
+            
+            print(f"💾 Original image saved to: {original_image_path}")
+            print(f"💾 Original file exists: {os.path.exists(original_image_path)}")
+            
+            # Create absolute URLs
+            original_image_url = f"{settings.MEDIA_URL}original_images/{original_filename}"
+            segmented_image_url = result.get("segmented_image_url", "")
+            
+            # If segmented_image_url is relative, make it absolute
+            if segmented_image_url and not segmented_image_url.startswith(('http://', 'https://', '/')):
+                segmented_image_url = f"{settings.MEDIA_URL}{segmented_image_url}"
+            
+            print(f"🌐 Original image URL: {original_image_url}")
+            print(f"🌐 Segmented image URL: {segmented_image_url}")
+            
+            # Check if files actually exist
+            if os.path.exists(original_image_path):
+                print("✅ Original image file exists on server")
+            else:
+                print("❌ Original image file NOT found on server")
+            
+            # Format the response
+            response_data = {
+                'success': True,
+                'top_prediction': f"{result['top_prediction']['class']} (confidence: {result['top_prediction']['confidence']:.2f})",
+                'detailed_results': result,
+                'original_image_url': original_image_url,
+                'segmented_image_url': segmented_image_url
+            }
+            
+            return JsonResponse(response_data)
+            
+        except Exception as e:
+            print(f"❌ Error in analyze_orange: {str(e)}")
+            import traceback
+            traceback.print_exc()
+            return JsonResponse({'success': False, 'error': str(e)})
+        
+        finally:
+            # Clean up temporary file
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                print("🧹 Temporary file cleaned up")
+    
+    return JsonResponse({'success': False, 'error': 'No image provided'})
+
+
+@csrf_exempt
+def analyze_onion(request):
+    return analyze_image(request, 'onion')
+
+@csrf_exempt
+def analyze_capsicum(request):
+    return analyze_image(request, 'capsicum')
+
+@csrf_exempt
+def analyze_tomato(request):
+    return analyze_image(request, 'tomato')
+
+@csrf_exempt
+def analyze_lemon(request):
+    return analyze_image(request, 'lemon')

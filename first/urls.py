@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='home'),
@@ -37,5 +39,19 @@ urlpatterns = [
     path('insights/<slug:slug>/', views.blog_detail, name='blog_detail'),
     
     # Explore Page
-    path('explore/', views.explore_coming_soon, name='explore'),
+    path('explore/', views.explore, name='explore'),
+    
+    # NEW: Crop Analysis URLs
+    path('analyze/potato/', views.analyze_potato, name='analyze_potato'),
+    path('analyze/apple/', views.analyze_apple, name='analyze_apple'),
+    path('analyze/pomegranate/', views.analyze_pomegranate, name='analyze_pomegranate'),
+    path('analyze/orange/', views.analyze_orange, name='analyze_orange'),
+    path('analyze/onion/', views.analyze_onion, name='analyze_onion'),
+    path('analyze/capsicum/', views.analyze_capsicum, name='analyze_capsicum'),
+    path('analyze/tomato/', views.analyze_tomato, name='analyze_tomato'),
+    path('analyze/lemon/', views.analyze_lemon, name='analyze_lemon'),
 ]
+
+# Serve media files during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
