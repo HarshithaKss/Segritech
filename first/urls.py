@@ -39,7 +39,8 @@ urlpatterns = [
     path('insights/<slug:slug>/', views.blog_detail, name='blog_detail'),
     
     # Explore Page
-    path('explore/', views.explore, name='explore'),
+    path('explore_coming_soon/', views.explore_coming_soon, name='explore'),
+    path('explore_coming_soon/explore/', views.explore, name='explore_coming'),
     
     # NEW: Crop Analysis URLs
     path('analyze/potato/', views.analyze_potato, name='analyze_potato'),

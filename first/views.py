@@ -642,7 +642,7 @@ def blog_detail(request, slug):
 def explore_coming_soon(request):
     """Explore coming soon page with meme GIF"""
     # return render(request, 'explore_coming_soon.html')
-    return render(request, 'explore.html')
+    return render(request, 'explore_coming_soon.html')
 
 def privacy_policy(request):
     return render(request, 'privacy_policy.html')
@@ -659,8 +659,8 @@ def faq_page(request):
     View for the full FAQ page that shows all questions
     """
     all_faqs = FAQ.objects.all()
-    return render(request, 'faq.html', {'faqs': all_faqs})
 
+    return render(request, 'faq.html', {'faqs': all_faqs})
 
 def explore(request):
     """Explore page with crop analysis functionality"""
